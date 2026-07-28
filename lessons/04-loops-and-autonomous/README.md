@@ -1,32 +1,59 @@
 # Lesson 4: Loops and Autonomous Sequences
 
-## Goals
+## Session at a glance
 
-- Trace a `for` loop using a counter.
-- Recognize an off-by-one error.
-- Explain why a loop terminates.
-- Represent repeated autonomous steps without robot hardware.
+| | |
+|---|---|
+| **Time** | 60–75 minutes |
+| **Java focus** | `for`, counters, boundaries, termination |
+| **FTC connection** | repeated autonomous steps |
+| **AI role** | explain why a loop repeats and stops |
+
+## Learning outcomes
+
+By the end of this lesson, you can:
+
+- trace a `for` loop using a counter;
+- recognize an off-by-one error;
+- explain why a loop terminates; and
+- represent repeated autonomous steps without hardware.
+
+## Before you begin
+
+Complete [Lesson 3](../03-decisions-and-deadbands/README.md), then open this file in
+your local clone:
+
+```text
+lessons/04-loops-and-autonomous/src/org/ftc/training/lesson04/AutoSequence.java
+```
 
 ## Requirement
 
-Print exactly three driving segments, numbered 1, 2, and 3, followed by “Complete.”
+Print exactly three driving segments, numbered 1, 2, and 3, followed by `Complete`.
 
-## Predict and run
+## Predict
 
-Trace the values of `step` on paper before running:
+Trace the values of `step` on paper before running. Record the value used for every
+line you expect the loop to print.
+
+macOS or Linux:
 
 ```text
 ./scripts/run-lesson.sh 04
 ```
 
-On Windows use `scripts\run-lesson.cmd 04`.
+Windows:
 
-## Exercise
+```text
+scripts\run-lesson.cmd 04
+```
 
-1. Compare the output to the requirement.
+## Implement
+
+1. Compare the output with the requirement.
 2. Repair the loop condition.
 3. Change the program to print five segments.
-4. Add a `totalSegments` variable so changing one value controls the count.
+4. Add a `totalSegments` variable so one value controls the count.
 5. Explain initialization, continuation condition, and update in the loop header.
 
 ## Ask the assistant
@@ -36,14 +63,27 @@ On Windows use `scripts\run-lesson.cmd 04`.
 
 ## Verify
 
-Count the segment lines and confirm their first and last numbers. Confirm “Complete”
-appears once, after the loop.
+You are finished when:
+
+- the number of segment lines matches `totalSegments`;
+- numbering begins at 1 and ends at `totalSegments`;
+- `Complete` appears once, after the loop; and
+- you can name the value that changes on every iteration.
+
+Do not demonstrate an uncontrolled infinite loop on a shared computer.
+
+## Explain
+
+Trace the final two iterations for a teammate and identify the first value that
+causes the continuation condition to be false.
+
+Exit question: **What single change could make this loop never terminate?**
 
 ## FTC connection
 
 Autonomous code performs sequences, but a real OpMode must remain responsive.
-Later lessons should replace long blocking loops with timed states or commands.
+Later robot code should use timed states or commands instead of long blocking loops.
 
-## Reflection
+## Next lesson
 
-What single change could make a loop never terminate?
+Continue to [Lesson 5: Methods, Classes, and Tests](../05-methods-classes-and-tests/README.md).

@@ -1,35 +1,63 @@
 # Lesson 1: First Java Program
 
-## Goals
+## Session at a glance
 
-- Identify a class and the `main` method.
-- Compile and run Java code.
-- Print simple status messages.
-- Ask the assistant to explain code without changing it.
+| | |
+|---|---|
+| **Time** | 60–75 minutes, with extra time for initial setup |
+| **Java focus** | class, `main`, output, compile, run |
+| **FTC connection** | initialization and telemetry messages |
+| **AI role** | explain existing code without editing it |
 
-## Predict
+## Learning outcomes
 
-Open `RobotStatus.java`. Before running it, write down the exact output you expect.
+By the end of this lesson, you can:
 
-## Run
+- identify a Java class and the `main` method;
+- compile and run a Java program;
+- change simple output messages; and
+- explain the difference between source code and a running program.
 
-From the repository root:
+## Before you begin
+
+Complete [Start Here](../../GETTING_STARTED.md), then open this file in your local
+clone:
+
+```text
+lessons/01-first-program/src/org/ftc/training/lesson01/RobotStatus.java
+```
+
+Run the starter from the repository root.
+
+macOS or Linux:
 
 ```text
 ./scripts/run-lesson.sh 01
 ```
 
-On Windows use `scripts\run-lesson.cmd 01`.
+Windows:
 
-## Exercise
+```text
+scripts\run-lesson.cmd 01
+```
+
+## Predict
+
+Before running, write down the exact output you expect. After running, compare the
+actual output with your prediction.
+
+## Implement
+
+Make these changes yourself before asking an AI assistant:
 
 1. Change the initialization message to include your team name.
-2. Add a second output line describing whether the virtual robot is ready.
-3. Run the lesson again and compare the output to your prediction.
-4. Explain what `public`, `class`, `static`, `void`, and `String[] args` appear to do.
-   It is fine if your first explanation is incomplete.
+2. Add a second output line saying whether the virtual robot is ready.
+3. Run the lesson again.
+4. Locate the line where execution begins.
 
 ## Ask the assistant
+
+Use the assistant as an explainer, not an editor:
 
 > Explain `RobotStatus.java` line by line for someone new to Java. Do not edit any
 > files. Correct my explanation of `main`, then ask me one check-for-understanding
@@ -37,14 +65,29 @@ On Windows use `scripts\run-lesson.cmd 01`.
 
 ## Verify
 
-The program compiles, prints two intentional lines, and you can identify where
-execution begins. A teammate should be able to change one message and rerun it.
+You are finished when:
+
+- the program compiles without errors;
+- it prints two intentional lines;
+- you can identify the `main` method; and
+- a teammate can change one message and rerun it.
+
+Compilation proves that Java accepted the program. It does not prove that the
+messages are useful or that future robot behavior is correct.
+
+## Explain
+
+Tell a teammate what `public`, `class`, `static`, `void`, and `String[] args` appear
+to do. An incomplete first explanation is fine.
+
+Exit question: **What did running the program prove, and what did it not prove?**
 
 ## FTC connection
 
-FTC programs use telemetry rather than `System.out.println` for driver-station
-status, but carefully chosen messages are valuable in both environments.
+FTC programs normally use telemetry instead of `System.out.println` for
+Driver Station status. In both environments, a useful message should tell the
+operator what the software actually knows.
 
-## Reflection
+## Next lesson
 
-What did running the program prove, and what did it not prove?
+Continue to [Lesson 2: Variables and Robot Math](../02-variables-and-math/README.md).
