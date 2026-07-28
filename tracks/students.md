@@ -5,7 +5,7 @@
 Learn enough Java to reason about FTC-style logic and use Claude Code as a tutor,
 debugging partner, and reviewer without giving away ownership of the work.
 
-## Learning path
+## Learning Path
 
 Complete [Lessons 1–6](../CURRICULUM.md#lesson-plan) in order. For every lesson:
 
@@ -18,7 +18,7 @@ Complete [Lessons 1–6](../CURRICULUM.md#lesson-plan) in order. For every lesso
 
 Use [Predict, Ask, Verify](../docs/student-workflow.md) whenever you are stuck.
 
-## Student evidence log
+## Student Evidence Log
 
 Keep a short entry in your notes for each lesson:
 
@@ -34,7 +34,7 @@ One thing I can now explain:
 This is not a transcript. Do not paste private data or every assistant message. The
 goal is to record decisions and evidence.
 
-## Readiness check
+## Readiness Check
 
 Using Lesson 6, demonstrate that you can:
 
