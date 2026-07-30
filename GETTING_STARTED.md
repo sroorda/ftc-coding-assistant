@@ -1,7 +1,8 @@
 # Set Up Your Computer
 
 By the end of this guide, you will have the course files, a working Java
-installation, and your first running program. Complete the steps in order.
+installation, Visual Studio Code, and your first running program. Complete the
+steps in order.
 
 If a command or security prompt surprises you, stop and ask an adult mentor before
 continuing.
@@ -11,8 +12,8 @@ continuing.
 Open the course repository:
 [sroorda/ftc-coding-assistant](https://github.com/sroorda/ftc-coding-assistant).
 
-For Level 1, the simplest choice is **Code → Download ZIP**. Extract the ZIP, then
-open a terminal in the extracted folder.
+For Level 1, the simplest choice is **Code → Download ZIP**. Extract the ZIP to a
+folder you can find again.
 
 If an adult mentor has asked you to use Git instead, clone the repository:
 
@@ -33,9 +34,20 @@ You need a full **JDK 17 or newer**, not only a Java runtime.
 
 On Linux, install OpenJDK 17 or newer using the method approved for your computer.
 
-## 3. Check your setup
+## 3. Install your editor
 
-Run the command from the course folder—the folder containing `README.md`.
+Follow [Install Visual Studio Code](docs/vscode-setup.md). Install Microsoft's
+**Extension Pack for Java**, then open the entire `ftc-coding-assistant` folder in
+VS Code.
+
+Use **Terminal → New Terminal** for every command in the lessons. Do not use the
+Java **Run** button during Level 1; the lesson scripts apply the course's FTC-compatible
+Java settings.
+
+## 4. Check your setup
+
+Run the command in VS Code's terminal. The terminal should be in the course
+folder—the folder containing `README.md`.
 
 macOS or Linux:
 
@@ -51,7 +63,7 @@ scripts\check-environment.cmd
 
 You are ready when the output shows both `java` and `javac` at version 17 or newer.
 
-## 4. Run your first program
+## 5. Run your first program
 
 macOS or Linux:
 
@@ -74,7 +86,7 @@ Robot initialized
 You just compiled source code and ran a Java program. That is your first piece of
 evidence that the setup works.
 
-## 5. Start learning
+## 6. Start learning
 
 Read [How the Lessons Work](docs/student-workflow.md), then open
 [Level 1 — Java Foundations](levels/01-java-foundations.md).

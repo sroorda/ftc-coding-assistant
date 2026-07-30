@@ -22,9 +22,14 @@ The output should show both a Java runtime and compiler at version 17 or newer.
 The course intentionally compiles student programs as Java 8-compatible code; see
 [Java and FTC compatibility](java-compatibility.md).
 
+## Install the editor
+
+Continue to [Install Visual Studio Code](vscode-setup.md). Use VS Code's built-in
+terminal for the commands below; Windows PowerShell is a supported default.
+
 ## Run a lesson
 
-From the repository root:
+From the repository root in VS Code's terminal:
 
 ```text
 scripts\run-lesson.cmd 01

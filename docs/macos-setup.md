@@ -23,9 +23,15 @@ brew install --cask temurin@17
 Do not install Homebrew solely for this course on a school-managed Mac without the
 school's approval.
 
+## Install the editor
+
+Continue to [Install Visual Studio Code](vscode-setup.md), then open the complete
+course folder in VS Code.
+
 ## Verify and run
 
-Change directory to the repository root—the folder containing `README.md`—and run:
+Open **Terminal → New Terminal** in VS Code. From the repository root—the folder
+containing `README.md`—run:
 
 ```text
 ./scripts/check-environment.sh

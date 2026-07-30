@@ -29,6 +29,7 @@
 
 ## Student Setup Reference
 
+* [Install Visual Studio Code](docs/vscode-setup.md)
 * [Install Java on Windows](docs/windows-setup.md)
 * [Install Java on macOS](docs/macos-setup.md)
 * [Java and FTC SDK Compatibility](docs/java-compatibility.md)

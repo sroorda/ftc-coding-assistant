@@ -24,8 +24,8 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-Complete [Start Here](../../GETTING_STARTED.md), then open this file in your local
-clone:
+Complete [Set Up Your Computer](../../GETTING_STARTED.md). In VS Code's Explorer,
+open this file:
 
 ```text
 lessons/01-first-program/src/org/ftc/training/lesson01/RobotStatus.java
