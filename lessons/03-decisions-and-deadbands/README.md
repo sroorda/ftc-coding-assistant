@@ -84,6 +84,8 @@ false.
 Before running the program, copy this table into your notes and fill in the
 **Expected power** column from the requirement.
 
+Complete your predictions before inspecting or changing the `if` condition.
+
 | Joystick input | Expected power | Actual before repair | Actual after repair |
 |---:|---:|---:|---:|
 | `0.00` | | | |
