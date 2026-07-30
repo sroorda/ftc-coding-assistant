@@ -18,7 +18,7 @@ code.
 By the end of this lesson, you can:
 
 - explain the relationship between a Java file, class, and package;
-- identify a Java class and the `main` method;
+- identify a Java class and explain the parts of the `main` method;
 - compile and run a Java program;
 - change simple output messages; and
 - explain the difference between source code and a running program.
@@ -102,9 +102,50 @@ org.ftc.training.lesson01.RobotStatus
 For now, keep the package line and folder structure unchanged. FTC projects use
 packages the same way to organize OpModes, subsystems, and other robot code.
 
+## Understand `main`, `static`, and arguments
+
+Inside the class, this line declares the `main` **method**:
+
+```java
+public static void main(String[] args) {
+```
+
+A method is a named block of instructions. When you launch this program, Java looks
+for the `main` method as the place to begin.
+
+Read the declaration one part at a time:
+
+| Part | Meaning in this program |
+|---|---|
+| `public` | Java is allowed to call this method from outside the class. |
+| `static` | The method belongs to the class itself. Java can call it without first creating a `RobotStatus` object. |
+| `void` | The method finishes without returning a value. |
+| `main` | This is the name Java recognizes as the program's starting point. |
+| `String[] args` | This method can receive an array—a list—of text values supplied when the program starts. |
+
+An **object** is one created instance of a class. You will work with objects in a
+later lesson. For now, the important point is that `static` lets Java start `main`
+before any `RobotStatus` object exists.
+
+`String[] args` is the method's **parameter**. `String` means text, the square
+brackets `[]` mean an array, and `args` is the variable name. The values placed in
+that array are called **arguments**.
+
+For example, if a program were launched with the argument `Creekside`, `args` would
+contain one text value: `Creekside`. This lesson does not pass any arguments, so the
+array starts empty. Keep the parameter in the method declaration even though the
+program does not use it yet.
+
+The opening `{` begins the method body. Java runs the statements inside that body
+in order, from top to bottom.
+
+## Make a prediction
+
+Before running, write down the exact output you expect.
+
 ## Run the starter
 
-Run the starter from the repository root.
+Now run the starter from the repository root.
 
 macOS or Linux:
 
@@ -118,10 +159,7 @@ Windows:
 scripts\run-lesson.cmd 01
 ```
 
-## Make a prediction
-
-Before running, write down the exact output you expect. After running, compare the
-actual output with your prediction.
+Compare the actual output with your prediction.
 
 ## Build it
 
@@ -138,7 +176,8 @@ Make these changes yourself before asking an AI assistant:
 Use the assistant as an explainer, not an editor:
 
 > Explain how the file, package, class, and `main` method in `RobotStatus.java` fit
-> together. Do not edit any files. Correct my explanation, then ask me one
+> together. Include why `main` is `static` and what `String[] args` can contain. Do
+> not edit any files. Correct my explanation, then ask me one
 > check-for-understanding question.
 
 ## Check your work
@@ -149,20 +188,13 @@ You are finished when:
 - it prints two intentional lines;
 - the filename matches the public class name;
 - you can identify the package declaration;
-- you can identify the `main` method; and
-- a teammate can change one message and rerun it.
+- you can identify the `main` method;
+- you can explain why Java can call a `static` method without creating an object;
+  and
+- you can explain what `String[] args` can contain.
 
 Compilation proves that Java accepted the program. It does not prove that the
 messages are useful or that future robot behavior is correct.
-
-## Teach it back
-
-Point to the file, package declaration, class declaration, and `main` method. Explain
-how each one helps Java find and run this program. Then tell a teammate what
-`public`, `static`, `void`, and `String[] args` appear to do. An incomplete first
-explanation is fine.
-
-Exit question: **What did running the program prove, and what did it not prove?**
 
 ## Connect it to FTC
 
