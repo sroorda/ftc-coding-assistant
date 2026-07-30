@@ -77,6 +77,8 @@ rules established by the tool provider, school, and team.
 - Use Java language features that transfer easily to FTC Android projects.
 - Run a lesson with `./scripts/run-lesson.sh NN` on macOS/Linux or
   `scripts\run-lesson.cmd NN` on Windows.
+- Lesson 3 requires a joystick test value after the lesson number, for example
+  `./scripts/run-lesson.sh 03 0.05` or `scripts\run-lesson.cmd 03 0.05`.
 - Place instructor-only guidance under `instructor/` and student guidance in the
   lesson README.
 - Keep Level 1 hardware-independent. Put FTC SDK and physical device work in

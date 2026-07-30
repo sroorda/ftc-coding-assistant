@@ -2,10 +2,10 @@ package org.ftc.training.lesson03;
 
 public class JoystickControl {
     public static void main(String[] args) {
-        double joystick = 0.08;
+        double joystick = Double.parseDouble(args[0]);
         double motorPower;
 
-        // The behavior does not yet match the 0.10 deadband requirement.
+        // This condition contains the intentional bug for Lesson 3.
         if (Math.abs(joystick) < 0.01) {
             motorPower = 0.0;
         } else {
@@ -15,4 +15,3 @@ public class JoystickControl {
         System.out.println("Motor power: " + motorPower);
     }
 }
-
