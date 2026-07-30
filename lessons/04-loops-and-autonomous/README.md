@@ -20,7 +20,7 @@ By the end of this lesson, you can:
 - write a `for` loop when you know how many times work should repeat;
 - write a `while` loop when repetition depends on a condition;
 - identify what changes so each loop eventually stops; and
-- explain the difference between blocking and non-blocking robot behavior.
+- explain why a long blocking loop can prevent other robot updates.
 
 ## Get ready
 
@@ -123,36 +123,13 @@ Before running, predict:
 Run the lesson and compare the output with all three predictions. Explain which
 statement changes the loop condition and why the loop stops.
 
-## Blocking and non-blocking robot thinking
+## Blocking robot thinking
 
 In this desktop program, the `while` loop is **blocking**: `main` cannot continue
 to `Other robot work can run now` until the loop finishes. That is acceptable for
 small calculations, but long blocking actions are risky in robot code. While one
 action owns the program, controls, localization, telemetry, stop checks, or another
 mechanism may not get updated.
-
-In a **non-blocking** design, repetition comes from the FTC control system calling
-the robot's control code again and again. The movement code does not finish the
-entire action in one call. Instead, each control cycle does this:
-
-1. Advance the movement by at most one update.
-2. Update controls, localization, telemetry, and other mechanisms.
-3. Return control to the FTC system.
-
-With the Activity 2 values, the progress would look like this:
-
-| Control cycle | Distance after one movement update | Can other robot work run? |
-|---:|---:|---|
-| 1 | `3` | Yes |
-| 2 | `6` | Yes |
-| 3 | `9` | Yes |
-| 4 | `12` | Yes |
-
-The movement still takes four updates, but no single control cycle waits for all
-four. Later lessons will use methods, states, and actions to build this pattern.
-For now, recognize the difference: a blocking loop completes every repetition
-before other code can continue; a non-blocking action completes one small update
-and gives control back.
 
 ## Ask your AI tutor
 

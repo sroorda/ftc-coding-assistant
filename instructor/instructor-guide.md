@@ -81,11 +81,11 @@ uses `segment = 1`, continues through `segment <= totalSegments`, and increments
 `targetDistance` using `<`, adds `distancePerUpdate`, and then prints the updated
 distance.
 
-Keep the blocking discussion concrete: the final message cannot run until the
-`while` loop releases control. A real non-blocking action advances once per control
-cycle and returns so other systems can update. Do not introduce threads, and do not
-claim that moving unrelated work inside a long `while` loop makes the action fully
-non-blocking. Do not demonstrate an uncontrolled infinite loop on shared machines.
+Keep the blocking discussion limited to what students can observe: the final
+message cannot run until the `while` loop releases control. Tell students that a
+later exercise will teach responsive, non-blocking actions. Do not introduce that
+architecture or threads here. Do not demonstrate an uncontrolled infinite loop on
+shared machines.
 
 Exit ticket: “When would you choose `for` instead of `while`, and why can a long
 `while` loop be dangerous in robot code?”
