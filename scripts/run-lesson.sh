@@ -15,7 +15,7 @@ case "$lesson" in
   03) lesson_dir="03-decisions-and-deadbands"; main_class="org.ftc.training.lesson03.JoystickControl" ;;
   04) lesson_dir="04-loops-and-autonomous"; main_class="org.ftc.training.lesson04.AutoSequence" ;;
   05) lesson_dir="05-methods-classes-and-tests"; main_class="org.ftc.training.lesson05.DriveMathTest" ;;
-  06) lesson_dir="06-virtual-intake-project"; main_class="org.ftc.training.lesson06.VirtualIntakeDemo" ;;
+  06) lesson_dir="06-virtual-intake-project"; main_class="org.ftc.training.lesson06.VirtualIntakeControllerTest" ;;
   *)
     echo "Unknown lesson '$lesson'. Choose 01 through 06."
     exit 2

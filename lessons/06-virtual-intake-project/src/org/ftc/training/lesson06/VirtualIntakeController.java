@@ -10,4 +10,3 @@ public class VirtualIntakeController {
         return new IntakeOutput(0.0, "Not implemented");
     }
 }
-

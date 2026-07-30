@@ -23,7 +23,7 @@ $lessons = @{
     "03" = @("03-decisions-and-deadbands", "org.ftc.training.lesson03.JoystickControl")
     "04" = @("04-loops-and-autonomous", "org.ftc.training.lesson04.AutoSequence")
     "05" = @("05-methods-classes-and-tests", "org.ftc.training.lesson05.DriveMathTest")
-    "06" = @("06-virtual-intake-project", "org.ftc.training.lesson06.VirtualIntakeDemo")
+    "06" = @("06-virtual-intake-project", "org.ftc.training.lesson06.VirtualIntakeControllerTest")
 }
 
 $lessonInfo = $lessons[$Lesson]

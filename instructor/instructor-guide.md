@@ -106,10 +106,17 @@ Exit ticket: “Why is this logic easier to trust as a method than when duplicat
 
 ### 6 — Virtual intake
 
-Use this precedence: emergency stop overrides everything; reverse overrides intake;
-an object detected prevents normal intake; otherwise intake follows its button and
-the motor is stopped. Students may choose different wording but outputs must be
-unambiguous. Encourage a decision table before code.
+Walk through all four starter files before presenting the requirements. Students
+should be able to trace one demo call into `update`, identify all four boolean
+parameters, and explain why `IntakeOutput` carries both power and status. The test
+harness is supplied; students should add scenarios rather than design new testing
+infrastructure.
+
+Use this precedence: emergency stop overrides everything; reverse overrides intake
+and object detection; an object detected prevents normal intake; otherwise intake
+follows its button and the motor is stopped. Status strings are part of the tested
+requirement: `Emergency stop`, `Reversing`, `Object detected`, `Intaking`, and
+`Idle`. Encourage a decision table before code.
 
 Required scenarios:
 
@@ -120,6 +127,10 @@ Required scenarios:
 | true | false | true | false | 0.0 |
 | true | true | false | false | -1.0 |
 | true | true | false | true | 0.0 |
+
+The starter should run all five scenarios, report zero passes and five failures,
+and then throw one final `AssertionError`. After implementing the five rules,
+students add the two specified high-conflict scenarios for a total of seven.
 
 Exit ticket: “Which rule wins when inputs conflict, and which test proves it?”
 
