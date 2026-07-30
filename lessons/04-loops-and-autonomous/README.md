@@ -1,26 +1,26 @@
-# Lesson 4: Loops and Autonomous Sequences
+# Lesson 4: Writing `for` and `while` Loops
 
-Today you will trace a loop that represents repeated autonomous steps. You will
-repair an off-by-one error and prove that you understand both why the loop repeats
-and why it stops.
+Robot programs repeat work: read controls, update telemetry, follow a path, or
+continue an action until a condition changes. Today you will learn two Java loop
+structures and write one of each yourself.
 
 ## Your mission
 
 | | |
 |---|---|
 | **Time** | 60–75 minutes |
-| **Java focus** | `for`, counters, boundaries, termination |
-| **FTC connection** | repeated autonomous steps |
-| **AI tutor** | explain why a loop repeats and stops |
+| **Java focus** | `for`, `while`, counters, conditions, and updates |
+| **FTC connection** | repetition, autonomous progress, and responsive robot code |
+| **AI tutor** | explain loop behavior without writing the loop for you |
 
 ## Your goal
 
 By the end of this lesson, you can:
 
-- trace a `for` loop using a counter;
-- recognize an off-by-one error;
-- explain why a loop terminates; and
-- represent repeated autonomous steps without hardware.
+- write a `for` loop when you know how many times work should repeat;
+- write a `while` loop when repetition depends on a condition;
+- identify what changes so each loop eventually stops; and
+- explain the difference between blocking and non-blocking robot behavior.
 
 ## Get ready
 
@@ -31,14 +31,43 @@ your local clone:
 lessons/04-loops-and-autonomous/src/org/ftc/training/lesson04/AutoSequence.java
 ```
 
-## Requirement
+The starter compiles, but the two repeated sequences are intentionally missing.
+You will write them.
 
-Print exactly three driving segments, numbered 1, 2, and 3, followed by `Complete`.
+## Understand a `for` loop
 
-## Make a prediction
+Use a `for` loop when you know the number of repetitions before the loop begins.
+A `for` loop puts three important parts in one header:
 
-Trace the values of `step` on paper before running. Record the value used for every
-line you expect the loop to print.
+```java
+for (int check = 1; check <= 3; check++) {
+    System.out.println("Inspection " + check);
+}
+```
+
+Read the header from left to right:
+
+1. `int check = 1` — **initialize** the counter once before the loop begins.
+2. `check <= 3` — **continue** while this condition is true.
+3. `check++` — **update** the counter after each iteration.
+
+The statements between `{` and `}` are the loop body. One trip through that body
+is called an **iteration**.
+
+## Student Activity 1 — Write a `for` loop
+
+The first part of `AutoSequence.java` contains `totalSegments`. Beneath its TODO:
+
+1. Write a `for` loop with a counter named `segment`.
+2. Begin the counter at `1`.
+3. Continue through `totalSegments`.
+4. Increase the counter by one after every iteration.
+5. In the loop body, print `Driving segment ` followed by the counter.
+
+Before running, predict the complete output for this activity. You should expect
+three numbered segment lines followed by `For-loop sequence complete`.
+
+Run the lesson:
 
 macOS or Linux:
 
@@ -52,34 +81,100 @@ Windows:
 scripts\run-lesson.cmd 04
 ```
 
-## Student Task
+Compare the output with your prediction. Then change only `totalSegments` to `5`
+and confirm that the loop follows the variable rather than a number hidden in its
+header. Return it to `3` before continuing.
 
-1. Compare the output with the requirement.
-2. Repair the loop condition.
-3. Change the program to print five segments.
-4. Add a `totalSegments` variable so one value controls the count.
-5. Explain initialization, continuation condition, and update in the loop header.
+## Understand a `while` loop
+
+Use a `while` loop when repetition should continue until a condition changes. You
+may not know the number of repetitions when the program begins.
+
+```java
+int chargePercent = 0;
+
+while (chargePercent < 100) {
+    chargePercent = chargePercent + 25;
+    System.out.println("Charge: " + chargePercent);
+}
+```
+
+Before every iteration, Java checks `chargePercent < 100`. The loop body changes
+`chargePercent`, so the condition eventually becomes false. If nothing relevant
+changes inside a `while` loop, it may run forever.
+
+## Student Activity 2 — Write a `while` loop
+
+The second part of `AutoSequence.java` simulates distance reported during an
+autonomous movement. Beneath its TODO:
+
+1. Write a `while` loop that continues while `distanceTraveled` is less than
+   `targetDistance`.
+2. Inside the loop, add `distancePerUpdate` to `distanceTraveled`.
+3. Print `Distance traveled: ` followed by the new distance.
+
+Before running, predict:
+
+- each distance the loop will print;
+- how many iterations it will perform; and
+- whether `Other robot work can run now` appears before, during, or after those
+  distance lines.
+
+Run the lesson and compare the output with all three predictions. Explain which
+statement changes the loop condition and why the loop stops.
+
+## Blocking and non-blocking robot thinking
+
+In this desktop program, the `while` loop is **blocking**: `main` cannot continue
+to `Other robot work can run now` until the loop finishes. That is acceptable for
+small calculations, but long blocking actions are risky in robot code. While one
+action owns the program, controls, localization, telemetry, stop checks, or another
+mechanism may not get updated.
+
+Non-blocking robot code advances an action a small amount during each pass through
+the robot's main control loop, then allows other work to run. The idea looks like
+this:
+
+```java
+if (distanceTraveled < targetDistance) {
+    distanceTraveled = distanceTraveled + distancePerUpdate;
+}
+
+System.out.println("Update controls, telemetry, and other mechanisms");
+```
+
+The FTC runtime would call the surrounding control code repeatedly. The `if`
+performs at most one movement update per pass instead of holding control in an
+inner `while` loop. Later lessons will use methods, states, and actions to organize
+this pattern; this lesson only asks you to recognize the difference.
 
 ## Ask your AI tutor
 
-> Explain why this loop prints its current number of segments and why it eventually
-> stops. Do not edit it. Ask me to trace the final two values of `step`.
+> I wrote the `for` and `while` loops in Lesson 4. Ask me to explain when each
+> loop stops and which value changes. If I am wrong, give one hint. Do not write a
+> replacement loop for me. Then ask me why the `while` activity is blocking.
 
 ## Check your work
 
 You are finished when:
 
-- the number of segment lines matches `totalSegments`;
-- numbering begins at 1 and ends at `totalSegments`;
-- `Complete` appears once, after the loop; and
-- you can name the value that changes on every iteration.
+- your `for` loop prints segments `1` through `totalSegments`;
+- changing `totalSegments` changes the number of iterations;
+- your `while` loop prints `3`, `6`, `9`, and `12` as traveled distances;
+- `Other robot work can run now` appears only after the `while` loop finishes;
+- you can explain why both loops terminate; and
+- you can describe when you would choose `for` instead of `while`.
 
-Do not demonstrate an uncontrolled infinite loop on a shared computer.
+Do not intentionally run an infinite loop on a shared computer.
 
 ## Connect it to FTC
 
-Autonomous code performs sequences, but a real OpMode must remain responsive.
-Later robot code should use timed states or commands instead of long blocking loops.
+A `for` loop is useful when an operation has a known count, such as processing four
+wheel measurements. A `while` loop expresses condition-driven repetition, but a
+long inner `while` loop can make a robot unresponsive. FTC control code generally
+needs to keep cycling so it can update every active system and respond to stop
+requests. You will apply that non-blocking idea to autonomous actions in later
+levels.
 
 ## Continue
 

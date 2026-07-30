@@ -75,11 +75,20 @@ Exit ticket: “Which three values best test a boundary at 0.10?”
 
 ### 4 — Loops and autonomous
 
-The initial loop is finite but has an off-by-one error: it prints four segments when
-the requirement says three. Have students trace `step` in a table before editing.
-Do not demonstrate an uncontrolled infinite loop on shared machines.
+Students write both loops rather than repair starter code. The intended `for` loop
+uses `segment = 1`, continues through `segment <= totalSegments`, and increments
+`segment`. The intended `while` loop compares `distanceTraveled` with
+`targetDistance` using `<`, adds `distancePerUpdate`, and then prints the updated
+distance.
 
-Exit ticket: “What changes each iteration, and why does the loop stop?”
+Keep the blocking discussion concrete: the final message cannot run until the
+`while` loop releases control. A real non-blocking action advances once per control
+cycle and returns so other systems can update. Do not introduce threads, and do not
+claim that moving unrelated work inside a long `while` loop makes the action fully
+non-blocking. Do not demonstrate an uncontrolled infinite loop on shared machines.
+
+Exit ticket: “When would you choose `for` instead of `while`, and why can a long
+`while` loop be dangerous in robot code?”
 
 ### 5 — Methods, classes, and tests
 

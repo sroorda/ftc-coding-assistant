@@ -24,7 +24,7 @@ thinking that helps you become a programmer.
 | 1. First program | class, `main`, output | initialization messages | change output and explain where execution begins |
 | 2. Variables and math | types, variables, arithmetic | wheel travel | name values, track units, and predict a calculation |
 | 3. Decisions and deadbands | booleans and `if`/`else` | joystick drift | repair and test a boundary condition |
-| 4. Loops and autonomous | counters and termination | repeated autonomous steps | trace a loop and explain why it stops |
+| 4. Loops and autonomous | `for`, `while`, and termination | repeated autonomous steps | write both loops and explain blocking behavior |
 | 5. Methods, classes, tests | parameters, returns, assertions | bounded motor power | use a failing test to implement a requirement |
 | 6. Virtual intake | requirements and priority | intake decision logic | implement and demonstrate conflicting rules |
 
