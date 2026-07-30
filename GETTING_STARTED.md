@@ -9,7 +9,8 @@ unclear.
 The course repository is
 [sroorda/ftc-coding-assistant](https://github.com/sroorda/ftc-coding-assistant).
 
-If Git is already installed, clone it:
+If Git is already installed and an adult mentor has asked you to use it, clone the
+repository:
 
 ```text
 git clone https://github.com/sroorda/ftc-coding-assistant.git
@@ -17,8 +18,8 @@ cd ftc-coding-assistant
 ```
 
 If Git is not installed yet, use GitHub's **Code → Download ZIP** option, extract
-the ZIP, and open a terminal in the extracted folder. Team leads will introduce Git
-before students work in a shared robot repository.
+the ZIP, and open a terminal in the extracted folder. Git is not a Level 1 learning
+objective. Students learn the team workflow after completing the Java lessons.
 
 ## 2. Install Java
 
@@ -75,9 +76,9 @@ verification.
 
 ## 5. Open your learning path
 
-- Students continue to [Track A — Students](tracks/students.md).
-- Team leads begin with [Track B — Team Leads](tracks/team-leads.md).
-- Mentors prepare with [Track C — Mentors](tracks/mentors.md).
+- Students continue to [Level 1 — Java Foundations](levels/01-java-foundations.md).
+- Adults prepare with the [Adult Mentor Guide](mentors/adult-mentor-guide.md).
+- The complete sequence is in the [Program Roadmap](PROGRAM_ROADMAP.md).
 
 Before using an AI assistant, read [Predict, Ask, Verify](docs/student-workflow.md).
 

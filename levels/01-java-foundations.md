@@ -1,9 +1,10 @@
-# Track A — Students
+# Level 1 — Java Foundations
 
 ## Outcome
 
-Learn enough Java to reason about FTC-style logic and use Claude Code as a tutor,
-debugging partner, and reviewer without giving away ownership of the work.
+Learn enough Java to reason about FTC-style logic and use an AI coding assistant
+for explanations, debugging questions, and review without giving away ownership of
+the work.
 
 ## Before your first session
 
@@ -61,5 +62,7 @@ Using Lesson 6, demonstrate that you can:
 - run the tests and interpret a deliberate failure; and
 - describe one AI suggestion you rejected or changed.
 
-Passing means you are ready to begin supervised work in a practice FTC SDK project.
-It does not by itself authorize deployment or hardware operation.
+Passing means you are ready for the [Team Workflow Bootcamp](../team-workflow.md).
+Completing that workshop prepares you to begin supervised
+[Level 2 hardware work](../levels/02-hardware-lab.md). It does not by itself
+authorize deployment or hardware operation.

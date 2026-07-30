@@ -107,7 +107,7 @@ You are finished when:
 
 ## Explain
 
-Demonstrate the project to a lead or mentor. State the expected result before each
+Demonstrate the project to an adult mentor. State the expected result before each
 run and identify the requirement that controls it.
 
 Exit question: **Which rule wins when inputs conflict, and which test proves it?**
@@ -120,6 +120,6 @@ test away from the robot.
 
 ## Course completion
 
-Return to the [Student Readiness Check](../../tracks/students.md#readiness-check),
-then review [Transitioning to FTC Robot Code](../../docs/ftc-transition.md) with a
-team lead or mentor.
+Return to the [Student Readiness Check](../../levels/01-java-foundations.md#readiness-check),
+then complete the [Team Workflow Bootcamp](../../team-workflow.md) before beginning
+supervised [Level 2 hardware work](../../levels/02-hardware-lab.md).

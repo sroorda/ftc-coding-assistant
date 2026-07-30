@@ -1,18 +1,12 @@
-# Curriculum
+# Level 1 Curriculum — Java Foundations
 
-## Three coordinated tracks
+Level 1 teaches beginning programmers to reason about Java through robot-like
+problems without requiring the FTC SDK or physical hardware. It is the first level
+of the [five-level student program](PROGRAM_ROADMAP.md), and its six lessons are
+available now.
 
-The six Java lessons are the core student sequence, not the entire team-development
-program. [TRACKS.md](TRACKS.md) coordinates three role-specific paths:
-
-| Track | Audience | Primary outcome | Guide |
-|---|---|---|---|
-| A — Students | new and developing programmers | write, explain, and verify Java with bounded AI help | [students](tracks/students.md) |
-| B — Team Leads | experienced students or software captains | create a safe Git and review system and guide architecture | [team leads](tracks/team-leads.md) |
-| C — Mentors | adult and student mentors | use Claude Code to teach and review without replacing student reasoning | [mentors](tracks/mentors.md) |
-
-All tracks share one standard: a change is not complete until a person can explain
-it, connect it to a requirement, and show evidence that it works.
+Git and collaboration are intentionally deferred until the
+[Team Workflow Bootcamp](team-workflow.md) after Level 1.
 
 ## Teaching model
 
@@ -23,10 +17,10 @@ Every lesson uses the same cycle:
 3. **Ask** the assistant for a hint, explanation, review, or test idea.
 4. **Decide** which advice is relevant.
 5. **Verify** by compiling, running, and testing.
-6. **Explain** the result to a teammate.
+6. **Explain** the result to another person.
 
-The sequence starts with plain Java. FTC SDK concepts are introduced by analogy,
-then deferred until students can reason about the underlying logic.
+The AI assistant supports the learning cycle but does not replace the adult mentor,
+student author, or human reviewer.
 
 ## Lesson plan
 
@@ -41,7 +35,7 @@ then deferred until students can reason about the underlying logic.
 
 ## Suggested session shape
 
-- 10 minutes: mentor demonstration and vocabulary
+- 10 minutes: adult mentor demonstration and vocabulary
 - 10 minutes: prediction in pairs
 - 25 minutes: coding exercise
 - 15 minutes: constrained AI-assistant activity
@@ -62,18 +56,12 @@ when they can:
 - describe at least one edge case; and
 - distinguish “it compiled” from “it meets the requirement.”
 
-For the final project, assess requirements coverage, code clarity, tests, explanation,
-and responsible assistant use. Avoid grading based on code volume.
+For the final project, assess requirements coverage, code clarity, tests,
+explanation, and responsible assistant use. Avoid grading based on code volume.
 
-## Iteration roadmap
+## After Level 1
 
-Recommended follow-on modules:
-
-1. Run the Track B Git and review workshops with emerging team leads
-2. Arrays, lists, and logged sensor samples
-3. Enums and explicit subsystem states
-4. FTC OpMode lifecycle and telemetry
-5. HardwareMap, motors, servos, and configuration safety
-6. Non-blocking timing and state machines
-7. Unit-testing logic outside the Robot Controller app
-8. Reading and reviewing a real team subsystem
+Students complete the
+[Level 1 readiness check](levels/01-java-foundations.md#readiness-check), then the
+[Team Workflow Bootcamp](team-workflow.md). Only after both should they begin
+supervised [Level 2 hardware work](levels/02-hardware-lab.md).

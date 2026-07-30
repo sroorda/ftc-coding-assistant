@@ -1,44 +1,46 @@
 # FTC Java + AI Coding Assistant Training
 
-Learn Java through small robotics exercises while learning to use an AI coding
-assistant responsibly. Everything runs on a Windows, macOS, or Linux computer—no
-robot or FTC Robot Controller is required for the course.
+A beginner-first path from a first Java program to coordinated FTC autonomous
+behavior. Students learn one layer at a time: code, hardware, robot systems,
+autonomous motion, and finally mechanisms acting during paths.
 
-> **New to the course?** Begin with [Start Here](GETTING_STARTED.md). It takes you
+Level 1 runs on Windows, macOS, or Linux without a robot or FTC Robot Controller.
+
+> **New to the program?** Begin with [Start Here](GETTING_STARTED.md). It takes you
 > from installing Java to running your first lesson.
 
-## Choose your track
+## Student pathway
 
-| Track | Designed for | Start here |
+| Level | Focus | Availability |
 |---|---|---|
-| **A — Students** | new and developing FTC programmers | [Student learning path](tracks/students.md) |
-| **B — Team Leads** | experienced students and software captains | [Team lead workshops](tracks/team-leads.md) |
-| **C — Mentors** | adults and students who coach programmers | [Mentor playbook](tracks/mentors.md) |
+| [1 — Java Foundations](levels/01-java-foundations.md) | Java and robot-like logic without hardware | **Six lessons available now** |
+| [2 — Hardware Lab](levels/02-hardware-lab.md) | FTC SDK, telemetry, motors, servos, and sensors | Planned |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | driving, gamepads, mechanisms, and subsystems | Planned |
+| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | localization, tuning, and Pedro Pathing | Planned |
+| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | mechanism actions while following paths | Planned |
 
-The tracks share the same exercises but have different responsibilities. Students
-write and explain the code. Leads build a safe Git and review workflow. Mentors help
-without taking the problem-solving away.
+See the [Program Roadmap](PROGRAM_ROADMAP.md) for readiness gates and how the
+levels connect.
 
-## What students will learn
+## Team skills and robot structure
 
-Across six hands-on lessons, students learn to:
+Level 1 stays focused on learning to code. After it, every student completes a
+short [Team Workflow Bootcamp](team-workflow.md). Git and pull requests then become
+the normal way work moves through Levels 2–5.
 
-- read, change, compile, and run Java programs;
-- use variables, decisions, loops, methods, classes, and basic tests;
-- connect Java concepts to FTC motor power, gamepads, autonomous steps, and subsystems;
-- ask an AI assistant for explanations, hints, reviews, and test ideas; and
-- verify suggestions instead of trusting generated code automatically.
+The [Robot Code Architecture](docs/robot-code-architecture.md) guide shows how the
+team's base framework can grow from hardware initialization to reusable subsystems
+and coordinated autonomous actions. Students evolve it from real needs rather than
+designing a large framework before they understand the robot.
 
-## Course format
+## Adults and AI
 
-- Six sessions of approximately 60–90 minutes
-- Pair programming encouraged
-- Plain Java exercises that target the FTC-compatible Java 8 language level
-- JDK 17 or newer, matching the current FTC SDK build-tool minimum
-- One final virtual intake project that combines the earlier concepts
+Adults use the [Adult Mentor Guide](mentors/adult-mentor-guide.md) to prepare
+lessons, coach productive struggle, review work, and supervise hardware.
 
-Learning matters more than finishing quickly. Students remain responsible for every
-changed line and every claim that the program works.
+AI can support mentoring through explanations, questions, review, and test ideas.
+It is not an accountable mentor. Adults remain responsible for student supervision,
+hardware safety, privacy, repository access, and final technical decisions.
 
 ## For maintainers
 

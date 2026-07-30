@@ -1,16 +1,17 @@
 # Instructor Guide
 
-## Before teaching: assign the tracks
+## Before teaching: understand the pathway
 
-- Every new programmer follows **Track A** and completes the six Java lessons.
-- Software captains and experienced students follow **Track B** while supporting,
-  not completing, Track A exercises.
-- Adults and designated student mentors follow **Track C** and agree on the same
-  assistance boundaries before the first session.
+Every new programmer begins with **Level 1 — Java Foundations** and completes the
+same six lessons. Do not assign student leads or add Git instruction during this
+level. The goal is to get every student writing, testing, and explaining code.
 
-See [TRACKS.md](../TRACKS.md) for the shared schedule and role handoffs. A person may
-hold more than one role, but should state which role they are acting in during a
-review or coaching interaction.
+Adults follow the [Adult Mentor Guide](../mentors/adult-mentor-guide.md) and agree
+on assistance, privacy, and safety boundaries before the first session. AI may
+support adults and students, but it is not an accountable mentor.
+
+See the [Program Roadmap](../PROGRAM_ROADMAP.md) for the later hardware, TeleOp,
+Pedro Pathing, and coordinated autonomous levels.
 
 ## Preparation
 
@@ -40,9 +41,10 @@ Require students to narrate changed lines in their own words. If they cannot, re
 or rewrite the change more simply. Compilation proves syntax and types; scenario
 tests provide evidence about behavior; neither replaces checking the requirement.
 
-Use the help ladder from [Track C](../tracks/mentors.md): question, location hint,
+Use the help ladder from the
+[Adult Mentor Guide](../mentors/adult-mentor-guide.md): question, location hint,
 concept hint, pseudocode, small example, then implementation only when appropriate.
-Team leads should review for requirements and evidence before discussing style.
+Adult reviewers should check requirements and evidence before discussing style.
 
 ## Lesson notes
 
@@ -117,10 +119,10 @@ Score each dimension as needs support, developing, or ready:
 - Assistant use: prompts were constrained and suggestions were evaluated.
 - Teamwork: both partners can explain and run the program.
 
-## Adding a lesson
+## Adding a Level 1 lesson
 
 Copy the nearest lesson rather than inventing a new format. Add its run mapping to
 both `scripts/run-lesson.sh` and `scripts/run-lesson.ps1`, run it on a clean checkout
 on at least one Unix-like system and Windows, and have a mentor unfamiliar with the
-exercise follow the README literally. Keep FTC hardware work in a later, explicitly
-supervised track.
+exercise follow the README literally. Keep FTC hardware work in Level 2 or later,
+with explicit adult supervision.

@@ -30,8 +30,12 @@ review and test away from the robot.
 
 ## Readiness gate
 
-Before students edit the competition repository, they should be able to complete
-Lesson 6, explain precedence between conflicting inputs, add a scenario test, and
-use Git to recover their own work. The team should then teach its exact SDK version,
-project structure, hardware configuration, deployment procedure, and safety rules.
+Before students enter the FTC SDK project, they should complete the
+[Level 1 readiness check](../levels/01-java-foundations.md#readiness-check) and the
+[Team Workflow Bootcamp](../team-workflow.md). The team should then teach its exact
+SDK version, project structure, hardware configuration, deployment procedure, and
+safety rules through supervised [Level 2 hardware labs](../levels/02-hardware-lab.md).
 
+Do not move directly from desktop Java to unsupervised competition robot changes.
+Students first need a controlled way to configure, command, observe, and stop one
+physical device at a time.

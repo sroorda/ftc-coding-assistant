@@ -1,9 +1,13 @@
-# Track C — Mentors
+# Adult Mentor Guide
 
 ## Outcome
 
-Use Claude Code to improve preparation, questioning, review, and verification while
-keeping programming decisions and explanations with the students.
+Use AI coding assistants to improve preparation, questioning, review, and
+verification while keeping programming decisions and explanations with students.
+
+AI supports mentoring but is not an accountable mentor. Adults remain responsible
+for student supervision, hardware safety, privacy, repository permissions, and final
+technical decisions.
 
 The test is not whether the group finishes faster. The test is whether students can
 make the next comparable change with less help.
@@ -13,7 +17,8 @@ make the next comparable change with less help.
 1. Run every lesson, including the intentionally failing starting state in Lesson 5.
 2. Identify the Java concept and evidence of learning for each exercise.
 3. Agree on account, privacy, repository, deployment, and hardware boundaries.
-4. Configure Claude using the repository's [CLAUDE.md](../CLAUDE.md).
+4. Configure Claude Code using the repository's [CLAUDE.md](../CLAUDE.md), or apply
+   the same boundaries to the team's chosen AI assistant.
 5. Rehearse one weak prompt (“fix this”) and one bounded prompt from the
    [student workflow](../docs/student-workflow.md).
 
@@ -33,7 +38,7 @@ Providing the full implementation is appropriate only when implementation is not
 the learning objective, time or accessibility requires it, or a safety issue must
 be corrected immediately. Say why you are crossing that line.
 
-## Good uses of Claude Code
+## Good uses of AI
 
 - Generate alternate explanations at an identified experience level.
 - Suggest questions that reveal misconceptions without revealing the answer.
@@ -53,7 +58,7 @@ be corrected immediately. Say why you are crossing that line.
 
 ## AI-assisted review protocol
 
-When Claude reviews student code, provide the written requirement and constrain the
+When an AI assistant reviews student code, provide the written requirement and constrain the
 scope to the student's diff. Ask it to separate correctness, missing tests, clarity,
 and optional ideas. Then require a human reviewer to:
 
@@ -62,7 +67,7 @@ and optional ideas. Then require a human reviewer to:
 3. convert answer-shaped feedback into questions when practical; and
 4. choose the exact verification students will run.
 
-Claude can widen attention; it cannot certify safety or understanding.
+AI can widen attention; it cannot certify safety or understanding.
 
 ## Ten-minute mentor debrief
 

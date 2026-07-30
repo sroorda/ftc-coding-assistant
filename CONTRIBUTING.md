@@ -26,10 +26,12 @@ remain in the repository but are not part of the published course navigation.
 ├── GETTING_STARTED.md        First-time student setup
 ├── SUMMARY.md                Published navigation
 ├── CURRICULUM.md             Course sequence and outcomes
-├── TRACKS.md                 Coordinated three-track program
+├── PROGRAM_ROADMAP.md        Five-level student progression and readiness gates
 ├── CLAUDE.md                 AI tutoring and safety behavior
 ├── docs/                     Setup, workflow, and FTC transition references
-├── tracks/                   Student, lead, and mentor paths
+├── levels/                   Level 1 path and planned Level 2–5 outcomes
+├── mentors/                  Adult preparation and coaching guidance
+├── team-workflow.md          Post-Level-1 Git and collaboration workshop
 ├── instructor/               Facilitation notes and answer guidance
 ├── lessons/                  Six Java exercises and their source code
 └── scripts/                  Cross-platform environment and lesson runners
@@ -51,7 +53,7 @@ Lessons 1–4 and 6 should compile and run from their starter state. Lesson 5 is
 deliberately expected to fail its first assertion until the student implements the
 exercise.
 
-## Add or revise a lesson
+## Add or revise a Level 1 lesson
 
 Use the existing lesson structure:
 
@@ -70,3 +72,8 @@ Keep source code hardware-independent and target the Java 8 language/API boundar
 Add new lesson mappings to both `scripts/run-lesson.sh` and
 `scripts/run-lesson.ps1`. Add the lesson to `SUMMARY.md`, then test its instructions
 on Windows and a Unix-like system.
+
+For Levels 2–5, do not remove the **Planned** label until the material has been
+tested with the team's actual FTC SDK version, hardware, safety procedure, and
+Windows development environment. Update the readiness gate in `PROGRAM_ROADMAP.md`
+when a level becomes available.
