@@ -32,7 +32,12 @@ open this file:
 lessons/01-first-program/src/org/ftc/training/lesson01/RobotStatus.java
 ```
 
-## Understand the file and class
+## Part 1 — Files, classes, and packages
+
+In Part 1, you will identify how Java organizes this program, predict its output,
+and make your first code changes.
+
+### Understand the file and class
 
 A **file** is a named piece of information stored on your computer. Java source
 files are text files whose names end in `.java`. You can open and change them in an
@@ -66,7 +71,7 @@ File:  RobotStatus.java
 The opening `{` begins the class body, and its matching `}` ends the class body.
 Everything between those braces belongs to the class.
 
-## Understand the package
+### Understand the package
 
 The first line places the class in a **package**:
 
@@ -102,7 +107,44 @@ org.ftc.training.lesson01.RobotStatus
 For now, keep the package line and folder structure unchanged. FTC projects use
 packages the same way to organize OpModes, subsystems, and other robot code.
 
-## Understand `main`, `static`, and arguments
+### Make a prediction
+
+Before running, write down the exact output you expect.
+
+### Run the starter
+
+Now run the starter from the repository root.
+
+macOS or Linux:
+
+```text
+./scripts/run-lesson.sh 01
+```
+
+Windows:
+
+```text
+scripts\run-lesson.cmd 01
+```
+
+Compare the actual output with your prediction.
+
+### Student task 1 — Change the output
+
+Make these changes yourself before asking an AI assistant:
+
+1. Change the initialization message to wording you prefer.
+2. Add a second output line saying whether the virtual robot is ready.
+3. Run the lesson again.
+4. Locate the package declaration, class declaration, and line where execution
+   begins.
+
+## Part 2 — `main`, `static`, and arguments
+
+In Part 2, you will examine how Java starts the program and then pass information
+into it when it runs.
+
+### Understand `main`, `static`, and arguments
 
 Inside the class, this line declares the `main` **method**:
 
@@ -131,45 +173,48 @@ before any `RobotStatus` object exists.
 brackets `[]` mean an array, and `args` is the variable name. The values placed in
 that array are called **arguments**.
 
-For example, if a program were launched with the argument `Creekside`, `args` would
-contain one text value: `Creekside`. This lesson does not pass any arguments, so the
-array starts empty. Keep the parameter in the method declaration even though the
-program does not use it yet.
-
 The opening `{` begins the method body. Java runs the statements inside that body
 in order, from top to bottom.
 
-## Make a prediction
+### Student task 2 — Use an argument
 
-Before running, write down the exact output you expect.
+Add this line inside `main`:
 
-## Run the starter
+```java
+System.out.println("Team: " + args[0]);
+```
 
-Now run the starter from the repository root.
+`args[0]` means “the first argument.” Java begins counting array positions at zero.
+The `+` joins the label `Team: ` with the argument text.
+
+Before running, predict all three output lines. Then pass your team name as the
+first argument.
 
 macOS or Linux:
 
 ```text
-./scripts/run-lesson.sh 01
+./scripts/run-lesson.sh 01 Creekside
 ```
 
 Windows:
 
 ```text
-scripts\run-lesson.cmd 01
+scripts\run-lesson.cmd 01 Creekside
 ```
 
-Compare the actual output with your prediction.
+Try a different team name. If the name contains spaces, put quotation marks around
+it:
 
-## Build it
+```text
+./scripts/run-lesson.sh 01 "Creekside Robotics"
+```
 
-Make these changes yourself before asking an AI assistant:
+```text
+scripts\run-lesson.cmd 01 "Creekside Robotics"
+```
 
-1. Change the initialization message to include your team name.
-2. Add a second output line saying whether the virtual robot is ready.
-3. Run the lesson again.
-4. Locate the package declaration, class declaration, and line where execution
-   begins.
+After you add `args[0]`, the program expects at least one argument. Without one,
+there is no item at position zero.
 
 ## Ask your AI tutor
 
@@ -185,13 +230,14 @@ Use the assistant as an explainer, not an editor:
 You are finished when:
 
 - the program compiles without errors;
-- it prints two intentional lines;
+- it prints three intentional lines, including the team name passed as the first
+  argument;
 - the filename matches the public class name;
 - you can identify the package declaration;
 - you can identify the `main` method;
 - you can explain why Java can call a `static` method without creating an object;
   and
-- you can explain what `String[] args` can contain.
+- you can explain why `args[0]` selects the first argument.
 
 Compilation proves that Java accepted the program. It does not prove that the
 messages are useful or that future robot behavior is correct.

@@ -2,7 +2,10 @@
 param(
     [Parameter(Mandatory = $true, Position = 0)]
     [ValidateSet("01", "02", "03", "04", "05", "06")]
-    [string]$Lesson
+    [string]$Lesson,
+
+    [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
+    [string[]]$ProgramArguments = @()
 )
 
 Set-StrictMode -Version Latest
@@ -40,5 +43,5 @@ New-Item -ItemType Directory -Path $buildDir -Force | Out-Null
 & javac --release 8 -d $buildDir $sourceFiles
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
-& java -cp $buildDir $lessonInfo[1]
+& java -cp $buildDir $lessonInfo[1] @ProgramArguments
 exit $LASTEXITCODE
