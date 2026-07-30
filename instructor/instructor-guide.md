@@ -92,9 +92,15 @@ Exit ticket: “When would you choose `for` instead of `while`, and why can a lo
 
 ### 5 — Methods, classes, and tests
 
-Students implement clamping to the inclusive range -1.0 through 1.0. Essential
-cases include below range, each boundary, within range, and above range. The small
-test harness avoids external libraries and should report five passing tests.
+Frame the lesson as extracting a numerical rule from hardware-facing code so it can
+be tested without a robot or FTC SDK. Students implement clamping to the inclusive
+range -1.0 through 1.0. Essential cases include below range, each boundary, within
+range, and above range.
+
+The small harness avoids external libraries. In the starter state it should run all
+five checks, report three passes and two failures, print its summary, and only then
+throw an `AssertionError`. After implementation it should report five passes.
+Students then add the two exact-boundary checks for a total of seven.
 
 Exit ticket: “Why is this logic easier to trust as a method than when duplicated?”
 

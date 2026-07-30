@@ -6,4 +6,3 @@ public class DriveMath {
         return power;
     }
 }
-

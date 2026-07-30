@@ -22,7 +22,7 @@ before it.
 | 2 | [Variables and Robot Math](../lessons/02-variables-and-math/README.md) | you can name values and track their units |
 | 3 | [Decisions and Deadbands](../lessons/03-decisions-and-deadbands/README.md) | you can repair and test a boundary condition |
 | 4 | [Loops and Autonomous](../lessons/04-loops-and-autonomous/README.md) | you can write `for` and `while` loops and explain blocking behavior |
-| 5 | [Methods, Classes, and Tests](../lessons/05-methods-classes-and-tests/README.md) | you can use a failing test to implement a requirement |
+| 5 | [Methods, Classes, and Tests](../lessons/05-methods-classes-and-tests/README.md) | you can isolate a calculation and verify it with multiple checks |
 | 6 | [Virtual Intake Controller](../lessons/06-virtual-intake-project/README.md) | you can implement and demonstrate conflicting rules |
 
 ## The learning loop
