@@ -53,7 +53,9 @@ A wheel travels one circumference per rotation. Estimate the distance for a
 ## Student Task
 
 1. Rename `d`, `r`, and `x` so their meanings and units are clear.
-2. Add a `String` containing a short label for the wheel being measured.
+2. Add a `String` variable containing a short label for the wheel, such as
+   `"left drive wheel"`. Use that variable in the printed output so the result
+   identifies which wheel was measured.
 3. Change the inputs to represent another FTC-sized wheel and rotation count.
 4. Round only the displayed result to two decimal places; keep the calculation as
    a `double`.
@@ -73,13 +75,24 @@ You are finished when:
 
 - your hand estimate and program output are reasonably close;
 - another calculation, such as a calculator, confirms one result;
+- the printed result includes the wheel label and distance unit;
 - every numeric value has an obvious unit; and
 - changing one input produces a result you can predict.
 
 ## Connect it to FTC
 
-Robot code converts encoder counts, wheel rotations, inches, degrees, and time. A
-correct formula with hidden units is still a future bug.
+An FTC motor encoder reports movement as counts. Robot code can convert those
+counts into wheel rotations, then use the wheel diameter to estimate distance
+traveled:
+
+```text
+distance = π × wheel diameter × rotations
+```
+
+Autonomous and localization code can use that estimated distance in inches. Clear
+variable names and visible units help prevent the robot from confusing encoder
+counts, rotations, inches, or millimeters—a mistake that can produce believable
+numbers but incorrect movement.
 
 ## Continue
 
