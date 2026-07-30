@@ -9,7 +9,7 @@ will also practice using an AI tutor without asking it to do your thinking for y
 ## Before your first lesson
 
 Complete [Set Up Your Computer](../GETTING_STARTED.md). Continue when the environment
-check succeeds and Lesson 1 prints `Robot initialized`.
+check succeeds and VS Code has the complete course folder open.
 
 ## Your lessons
 

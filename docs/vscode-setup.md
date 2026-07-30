@@ -83,7 +83,7 @@ The lesson scripts:
 - run the correct source files for each lesson; and
 - preserve intentional behavior such as Lesson 5's starting test failure.
 
-For example:
+When Lesson 1 tells you to run its program, use:
 
 ```text
 ./scripts/run-lesson.sh 01
@@ -95,5 +95,6 @@ or on Windows:
 scripts\run-lesson.cmd 01
 ```
 
-You are ready when you can edit `RobotStatus.java`, save it, run the Lesson 1
-command, and see your changed output.
+For now, you are ready when the environment check succeeds and VS Code's Explorer
+shows the course files. Return to [Set Up Your Computer](../GETTING_STARTED.md) and
+let Lesson 1 ask for your prediction before you run its program.

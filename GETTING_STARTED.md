@@ -1,8 +1,7 @@
 # Set Up Your Computer
 
 By the end of this guide, you will have the course files, a working Java
-installation, Visual Studio Code, and your first running program. Complete the
-steps in order.
+installation, and Visual Studio Code. Complete the steps in order.
 
 If a command or security prompt surprises you, stop and ask an adult mentor before
 continuing.
@@ -63,33 +62,11 @@ scripts\check-environment.cmd
 
 You are ready when the output shows both `java` and `javac` at version 17 or newer.
 
-## 5. Run your first program
-
-macOS or Linux:
-
-```text
-./scripts/run-lesson.sh 01
-```
-
-Windows Command Prompt or PowerShell:
-
-```text
-scripts\run-lesson.cmd 01
-```
-
-Look for this output:
-
-```text
-Robot initialized
-```
-
-You just compiled source code and ran a Java program. That is your first piece of
-evidence that the setup works.
-
-## 6. Start learning
+## 5. Start learning
 
 Read [How the Lessons Work](docs/student-workflow.md), then open
-[Level 1 — Java Foundations](levels/01-java-foundations.md).
+[Level 1 — Java Foundations](levels/01-java-foundations.md). Lesson 1 will ask you
+to predict your first program's output before you run it.
 
 ## Stop and ask an adult when
 
