@@ -131,22 +131,28 @@ small calculations, but long blocking actions are risky in robot code. While one
 action owns the program, controls, localization, telemetry, stop checks, or another
 mechanism may not get updated.
 
-Non-blocking robot code advances an action a small amount during each pass through
-the robot's main control loop, then allows other work to run. The idea looks like
-this:
+In a **non-blocking** design, repetition comes from the FTC control system calling
+the robot's control code again and again. The movement code does not finish the
+entire action in one call. Instead, each control cycle does this:
 
-```java
-if (distanceTraveled < targetDistance) {
-    distanceTraveled = distanceTraveled + distancePerUpdate;
-}
+1. Advance the movement by at most one update.
+2. Update controls, localization, telemetry, and other mechanisms.
+3. Return control to the FTC system.
 
-System.out.println("Update controls, telemetry, and other mechanisms");
-```
+With the Activity 2 values, the progress would look like this:
 
-The FTC runtime would call the surrounding control code repeatedly. The `if`
-performs at most one movement update per pass instead of holding control in an
-inner `while` loop. Later lessons will use methods, states, and actions to organize
-this pattern; this lesson only asks you to recognize the difference.
+| Control cycle | Distance after one movement update | Can other robot work run? |
+|---:|---:|---|
+| 1 | `3` | Yes |
+| 2 | `6` | Yes |
+| 3 | `9` | Yes |
+| 4 | `12` | Yes |
+
+The movement still takes four updates, but no single control cycle waits for all
+four. Later lessons will use methods, states, and actions to build this pattern.
+For now, recognize the difference: a blocking loop completes every repetition
+before other code can continue; a non-blocking action completes one small update
+and gives control back.
 
 ## Ask your AI tutor
 
