@@ -63,12 +63,11 @@ Use the existing lesson structure:
 4. Get ready
 5. Requirement, when applicable
 6. Make a prediction
-7. Build it
+7. Student Task
 8. Ask your AI tutor
 9. Check your work
-10. Teach it back
-11. Connect it to FTC
-12. Continue
+10. Connect it to FTC
+11. Continue
 
 Keep source code hardware-independent and target the Java 8 language/API boundary.
 Add new lesson mappings to both `scripts/run-lesson.sh` and

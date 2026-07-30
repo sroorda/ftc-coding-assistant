@@ -33,7 +33,6 @@ Every lesson follows the same rhythm:
 2. Try a small change yourself.
 3. Ask for focused help when it is useful.
 4. Verify the result.
-5. Explain what you learned to another person.
 
 ## What comes after Level 1
 

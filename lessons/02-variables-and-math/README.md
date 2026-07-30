@@ -50,7 +50,7 @@ scripts\run-lesson.cmd 02
 A wheel travels one circumference per rotation. Estimate the distance for a
 4-inch wheel turning three times. Write down your estimate before running.
 
-## Build it
+## Student Task
 
 1. Rename `d`, `r`, and `x` so their meanings and units are clear.
 2. Add a `String` containing a short label for the wheel being measured.
@@ -75,13 +75,6 @@ You are finished when:
 - another calculation, such as a calculator, confirms one result;
 - every numeric value has an obvious unit; and
 - changing one input produces a result you can predict.
-
-## Teach it back
-
-Explain why `double` is appropriate and how the variable names prevent inches,
-rotations, and other units from being confused.
-
-Exit question: **Which variable name prevented the most confusion, and why?**
 
 ## Connect it to FTC
 

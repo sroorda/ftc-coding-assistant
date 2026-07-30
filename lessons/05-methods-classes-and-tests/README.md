@@ -58,7 +58,7 @@ scripts\run-lesson.cmd 05
 
 Read the entire failure message, including the expected and actual values.
 
-## Build it
+## Student Task
 
 1. Implement `DriveMath.limitPower` without changing the existing tests.
 2. Run the tests after each small change.
@@ -86,13 +86,6 @@ You are finished when:
 - in-range values remain unchanged; and
 - deliberately changing one expected value produces a useful failure before you
   restore it.
-
-## Teach it back
-
-Explain how a failing assertion points to the requirement, expected value, and
-actual value.
-
-Exit question: **What does the test suite prove, and what mistakes might it still miss?**
 
 ## Connect it to FTC
 

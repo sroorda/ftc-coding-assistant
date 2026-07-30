@@ -52,7 +52,7 @@ Windows:
 scripts\run-lesson.cmd 03
 ```
 
-## Build it
+## Student Task
 
 1. Explain why the observed result violates the requirement.
 2. Try `0.0`, `0.09`, `0.10`, `-0.09`, and `-0.10` one at a time.
@@ -74,13 +74,6 @@ You are finished when:
 - values at and outside the boundary follow your stated interpretation;
 - positive and negative inputs are tested; and
 - the code and written requirement agree.
-
-## Teach it back
-
-Show a teammate your boundary table and explain why values near `0.10` reveal more
-than several random inputs.
-
-Exit question: **Which three values best test a boundary at `0.10`, and why?**
 
 ## Connect it to FTC
 

@@ -27,14 +27,13 @@ before it.
 
 ## The learning loop
 
-I will ask you to do six things in every lesson:
+I will ask you to do five things in every lesson:
 
 1. **Predict** before you run.
 2. **Try** the first change yourself.
 3. **Ask** your AI tutor only for the kind of help named in the lesson.
 4. **Decide** which suggestions to accept or reject.
 5. **Verify** with the lesson command and required examples.
-6. **Teach it back** by explaining the result to someone else.
 
 Use [How the Lessons Work](../docs/student-workflow.md) whenever you get stuck.
 

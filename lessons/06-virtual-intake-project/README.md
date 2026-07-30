@@ -51,7 +51,7 @@ Every output needs a short status message explaining the chosen state.
 
 Create a decision table with columns for intake, reverse, object detected,
 emergency stop, expected power, and expected status. Include conflicting inputs,
-not only the easy cases. Show the table to another pair before coding.
+not only the easy cases. Review every row before coding.
 
 Run the starter from the repository root.
 
@@ -67,14 +67,14 @@ Windows:
 scripts\run-lesson.cmd 06
 ```
 
-## Build it
+## Student Task
 
 1. Implement `VirtualIntakeController.update` in requirement-priority order.
 2. Use the demo to exercise each row in your decision table.
 3. Move scenario checks into small methods or create a separate test class.
 4. Add at least one scenario where three inputs are simultaneously true.
 5. Improve status wording without changing decision behavior.
-6. Pair-review the code; both partners must explain every branch.
+6. Review the completed code and make sure you can explain every branch.
 
 ## Ask your AI tutor
 
@@ -107,14 +107,7 @@ You are finished when:
 - conflicting inputs demonstrate the priority order;
 - status messages agree with motor power;
 - your three-input scenario produces the predicted result; and
-- both partners can explain the implementation without the assistant.
-
-## Teach it back
-
-Demonstrate the project to an adult mentor. State the expected result before each
-run and identify the requirement that controls it.
-
-Exit question: **Which rule wins when inputs conflict, and which test proves it?**
+- you can explain the implementation without the assistant.
 
 ## Connect it to FTC
 

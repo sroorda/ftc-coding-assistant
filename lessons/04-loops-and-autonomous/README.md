@@ -52,7 +52,7 @@ Windows:
 scripts\run-lesson.cmd 04
 ```
 
-## Build it
+## Student Task
 
 1. Compare the output with the requirement.
 2. Repair the loop condition.
@@ -75,13 +75,6 @@ You are finished when:
 - you can name the value that changes on every iteration.
 
 Do not demonstrate an uncontrolled infinite loop on a shared computer.
-
-## Teach it back
-
-Trace the final two iterations for a teammate and identify the first value that
-causes the continuation condition to be false.
-
-Exit question: **What single change could make this loop never terminate?**
 
 ## Connect it to FTC
 

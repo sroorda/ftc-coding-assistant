@@ -6,14 +6,13 @@ learning how code behaves.
 
 ## How each lesson works
 
-I will ask you to use the same learning loop in every lesson:
+I will ask you to use the same five-step learning loop in every lesson:
 
 1. **Predict** what the program will do before you run it.
 2. **Try** a small change without asking AI to write it.
 3. **Ask** your AI tutor for a focused hint, explanation, review, or test idea.
 4. **Decide** which advice is useful.
 5. **Verify** by compiling, running, and checking the requirement.
-6. **Teach it back** by explaining the result to another person.
 
 The point is not to avoid AI. The point is to use it without giving away the
 thinking that helps you become a programmer.
