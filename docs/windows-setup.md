@@ -61,12 +61,5 @@ administrator account.
 
 Do not work around school security policy. Ask the team's technical contact to
 approve the scripts or use a managed development environment. The Java source can
-also be compiled from an approved IDE, but mentors should demonstrate the exact
-project setup before class.
-
-## Instructor check
-
-Test on the same managed Windows image students will use. Personal Windows machines
-often have permissions and developer tools that school machines do not. Confirm
-that students can extract or clone the repository, open a terminal in it, run the
-environment check, edit a Java file, and rerun Lesson 1 without administrator access.
+also be compiled from an approved IDE, but ask an adult mentor to show you the
+team's exact project setup.

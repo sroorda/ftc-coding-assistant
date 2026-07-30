@@ -1,15 +1,19 @@
 # Lesson 4: Loops and Autonomous Sequences
 
-## Session at a glance
+Today you will trace a loop that represents repeated autonomous steps. You will
+repair an off-by-one error and prove that you understand both why the loop repeats
+and why it stops.
+
+## Your mission
 
 | | |
 |---|---|
 | **Time** | 60–75 minutes |
 | **Java focus** | `for`, counters, boundaries, termination |
 | **FTC connection** | repeated autonomous steps |
-| **AI role** | explain why a loop repeats and stops |
+| **AI tutor** | explain why a loop repeats and stops |
 
-## Learning outcomes
+## Your goal
 
 By the end of this lesson, you can:
 
@@ -18,7 +22,7 @@ By the end of this lesson, you can:
 - explain why a loop terminates; and
 - represent repeated autonomous steps without hardware.
 
-## Before you begin
+## Get ready
 
 Complete [Lesson 3](../03-decisions-and-deadbands/README.md), then open this file in
 your local clone:
@@ -31,7 +35,7 @@ lessons/04-loops-and-autonomous/src/org/ftc/training/lesson04/AutoSequence.java
 
 Print exactly three driving segments, numbered 1, 2, and 3, followed by `Complete`.
 
-## Predict
+## Make a prediction
 
 Trace the values of `step` on paper before running. Record the value used for every
 line you expect the loop to print.
@@ -48,7 +52,7 @@ Windows:
 scripts\run-lesson.cmd 04
 ```
 
-## Implement
+## Build it
 
 1. Compare the output with the requirement.
 2. Repair the loop condition.
@@ -56,12 +60,12 @@ scripts\run-lesson.cmd 04
 4. Add a `totalSegments` variable so one value controls the count.
 5. Explain initialization, continuation condition, and update in the loop header.
 
-## Ask the assistant
+## Ask your AI tutor
 
 > Explain why this loop prints its current number of segments and why it eventually
 > stops. Do not edit it. Ask me to trace the final two values of `step`.
 
-## Verify
+## Check your work
 
 You are finished when:
 
@@ -72,18 +76,18 @@ You are finished when:
 
 Do not demonstrate an uncontrolled infinite loop on a shared computer.
 
-## Explain
+## Teach it back
 
 Trace the final two iterations for a teammate and identify the first value that
 causes the continuation condition to be false.
 
 Exit question: **What single change could make this loop never terminate?**
 
-## FTC connection
+## Connect it to FTC
 
 Autonomous code performs sequences, but a real OpMode must remain responsive.
 Later robot code should use timed states or commands instead of long blocking loops.
 
-## Next lesson
+## Continue
 
 Continue to [Lesson 5: Methods, Classes, and Tests](../05-methods-classes-and-tests/README.md).

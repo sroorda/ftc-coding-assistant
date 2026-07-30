@@ -1,54 +1,41 @@
-# Level 5 — Coordinated Autonomous Actions
+# Level 5 Preview — Coordinated Autonomous Actions
 
-> **Status: Planned.** Implement this level only after the team's Level 4 paths and
-> Level 3 subsystems are reliable independently.
+> **Coming later:** You will begin this level after paths and mechanisms work
+> reliably on their own.
 
-## Outcome
+In Level 5, you will make the drivetrain and mechanisms work together. The robot
+must continue updating its path, localization, mechanisms, safety conditions, and
+telemetry instead of freezing inside a long sequence of waits.
 
-Students coordinate mechanisms with Pedro Pathing without blocking the control
-loop. They can reason about action readiness, precedence, completion, timeout, and
-recovery.
+## What you will learn
 
-## Planned modules
+1. Explain why long sleeps break responsive robot control.
+2. Define mechanism states, commands, completion conditions, and timeouts.
+3. Update the follower and mechanisms in the same loop.
+4. Use Pedro Pathing progress- and pose-based callbacks.
+5. Pause and resume movement when an action requires it.
+6. Handle conflicting actions, safety priority, and cancellation.
+7. Report the current path, state, target, and failure reason through telemetry.
+8. Build a final routine that drives, acquires or scores, recovers, and parks.
 
-1. Why sequential sleeps break responsive robot control
-2. Mechanism states, commands, completion conditions, and timeouts
-3. Updating the follower and mechanisms in the same loop
-4. Pedro Pathing parametric and pose-based callbacks
-5. Pausing and resuming movement when an action requires it
-6. Conflicting actions, safety precedence, and cancellation
-7. Telemetry for current path, state, target, and failure reason
-8. Final project: drive, acquire or score, recover, and park
-
-Prefer progress- or pose-based triggers when they express the requirement. A
-time-based trigger is appropriate only when elapsed time is genuinely the condition,
-not as a substitute for observing mechanism or path progress.
-
-## Architecture milestone
-
-Use the same subsystem operations in TeleOp and autonomous. Autonomous code should
-coordinate existing capabilities rather than reach around a subsystem to command
-its devices directly.
-
-Each action should make these questions answerable:
+## Ask these questions about every action
 
 - When may it start?
-- What is commanded while it runs?
-- How do we know it completed?
+- What does it command while it runs?
+- How do you know it completed?
 - What stops or cancels it?
 - What happens if it never completes?
 
-## Completion evidence
+You will use the same subsystem operations in TeleOp and autonomous. Autonomous
+code should coordinate existing capabilities instead of bypassing them to command
+devices directly.
 
-Students can:
+## Your final checkpoint
 
-- trace an action from a path condition to a subsystem and hardware output;
-- show that localization and mechanisms continue updating together;
-- demonstrate normal, delayed, failed, and stopped behavior;
-- explain every timeout and precedence decision;
-- review an integration pull request with evidence from telemetry and tests; and
-- run the complete routine repeatedly under adult supervision.
+You will demonstrate normal, delayed, failed, and stopped behavior; show that
+localization and mechanisms keep updating together; and explain every timeout and
+priority decision.
 
-## Planning reference
+## Learn more
 
 - [Pedro Pathing path callbacks](https://pedropathing.com/docs/pathing/reference/callbacks)

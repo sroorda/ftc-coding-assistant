@@ -1,46 +1,38 @@
-# Level 3 — Robot Systems and TeleOp
+# Level 3 Preview — Robot Systems and TeleOp
 
-> **Status: Planned.** Build these lessons around the team's actual drivetrain and
-> mechanisms after Level 2 hardware exercises are proven safe.
+> **Coming later:** You will begin this level after you can safely control and
+> explain the individual devices used on the robot.
 
-## Outcome
+In Level 3, you will combine separate hardware skills into a working robot. You
+will learn how gamepad input becomes drivetrain and mechanism behavior while the
+control loop keeps everything responsive.
 
-Students can operate a drivetrain and a mechanism at the same time, explain how
-gamepad input reaches hardware, and organize reusable behavior without hiding the
-FTC control loop.
+## What you will learn
 
-## Planned modules
+1. Read gamepad inputs and apply deadbands and scaling.
+2. Test drivetrain directions one motor at a time.
+3. Drive robot-centric at reduced power.
+4. Organize one mechanism as a reusable subsystem.
+5. Drive and operate a mechanism without blocking the control loop.
+6. Handle limits, conflicting controls, and safe stop behavior.
+7. Complete an integration challenge: drive while operating an intake, arm, or servo.
 
-1. Gamepad inputs, deadbands, scaling, and telemetry
-2. Drivetrain directions and individual motor tests
-3. Robot-centric driving at reduced power
-4. One mechanism as a reusable subsystem
-5. Operating drive and mechanism together without blocking
-6. Limits, conflicting controls, and safe stop behavior
-7. Integration project: drive while operating an intake, arm, or servo
+You will start with robot-centric driving. Field-centric driving can follow after
+you understand the drivetrain and the robot's heading sensor.
 
-Field-centric driving can follow after students understand robot-centric behavior
-and the team's heading sensor. It should not conceal drivetrain fundamentals.
+## Follow one command
 
-## Architecture milestone
-
-Students evolve the base code toward thin OpModes and reusable subsystems. They
-should be able to trace:
+By the end, you should be able to trace:
 
 ```text
 gamepad input → OpMode decision → subsystem method → hardware command
 ```
 
-Pairs may own different subsystems, but integration is reviewed together. See
-[Robot Code Architecture](../docs/robot-code-architecture.md).
+See [Robot Code Architecture](../docs/robot-code-architecture.md) for the structure
+you will build toward.
 
-## Readiness for Level 4
+## Your next checkpoint
 
-Students can:
-
-- safely drive the robot and operate at least one mechanism;
-- explain why the control loop must keep running;
-- identify where hardware is initialized and where behavior belongs;
-- test drivetrain directions and mechanism limits independently;
-- integrate two student-owned changes through reviewed pull requests; and
-- stop and diagnose unexpected movement without guessing.
+You will be ready for Level 4 when you can safely drive, operate a mechanism,
+explain why the control loop must keep running, integrate a partner's subsystem,
+and diagnose unexpected movement without guessing.

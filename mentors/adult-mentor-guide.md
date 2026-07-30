@@ -58,9 +58,9 @@ be corrected immediately. Say why you are crossing that line.
 
 ## AI-assisted review protocol
 
-When an AI assistant reviews student code, provide the written requirement and constrain the
-scope to the student's diff. Ask it to separate correctness, missing tests, clarity,
-and optional ideas. Then require a human reviewer to:
+When an AI assistant reviews student code, provide the written requirement and
+constrain the scope to the student's diff. Ask it to separate correctness, missing
+tests, clarity, and optional ideas. Then require a human reviewer to:
 
 1. reproduce each material claim in the actual code;
 2. discard comments unrelated to the requirement or learning objective;

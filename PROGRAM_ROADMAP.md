@@ -1,63 +1,42 @@
-# Student Program Roadmap
+# Your Robotics Programming Roadmap
 
-Every student follows the same progression. The program begins with Java away from
-the robot, then adds hardware, complete robot behavior, autonomous motion, and
-coordinated autonomous actions. Students advance by demonstrating readiness, not by
-title or prior experience.
+You will build your robotics skills in five levels. Each level adds one new layer,
+so you understand the code beneath the robot behavior instead of only copying a
+finished solution.
 
 ## The five levels
 
-| Level | Focus | Student outcome | Status |
-|---|---|---|---|
-| [1 — Java Foundations](levels/01-java-foundations.md) | Java and robot-like logic without hardware | write, test, debug, and explain small Java programs | **Available now** |
-| [2 — Hardware Lab](levels/02-hardware-lab.md) | FTC SDK, telemetry, motors, servos, and sensors | safely control and observe one device at a time | Planned |
-| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | gamepads, drivetrain, mechanisms, and subsystems | drive while operating a mechanism | Planned |
-| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | poses, localization, tuning, and Pedro Pathing | build and verify reliable autonomous movement | Planned |
-| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | actions, state machines, callbacks, and recovery | coordinate mechanisms with path following | Planned |
+| Level | Your challenge | Status |
+|---|---|---|
+| [1 — Java Foundations](levels/01-java-foundations.md) | write, test, debug, and explain robot-like Java | **Ready now** |
+| [2 — Hardware Lab](levels/02-hardware-lab.md) | safely command and observe one device at a time | Coming later |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating a robot mechanism | Coming later |
+| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | create and tune reliable autonomous paths | Coming later |
+| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | coordinate mechanisms with path following | Coming later |
 
-“Planned” pages define outcomes and design constraints. They are not complete
-student lessons yet. Build and test each level with the team's actual hardware before
-presenting it as ready for independent student use.
+The later-level pages are previews, not complete lessons yet.
 
-## Progression
+## How the levels build on one another
 
-Level 1 deliberately contains no robot SDK, hardware setup, or team Git process. It
-gives beginners a fast environment in which they can concentrate on code.
+1. You begin with ordinary Java logic.
+2. You connect Java logic to individual hardware devices.
+3. You combine devices into subsystems controlled during TeleOp.
+4. You use localization and Pedro Pathing to move autonomously.
+5. You coordinate drivetrain movement with mechanism actions.
 
-After Level 1, students complete the [Team Workflow Bootcamp](team-workflow.md). Git
-then becomes the normal way work moves through Levels 2–5, but it remains a team
-practice rather than a programming lesson objective.
+Level 1 intentionally leaves out the FTC SDK, physical hardware, and Git workflow.
+That gives you a fast place to experiment while you learn the language.
 
-Each later level adds one new boundary:
+## Your checkpoints
 
-1. ordinary Java logic;
-2. Java logic connected to individual hardware;
-3. subsystems coordinated by a TeleOp;
-4. drivetrain movement coordinated by a path follower; and
-5. drivetrain and mechanism actions coordinated without blocking the control loop.
-
-## Readiness gates
-
-A student is ready to advance when they can demonstrate the prior level without the
-AI assistant speaking for them. Adults may adjust pace and accommodations, but
-should not waive hardware safety or understanding checks.
-
-| Move to | Required evidence |
+| Before you begin | Show that you can |
 |---|---|
-| Level 2 | complete the Level 1 readiness check and the Team Workflow Bootcamp |
-| Level 3 | safely initialize, command, stop, and explain each device used on the robot |
-| Level 4 | operate the drivetrain and mechanisms in TeleOp and explain the robot code structure |
-| Level 5 | create, tune, and verify a simple path with reliable localization |
-| Competition work | demonstrate coordinated behavior, recovery, review, and safe deployment with an adult mentor |
+| Level 2 | complete Level 1 and the Team Workflow Bootcamp |
+| Level 3 | initialize, command, stop, and explain each device you will use |
+| Level 4 | drive and operate mechanisms while explaining the robot code structure |
+| Level 5 | create, tune, and repeat a simple path using reliable localization |
+| Competition work | demonstrate safe behavior, recovery, review, and deployment with an adult mentor |
 
-## Supporting guides
-
-- [Team Workflow Bootcamp](team-workflow.md) introduces Git after Level 1.
-- [Robot Code Architecture](docs/robot-code-architecture.md) shows how the base
-  framework grows through Levels 2–5.
-- [Adult Mentor Guide](mentors/adult-mentor-guide.md) defines teaching, AI, privacy, and safety
-  responsibilities.
-
-AI can explain, question, review, and suggest verification. It is not an accountable
-mentor. Adults remain responsible for student supervision, hardware safety, and
-final technical decisions.
+An AI tutor can help you ask questions and review evidence. It cannot demonstrate
+your understanding for you, approve hardware operation, or make final team
+decisions.

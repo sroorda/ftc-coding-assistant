@@ -57,23 +57,25 @@ exercise.
 
 Use the existing lesson structure:
 
-1. Session at a glance
-2. Learning outcomes
-3. Before you begin
-4. Requirement, when applicable
-5. Predict
-6. Implement
-7. Ask the assistant
-8. Verify
-9. Explain
-10. Next lesson
+1. Teacher-to-student introduction
+2. Your mission
+3. Your goal
+4. Get ready
+5. Requirement, when applicable
+6. Make a prediction
+7. Build it
+8. Ask your AI tutor
+9. Check your work
+10. Teach it back
+11. Connect it to FTC
+12. Continue
 
 Keep source code hardware-independent and target the Java 8 language/API boundary.
 Add new lesson mappings to both `scripts/run-lesson.sh` and
 `scripts/run-lesson.ps1`. Add the lesson to `SUMMARY.md`, then test its instructions
 on Windows and a Unix-like system.
 
-For Levels 2–5, do not remove the **Planned** label until the material has been
+For Levels 2–5, do not remove the **Coming later** label until the material has been
 tested with the team's actual FTC SDK version, hardware, safety procedure, and
-Windows development environment. Update the readiness gate in `PROGRAM_ROADMAP.md`
+Windows development environment. Update the checkpoint in `PROGRAM_ROADMAP.md`
 when a level becomes available.

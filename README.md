@@ -1,49 +1,49 @@
 # FTC Java + AI Coding Assistant Training
 
-A beginner-first path from a first Java program to coordinated FTC autonomous
-behavior. Students learn one layer at a time: code, hardware, robot systems,
-autonomous motion, and finally mechanisms acting during paths.
+Welcome, programmer. You are going to learn Java by solving problems that behave
+like parts of an FTC robot—even before you have a robot in front of you.
 
-Level 1 runs on Windows, macOS, or Linux without a robot or FTC Robot Controller.
+You do not need previous programming experience. You do need to make predictions,
+try your own changes, read the results, and explain what you learned.
 
-> **New to the program?** Begin with [Start Here](GETTING_STARTED.md). It takes you
-> from installing Java to running your first lesson.
+> **Start here:** Follow [Set Up Your Computer](GETTING_STARTED.md), then begin
+> [Level 1 — Java Foundations](levels/01-java-foundations.md).
 
-## Student pathway
+## Your path
 
-| Level | Focus | Availability |
+| Level | What you will learn | Availability |
 |---|---|---|
-| [1 — Java Foundations](levels/01-java-foundations.md) | Java and robot-like logic without hardware | **Six lessons available now** |
-| [2 — Hardware Lab](levels/02-hardware-lab.md) | FTC SDK, telemetry, motors, servos, and sensors | Planned |
-| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | driving, gamepads, mechanisms, and subsystems | Planned |
-| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | localization, tuning, and Pedro Pathing | Planned |
-| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | mechanism actions while following paths | Planned |
+| [1 — Java Foundations](levels/01-java-foundations.md) | write and test robot-like Java without hardware | **Ready now** |
+| [2 — Hardware Lab](levels/02-hardware-lab.md) | safely control motors, servos, and sensors | Coming later |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating robot mechanisms | Coming later |
+| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | use localization and Pedro Pathing | Coming later |
+| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | run mechanism actions while following paths | Coming later |
 
-See the [Program Roadmap](PROGRAM_ROADMAP.md) for readiness gates and how the
-levels connect.
+The [Program Roadmap](PROGRAM_ROADMAP.md) shows how the levels fit together.
 
-## Team skills and robot structure
+## How you will use AI
 
-Level 1 stays focused on learning to code. After it, every student completes a
-short [Team Workflow Bootcamp](team-workflow.md). Git and pull requests then become
-the normal way work moves through Levels 2–5.
+The AI coding assistant is your tutor, not your driver. Use it to ask for an
+explanation, a small hint, a review, or a test idea. You still make the change and
+decide whether the result is correct.
 
-The [Robot Code Architecture](docs/robot-code-architecture.md) guide shows how the
-team's base framework can grow from hardware initialization to reusable subsystems
-and coordinated autonomous actions. Students evolve it from real needs rather than
-designing a large framework before they understand the robot.
+Every lesson follows the same rhythm:
 
-## Adults and AI
+1. Predict what the program will do.
+2. Try a small change yourself.
+3. Ask for focused help when it is useful.
+4. Verify the result.
+5. Explain what you learned to another person.
 
-Adults use the [Adult Mentor Guide](mentors/adult-mentor-guide.md) to prepare
-lessons, coach productive struggle, review work, and supervise hardware.
+## What comes after Level 1
 
-AI can support mentoring through explanations, questions, review, and test ideas.
-It is not an accountable mentor. Adults remain responsible for student supervision,
-hardware safety, privacy, repository access, and final technical decisions.
+After the six Java lessons, you will learn the team's Git process in the
+[Team Workflow Bootcamp](team-workflow.md). Then you will be ready to begin
+supervised work with FTC hardware.
 
-## For maintainers
+Learning matters more than finishing quickly. You are responsible for every line
+you change and every claim that your program works.
 
-GitHub is the source of truth and GitBook is the published reading experience.
-Course maintainers should use [Contributing and Publishing](CONTRIBUTING.md) rather
-than editing repository-managed pages directly in GitBook.
+---
+
+**Adult mentor or course maintainer?** Enter the [Mentor Hub](MENTOR_HUB.md).

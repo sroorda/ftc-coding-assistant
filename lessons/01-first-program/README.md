@@ -1,15 +1,19 @@
 # Lesson 1: First Java Program
 
-## Session at a glance
+Today you will take control of your first Java program. You will predict its output,
+change what it says, run it again, and identify where Java begins executing your
+code.
+
+## Your mission
 
 | | |
 |---|---|
 | **Time** | 60–75 minutes, with extra time for initial setup |
 | **Java focus** | class, `main`, output, compile, run |
 | **FTC connection** | initialization and telemetry messages |
-| **AI role** | explain existing code without editing it |
+| **AI tutor** | explain existing code without editing it |
 
-## Learning outcomes
+## Your goal
 
 By the end of this lesson, you can:
 
@@ -18,7 +22,7 @@ By the end of this lesson, you can:
 - change simple output messages; and
 - explain the difference between source code and a running program.
 
-## Before you begin
+## Get ready
 
 Complete [Start Here](../../GETTING_STARTED.md), then open this file in your local
 clone:
@@ -41,12 +45,12 @@ Windows:
 scripts\run-lesson.cmd 01
 ```
 
-## Predict
+## Make a prediction
 
 Before running, write down the exact output you expect. After running, compare the
 actual output with your prediction.
 
-## Implement
+## Build it
 
 Make these changes yourself before asking an AI assistant:
 
@@ -55,7 +59,7 @@ Make these changes yourself before asking an AI assistant:
 3. Run the lesson again.
 4. Locate the line where execution begins.
 
-## Ask the assistant
+## Ask your AI tutor
 
 Use the assistant as an explainer, not an editor:
 
@@ -63,7 +67,7 @@ Use the assistant as an explainer, not an editor:
 > files. Correct my explanation of `main`, then ask me one check-for-understanding
 > question.
 
-## Verify
+## Check your work
 
 You are finished when:
 
@@ -75,19 +79,19 @@ You are finished when:
 Compilation proves that Java accepted the program. It does not prove that the
 messages are useful or that future robot behavior is correct.
 
-## Explain
+## Teach it back
 
 Tell a teammate what `public`, `class`, `static`, `void`, and `String[] args` appear
 to do. An incomplete first explanation is fine.
 
 Exit question: **What did running the program prove, and what did it not prove?**
 
-## FTC connection
+## Connect it to FTC
 
 FTC programs normally use telemetry instead of `System.out.println` for
 Driver Station status. In both environments, a useful message should tell the
 operator what the software actually knows.
 
-## Next lesson
+## Continue
 
 Continue to [Lesson 2: Variables and Robot Math](../02-variables-and-math/README.md).

@@ -1,22 +1,22 @@
 # Level 1 — Java Foundations
 
-## Outcome
+This is where your programming path begins. You will work with small Java programs
+that model robot ideas, but you will not need a robot or the FTC SDK.
 
-Learn enough Java to reason about FTC-style logic and use an AI coding assistant
-for explanations, debugging questions, and review without giving away ownership of
-the work.
+By the end, you will be able to read, change, run, test, and explain Java code. You
+will also practice using an AI tutor without asking it to do your thinking for you.
 
-## Before your first session
+## Before your first lesson
 
-Complete [Start Here](../GETTING_STARTED.md). Do not continue until the environment
+Complete [Set Up Your Computer](../GETTING_STARTED.md). Continue when the environment
 check succeeds and Lesson 1 prints `Robot initialized`.
 
-## Learning path
+## Your lessons
 
-Complete the lessons in order. Each lesson assumes you can explain the core idea
-from the previous lesson.
+Complete these in order. Each lesson builds on something you practiced in the one
+before it.
 
-| Session | Lesson | Ready to continue when |
+| Session | Lesson | You are ready to continue when |
 |---:|---|---|
 | 1 | [First Java Program](../lessons/01-first-program/README.md) | you can change output and identify where execution begins |
 | 2 | [Variables and Robot Math](../lessons/02-variables-and-math/README.md) | you can name values and track their units |
@@ -25,44 +25,48 @@ from the previous lesson.
 | 5 | [Methods, Classes, and Tests](../lessons/05-methods-classes-and-tests/README.md) | you can use a failing test to implement a requirement |
 | 6 | [Virtual Intake Controller](../lessons/06-virtual-intake-project/README.md) | you can implement and demonstrate conflicting rules |
 
-For every lesson:
+## The learning loop
 
-1. **Predict** before running.
-2. **Implement** the first change without AI.
-3. **Ask** only for the kind of help assigned by the lesson.
+I will ask you to do six things in every lesson:
+
+1. **Predict** before you run.
+2. **Try** the first change yourself.
+3. **Ask** your AI tutor only for the kind of help named in the lesson.
 4. **Decide** which suggestions to accept or reject.
-5. **Verify** with the lesson command and required scenarios.
-6. **Explain** the result to someone else.
+5. **Verify** with the lesson command and required examples.
+6. **Teach it back** by explaining the result to someone else.
 
-Use [Predict, Ask, Verify](../docs/student-workflow.md) whenever you are stuck.
+Use [How the Lessons Work](../docs/student-workflow.md) whenever you get stuck.
 
-## Student evidence log
+## Keep a learning log
 
-Keep a short entry in your notes for each lesson:
+After each lesson, write a short entry in your notes:
 
 ```text
-Prediction:
-Change I made:
-AI help I requested:
-Suggestion I accepted or rejected, and why:
-Verification command and result:
+My prediction:
+The change I made:
+The AI help I requested:
+A suggestion I accepted or rejected, and why:
+The command I ran and what happened:
 One thing I can now explain:
 ```
 
-This is not a transcript. Do not paste private data or every assistant message. The
-goal is to record decisions and evidence.
+This is not a chat transcript. Do not copy private information or every assistant
+message. Record your decisions and your evidence.
 
-## Readiness check
+## Level 1 readiness check
 
-Using Lesson 6, demonstrate that you can:
+After Lesson 6, show that you can:
 
-- explain the intake precedence rules before opening the implementation;
+- explain the intake priority rules before opening the implementation;
 - make one requirement change in a small method;
-- name a normal case, boundary case, and conflicting-input case;
+- name a normal case, a boundary case, and a conflicting-input case;
 - run the tests and interpret a deliberate failure; and
-- describe one AI suggestion you rejected or changed.
+- describe one AI suggestion you rejected or improved.
 
-Passing means you are ready for the [Team Workflow Bootcamp](../team-workflow.md).
-Completing that workshop prepares you to begin supervised
-[Level 2 hardware work](../levels/02-hardware-lab.md). It does not by itself
-authorize deployment or hardware operation.
+You do not need a perfect speech. You do need to show your own reasoning.
+
+When you are ready, continue to the
+[Team Workflow Bootcamp](../team-workflow.md). That workshop prepares you for
+supervised [Level 2 hardware work](../levels/02-hardware-lab.md); it does not by
+itself authorize you to deploy code or operate hardware.

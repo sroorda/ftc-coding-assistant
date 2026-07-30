@@ -1,15 +1,19 @@
 # Lesson 6: Virtual Intake Controller
 
-## Session at a glance
+This is your Level 1 project. You will turn five written rules into a controller,
+decide which rule wins when inputs conflict, and build enough scenarios to defend
+your implementation.
+
+## Your mission
 
 | | |
 |---|---|
 | **Time** | 90–120 minutes |
 | **Java focus** | requirements, decomposition, precedence, integration |
 | **FTC connection** | intake subsystem decision logic |
-| **AI role** | review implementation against numbered requirements |
+| **AI tutor** | review implementation against numbered requirements |
 
-## Learning outcomes
+## Your goal
 
 By the end of this project, you can:
 
@@ -19,7 +23,7 @@ By the end of this project, you can:
 - design scenarios that expose missing behavior; and
 - defend an AI-assisted change with evidence.
 
-## Before you begin
+## Get ready
 
 Complete [Lesson 5](../05-methods-classes-and-tests/README.md). Open both files in
 your local clone:
@@ -63,7 +67,7 @@ Windows:
 scripts\run-lesson.cmd 06
 ```
 
-## Implement
+## Build it
 
 1. Implement `VirtualIntakeController.update` in requirement-priority order.
 2. Use the demo to exercise each row in your decision table.
@@ -72,7 +76,7 @@ scripts\run-lesson.cmd 06
 5. Improve status wording without changing decision behavior.
 6. Pair-review the code; both partners must explain every branch.
 
-## Ask the assistant
+## Ask your AI tutor
 
 After your first implementation:
 
@@ -85,7 +89,7 @@ After writing your own scenarios:
 > Look for a missing conflicting-input scenario in my tests. Suggest the input and
 > expected result, but let me write the test.
 
-## Verify
+## Check your work
 
 Demonstrate at least these scenarios:
 
@@ -105,21 +109,21 @@ You are finished when:
 - your three-input scenario produces the predicted result; and
 - both partners can explain the implementation without the assistant.
 
-## Explain
+## Teach it back
 
 Demonstrate the project to an adult mentor. State the expected result before each
 run and identify the requirement that controls it.
 
 Exit question: **Which rule wins when inputs conflict, and which test proves it?**
 
-## FTC connection
+## Connect it to FTC
 
 This controller could sit between gamepad/sensor readings and an FTC motor. It does
 not know hardware names or call motor APIs, so its important logic remains fast to
 test away from the robot.
 
-## Course completion
+## Continue
 
-Return to the [Student Readiness Check](../../levels/01-java-foundations.md#readiness-check),
+Return to the [Level 1 Readiness Check](../../levels/01-java-foundations.md#level-1-readiness-check),
 then complete the [Team Workflow Bootcamp](../../team-workflow.md) before beginning
 supervised [Level 2 hardware work](../../levels/02-hardware-lab.md).

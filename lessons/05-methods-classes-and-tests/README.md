@@ -1,18 +1,22 @@
 # Lesson 5: Methods, Classes, and Tests
 
-## Session at a glance
+Today you will begin with a failure—and that is intentional. You will use the
+failure message and written requirement to implement reusable motor-power logic,
+then add evidence that your solution handles important cases.
+
+## Your mission
 
 | | |
 |---|---|
 | **Time** | 75–90 minutes |
 | **Java focus** | parameters, return values, classes, assertions |
 | **FTC connection** | reusable and bounded motor-power logic |
-| **AI role** | suggest test cases without implementing the method |
+| **AI tutor** | suggest test cases without implementing the method |
 
 > **Expected first result:** this lesson begins with a failing test. The failure is
 > the starting evidence for the exercise, not an environment problem.
 
-## Learning outcomes
+## Your goal
 
 By the end of this lesson, you can:
 
@@ -21,7 +25,7 @@ By the end of this lesson, you can:
 - use examples as executable tests; and
 - distinguish a useful failure from a broken development environment.
 
-## Before you begin
+## Get ready
 
 Complete [Lesson 4](../04-loops-and-autonomous/README.md). Open both files in your
 local clone:
@@ -36,7 +40,7 @@ lessons/05-methods-classes-and-tests/src/org/ftc/training/lesson05/DriveMathTest
 `limitPower` must return a value in the inclusive range `-1.0` through `1.0`.
 Values already in the range must be returned unchanged.
 
-## Predict
+## Make a prediction
 
 Read `DriveMathTest.java` and predict which assertion fails first. Then run it.
 
@@ -54,7 +58,7 @@ scripts\run-lesson.cmd 05
 
 Read the entire failure message, including the expected and actual values.
 
-## Implement
+## Build it
 
 1. Implement `DriveMath.limitPower` without changing the existing tests.
 2. Run the tests after each small change.
@@ -64,7 +68,7 @@ Read the entire failure message, including the expected and actual values.
 
 Never weaken or remove a test merely to make the run appear successful.
 
-## Ask the assistant
+## Ask your AI tutor
 
 > Suggest five test inputs for `limitPower`, including boundaries and values outside
 > the allowed range. Explain why each matters. Do not implement the method or edit
@@ -72,7 +76,7 @@ Never weaken or remove a test merely to make the run appear successful.
 
 Compare the suggestions with the tests already present before adding anything.
 
-## Verify
+## Check your work
 
 You are finished when:
 
@@ -83,18 +87,18 @@ You are finished when:
 - deliberately changing one expected value produces a useful failure before you
   restore it.
 
-## Explain
+## Teach it back
 
 Explain how a failing assertion points to the requirement, expected value, and
 actual value.
 
 Exit question: **What does the test suite prove, and what mistakes might it still miss?**
 
-## FTC connection
+## Connect it to FTC
 
 Motor APIs expect bounded power. Keeping the calculation in a hardware-independent
 method makes it quick to test and safer to reason about on a laptop.
 
-## Next lesson
+## Continue
 
 Continue to [Lesson 6: Virtual Intake Controller](../06-virtual-intake-project/README.md).

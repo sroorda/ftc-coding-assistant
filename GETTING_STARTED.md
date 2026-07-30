@@ -1,40 +1,41 @@
-# Start Here
+# Set Up Your Computer
 
-This guide gets a new student from a fresh computer to a running Java lesson.
-Complete the steps in order. Ask a mentor whenever a command or security prompt is
-unclear.
+By the end of this guide, you will have the course files, a working Java
+installation, and your first running program. Complete the steps in order.
+
+If a command or security prompt surprises you, stop and ask an adult mentor before
+continuing.
 
 ## 1. Get the exercises
 
-The course repository is
+Open the course repository:
 [sroorda/ftc-coding-assistant](https://github.com/sroorda/ftc-coding-assistant).
 
-If Git is already installed and an adult mentor has asked you to use it, clone the
-repository:
+For Level 1, the simplest choice is **Code → Download ZIP**. Extract the ZIP, then
+open a terminal in the extracted folder.
+
+If an adult mentor has asked you to use Git instead, clone the repository:
 
 ```text
 git clone https://github.com/sroorda/ftc-coding-assistant.git
 cd ftc-coding-assistant
 ```
 
-If Git is not installed yet, use GitHub's **Code → Download ZIP** option, extract
-the ZIP, and open a terminal in the extracted folder. Git is not a Level 1 learning
-objective. Students learn the team workflow after completing the Java lessons.
+Git is not part of the first Java lessons. You will learn the team Git process after
+Level 1.
 
 ## 2. Install Java
 
-The course requires a full **JDK 17 or newer**, not only a Java runtime.
+You need a full **JDK 17 or newer**, not only a Java runtime.
 
-- [Windows setup](docs/windows-setup.md)
-- [macOS setup](docs/macos-setup.md)
+- [Install Java on Windows](docs/windows-setup.md)
+- [Install Java on macOS](docs/macos-setup.md)
 
-Linux students should install OpenJDK 17 or newer using the method approved for
-their distribution or school-managed computer.
+On Linux, install OpenJDK 17 or newer using the method approved for your computer.
 
-## 3. Check the computer
+## 3. Check your setup
 
-Run the appropriate command from the repository root—the folder containing this
-file and `README.md`.
+Run the command from the course folder—the folder containing `README.md`.
 
 macOS or Linux:
 
@@ -48,9 +49,9 @@ Windows Command Prompt or PowerShell:
 scripts\check-environment.cmd
 ```
 
-Continue only when the output shows both `java` and `javac` at version 17 or newer.
+You are ready when the output shows both `java` and `javac` at version 17 or newer.
 
-## 4. Run Lesson 1
+## 4. Run your first program
 
 macOS or Linux:
 
@@ -64,28 +65,24 @@ Windows Command Prompt or PowerShell:
 scripts\run-lesson.cmd 01
 ```
 
-You should see:
+Look for this output:
 
 ```text
 Robot initialized
 ```
 
-That output confirms the starter program compiled and ran. It does not prove that
-future changes meet their requirements—that is why every lesson includes explicit
-verification.
+You just compiled source code and ran a Java program. That is your first piece of
+evidence that the setup works.
 
-## 5. Open your learning path
+## 5. Start learning
 
-- Students continue to [Level 1 — Java Foundations](levels/01-java-foundations.md).
-- Adults prepare with the [Adult Mentor Guide](mentors/adult-mentor-guide.md).
-- The complete sequence is in the [Program Roadmap](PROGRAM_ROADMAP.md).
+Read [How the Lessons Work](docs/student-workflow.md), then open
+[Level 1 — Java Foundations](levels/01-java-foundations.md).
 
-Before using an AI assistant, read [Predict, Ask, Verify](docs/student-workflow.md).
-
-## Get help before continuing when
+## Stop and ask an adult when
 
 - `java` or `javac` is not found;
-- a command asks for administrator access unexpectedly;
-- the repository contains credentials or personal student information;
+- a command unexpectedly asks for administrator access;
+- you see a password, API key, credential, or personal information;
 - a command would push to a shared branch; or
-- work would deploy code or move real robot hardware.
+- code could deploy to or move real robot hardware.

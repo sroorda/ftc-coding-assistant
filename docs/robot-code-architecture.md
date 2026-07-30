@@ -1,8 +1,8 @@
 # Robot Code Architecture
 
-The base robot framework should grow from real needs across Levels 2–5. Beginners
-should not be asked to design it from a blank project, and the team should not add
-layers merely because another team or an AI assistant recommends them.
+As your robot gains capabilities, its code needs a structure that remains easy to
+trace. You will grow this framework across Levels 2–5 instead of building a large
+design before you understand the robot.
 
 ## Target shape
 
@@ -15,14 +15,14 @@ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/
 └── logic/         hardware-independent decisions and calculations
 ```
 
-This is a direction, not a requirement to create empty packages. Add a package when
-the team has code that clearly belongs there.
+This is a direction, not a request to create empty packages. Add a package when
+your team has code that clearly belongs there.
 
 ## How the framework grows
 
 ### Level 1 — Pure logic
 
-Keep robot-like decisions in ordinary Java classes. Students learn that important
+Keep robot-like decisions in ordinary Java classes. This shows you that important
 logic can be tested without deploying to hardware.
 
 ### Level 2 — Hardware boundary
@@ -72,7 +72,7 @@ follower, mechanisms, stop conditions, and telemetry.
 
 ## Architecture milestone
 
-At the end of Level 3, ask each student to trace one behavior from a gamepad button
-through the OpMode and subsystem to the hardware command. At the end of Level 5,
-repeat the trace from an autonomous condition. If the path cannot be explained,
-the framework is too complicated or insufficiently documented.
+At the end of Level 3, trace one behavior from a gamepad button through the OpMode
+and subsystem to the hardware command. At the end of Level 5, repeat the trace from
+an autonomous condition. If you cannot explain the path, simplify or document the
+framework before adding more behavior.

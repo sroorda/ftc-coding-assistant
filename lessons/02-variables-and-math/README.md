@@ -1,15 +1,19 @@
 # Lesson 2: Variables and Robot Math
 
-## Session at a glance
+Today you will use Java to calculate how far a wheel travels. Your main challenge
+is not typing the formula—it is making every value and unit clear enough that
+another programmer can trust the calculation.
+
+## Your mission
 
 | | |
 |---|---|
 | **Time** | 60–75 minutes |
 | **Java focus** | types, variables, arithmetic, names, units |
 | **FTC connection** | calculating wheel travel |
-| **AI role** | review names without rewriting the calculation |
+| **AI tutor** | review names without rewriting the calculation |
 
-## Learning outcomes
+## Your goal
 
 By the end of this lesson, you can:
 
@@ -18,7 +22,7 @@ By the end of this lesson, you can:
 - choose names that reveal meaning; and
 - estimate an answer before trusting program output.
 
-## Before you begin
+## Get ready
 
 Complete [Lesson 1](../01-first-program/README.md), then open this file in your
 local clone:
@@ -41,12 +45,12 @@ Windows:
 scripts\run-lesson.cmd 02
 ```
 
-## Predict
+## Make a prediction
 
 A wheel travels one circumference per rotation. Estimate the distance for a
 4-inch wheel turning three times. Write down your estimate before running.
 
-## Implement
+## Build it
 
 1. Rename `d`, `r`, and `x` so their meanings and units are clear.
 2. Add a `String` containing a short label for the wheel being measured.
@@ -55,7 +59,7 @@ A wheel travels one circumference per rotation. Estimate the distance for a
    a `double`.
 5. Run after each small change.
 
-## Ask the assistant
+## Ask your AI tutor
 
 > Review only the variable names in `WheelCalculator.java`. Suggest clearer names
 > and explain what information each name should carry. Do not edit the file or
@@ -63,7 +67,7 @@ A wheel travels one circumference per rotation. Estimate the distance for a
 
 Decide which suggestions improve the code. You do not need to accept all of them.
 
-## Verify
+## Check your work
 
 You are finished when:
 
@@ -72,18 +76,18 @@ You are finished when:
 - every numeric value has an obvious unit; and
 - changing one input produces a result you can predict.
 
-## Explain
+## Teach it back
 
 Explain why `double` is appropriate and how the variable names prevent inches,
 rotations, and other units from being confused.
 
 Exit question: **Which variable name prevented the most confusion, and why?**
 
-## FTC connection
+## Connect it to FTC
 
 Robot code converts encoder counts, wheel rotations, inches, degrees, and time. A
 correct formula with hidden units is still a future bug.
 
-## Next lesson
+## Continue
 
 Continue to [Lesson 3: Decisions and Deadbands](../03-decisions-and-deadbands/README.md).

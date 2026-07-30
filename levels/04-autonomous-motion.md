@@ -1,55 +1,33 @@
-# Level 4 — Autonomous Motion with Pedro Pathing
+# Level 4 Preview — Autonomous Motion with Pedro Pathing
 
-> **Status: Planned.** Pedro Pathing and the FTC SDK evolve. Confirm the current
-> official installation and tuning guidance when these lessons are implemented.
+> **Coming later:** You will begin this level after the drivetrain, mechanisms, and
+> localization hardware are working reliably.
 
-## Outcome
+In Level 4, you will teach the robot where it is on the field and where it should
+go. You will use Pedro Pathing to create, tune, and verify autonomous drivetrain
+movement.
 
-Students understand poses, field coordinates, localization, paths, and tuning well
-enough to build and verify reliable autonomous drivetrain movement.
+## What you will learn
 
-## Entry requirements
+1. Draw field coordinates, poses, headings, and units.
+2. Measure localization error.
+3. Understand the Pedro follower lifecycle.
+4. Build straight paths, turns, and heading changes.
+5. Combine paths into a short path chain.
+6. Tune using recorded evidence instead of guesswork.
+7. Handle start pose, end constraints, stop behavior, and recovery.
+8. Build a repeatable start-to-target-to-park routine.
 
-Before using Pedro Pathing, the team needs:
+First, make drivetrain motion reliable by itself. Mechanism actions during a path
+belong in Level 5.
 
-- a reliable omnidirectional drivetrain;
-- a supported and tested localization method;
-- an Android Studio FTC project;
-- known motor directions and drivetrain measurements; and
-- safe Level 3 TeleOp operation.
+## Your next checkpoint
 
-## Planned modules
+You will be ready for Level 5 when you can draw the coordinate system, compare
+expected and observed poses, explain localization correction, repeat a tuned path,
+and distinguish path-definition problems from localization or tuning problems.
 
-1. Field coordinates, poses, headings, and units
-2. Localization and measuring error
-3. Pedro Pathing project structure and follower lifecycle
-4. Straight paths, turns, and heading interpolation
-5. Building and following a short path chain
-6. Tuning through recorded evidence rather than guesswork
-7. Start pose, end constraints, stop behavior, and recovery
-8. Autonomous project: repeatable start-to-target-to-park motion
-
-Students should first make drivetrain motion reliable. Mechanism actions during a
-path belong in Level 5.
-
-## Architecture milestone
-
-Keep named poses, path definitions, tuning constants, and mechanism behavior
-separate enough to review independently. Record the coordinate convention beside
-the season's field definitions.
-
-## Readiness for Level 5
-
-Students can:
-
-- draw and explain the coordinate system before writing a path;
-- report expected and observed start/end poses;
-- explain how localization affects correction;
-- build, tune, and repeat a simple path safely;
-- identify what must update on every control-loop iteration; and
-- distinguish a path-definition problem from a localization or tuning problem.
-
-## Planning references
+## Learn more
 
 - [Pedro Pathing introduction and prerequisites](https://pedropathing.com/docs/pathing)
 - [Pedro Pathing installation](https://pedropathing.com/docs/pathing/installation)
