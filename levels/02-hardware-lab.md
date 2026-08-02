@@ -17,16 +17,19 @@ each line of code to what you observe.
 6. Read a sensor and turn its value into a decision.
 7. Build a mini-project in which one sensor safely controls one output.
 
-Your first hardware environment will probably be a small benchtop rig. An adult
-mentor will approve the wiring, configuration, test area, power, and stop procedure
-before you run code.
+Your first hardware environment will be a small benchtop rig. Before running code,
+verify the wiring, test area, expected motion, power limits, and stop procedure.
 
 ## Before Level 2
 
-Complete [Level 2 Setup](../docs/level-2-setup.md). It covers the team GitHub
-repository, your personal branch, Android Studio, and the supervised Control Hub
-connection. These setup pages are available for review while the hardware lessons
-are still being developed.
+Complete [Level 2 Setup](../docs/level-2-setup.md). It covers GitHub and Git basics,
+cloning the team repository in Android Studio, creating your personal branch, and
+connecting to the Control Hub.
+
+The first hardware exercise will create a feature branch from your personal branch.
+After the exercise works, it will guide you through committing, pushing, opening a
+pull request, obtaining a review, and merging the result back into your personal
+branch.
 
 ## Your next checkpoint
 

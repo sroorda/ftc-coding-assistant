@@ -46,16 +46,15 @@ Preserving everyone’s work matters more than appearing to fix it alone.
 
 | Level | Your next teamwork challenge |
 |---|---|
-| 2 — Hardware Lab | keep cumulative work on a personal branch and use selected lesson pull requests for peer review |
+| 2 — Hardware Lab | keep cumulative work on a personal branch and use feature branches for reviewed exercises |
 | 3 — Robot Systems | integrate your subsystem with a partner's subsystem |
 | 4 — Autonomous Motion | review paths, poses, constants, and tuning evidence |
 | 5 — Coordinated Autonomous | coordinate changes across pathing and mechanism code |
 
 You do not need a permanent lead title. As your skills grow, you can temporarily
 own a subsystem, test, or pull request and teach the next person what you learned.
-
-Before Level 2, read [Your Level 2 Git Workflow](docs/level-2-git-workflow.md) to
-see how personal branches and temporary review branches work together.
+Level 2 setup creates the personal branch; the first hardware exercise introduces
+the feature-branch, pull-request, review, and merge workflow in context.
 
 ## Use AI safely
 

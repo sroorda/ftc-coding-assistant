@@ -24,7 +24,7 @@
 * [Level 2 Preview: Hardware Lab](levels/02-hardware-lab.md)
   * [Level 2 Setup](docs/level-2-setup.md)
   * [Set Up GitHub and Git](docs/github-and-git-setup.md)
-  * [Your Level 2 Git Workflow](docs/level-2-git-workflow.md)
+  * [How Level 2 Branches Work](docs/level-2-git-workflow.md)
   * [Prepare Android Studio for FTC](docs/android-studio-ftc-setup.md)
   * [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
 * [Level 3 Preview: Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md)

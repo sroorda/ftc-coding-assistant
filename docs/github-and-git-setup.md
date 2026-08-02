@@ -1,25 +1,65 @@
 # Set Up GitHub and Git for Level 2
 
-Level 2 uses a shared team repository. You will have your own cumulative branch,
-so your work remains separate from other students while still allowing code
-review.
+## Why we use Git
 
-## 1. Prepare your GitHub account
+Programming is experimental. Git records useful checkpoints so you can see what
+changed, return to working code, and compare your solution with another student's
+without sharing the same working files.
 
-1. Create or sign in to the GitHub account approved for team use.
-2. Verify the email address associated with the account.
-3. Accept the invitation to the team's repository or GitHub organization.
-4. Open `<HARDWARE_LAB_REPOSITORY_URL>` in a browser and confirm that you can see
-   it.
+Git runs on your computer. GitHub stores the shared copy online and provides pull
+requests for reviewing proposed changes.
 
-Use [GitHub's account documentation](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)
-if you need help creating the account. Do not put a password, access token, Wi-Fi
-credential, or recovery code in a repository, lesson response, or AI prompt.
+```mermaid
+flowchart LR
+    Files["Working files<br/>on your computer"] -->|"commit"| Commit["Saved checkpoint<br/>in Git"]
+    Commit -->|"push"| GitHub["Shared repository<br/>on GitHub"]
+    GitHub -->|"clone or pull"| Files
+```
+
+GitHub's [About Git](https://docs.github.com/en/get-started/using-git/about-git)
+explains version control, repositories, commits, branches, and how Git works with
+GitHub. Its [Getting started with Git](https://docs.github.com/en/get-started/learning-to-code/getting-started-with-git)
+guide provides a longer hands-on introduction with pictures.
+
+## Terms you will see
+
+| Term | Meaning in this course |
+|---|---|
+| Repository | The project files together with their saved Git history |
+| Local | The copy on your computer |
+| Remote | A copy stored elsewhere; our remote is hosted on GitHub |
+| `origin` | Git's short name for the team repository you cloned |
+| Commit | A named checkpoint containing a specific set of changes |
+| Branch | An independent line of work within a repository |
+| Clone | Download a repository and its history to your computer |
+| Push | Send your local commits to GitHub |
+| Pull | Bring newer commits from GitHub into your local branch |
+| Pull request | A GitHub page for comparing, discussing, and merging branches |
+
+You do not need to memorize commands before Level 2. Android Studio provides the
+Git actions we will use, and the hardware exercises will introduce each action
+when it has a purpose.
+
+## 1. Create your GitHub account
+
+Follow GitHub's official
+[Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)
+instructions. Choose your own username and verify your email address.
+
+After the account is ready:
+
+1. Give your GitHub username to the team repository owner.
+2. Accept the invitation to the team's repository or GitHub organization.
+3. Open `<HARDWARE_LAB_REPOSITORY_URL>` and confirm that you can see it.
+
+Do not put a password, access token, recovery code, or Control Hub Wi-Fi credential
+in a repository or AI prompt.
 
 ## 2. Install Git
 
-Follow [GitHub's Set up Git documentation](https://docs.github.com/en/get-started/git-basics/set-up-git)
-for your operating system. Then open a terminal and run:
+Follow GitHub's official
+[Set up Git](https://docs.github.com/en/get-started/git-basics/set-up-git)
+instructions for your operating system. Then open a terminal and run:
 
 ```text
 git --version
@@ -30,42 +70,31 @@ Continue when Git prints a version instead of an error.
 ## 3. Identify your commits
 
 Use the name you want teammates to see in repository history and the email address
-approved for your GitHub account:
+associated with your GitHub account:
 
 ```text
 git config --global user.name "Your Name"
-git config --global user.email "your-approved-email@example.com"
+git config --global user.email "your-email@example.com"
 ```
 
-Verify the saved values without displaying unrelated Git settings:
+Verify the saved values:
 
 ```text
 git config --global user.name
 git config --global user.email
 ```
 
-Students who do not want a personal email shown in commits can use a GitHub-provided
-`noreply` address after configuring it in their GitHub email settings.
-
-## 4. Authenticate through the approved method
-
-The mentor will choose HTTPS or SSH for the hardware-lab repository. Follow that
-choice rather than changing the repository URL yourself.
-
-- For HTTPS, use the browser or credential-manager sign-in offered by Git.
-- For SSH, use the SSH key and GitHub account setup approved by the mentor.
-
-Do not paste a password or token into a command shown by another student. Stop and
-ask a mentor if authentication requests a credential you do not recognize.
+GitHub provides a `noreply` email address if you prefer not to show a personal
+email in commits.
 
 ## Check your setup
 
-You are ready to clone when:
+You are ready to continue when:
 
 - `git --version` succeeds;
-- your Git name and approved email are configured;
-- you can view the hardware-lab repository on GitHub; and
-- you understand that `origin` will mean the team's repository, not FIRST's
-  official repository.
+- your Git name and email are configured;
+- you accepted the repository invitation; and
+- you can view the hardware-lab repository on GitHub.
 
-Continue to [Your Level 2 Git Workflow](level-2-git-workflow.md).
+Continue to [Prepare Android Studio for FTC](android-studio-ftc-setup.md). Android
+Studio will clone the repository and manage the branches you use in the labs.

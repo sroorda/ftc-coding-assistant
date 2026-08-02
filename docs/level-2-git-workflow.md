@@ -1,149 +1,67 @@
-# Your Level 2 Git Workflow
+# How Level 2 Branches Work
 
-Level 2 uses two kinds of student branches:
+Level 2 uses two kinds of student branches. You create the personal branch during
+setup. The first hardware exercise creates a feature branch and walks through the
+complete review process.
 
-- `student/<your-name>` is your cumulative Level 2 work.
-- `lesson/<your-name>/<short-description>` is temporary work prepared for review.
+## Why each student gets a personal branch
 
-For example, Alex might use:
+A personal branch lets you complete every lab independently without changing
+another student's code. It becomes your cumulative Level 2 implementation.
+
+Choose your own short, recognizable name:
 
 ```text
 student/alex
-lesson/alex/motor-telemetry
+student/robotdog17
 ```
 
-Lesson pull requests target the author's personal branch. They do not target
-`main`, another student's branch, or the official FIRST repository.
+No one assigns the name, but each student must choose a different one.
 
-## Clone the team repository
+## Why exercises use feature branches
 
-Choose a folder where you keep programming projects, then run:
+A feature branch isolates one focused change. That makes the change easy to
+inspect, discuss, test, and merge without mixing it with unrelated work.
+
+```mermaid
+flowchart LR
+    Main["main<br/>shared lab starter"] --> Student["student/alex<br/>Alex's cumulative Level 2 work"]
+    Student --> Feature["feature/alex/first-motor<br/>one exercise"]
+    Feature -->|"commit + push"| PR["Pull request<br/>review the exercise"]
+    PR -->|"approved + merged"| Student
+```
+
+The first exercise will guide you through this sequence:
+
+1. Start on your `student/<name>` branch.
+2. Create and switch to a `feature/<name>/<exercise>` branch in Android Studio.
+3. Complete and test the exercise.
+4. Review the changed files in Android Studio.
+5. Commit the working change.
+6. Push the feature branch to GitHub.
+7. Open a pull request whose target is your `student/<name>` branch.
+8. Ask a mentor or another student to review and approve it.
+9. Merge the pull request into your personal branch.
+10. Update Android Studio to the newly merged personal branch.
+
+The reviewer comments through the pull request rather than editing your branch.
+The pull request does not target `main`, another student's branch, or FIRST's
+official repository.
+
+## How this relates to competition code
+
+The course uses your personal branch as the integration branch so every student
+can keep a separate body of work. During the season, the same pattern usually
+looks like this:
 
 ```text
-git clone <HARDWARE_LAB_REPOSITORY_URL>
-cd ftc-hardware-lab
-git remote -v
+shared competition branch → feature branch → pull request → review → shared branch
 ```
 
-Both `origin` entries must point to the team hardware-lab repository. Stop if they
-point directly to `FIRST-Tech-Challenge/FtcRobotController` or somewhere you do
-not recognize.
+The destination changes, but the professional habit is the same: isolate one
+change, test it, explain it, review it, and merge it intentionally.
 
-## Create your personal branch once
-
-Replace `<your-name>` with the short name assigned by the mentor:
-
-```text
-git switch main
-git pull --ff-only origin main
-git switch -c student/<your-name>
-git push -u origin student/<your-name>
-```
-
-Run these checks:
-
-```text
-git branch --show-current
-git status
-```
-
-Do not commit directly to `main`. Do not work on another student's branch.
-
-## Start a piece of reviewed work
-
-Begin from your up-to-date personal branch:
-
-```text
-git switch student/<your-name>
-git pull --ff-only origin student/<your-name>
-git switch -c lesson/<your-name>/<short-description>
-```
-
-Before editing, verify the branch:
-
-```text
-git branch --show-current
-git status
-```
-
-## Inspect and commit your work
-
-After the code behaves as required, inspect the change before staging it:
-
-```text
-git status
-git diff
-```
-
-Stage only the files that belong to the change. Avoid `git add .` until you can
-confidently explain every file in `git status`.
-
-```text
-git add <specific-file>
-git diff --staged
-git commit -m "Describe the working outcome"
-git push -u origin lesson/<your-name>/<short-description>
-```
-
-A good commit message describes the result, such as:
-
-```text
-Report motor power and encoder position
-```
-
-## Open the pull request
-
-On GitHub, select:
-
-- **base repository:** the team hardware-lab repository
-- **base branch:** `student/<your-name>`
-- **compare branch:** `lesson/<your-name>/<short-description>`
-
-Before requesting review, confirm that the pull request shows only your intended
-files and commits. Include:
-
-- what changed;
-- how you tested it;
-- what physical behavior you observed, when hardware was involved; and
-- any limitation or concern the reviewer should examine.
-
-If the GitHub CLI is installed, the equivalent command is:
-
-```text
-gh pr create --base student/<your-name> --head lesson/<your-name>/<short-description>
-```
-
-Using the GitHub website is equally acceptable.
-
-## Review another student's work
-
-Reviewers comment through the pull request. They do not push commits to the
-author's branch or edit the author's files.
-
-Check:
-
-- Does the code satisfy the stated requirement?
-- Is the expected hardware motion documented?
-- Are power, position, time, and sensor limits safe?
-- Does the code stop the device in every relevant path?
-- Does the evidence support the author's conclusion?
-- Can you identify one normal case and one failure or boundary case?
-
-Mark an issue as required only when the requirement, safety, or correctness
-demands it. Label optional improvements as suggestions.
-
-## Merge and continue
-
-After review and mentor approval, merge the lesson pull request into your personal
-branch. Then update your local copy:
-
-```text
-git switch student/<your-name>
-git pull --ff-only origin student/<your-name>
-git branch -d lesson/<your-name>/<short-description>
-git status
-```
-
-The mentor will announce when your branch needs an update from `main`. Do not
-merge, rebase, force-push, reset, or discard files to resolve a confusing Git state
-without help. Preserving work is more important than repairing it quickly.
+GitHub's [Getting started with Git](https://docs.github.com/en/get-started/learning-to-code/getting-started-with-git)
+provides a broader illustrated introduction to branches, commits, pushes, and pull
+requests. The first hardware exercise will provide the exact Android Studio clicks
+when the workflow is introduced.

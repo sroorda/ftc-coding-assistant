@@ -1,19 +1,20 @@
 # Prepare Android Studio for FTC
 
-FIRST maintains the installation and FTC SDK documentation. This course links to
-those instructions instead of copying steps that can become outdated.
+FIRST maintains the Android Studio and FTC SDK installation documentation. This
+course links to those instructions instead of copying steps that can become
+outdated.
 
-## Team-approved versions
+## Team versions
 
-An adult mentor must fill in these values before students begin:
+These values must be filled in before students begin:
 
 ```text
 FTC SDK version: <FTC_SDK_VERSION>
 Hardware-lab repository: <HARDWARE_LAB_REPOSITORY_URL>
 ```
 
-Use the versions supplied by the mentor even if Android Studio offers a newer
-Android Gradle Plugin, Gradle version, SDK component, or Java configuration.
+Use the versions supplied by the team repository even if Android Studio offers a
+newer Android Gradle Plugin, Gradle version, SDK component, or Java configuration.
 
 ## Install Android Studio
 
@@ -21,25 +22,54 @@ Follow FIRST's
 [Android Studio Programming Tutorial](https://ftc-docs.firstinspires.org/en/latest/programming_resources/android_studio_java/Android-Studio-Tutorial.html)
 through the Android Studio installation and required Android SDK preparation.
 
-Read FIRST's
-[Downloading the Android Studio Project Folder](https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/downloading_as_project_folder/Downloading-the-Android-Studio-Project-Folder.html)
-page for its explanation of importing and trusting an FTC project. Do not download
-the ZIP for Level 2; you will clone the team hardware-lab repository instead.
+You also need Git installed as described in
+[Set Up GitHub and Git](github-and-git-setup.md). Android Studio uses that Git
+installation for cloning, branches, commits, and pushes.
 
-## Open the team project
+## Clone the hardware-lab repository in Android Studio
 
-After following [Your Level 2 Git Workflow](level-2-git-workflow.md) to clone the
-repository:
+Android's
+[Version control basics](https://developer.android.com/studio/projects/version-control)
+describes Android Studio's Git integration.
 
-1. Start Android Studio.
-2. Select **Open**.
-3. Choose the cloned `ftc-hardware-lab` folder containing the Gradle project.
-4. Trust the project when Android Studio asks.
-5. Allow Gradle sync to finish before editing or running anything.
-6. Build the project once without making changes.
+From the Android Studio welcome screen:
 
-Do not open only the `TeamCode` directory. Android Studio must open the complete
-FTC project.
+1. Select **Get from VCS**.
+2. Select **Git** as the version-control system.
+3. Paste `<HARDWARE_LAB_REPOSITORY_URL>` into the URL field.
+4. Choose the parent folder where Android Studio should create the local project.
+5. Select **Clone**.
+6. Complete the GitHub sign-in prompt if Android Studio displays one.
+7. Trust the project when Android Studio asks.
+8. Allow Gradle sync to finish before editing or running anything.
+9. Build the project once without making changes.
+
+If another project is already open, use **File → New → Project from Version
+Control** instead.
+
+Do not open only the `TeamCode` directory. Android Studio must clone and open the
+complete FTC project.
+
+## Create your personal branch in Android Studio
+
+Android Studio shows the current Git branch in the branch widget near the top of
+the window.
+
+1. Confirm the current branch is `main`.
+2. Open the branch widget.
+3. Select `main`, then choose **New Branch from 'main'**.
+4. Enter the personal name you chose, such as `student/alex`.
+5. Keep **Checkout branch** selected and create the branch.
+6. Use **Git → Push** to publish the branch to the team repository.
+7. Confirm the new branch appears on GitHub.
+
+JetBrains' official
+[Manage Git branches](https://www.jetbrains.com/help/idea/manage-branches.html)
+reference contains screenshots and more detail. The same Git interface is used by
+Android Studio.
+
+Do not create exercise feature branches yet. The first hardware exercise will
+introduce that workflow after you have code worth committing and reviewing.
 
 ## Understand the project boundary
 
@@ -49,15 +79,15 @@ module or its included sample files. FIRST's
 [Creating and Running an OpMode](https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/creating_op_modes/Creating-and-Running-an-Op-Mode-%28Android-Studio%29.html)
 page explains this module boundary and where the official samples live.
 
-## Stop and ask a mentor when
+## Pause and get help when
 
 - Gradle sync proposes changing project versions;
 - Android Studio asks to upgrade the Android Gradle Plugin;
-- the approved FTC SDK version does not match the project;
+- the expected FTC SDK version does not match the project;
 - a build error mentions signing, SDK components, Gradle, or Java compatibility;
 - you are tempted to edit `FtcRobotController`; or
 - Android Studio requests administrator access or an unfamiliar credential.
 
 Continue to
-[Connect Android Studio to the Control Hub](control-hub-connection.md) only with
-an adult mentor and an approved test bench.
+[Connect Android Studio to the Control Hub](control-hub-connection.md) after the
+project builds successfully and the test bench is ready.
