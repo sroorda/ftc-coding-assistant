@@ -21,6 +21,13 @@ Your first hardware environment will probably be a small benchtop rig. An adult
 mentor will approve the wiring, configuration, test area, power, and stop procedure
 before you run code.
 
+## Before Level 2
+
+Complete [Level 2 Setup](../docs/level-2-setup.md). It covers the team GitHub
+repository, your personal branch, Android Studio, and the supervised Control Hub
+connection. These setup pages are available for review while the hardware lessons
+are still being developed.
+
 ## Your next checkpoint
 
 You will be ready for Level 3 when you can:

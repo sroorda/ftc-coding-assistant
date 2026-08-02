@@ -20,6 +20,8 @@ can speak directly to learners.
 
 - Review the [program design notes](mentors/program-design.md) before turning a
   planned level into student lessons.
+- Use [Prepare the Level 2 Hardware-Lab Repository](mentors/level-2-repository-setup.md)
+  before giving students access to the Android Studio project.
 - Evolve the team's base framework using
   [Robot Code Architecture](docs/robot-code-architecture.md).
 - Verify the current FTC SDK, hardware, Pedro Pathing version, safety procedure,

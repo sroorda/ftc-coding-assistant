@@ -22,6 +22,11 @@
 
 * [Git and Collaboration Bootcamp](team-workflow.md)
 * [Level 2 Preview: Hardware Lab](levels/02-hardware-lab.md)
+  * [Level 2 Setup](docs/level-2-setup.md)
+  * [Set Up GitHub and Git](docs/github-and-git-setup.md)
+  * [Your Level 2 Git Workflow](docs/level-2-git-workflow.md)
+  * [Prepare Android Studio for FTC](docs/android-studio-ftc-setup.md)
+  * [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
 * [Level 3 Preview: Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md)
 * [Level 4 Preview: Autonomous Motion](levels/04-autonomous-motion.md)
 * [Level 5 Preview: Coordinated Autonomous](levels/05-coordinated-autonomous.md)
@@ -41,4 +46,5 @@
   * [Adult Mentor Guide](mentors/adult-mentor-guide.md)
   * [Level 1 Instructor Guide](instructor/instructor-guide.md)
   * [Program Design Notes](mentors/program-design.md)
+  * [Prepare the Level 2 Hardware-Lab Repository](mentors/level-2-repository-setup.md)
   * [Contributing and Publishing](CONTRIBUTING.md)
