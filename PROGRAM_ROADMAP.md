@@ -24,19 +24,19 @@ The later-level pages are previews, not complete lessons yet.
 4. You use localization and Pedro Pathing to move autonomously.
 5. You coordinate drivetrain movement with mechanism actions.
 
-Level 1 intentionally leaves out the FTC SDK, physical hardware, and Git workflow.
-That gives you a fast place to experiment while you learn the language.
+Level 1 intentionally leaves out the FTC SDK, physical hardware, and most Git
+workflow. That gives you a fast place to experiment while you learn the language.
 
 ## Your checkpoints
 
 | Before you begin | Show that you can |
 |---|---|
-| Level 2 | complete Level 1 and the Team Workflow Bootcamp |
+| Level 2 | complete Level 1 and the Level 2 computer setup |
 | Level 3 | initialize, command, stop, and explain each device you will use |
 | Level 4 | drive and operate mechanisms while explaining the robot code structure |
 | Level 5 | create, tune, and repeat a simple path using reliable localization |
-| Competition work | demonstrate safe behavior, recovery, review, and deployment with an adult mentor |
+| Competition work | demonstrate safe behavior, recovery, review, and the team's deployment process |
 
 An AI tutor can help you ask questions and review evidence. It cannot demonstrate
-your understanding for you, approve hardware operation, or make final team
+your understanding for you, replace hardware safety checks, or make final team
 decisions.

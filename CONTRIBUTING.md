@@ -31,7 +31,6 @@ remain in the repository but are not part of the published course navigation.
 ├── docs/                     Setup, workflow, and FTC transition references
 ├── levels/                   Level 1 path and planned Level 2–5 outcomes
 ├── mentors/                  Adult preparation and coaching guidance
-├── team-workflow.md          Post-Level-1 Git and collaboration workshop
 ├── instructor/               Facilitation notes and answer guidance
 ├── lessons/                  Six Java exercises and their source code
 └── scripts/                  Cross-platform environment and lesson runners

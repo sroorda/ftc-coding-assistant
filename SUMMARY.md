@@ -18,22 +18,30 @@
 * [Lesson 5: Methods, Classes, and Tests](lessons/05-methods-classes-and-tests/README.md)
 * [Lesson 6: Virtual Intake Controller](lessons/06-virtual-intake-project/README.md)
 
-## After Level 1
+## Level 2 — Hardware Lab
 
-* [Git and Collaboration Bootcamp](team-workflow.md)
-* [Level 2 Preview: Hardware Lab](levels/02-hardware-lab.md)
-  * [Level 2 Setup](docs/level-2-setup.md)
-  * [Set Up GitHub and Git](docs/github-and-git-setup.md)
-  * [How Level 2 Branches Work](docs/level-2-git-workflow.md)
-  * [Prepare Android Studio for FTC](docs/android-studio-ftc-setup.md)
-  * [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
-* [Level 3 Preview: Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md)
-* [Level 4 Preview: Autonomous Motion](levels/04-autonomous-motion.md)
-* [Level 5 Preview: Coordinated Autonomous](levels/05-coordinated-autonomous.md)
+* [Level 2 Preview](levels/02-hardware-lab.md)
+* [Level 2 Setup](docs/level-2-setup.md)
+* [Set Up GitHub and Git](docs/github-and-git-setup.md)
+* [How Level 2 Branches Work](docs/level-2-git-workflow.md)
+* [Prepare Android Studio for FTC](docs/android-studio-ftc-setup.md)
+* [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
+
+## Level 3 — Robot Systems and TeleOp
+
+* [Level 3 Preview](levels/03-robot-systems-and-teleop.md)
+
+## Level 4 — Autonomous Motion
+
+* [Level 4 Preview](levels/04-autonomous-motion.md)
+
+## Level 5 — Coordinated Autonomous
+
+* [Level 5 Preview](levels/05-coordinated-autonomous.md)
+
+## Student Reference
+
 * [Robot Code Architecture](docs/robot-code-architecture.md)
-
-## Student Setup Reference
-
 * [Install Visual Studio Code](docs/vscode-setup.md)
 * [Install Java on Windows](docs/windows-setup.md)
 * [Install Java on macOS](docs/macos-setup.md)

@@ -6,7 +6,9 @@
 ## Delivery sequence
 
 - Level 1 contains no FTC SDK, hardware setup, or Git instruction.
-- Run the Team Workflow Bootcamp between Levels 1 and 2.
+- Introduce Git and Android Studio during Level 2 setup.
+- Teach the feature-branch and pull-request workflow inside the first hardware
+  exercise, when students have a real change to review.
 - Introduce hardware one device at a time in a controlled Level 2 environment.
 - Require reliable TeleOp subsystems before autonomous pathing.
 - Require reliable pathing and mechanisms independently before coordinating them.
@@ -23,7 +25,7 @@ have been tested with:
 
 - the team's current FTC SDK and Android Studio environment;
 - the team's actual hardware and configuration;
-- the adult-approved safety and emergency-stop procedure;
+- the tested safety and emergency-stop procedure;
 - both Windows and macOS development paths used by the team; and
 - a beginner who was not involved in writing the lesson.
 
@@ -43,12 +45,14 @@ access.
 
 ## Git and collaboration
 
-Git is a team practice, not a Level 1 programming objective. After the bootcamp,
-increase the collaboration challenge gradually:
+Git is a team practice, not a Level 1 programming objective. Level 2 setup creates
+a personal branch for each student. The first hardware exercise teaches a feature
+branch, commit, push, pull request, review, and merge back into that personal
+branch. Increase the collaboration challenge gradually:
 
 | Level | Team practice |
 |---|---|
-| 2 | one small branch and pull request per device exercise |
+| 2 | personal cumulative branches with selected feature branches and pull requests |
 | 3 | pairs own different subsystems and review integration points |
 | 4 | review paths, poses, constants, and tuning evidence separately |
 | 5 | coordinate changes across autonomous and mechanism code |

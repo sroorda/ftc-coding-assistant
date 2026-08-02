@@ -65,7 +65,6 @@ After Lesson 6, show that you can:
 
 You do not need a perfect speech. You do need to show your own reasoning.
 
-When you are ready, continue to the
-[Team Workflow Bootcamp](../team-workflow.md). That workshop prepares you for
-supervised [Level 2 hardware work](../levels/02-hardware-lab.md); it does not by
-itself authorize you to deploy code or operate hardware.
+When you are ready, continue to [Level 2 Setup](../docs/level-2-setup.md). You will
+prepare Android Studio and Git, clone the hardware-lab repository, and create your
+personal Level 2 branch before beginning [hardware work](02-hardware-lab.md).

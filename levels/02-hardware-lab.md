@@ -1,7 +1,7 @@
 # Level 2 Preview — Hardware Lab
 
-> **Coming later:** These are the skills you will learn after Level 1 and the Team
-> Workflow Bootcamp. The student lessons are still being built and tested.
+> **Coming later:** These are the skills you will learn after Level 1. The student
+> lessons are still being built and tested.
 
 In Level 2, your Java code will leave the laptop and control real FTC hardware for
 the first time. You will work with one device at a time so you can clearly connect

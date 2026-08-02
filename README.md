@@ -36,9 +36,9 @@ Every lesson follows the same rhythm:
 
 ## What comes after Level 1
 
-After the six Java lessons, you will learn the team's Git process in the
-[Team Workflow Bootcamp](team-workflow.md). Then you will be ready to begin
-supervised work with FTC hardware.
+After the six Java lessons, continue to [Level 2 Setup](docs/level-2-setup.md).
+You will prepare Android Studio and Git, clone the hardware-lab repository, create
+your personal branch, and begin working with FTC hardware.
 
 Learning matters more than finishing quickly. You are responsible for every line
 you change and every claim that your program works.

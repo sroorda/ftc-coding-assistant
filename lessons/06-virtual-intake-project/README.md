@@ -247,5 +247,5 @@ call `update`, and apply the returned motor power.
 ## Continue
 
 Return to the [Level 1 Readiness Check](../../levels/01-java-foundations.md#level-1-readiness-check),
-then complete the [Team Workflow Bootcamp](../../team-workflow.md) before beginning
-supervised [Level 2 hardware work](../../levels/02-hardware-lab.md).
+then complete [Level 2 Setup](../../docs/level-2-setup.md) before beginning
+[Level 2 hardware work](../../levels/02-hardware-lab.md).

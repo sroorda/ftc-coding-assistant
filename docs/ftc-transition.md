@@ -31,11 +31,10 @@ review and test away from the robot.
 ## Your next step
 
 Before you enter the FTC SDK project, complete the
-[Level 1 readiness check](../levels/01-java-foundations.md#level-1-readiness-check)
-and the [Team Workflow Bootcamp](../team-workflow.md). Then an adult mentor will
-guide you through the team's exact SDK version, project structure, hardware
-configuration, deployment procedure, and safety rules in supervised
-[Level 2 hardware labs](../levels/02-hardware-lab.md).
+[Level 1 readiness check](../levels/01-java-foundations.md#level-1-readiness-check),
+then follow [Level 2 Setup](level-2-setup.md) for the team's SDK version, Android
+Studio project, Git repository, and Control Hub connection.
 
-Do not move directly from desktop Java to unsupervised competition robot changes.
-First learn to configure, command, observe, and stop one physical device at a time.
+Do not move directly from desktop Java to competition robot changes. First use the
+[Level 2 hardware labs](../levels/02-hardware-lab.md) to configure, command,
+observe, and stop one physical device at a time.

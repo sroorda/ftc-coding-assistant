@@ -39,5 +39,5 @@ You are ready to continue when you can:
 - explain the difference between “it compiled” and “it meets the requirement.”
 
 When you finish Lesson 6, complete the
-[Level 1 readiness check](levels/01-java-foundations.md#level-1-readiness-check). Your next
-step will be the [Team Workflow Bootcamp](team-workflow.md).
+[Level 1 readiness check](levels/01-java-foundations.md#level-1-readiness-check).
+Then continue to [Level 2 Setup](docs/level-2-setup.md).
