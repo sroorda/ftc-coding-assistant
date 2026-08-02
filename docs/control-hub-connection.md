@@ -1,8 +1,12 @@
 # Connect Android Studio to the Control Hub
 
-Use this guide after the FTC project builds successfully without a connected
-robot. Confirm that the test bench is wired, powered safely, clear of loose
-objects, and positioned so you can stop it easily.
+Use this guide when the first Level 2 lesson directs you here, after your first
+OpMode builds successfully without a connected robot. Do not complete this during
+initial setup: writing code first makes the connection and deployment steps part
+of a real development cycle.
+
+Confirm that the test bench is wired, powered safely, clear of loose objects, and
+positioned so you can stop it easily.
 
 FIRST's maintained reference is
 [Managing a Control Hub](https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_control_hub/Managing-a-Control-Hub.html).

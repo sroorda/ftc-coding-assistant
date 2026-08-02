@@ -23,8 +23,8 @@ verify the wiring, test area, expected motion, power limits, and stop procedure.
 ## Before Level 2
 
 Complete [Level 2 Setup](../docs/level-2-setup.md). It covers GitHub and Git basics,
-cloning the team repository in Android Studio, creating your personal branch, and
-connecting to the Control Hub.
+cloning the team repository in Android Studio, and creating your personal branch.
+You will write and build the first OpMode before connecting to the Control Hub.
 
 The first hardware exercise will create a feature branch from your personal branch.
 After the exercise works, it will guide you through committing, pushing, opening a

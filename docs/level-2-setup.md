@@ -1,16 +1,13 @@
 # Level 2 Setup
 
-> **Draft for review:** The team must fill in the FTC SDK version and hardware-lab
-> repository URL before students use this guide.
-
 Level 2 moves from small desktop Java programs to an Android Studio project that
-can deploy code to FTC hardware. Complete this setup before beginning the hardware
-labs.
+can deploy code to FTC hardware. This setup prepares the project and your personal
+branch. You will write your first OpMode before connecting to the Control Hub.
 
 ## What you need
 
-- Hardware-lab repository: `<HARDWARE_LAB_REPOSITORY_URL>`
-- FTC SDK version used by the repository: `<FTC_SDK_VERSION>`
+- Hardware-lab repository: `https://github.com/sroorda/ftc-hardware-lab`
+- FTC SDK version used by the repository: `11.2.1`
 - Access to the team's repository on GitHub
 - Android Studio and Git
 - The configured hardware test bench
@@ -22,15 +19,17 @@ repository is based on the correct SDK version and is where your work belongs.
 
 1. [Set Up GitHub and Git](github-and-git-setup.md).
 2. [Prepare Android Studio for FTC](android-studio-ftc-setup.md).
-3. In Android Studio, clone `<HARDWARE_LAB_REPOSITORY_URL>` using **Get from
-   Version Control**.
+3. In Android Studio, clone `https://github.com/sroorda/ftc-hardware-lab` using
+   **Get from Version Control**.
 4. Allow the first Gradle sync to finish, then build the project without changing
    any files.
 5. Create your personal Level 2 branch in Android Studio.
 6. Push the new personal branch to the team repository.
-7. Follow [Connect Android Studio to the Control Hub](control-hub-connection.md).
 
 The Android Studio guide walks through cloning and creating the personal branch.
+Do not connect to the Control Hub during setup. The first lesson will have you
+write and build code first, then connect when there is something meaningful to
+deploy.
 
 ## Choose your personal branch name
 
@@ -54,9 +53,8 @@ teams work that way.
 - the personal branch appears in the team repository on GitHub;
 - Git reports no uncommitted changes;
 - Android Studio completes Gradle sync without requiring project upgrades;
-- the `TeamCode` module builds successfully; and
-- Android Studio can see the Control Hub on its Program & Manage network.
+- the `TeamCode` module builds successfully.
 
-Once these checks succeed, you may deploy when you are ready. Before pressing Run,
-make sure you understand which hardware can move, what the code should do, and how
-you will stop the OpMode if the behavior is unexpected.
+Once these checks succeed, begin the first Level 2 lesson. It will introduce the
+OpMode lifecycle, have you create the first feature branch and Java class, and then
+send you to the Control Hub connection guide.

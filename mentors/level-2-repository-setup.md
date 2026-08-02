@@ -1,8 +1,5 @@
 # Prepare the Level 2 Hardware-Lab Repository
 
-> **Draft for mentor review:** This page prepares the shared repository and student
-> branches. It does not define Level 2 lessons or authorize hardware deployment.
-
 The hardware lab should be separate from both the curriculum repository and active
 competition code. It needs the same approved FTC SDK version and compatible package
 conventions so selected code can later be promoted deliberately.
@@ -11,11 +8,11 @@ conventions so selected code can later be promoted deliberately.
 
 Document:
 
-- FTC SDK release or tag: `<FTC_SDK_VERSION>`
+- FTC SDK release: `11.2.1`
 - Official source: `FIRST-Tech-Challenge/FtcRobotController`
-- Exact source commit: `<FTC_SDK_COMMIT>`
-- Team repository URL: `<HARDWARE_LAB_REPOSITORY_URL>`
-- Supported Android Studio and Java configuration
+- Exact source commit: `26cd1fdd2a3c4b26173d9ff33a3279c27d1c7ad1`
+- Team repository URL: `https://github.com/sroorda/ftc-hardware-lab`
+- Supported Android Studio: Narwhal 3 Feature Drop or later
 - Control Hub and Driver Station versions used for validation
 
 FIRST maintains the
@@ -23,27 +20,24 @@ FIRST maintains the
 and its
 [fork-and-clone workflow](https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/fork_and_clone_github_repository/Fork-and-Clone-From-GitHub.html).
 
-## Recommended repository ownership
+## Repository ownership
 
-For this student lab, prefer a normal team-owned repository initialized from the
-approved official SDK release rather than a GitHub-linked public fork. A fork
-prevents direct pushes to FIRST but can still present FIRST's repository as a pull
-request destination. A standalone team repository keeps student pull requests
-inside the team project.
+The hardware lab is a public fork under `sroorda`. This prevents student work from
+changing the official FIRST repository, while preserving a clear relationship to
+upstream SDK releases. Because GitHub may offer the official repository as a pull
+request destination, students must verify both the base repository and base branch
+before creating each pull request.
 
 In the maintainer clone:
 
 - `origin` should be the team hardware-lab repository;
-- an optional `upstream` may point to the official FIRST repository; and
+- `upstream` points to the official FIRST repository; and
 - students should normally have only the team repository configured as `origin`.
-
-If the team chooses a GitHub fork instead, explicitly teach students to verify the
-base repository and base branch on every pull request.
 
 ## Prepare the initial project
 
 1. Start from the approved official SDK tag or commit.
-2. Create the team-owned hardware-lab repository.
+2. Fork the official project into the team maintainer's GitHub account.
 3. Preserve the official project structure.
 4. Keep team changes inside `TeamCode`; do not modify `FtcRobotController` samples
    or SDK sources.
@@ -60,7 +54,7 @@ base repository and base branch on every pull request.
 - Protect `main` from direct student pushes.
 - Give each student enough access to create and push branches.
 - Use one cumulative branch per student: `student/<name>`.
-- Use temporary review branches such as `lesson/<name>/<description>`.
+- Use temporary review branches such as `feature/<name>/<description>`.
 - Direct each lesson pull request to the author's `student/<name>` branch.
 - Require a peer or mentor review before merging reviewed work.
 - Do not merge all student implementations into `main`.
@@ -70,11 +64,12 @@ The student workflow is documented in
 
 ## Keep code portable to competition
 
-Use `org.firstinspires.ftc.teamcode` and keep responsibilities separated:
+Student Level 2 code begins in `org.firstinspires.ftc.teamcode.level2`. As reusable
+code emerges, keep responsibilities separated inside that package:
 
 ```text
-TeamCode/src/main/java/org/firstinspires/ftc/teamcode/
-├── training/       lesson OpModes that normally stay in the lab
+TeamCode/src/main/java/org/firstinspires/ftc/teamcode/level2/
+├── opmodes/        lesson OpModes that normally stay in the lab
 ├── hardware/       hardware initialization candidates
 ├── subsystems/     reusable mechanism behavior candidates
 └── util/           small hardware-independent helpers
@@ -93,4 +88,4 @@ again, and submit a separate competition-code pull request.
 - the Driver Station reconnects after installation;
 - repository permissions and branch protection have been tested with a non-owner
   account; and
-- all placeholders in the student setup pages have been replaced.
+- the hardware contract matches the physical Driver Station configuration.

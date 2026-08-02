@@ -6,11 +6,10 @@ outdated.
 
 ## Team versions
 
-These values must be filled in before students begin:
-
 ```text
-FTC SDK version: <FTC_SDK_VERSION>
-Hardware-lab repository: <HARDWARE_LAB_REPOSITORY_URL>
+FTC SDK version: 11.2.1
+Hardware-lab repository: https://github.com/sroorda/ftc-hardware-lab
+Minimum Android Studio: Narwhal 3 Feature Drop
 ```
 
 Use the versions supplied by the team repository even if Android Studio offers a
@@ -36,7 +35,7 @@ From the Android Studio welcome screen:
 
 1. Select **Get from VCS**.
 2. Select **Git** as the version-control system.
-3. Paste `<HARDWARE_LAB_REPOSITORY_URL>` into the URL field.
+3. Paste `https://github.com/sroorda/ftc-hardware-lab` into the URL field.
 4. Choose the parent folder where Android Studio should create the local project.
 5. Select **Clone**.
 6. Complete the GitHub sign-in prompt if Android Studio displays one.
@@ -73,9 +72,9 @@ introduce that workflow after you have code worth committing and reviewing.
 
 ## Understand the project boundary
 
-Student code belongs under the `TeamCode` module in the
-`org.firstinspires.ftc.teamcode` package. Do not modify the `FtcRobotController`
-module or its included sample files. FIRST's
+Student Level 2 code belongs under the `TeamCode` module in the
+`org.firstinspires.ftc.teamcode.level2` package. Do not modify the
+`FtcRobotController` module or its included sample files. FIRST's
 [Creating and Running an OpMode](https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/creating_op_modes/Creating-and-Running-an-Op-Mode-%28Android-Studio%29.html)
 page explains this module boundary and where the official samples live.
 
@@ -88,6 +87,6 @@ page explains this module boundary and where the official samples live.
 - you are tempted to edit `FtcRobotController`; or
 - Android Studio requests administrator access or an unfamiliar credential.
 
-Continue to
-[Connect Android Studio to the Control Hub](control-hub-connection.md) after the
-project builds successfully and the test bench is ready.
+Return to [Level 2 Setup](level-2-setup.md) after the project builds successfully.
+The first hardware lesson will have you write code before connecting Android
+Studio to the Control Hub.

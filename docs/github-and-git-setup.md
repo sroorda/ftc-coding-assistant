@@ -50,7 +50,9 @@ After the account is ready:
 
 1. Give your GitHub username to the team repository owner.
 2. Accept the invitation to the team's repository or GitHub organization.
-3. Open `<HARDWARE_LAB_REPOSITORY_URL>` and confirm that you can see it.
+3. Open the
+   [FTC hardware-lab repository](https://github.com/sroorda/ftc-hardware-lab)
+   and confirm that you can see it.
 
 Do not put a password, access token, recovery code, or Control Hub Wi-Fi credential
 in a repository or AI prompt.
