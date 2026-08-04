@@ -66,6 +66,25 @@ project setup problems from mistakes in new student code.
 Continue when Gradle sync and the `TeamCode` build complete without project
 upgrades or source changes.
 
+### What Android Studio should look like
+
+After the build, Android Studio should look similar to this:
+
+![Android Studio showing the cloned FTC hardware-lab project with the FtcRobotController and TeamCode modules](images/level-2/android-studio-after-build.png)
+
+Check these parts of the window:
+
+- the project is named `ftc-hardware-lab`;
+- the Android project view contains both `FtcRobotController` and `TeamCode`;
+- `TeamCode` is selected as the run configuration;
+- the current branch is still `main` before you complete the next section; and
+- **No Devices** is expected because you do not connect to the Control Hub until
+  Lesson 1.
+
+Your operating system, theme, and Android Studio layout may look different. The
+screenshot confirms the expected project structure; it does not replace a
+successful Gradle sync and `TeamCode` build.
+
 ## 5. Create your personal branch
 
 A personal branch lets you complete every lab independently without changing
