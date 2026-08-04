@@ -7,13 +7,16 @@ branch. You will write your first OpMode before connecting to the Control Hub.
 ## What you need
 
 - Hardware-lab repository: `https://github.com/sroorda/ftc-hardware-lab`
-- FTC SDK version used by the repository: `11.2.1`
 - Access to the team's repository on GitHub
 - Android Studio and Git
 - The configured hardware test bench
 
 Do not clone the official FIRST repository for the course. The team hardware-lab
-repository is based on the correct SDK version and is where your work belongs.
+repository is the FTC project where your Level 2 work belongs.
+
+> **Note:** The hardware-lab repository is currently based on FTC SDK `11.2.1`.
+> The SDK is already part of the project; you do not need to download it
+> separately.
 
 ## Complete these steps in order
 
