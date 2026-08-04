@@ -22,10 +22,7 @@
 
 * [Level 2 Preview](levels/02-hardware-lab.md)
 * [Level 2 Setup](docs/level-2-setup.md)
-* [Set Up GitHub and Git](docs/github-and-git-setup.md)
-* [How Level 2 Branches Work](docs/level-2-git-workflow.md)
-* [Prepare Android Studio for FTC](docs/android-studio-ftc-setup.md)
-* [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
+* [Prepare Android Studio and Your Level 2 Branch](docs/android-studio-ftc-setup.md)
 
 ## Level 3 — Robot Systems and TeleOp
 
@@ -41,6 +38,8 @@
 
 ## Student Reference
 
+* [Set Up GitHub and Git](docs/github-and-git-setup.md)
+* [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
 * [Robot Code Architecture](docs/robot-code-architecture.md)
 * [Install Visual Studio Code](docs/vscode-setup.md)
 * [Install Java on Windows](docs/windows-setup.md)

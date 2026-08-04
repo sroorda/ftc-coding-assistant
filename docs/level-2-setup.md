@@ -21,33 +21,12 @@ repository is the FTC project where your Level 2 work belongs.
 ## Complete these steps in order
 
 1. [Set Up GitHub and Git](github-and-git-setup.md).
-2. [Prepare Android Studio for FTC](android-studio-ftc-setup.md).
-3. In Android Studio, clone `https://github.com/sroorda/ftc-hardware-lab` using
-   **Get from Version Control**.
-4. Allow the first Gradle sync to finish, then build the project without changing
-   any files.
-5. Create your personal Level 2 branch in Android Studio.
-6. Push the new personal branch to the team repository.
+2. [Prepare Android Studio and Your Level 2 Branch](android-studio-ftc-setup.md).
 
-The Android Studio guide walks through cloning and creating the personal branch.
-Do not connect to the Control Hub during setup. The first lesson will have you
-write and build code first, then connect when there is something meaningful to
-deploy.
-
-## Choose your personal branch name
-
-Your branch holds all of your cumulative Level 2 work. Choose a short name that
-teammates can recognize. You can use your first name, GitHub username, or another
-team nickname:
-
-```text
-student/alex
-student/robotdog17
-```
-
-Each student chooses a different name. The first hardware exercise will create a
-temporary feature branch from this personal branch and explain why real software
-teams work that way.
+The combined Android Studio guide walks through installation, cloning, the first
+build, and creation of your personal branch. Do not connect to the Control Hub
+during setup. The first lesson will have you write and build code first, then
+connect when there is something meaningful to deploy.
 
 ## You are ready when
 

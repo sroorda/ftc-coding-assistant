@@ -1,4 +1,4 @@
-# Prepare Android Studio for FTC
+# Prepare Android Studio and Your Level 2 Branch
 
 FIRST maintains the Android Studio and FTC SDK installation documentation. This
 course links to those instructions instead of copying steps that can become
@@ -51,6 +51,21 @@ complete FTC project.
 
 ## Create your personal branch in Android Studio
 
+### Why you need a personal branch
+
+A personal branch lets you complete every lab independently without changing
+another student's code. It becomes your cumulative Level 2 implementation.
+
+Choose your own short, recognizable name. You can use your first name, GitHub
+username, or another team nickname:
+
+```text
+student/alex
+student/robotdog17
+```
+
+No one assigns the name, but each student must choose a different one.
+
 Android Studio shows the current Git branch in the branch widget near the top of
 the window.
 
@@ -70,6 +85,39 @@ Android Studio.
 Do not create exercise feature branches yet. The first hardware exercise will
 introduce that workflow after you have code worth committing and reviewing.
 
+## Preview the Level 2 branch workflow
+
+Each exercise will use a temporary feature branch created from your personal
+branch. A feature branch isolates one focused change so it can be inspected,
+tested, discussed, and merged without mixing it with unrelated work.
+
+```mermaid
+flowchart LR
+    Main["main<br/>shared lab starter"] --> Student["student/alex<br/>Alex's cumulative Level 2 work"]
+    Student --> Feature["feature/alex/first-opmode<br/>one exercise"]
+    Feature -->|"commit + push"| PR["Pull request<br/>review the exercise"]
+    PR -->|"approved + merged"| Student
+```
+
+Lesson 1 will walk you through creating the feature branch, writing and testing
+the first OpMode, inspecting the diff, committing, pushing, opening a pull request,
+obtaining a peer or mentor review, and merging into your personal branch.
+
+The pull request targets `student/<your-name>`. It does not target `main`, another
+student's branch, or FIRST's official repository.
+
+During the competition season, the destination is normally a shared competition
+branch instead of a personal branch. The habit remains the same:
+
+```text
+shared branch → feature branch → pull request → review → shared branch
+```
+
+GitHub's
+[Getting started with Git](https://docs.github.com/en/get-started/learning-to-code/getting-started-with-git)
+provides a broader introduction. You do not need to memorize the complete workflow
+during setup; Lesson 1 introduces each action when it has a purpose.
+
 ## Understand the project boundary
 
 Student Level 2 code belongs under the `TeamCode` module in the
@@ -77,6 +125,11 @@ Student Level 2 code belongs under the `TeamCode` module in the
 `FtcRobotController` module or its included sample files. FIRST's
 [Creating and Running an OpMode](https://ftc-docs.firstinspires.org/en/latest/programming_resources/tutorial_specific/android_studio/creating_op_modes/Creating-and-Running-an-Op-Mode-%28Android-Studio%29.html)
 page explains this module boundary and where the official samples live.
+
+The hardware repository's
+[Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md)
+records the package boundary, device configuration names, and branch conventions
+used by the lessons.
 
 ## Pause and get help when
 
