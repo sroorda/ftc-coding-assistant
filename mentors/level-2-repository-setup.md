@@ -59,9 +59,9 @@ In the maintainer clone:
 - Require a peer or mentor review before merging reviewed work.
 - Do not merge all student implementations into `main`.
 
-The personal-branch setup and a preview of the lesson workflow are documented in
-[Prepare Android Studio and Your Level 2 Branch](../docs/android-studio-ftc-setup.md).
-Lesson 1 will provide the complete feature-branch and pull-request procedure.
+The personal-branch setup is documented in
+[Level 2 Setup](../docs/level-2-setup.md). Lesson 1 will provide the complete
+feature-branch and pull-request procedure.
 
 ## Keep code portable to competition
 

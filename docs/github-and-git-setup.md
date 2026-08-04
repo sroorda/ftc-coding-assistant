@@ -98,7 +98,5 @@ You are ready to continue when:
 - you accepted the repository invitation; and
 - you can view the hardware-lab repository on GitHub.
 
-Continue to
-[Prepare Android Studio and Your Level 2 Branch](android-studio-ftc-setup.md).
-Android Studio will clone the repository and manage the branches you use in the
-labs.
+Return to [Level 2 Setup](level-2-setup.md). Android Studio will clone the
+repository and manage the branches you use in the labs.

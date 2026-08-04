@@ -20,9 +20,8 @@
 
 ## Level 2 — Hardware Lab
 
-* [Level 2 Preview](levels/02-hardware-lab.md)
+* [Level 2 Learning Path](levels/02-hardware-lab.md)
 * [Level 2 Setup](docs/level-2-setup.md)
-* [Prepare Android Studio and Your Level 2 Branch](docs/android-studio-ftc-setup.md)
 
 ## Level 3 — Robot Systems and TeleOp
 
