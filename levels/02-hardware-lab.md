@@ -1,7 +1,9 @@
 # Level 2 Learning Path — Hardware Lab
 
-> **Coming later:** These are the skills you will learn after Level 1. The student
-> lessons are still being built and tested.
+> **Draft for hardware validation:** The nine lessons are available for review,
+> but their device types, configuration names, safe ranges, sensor polarity, and
+> integrated sequence must be verified on the physical test bench before students
+> use them independently.
 
 In Level 2, your Java code will leave the laptop and control real FTC hardware for
 the first time. You will work with one device at a time so you can clearly connect
@@ -9,15 +11,21 @@ each line of code to what you observe.
 
 ## What you will learn
 
-1. Write and run a hardware OpMode and understand its lifecycle.
-2. Use telemetry and logging to observe what the robot is doing.
-3. Control a DC motor with encoders, stop checks, and timeouts.
-4. Move a positional servo through named, mechanically safe positions.
-5. Control and reliably stop a continuous-rotation servo.
-6. Read touch and magnetic limit switches and use them to stop motion safely.
-7. Calibrate a color sensor and turn raw readings into a useful decision.
-8. Move repeated hardware setup into reusable robot code.
-9. Coordinate several devices with a non-blocking state machine.
+1. [Write and run a hardware OpMode](../level-2/01-first-hardware-opmode/README.md)
+   and understand its lifecycle.
+2. [Use telemetry and logging](../level-2/02-telemetry-and-logging/README.md) to
+   observe what the robot is doing.
+3. [Control a DC motor with encoders](../level-2/03-motors-and-encoders/README.md),
+   stop checks, and timeouts.
+4. [Move a positional servo](../level-2/04-positional-servos/README.md) through
+   named, mechanically safe positions.
+5. [Control and reliably stop a continuous-rotation servo](../level-2/05-continuous-rotation-servos/README.md).
+6. [Read touch and magnetic limit switches](../level-2/06-digital-sensors-and-limits/README.md)
+   and use them to stop motion safely.
+7. [Calibrate a color sensor](../level-2/07-color-sensing/README.md) and turn raw
+   readings into a useful decision.
+8. [Move repeated hardware setup into reusable code](../level-2/08-reusable-hardware-code/README.md).
+9. [Coordinate several devices with a non-blocking state machine](../level-2/09-integrated-hardware-challenge/README.md).
 
 Your first hardware environment will be a small benchtop rig. Before running code,
 verify the wiring, test area, expected motion, power limits, and stop procedure.
@@ -26,8 +34,9 @@ verify the wiring, test area, expected motion, power limits, and stop procedure.
 
 Complete [Level 2 Setup](../docs/level-2-setup.md) before beginning Lesson 1. You
 will prepare Android Studio, clone and build the hardware-lab project, and create
-your personal branch. Lesson 1 introduces feature branches and connects to the
-Control Hub after your first OpMode builds successfully.
+your personal branch. [Lesson 1](../level-2/01-first-hardware-opmode/README.md)
+introduces feature branches and connects to the Control Hub after your first
+OpMode builds successfully.
 
 ## Your next checkpoint
 

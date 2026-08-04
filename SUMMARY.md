@@ -22,6 +22,15 @@
 
 * [Level 2 Learning Path](levels/02-hardware-lab.md)
 * [Level 2 Setup](docs/level-2-setup.md)
+* [Lesson 1: Your First Hardware OpMode](level-2/01-first-hardware-opmode/README.md)
+* [Lesson 2: Telemetry and Logging](level-2/02-telemetry-and-logging/README.md)
+* [Lesson 3: Motors and Encoders](level-2/03-motors-and-encoders/README.md)
+* [Lesson 4: Positional Servos](level-2/04-positional-servos/README.md)
+* [Lesson 5: Continuous-Rotation Servos](level-2/05-continuous-rotation-servos/README.md)
+* [Lesson 6: Digital Sensors and Limits](level-2/06-digital-sensors-and-limits/README.md)
+* [Lesson 7: Color Sensing](level-2/07-color-sensing/README.md)
+* [Lesson 8: Reusable Hardware Code](level-2/08-reusable-hardware-code/README.md)
+* [Lesson 9: Integrated Hardware Challenge](level-2/09-integrated-hardware-challenge/README.md)
 
 ## Level 3 — Robot Systems and TeleOp
 

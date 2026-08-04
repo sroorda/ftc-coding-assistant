@@ -130,6 +130,8 @@ used by the lessons.
 - Gradle sync completes without requiring project upgrades; and
 - the `TeamCode` module builds successfully.
 
-When these checks succeed, continue to Lesson 1. It will create the first feature
-branch, introduce the OpMode lifecycle, have you write and build your first OpMode,
-and then direct you to the Control Hub connection guide.
+When these checks succeed, continue to
+[Lesson 1: Your First Hardware OpMode](../level-2/01-first-hardware-opmode/README.md).
+It will create the first feature branch, introduce the OpMode lifecycle, have you
+write and build your first OpMode, and then direct you to the Control Hub
+connection guide.

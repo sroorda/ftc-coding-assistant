@@ -73,12 +73,19 @@ rules established by the tool provider, school, and team.
 
 ## Repository conventions
 
-- Java packages use `org.ftc.training.lessonNN`.
-- Lesson code should remain runnable without robot hardware.
+- Level 1 Java packages use `org.ftc.training.lessonNN`, and Level 1 lesson code
+  remains runnable without robot hardware.
+- Level 2 student instructions live under `level-2/` in this curriculum
+  repository. Students write FTC code in the separate hardware-lab repository
+  under `org.firstinspires.ftc.teamcode.level2`.
+- Level 2 examples use the device names and SDK types in the hardware-lab
+  repository's `docs/HARDWARE_LAB.md`. Treat those quoted names as a runtime
+  contract with the Driver Station configuration.
 - Use Java language features that transfer easily to FTC Android projects.
-- Run a lesson with `./scripts/run-lesson.sh NN` on macOS/Linux or
-  `scripts\run-lesson.cmd NN` on Windows.
-- Lesson 3 requires a joystick test value after the lesson number, for example
+- Run a Level 1 lesson with `./scripts/run-lesson.sh NN` on macOS/Linux or
+  `scripts\run-lesson.cmd NN` on Windows. Level 2 work builds and runs from the
+  separate FTC Android Studio project.
+- Level 1 Lesson 3 requires a joystick test value after the lesson number, for example
   `./scripts/run-lesson.sh 03 0.05` or `scripts\run-lesson.cmd 03 0.05`.
 - Place instructor-only guidance under `instructor/` and student guidance in the
   lesson README.
