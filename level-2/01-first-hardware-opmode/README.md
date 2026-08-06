@@ -62,7 +62,22 @@ In Android Studio:
 Do not create the branch from `main`. Run `git status` in Android Studio's terminal
 if you are uncertain which branch is active.
 
-## Part 2 — Understand the lifecycle
+## Part 2 — Watch and understand the lifecycle
+
+Watch
+[Learn Java for Robotics: Your First Program (FTC)](https://youtu.be/F24X8Ut83os)
+by Brogan M. Pratt.
+
+As you watch, look for the four jobs that a basic hardware OpMode must do:
+
+1. Get hardware from the robot configuration.
+2. Wait for the driver to press **START**.
+3. Repeat while the OpMode is active.
+4. Read an input and use it to command hardware.
+
+You do not need to write a video summary. The starter OpMode in Part 3 labels
+these four areas. You will demonstrate what you understood by completing them
+and running the result on the hardware bench.
 
 An OpMode is a Java class the Robot Controller can discover and run. A
 `LinearOpMode` uses `runOpMode()` to describe its sequence.
@@ -109,16 +124,20 @@ public class FirstHardwareOpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        // Area 1: Get hardware from the robot configuration.
         // TODO: retrieve bench_motor from hardwareMap
         // TODO: set a deliberate zero-power behavior and zero power
 
+        // Area 2: Wait for the driver to press START.
         waitForStart();
 
         if (isStopRequested()) {
             return;
         }
 
+        // Area 3: Repeat while the OpMode is active.
         while (opModeIsActive()) {
+            // Area 4: Read an input and use it to command hardware.
             // TODO: calculate limited power from the left stick
             // TODO: send that power to the motor
         }
