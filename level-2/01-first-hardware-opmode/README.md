@@ -98,9 +98,6 @@ press STOP
 loop ends and outputs return to a safe state
 ```
 
-`@TeleOp` places the class in the Driver Station's TeleOp list. `@Override` tells
-Java that `runOpMode()` implements behavior required by `LinearOpMode`.
-
 ## Part 3 — Create the OpMode
 
 Under this folder in the hardware-lab repository:
@@ -147,6 +144,14 @@ public class FirstHardwareOpMode extends LinearOpMode {
 }
 ```
 
+`@TeleOp` places the class in the Driver Station's TeleOp list. `@Override` tells
+Java that `runOpMode()` implements behavior required by `LinearOpMode`.
+
+The FTC SDK also provides the iterative `OpMode` type. An iterative OpMode uses
+separate lifecycle methods such as `init()`, `start()`, `loop()`, and `stop()`.
+This course begins with `LinearOpMode` because its top-to-bottom flow is easier
+to follow. You will encounter iterative OpModes when reading other FTC code.
+
 Complete the TODOs using these requirements:
 
 1. Retrieve a `DcMotor` with `hardwareMap.get(...)` and the exact name
@@ -184,9 +189,11 @@ Return here when Android Studio shows the Control Hub as a deployment target.
 Before pressing Run:
 
 1. Confirm the feature branch is active.
-2. Predict the moving device, direction, maximum power, and stopping action.
-3. Clear the test bench.
-4. Keep the Driver Station Stop control available.
+2. On the Driver Station, confirm the active configuration contains a motor named
+   exactly `bench_motor`.
+3. Predict the moving device, direction, maximum power, and stopping action.
+4. Clear the test bench.
+5. Keep the Driver Station Stop control available.
 
 Deploy the app, select **L2 First Hardware**, press INIT, then PLAY. Move the left
 stick slowly in both directions and press Stop. Record:
