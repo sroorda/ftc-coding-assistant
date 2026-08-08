@@ -48,9 +48,10 @@ Your Java code retrieves that configured device through `hardwareMap`:
 DcMotor benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
 ```
 
-`DcMotor.class` is the device type Java expects. `"bench_motor"` must match the
-name in the active Driver Station configuration exactly, including capitalization.
-`benchMotor` is only the Java variable name, so it does not need to match.
+- `DcMotor.class` is the device type Java expects.
+- `"bench_motor"` must match the name in the active Driver Station configuration
+  exactly, including capitalization.
+- `benchMotor` is only the Java variable name, so it does not need to match.
 
 You only need to configure `bench_motor` for this lesson. If you prefer, you can
 set up every test-bench device now by following the
