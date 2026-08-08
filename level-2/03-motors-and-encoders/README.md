@@ -210,7 +210,7 @@ benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 telemetry.addData(
-        "Value to test",
+        "Researched ticks/revolution",
         "%.1f",
         MOTOR_TICKS_PER_REV);
 telemetry.update();
