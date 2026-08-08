@@ -28,11 +28,11 @@ By the end of this lesson, you can:
 
 ## Get ready
 
+![The Android Studio branch selector showing a personal student branch.](../../docs/images/level-2/android-studio-personal-branch.png)
+
 Complete [Level 2 Setup](../../docs/level-2-setup.md). Android Studio should show
 `student/<your-name>` as the current branch, and the unchanged `TeamCode` module
 should build successfully.
-
-![The Android Studio branch selector showing a personal student branch.](../../docs/images/level-2/android-studio-personal-branch.png)
 
 Read the hardware repository's
 [Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md).
