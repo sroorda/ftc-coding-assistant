@@ -102,21 +102,7 @@ and running the result on the hardware bench.
 An OpMode is a Java class the Robot Controller can discover and run. A
 `LinearOpMode` uses `runOpMode()` to describe its sequence.
 
-```text
-select OpMode and press INIT
-              ↓
-runOpMode() begins and maps hardware
-              ↓
-waitForStart() pauses
-              ↓
-press PLAY
-              ↓
-active loop repeats while opModeIsActive()
-              ↓
-press STOP
-              ↓
-loop ends and outputs return to a safe state
-```
+![The Driver Station actions and corresponding stages of the LinearOpMode lifecycle.](../../docs/images/level-2/linear-opmode-lifecycle.svg)
 
 ## Part 3 — Create the OpMode
 
