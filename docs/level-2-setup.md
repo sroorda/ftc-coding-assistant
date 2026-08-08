@@ -120,26 +120,9 @@ have an OpMode worth committing, reviewing, and merging.
 
 ## Understand the project boundary
 
-```mermaid
-flowchart TB
-    Repository["ftc-hardware-lab repository"]
-
-    subgraph SDK["FTC SDK — read and reference, but do not modify"]
-        Controller["FtcRobotController module"]
-        Samples["Official sample OpModes"]
-        Controller --> Samples
-    end
-
-    subgraph Student["Student work — create and edit here"]
-        TeamCode["TeamCode module"]
-        Level2["org.firstinspires.ftc.teamcode.level2"]
-        OpModes["Your Level 2 OpModes"]
-        TeamCode --> Level2 --> OpModes
-    end
-
-    Repository --> Controller
-    Repository --> TeamCode
-```
+| Project boundary | What it looks like in Android Studio |
+|---|---|
+| ![The hardware-lab repository separates reference-only FTC SDK code from student code in TeamCode.](images/level-2/project-boundary.svg) | ![Android Studio showing FtcRobotController and the level2 package under TeamCode.](images/level-2/android-studio-project-boundary.png) |
 
 Student Level 2 code belongs under the `TeamCode` module in the
 `org.firstinspires.ftc.teamcode.level2` package. Do not modify the
