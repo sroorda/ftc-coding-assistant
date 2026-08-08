@@ -158,10 +158,18 @@ manufacturer value only after identifying the installed motor.
 
 ### Compare it with the configured motor type
 
-After mapping the motor, ask the FTC SDK for the value stored by the active motor
-configuration:
+Put this telemetry inside `runOpMode()`, during initialization and before
+`waitForStart()`.
+
+In the skeleton, find the section that starts with the motor-mapping line and
+ends with `waitForStart()`. Replace that section with the code below. The
+surrounding lines show exactly where the new telemetry belongs:
 
 ```java
+benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
+benchMotor.setPower(0.0);
+
+// Compare the configured motor value with the manufacturer value.
 double configuredTicksPerRevolution =
         benchMotor.getMotorType().getTicksPerRev();
 
@@ -174,7 +182,13 @@ telemetry.addData(
         "%.1f",
         MOTOR_TICKS_PER_REV);
 telemetry.update();
+
+// Do not put the comparison below this line.
+waitForStart();
 ```
+
+The comparison must run before `waitForStart()` so the values appear on the
+Driver Station after INIT. Read and compare them before pressing PLAY.
 
 This value comes from the motor type selected in the Driver Station configuration.
 The Java method can return a number even when the wrong motor type was selected,
@@ -205,10 +219,12 @@ Add these constants and timer alongside the existing `benchMotor` field:
 ```java
 private static final double TEST_POWER = 0.20;
 private static final double TIMEOUT_SECONDS = 5.0;
-private static final double MOTOR_TICKS_PER_REV = 0.0;
 
 private final ElapsedTime runtime = new ElapsedTime();
 ```
+
+Keep the `MOTOR_TICKS_PER_REV` constant you added in Part 2. Do not declare it a
+second time.
 
 Add this import with the other imports:
 
@@ -216,7 +232,9 @@ Add this import with the other imports:
 import com.qualcomm.robotcore.util.ElapsedTime;
 ```
 
-During initialization:
+Now expand the same initialization section inside `runOpMode()`. Replace the
+code from the motor-mapping line through `waitForStart()` with this combined
+block:
 
 ```java
 benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
@@ -229,6 +247,18 @@ double configuredTicksPerRevolution =
 
 benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+telemetry.addData(
+        "Configured ticks/revolution",
+        "%.1f",
+        configuredTicksPerRevolution);
+telemetry.addData(
+        "Manufacturer ticks/revolution",
+        "%.1f",
+        MOTOR_TICKS_PER_REV);
+telemetry.update();
+
+waitForStart();
 ```
 
 These settings have specific jobs:
@@ -241,9 +271,9 @@ These settings have specific jobs:
 - `RUN_USING_ENCODER` leaves reset mode and prepares the motor for encoder-aware
   operation.
 
-Before `waitForStart()`, display both ticks-per-revolution values. Do not continue
-until `MOTOR_TICKS_PER_REV` contains the verified manufacturer value and it agrees
-with the configured value.
+Press INIT and compare both ticks-per-revolution values. Do not press PLAY until
+`MOTOR_TICKS_PER_REV` contains the verified manufacturer value and it agrees with
+the configured value.
 
 ### 2. Convert one revolution into a target
 
