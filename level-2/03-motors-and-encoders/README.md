@@ -348,7 +348,7 @@ Before each test, complete this prediction table:
 |---|---:|
 | Researched counts per motor revolution | |
 | Measured wheel diameter | |
-| Calculated wheel circumference | |
+| Calculated wheel circumference | Example: `4.0 in × π ≈ 12.57 in` |
 | Drive gear reduction | |
 | Calculated counts per inch | |
 | Requested rim distance | |
