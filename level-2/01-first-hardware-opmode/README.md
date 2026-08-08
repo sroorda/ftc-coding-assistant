@@ -307,23 +307,155 @@ deliberately.
 
 ## Part 6 — Commit, review, and merge
 
-Open Android Studio's Commit view and inspect the diff. Be able to explain every
-changed line.
+You will perform four different Git and GitHub actions:
 
-1. Commit with a focused message such as `Add first hardware OpMode`.
-2. Push `feature/<your-name>/first-opmode` to GitHub.
-3. Create a pull request on `sroorda/ftc-hardware-lab`.
-4. Set the base branch to `student/<your-name>` and the compare branch to your
-   feature branch. GitHub may otherwise suggest FIRST's upstream repository.
-5. Describe the build and hardware test results.
-6. Ask another student or a mentor to review and approve the pull request.
-7. Respond to comments and push corrections to the same feature branch.
-8. Merge the approved pull request.
-9. In Android Studio, switch to `student/<your-name>` and pull the merged commit.
-10. Run `git status` and confirm the working tree is clean.
+| Action | What it does |
+|---|---|
+| **Commit** | Saves a checkpoint on the feature branch on your computer |
+| **Push** | Sends that branch and its commits to GitHub |
+| **Pull request** | Shows the proposed difference between the feature branch and your personal branch so someone can review it |
+| **Merge** | Adds the approved feature-branch commits to your personal branch |
 
-The reviewer comments through the pull request. They do not need to edit your
-branch or run your hardware test for you.
+They are separate on purpose. A commit does not automatically reach GitHub, and a
+push does not automatically change your personal branch.
+
+### 1. Review exactly what changed
+
+1. Confirm Android Studio still shows
+   `feature/<your-name>/first-opmode` as the current branch.
+2. Open **View → Tool Windows → Commit**. Depending on the Android Studio layout,
+   the Commit tool may already appear along the left side.
+3. Expand the changed files and select `FirstHardwareOpMode.java`.
+4. Click the file and inspect its diff—the before-and-after view.
+5. Confirm the diff contains only the OpMode you intended to add.
+
+Do not select `.idea`, build output, local configuration, or unrelated files just
+because Android Studio lists them. Ask what a file is before including it in the
+commit.
+
+### 2. Create the local commit
+
+1. Check the box next to `FirstHardwareOpMode.java`.
+2. Enter this focused commit message:
+
+   ```text
+   Add first hardware OpMode
+   ```
+
+3. Select **Commit**, not **Commit and Push**, so you can see the two actions
+   separately this first time.
+4. Read any inspection warning before continuing. Fix a real code problem; do not
+   disable an inspection merely to make the warning disappear.
+5. Open Android Studio's terminal and run:
+
+   ```text
+   git status
+   ```
+
+The output should identify the feature branch and show no uncommitted lesson
+changes. The commit exists only in the Git repository on your computer at this
+point.
+
+### 3. Push the feature branch to GitHub
+
+1. Select **Git → Push**.
+2. Confirm the dialog shows your commit going from
+   `feature/<your-name>/first-opmode` to an `origin` branch with the same name.
+3. Select **Push**.
+4. Complete GitHub sign-in if Android Studio requests it. Never paste a password
+   or access token into source code, a commit message, or an AI prompt.
+5. Open the
+   [FTC hardware-lab repository](https://github.com/sroorda/ftc-hardware-lab)
+   and use the branch selector to confirm your feature branch is present.
+
+`origin` is Git's short name for the GitHub repository cloned during setup. The
+push publishes the branch for review; it does not merge the branch.
+
+### 4. Create the pull request
+
+GitHub may display a **Compare & pull request** button after the push. If it does
+not, open the repository's **Pull requests** tab, select **New pull request**, and
+choose the branches manually.
+
+Set the comparison carefully:
+
+| GitHub field | Select |
+|---|---|
+| **base repository** | `sroorda/ftc-hardware-lab` |
+| **base** | `student/<your-name>` |
+| **compare** | `feature/<your-name>/first-opmode` |
+
+The arrow means “propose the compare-branch changes for the base branch”:
+
+```text
+feature/<your-name>/first-opmode  →  student/<your-name>
+```
+
+Do not use `main`, another student's branch, or FIRST's upstream repository as the
+base.
+
+Use `Add first hardware OpMode` as the pull-request title. In the description,
+record evidence instead of writing only “it works.” For example:
+
+```text
+## What changed
+- Added the first Level 2 LinearOpMode.
+- Mapped bench_motor and limited joystick power to 25%.
+
+## Verification
+- TeamCode builds successfully.
+- Driver Station found bench_motor.
+- Centered joystick stopped the motor.
+- Driver Station Stop ended motor motion.
+```
+
+Select **Create pull request**, then copy its web address so a reviewer can find
+it.
+
+### 5. Get a review and respond to feedback
+
+Ask another student or a mentor to review the pull request. The reviewer checks
+the diff and your test evidence and then comments or approves. They do not need to
+edit your branch or run the hardware test for you.
+
+If the reviewer requests a correction:
+
+1. Keep working on `feature/<your-name>/first-opmode` in Android Studio.
+2. Make and test the correction.
+3. Review the new diff, commit it with a message describing the correction, and
+   push the same feature branch again.
+4. Return to the existing pull request. GitHub adds the new commit automatically;
+   do not create a second pull request for the correction.
+5. Reply to the comment and ask the reviewer to look again.
+
+### 6. Merge into your personal branch
+
+After the pull request is approved:
+
+1. Reconfirm the pull request shows
+   `feature/<your-name>/first-opmode` into `student/<your-name>`.
+2. Select **Merge pull request**, then confirm the merge.
+3. Confirm GitHub reports that the pull request was merged.
+
+The merged code is now on the GitHub copy of `student/<your-name>`. Your local
+personal branch still needs to download it.
+
+### 7. Update the personal branch in Android Studio
+
+1. Open Android Studio's branch widget.
+2. Check out `student/<your-name>`.
+3. Select **Git → Pull** and pull from `origin/student/<your-name>`.
+4. Confirm `FirstHardwareOpMode.java` is still present.
+5. In the terminal, run:
+
+   ```text
+   git status
+   git log --oneline -3
+   ```
+
+`git status` should show `student/<your-name>` with a clean working tree. The
+recent log should include your lesson commit. You are now ready to create the next
+lesson's feature branch from the updated personal branch.
 
 ## Ask your AI tutor
 
