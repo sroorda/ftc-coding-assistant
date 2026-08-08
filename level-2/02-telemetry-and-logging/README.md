@@ -20,7 +20,7 @@ By the end of this lesson, you can:
 - distinguish Driver Station telemetry from Robot Controller logs;
 - report requested and applied values with useful labels;
 - record lifecycle events without flooding the log; and
-- use evidence to isolate a hardware or software mismatch.
+- verify telemetry and lifecycle events in the tools where each one appears.
 
 ## Get ready
 
@@ -179,23 +179,58 @@ will relate. Collect evidence for:
 3. the stick fully backward; and
 4. the OpMode after Stop.
 
-Record one observation that confirms the calculation and one value that would have
-exposed a sign or scaling mistake.
+Think about which observation confirms the calculation and which displayed value
+would expose a sign or scaling mistake. You do not need to record an answer.
 
-## Diagnose one mismatch
+## Check the Driver Station telemetry
 
-Temporarily introduce one harmless mismatch, such as an incorrect telemetry label
-or a different calculation displayed from the one applied. Ask another student to
-diagnose it using the code, telemetry, and your observations. Restore the correct
-code before committing.
+Deploy the updated app to the Control Hub, then use the Driver Station:
 
-Use this debugging loop:
+1. Select **L2 First Hardware** and press INIT.
+2. Confirm the telemetry shows `Status: Initialized` before the motor can respond
+   to the joystick.
+3. Press PLAY and confirm the status changes to `Running`.
+4. Center the left stick. Raw input, requested power, and applied power should all
+   be close to zero.
+5. Move the stick approximately halfway in each direction. Confirm the signs
+   change and the applied command remains limited.
+6. Move the stick through its full range. Requested and applied power must remain
+   between `-0.25` and `0.25`.
+7. Press Stop and confirm the motor stops.
 
-```text
-observe → form one hypothesis → inspect evidence → change one cause → retest
-```
+The three numeric values answer different questions. If the motor behaves
+unexpectedly, first identify whether the unexpected value began with the gamepad
+input, the calculation, or the command sent to the motor.
+
+## Check the Robot Controller log
+
+Keep the Control Hub connected to Android Studio, then:
+
+1. Open **View → Tool Windows → Logcat**.
+2. Select the Control Hub in the device list and the Robot Controller app or
+   process if Logcat asks for one.
+3. Enter `L2Hardware` in the Logcat search or filter field.
+4. Run **L2 First Hardware** from INIT through PLAY and Stop again.
+5. Confirm the filtered log contains one event for each lifecycle point:
+
+   ```text
+   OpMode initialized
+   OpMode started
+   OpMode stopped
+   ```
+
+6. Confirm the log does not add another message on every active loop.
+
+Driver Station telemetry is for changing information the operator needs now.
+Logcat preserves occasional diagnostic events that a programmer may inspect
+later. Both describe the same run, but they serve different audiences.
 
 ## Git checkpoint
+
+Open Android Studio's Commit window and inspect the Lesson 2 diff. It should look
+similar to this example, although line numbers and window layout may differ:
+
+![Android Studio Commit window showing the Lesson 2 telemetry and RobotLog changes in FirstHardwareOpMode.java.](../../docs/images/level-2/lesson-2-commit-window.png)
 
 Before committing, run:
 
@@ -206,8 +241,8 @@ git diff
 
 Confirm the branch and changed files match this lesson. Commit with a focused
 message, push, and open a pull request into `student/<your-name>`. Include your
-observations in the description. Obtain a review, merge, then update your personal
-branch.
+Driver Station and Robot Controller log verification in the description. Obtain a
+review, merge, then update your personal branch.
 
 ## Ask your AI tutor
 
