@@ -25,17 +25,15 @@ The Level 2 hardware bench uses the following connections and names:
 | Positional servo | Servo 1 | `Servo` | `Servo` | `position_servo` |
 | Continuous-rotation servo | Servo 0 | `Continuous Rotation Servo` | `CRServo` | `continuous_servo` |
 | REV Color Sensor V3 | I2C Bus 1 | `REV Color/Range Sensor` | `ColorSensor` | `color_sensor` |
-| REV Touch Sensor | Digital channel 3 (connector 2–3) | `Digital Device` | `DigitalChannel` | `touch_sensor` |
-| Magnetic limit switch | Digital channel TBD | `Digital Device` | `DigitalChannel` | `magnetic_limit` |
+| REV Touch Sensor | Digital channel 3 (connector 2–3) | `REV Touch Sensor` | `TouchSensor` | `touch_sensor` |
 | Optional simple digital LED | Digital channel TBD | `Digital Device` | `DigitalChannel` | `status_led` |
 
 The configured port or channel must match the device's physical Control Hub
 connection. `TBD` means that device is not installed yet; update this contract
 when its connection is chosen.
 
-The touch sensor and magnetic limit switch are intentionally configured as
-`Digital Device`. Lesson 6 uses `DigitalChannel` to inspect their raw electrical
-states before translating those states into useful names.
+Lesson 5 maps the REV Touch Sensor through the SDK's `TouchSensor` interface so
+student code can read its pressed-or-released state directly.
 
 The string passed to `hardwareMap.get(...)` must match the active Driver Station
 configuration exactly, including capitalization. For example:

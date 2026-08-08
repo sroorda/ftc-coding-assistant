@@ -221,4 +221,4 @@ You are finished when:
 - Driver Station Stop leaves the servo with a `0.0` power command.
 
 Continue to
-[Lesson 5: Digital Sensors and Limits](../05-digital-sensors-and-limits/README.md).
+[Lesson 5: Touch Sensor Input](../05-touch-sensor/README.md).

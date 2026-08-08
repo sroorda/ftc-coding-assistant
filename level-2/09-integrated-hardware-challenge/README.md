@@ -1,8 +1,8 @@
 # Lesson 9: Integrated Hardware Challenge
 
 You will combine the motor, encoder, positional servo, continuous-rotation servo,
-color sensor, touch sensor, and magnetic limit switch into one interruptible
-automation. The optional LED can display the automation state.
+color sensor, and touch sensor into one interruptible automation. The optional
+LED can display the automation state.
 
 This is a requirements challenge. You will design the state transitions and write
 the implementation using the reusable hardware class from Lesson 8.
@@ -47,9 +47,9 @@ A state machine performs a small amount of work on each pass through one outer
 `while (opModeIsActive())` loop:
 
 ```text
-IDLE → HOMING → MOVING_TO_WORK → POSITIONING → FEEDING → COMPLETE
-          ↘             ↘             ↘           ↘
-                         FAULT
+IDLE → MOVING_TO_WORK → POSITIONING → FEEDING → COMPLETE
+              ↘             ↘           ↘
+                            FAULT
 ```
 
 Use an enum so every state has a clear name:
@@ -57,7 +57,6 @@ Use an enum so every state has a clear name:
 ```java
 private enum State {
     IDLE,
-    HOMING,
     MOVING_TO_WORK,
     POSITIONING,
     FEEDING,
@@ -134,15 +133,14 @@ Start with a switch that changes states but requests zero powered output:
 switch (currentState) {
     case IDLE:
         bench.stopAll();
-        // A rising-edge button press may transition to HOMING.
+        // A rising-edge button press may transition to MOVING_TO_WORK.
         break;
 
-    case HOMING:
+    case MOVING_TO_WORK:
         bench.stopAll(); // Keep this disabled during the transition-only test.
-        if (bench.isMagneticLimitReached()) {
-            transitionTo(State.MOVING_TO_WORK);
-        } else if (stateTimer.seconds() >= HOMING_TIMEOUT_SECONDS) {
-            enterFault("Homing timeout");
+        // Add the encoder target condition when motion is enabled.
+        if (stateTimer.seconds() >= MOVE_TIMEOUT_SECONDS) {
+            enterFault("Movement timeout");
         }
         break;
 
@@ -159,8 +157,7 @@ Define which states can command motion, then check the touch sensor before their
 normal switch behavior:
 
 ```java
-boolean poweredState = currentState == State.HOMING
-        || currentState == State.MOVING_TO_WORK
+boolean poweredState = currentState == State.MOVING_TO_WORK
         || currentState == State.POSITIONING
         || currentState == State.FEEDING;
 
@@ -193,19 +190,17 @@ Implement this sequence:
 
 1. **IDLE** — all powered outputs are stopped. A deliberate gamepad button starts
    the automation.
-2. **HOMING** — run the DC motor slowly toward `magnetic_limit`. Stop and zero the
-   encoder when the limit activates. Fault if it does not activate before the
-   timeout.
-3. **MOVING_TO_WORK** — use the encoder to move to a small tested work position.
+2. **MOVING_TO_WORK** — use the encoder to move from its initialized zero to a
+   small tested work position.
    Continue when the target is reached. Fault on timeout.
-4. **POSITIONING** — command the positional servo to its tested active position.
+3. **POSITIONING** — command the positional servo to its tested active position.
    Use elapsed time to allow movement without calling a long `sleep()`.
-5. **FEEDING** — run the CR servo at tested limited power until the desired color
+4. **FEEDING** — run the CR servo at tested limited power until the desired color
    is classified. Fault on timeout or ambiguous sensor behavior that exceeds your
    defined limit.
-6. **COMPLETE** — stop powered outputs, return the positional servo to its tested
+5. **COMPLETE** — stop powered outputs, return the positional servo to its tested
    home position, and report success.
-7. **FAULT** — stop powered outputs, report the fault reason, and wait safely for
+6. **FAULT** — stop powered outputs, report the fault reason, and wait safely for
    Stop or a deliberate reset action.
 
 At any active state, an activated touch sensor acts as an interlock and sends the
@@ -227,7 +222,6 @@ Complete this transition table first:
 | Current state | Output commands | Successful transition | Fault transition | Timeout |
 |---|---|---|---|---:|
 | IDLE | | | | |
-| HOMING | | | | |
 | MOVING_TO_WORK | | | | |
 | POSITIONING | | | | |
 | FEEDING | | | | |
@@ -265,13 +259,12 @@ Do not test the entire automation first.
 
 1. Run with motor and servo powers forced to zero; verify button, sensor, state,
    and timeout transitions through telemetry.
-2. Enable HOMING at low power and verify the magnetic limit and timeout separately.
-3. Enable the small encoder movement and verify target and timeout.
-4. Enable positional-servo movement using previously tested constants.
-5. Enable CR-servo feeding and color completion.
-6. Activate the touch interlock during each powered state.
-7. Press Driver Station Stop during each powered state.
-8. Run the complete success path at conservative values.
+2. Enable the small encoder movement and verify target and timeout.
+3. Enable positional-servo movement using previously tested constants.
+4. Enable CR-servo feeding and color completion.
+5. Activate the touch interlock during each powered state.
+6. Press Driver Station Stop during each powered state.
+7. Run the complete success path at conservative values.
 
 Record every test result. Correct one failed requirement at a time.
 
@@ -298,7 +291,7 @@ change affects behavior.
 
 ## Ask your AI tutor
 
-> Review my integrated state machine against the seven required states and the
+> Review my integrated state machine against the six required states and the
 > implementation constraints. Do not edit. For every state, list its outputs,
 > success transition, timeout, interlock behavior, and Stop behavior. Identify any
 > output inherited accidentally from a previous state and propose a test that

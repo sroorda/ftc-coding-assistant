@@ -1,55 +1,104 @@
-# Lesson 6: Color Sensing and Calibration
+# Lesson 6: Color Sensor Readings
 
-A color sensor returns numbers, not the meaning “red game piece” or “blue marker.”
-You will collect evidence under real conditions, create a simple classifier, and
-keep raw sensing separate from interpretation.
+A color sensor reports numeric color channels rather than a color name. In this
+lesson, you will read those channels with telemetry and use a simple comparison
+to identify the strongest red, green, or blue reading.
 
 ## Your mission
 
 | | |
 |---|---|
-| **Time** | 75–105 minutes |
-| **FTC focus** | `ColorSensor`, RGB readings, calibration, classification |
-| **Git focus** | make test evidence part of the pull request |
-| **AI tutor** | challenge thresholds with missing or ambiguous cases |
+| **Time** | 45–60 minutes |
+| **FTC focus** | `ColorSensor`, RGB values, comparison, telemetry |
+| **Git focus** | commit, push, review, and merge one focused hardware change |
+| **AI tutor** | check that one sensor snapshot drives telemetry and the decision |
 
 ## Your goal
 
 By the end of this lesson, you can:
 
-- read and display raw red, green, blue, and alpha values;
-- explain how distance and ambient light affect measurements;
-- derive thresholds from repeated observations; and
-- return a named classification separately from raw sensor access.
+- map a configured color sensor;
+- read its red, green, blue, and alpha channels;
+- display the readings with telemetry; and
+- turn the strongest RGB channel into a simple color name.
 
 ## Get ready
 
-Update your personal branch and create:
+Update `student/<your-name>` and create:
 
 ```text
 feature/<your-name>/color-sensor
 ```
 
-Create `ColorSensorOpMode.java`. Confirm the configured name is `color_sensor`.
-Prepare at least two target colors plus a neutral or unknown sample. Use the same
-physical presentation you expect the final mechanism to use.
+Create `ColorSensorOpMode.java` in the Level 2 package. Confirm the active Driver
+Station configuration contains a `REV Color/Range Sensor` named exactly
+`color_sensor`.
 
-## Raw readings need context
+Prepare red, green, and blue samples. Hold each sample at a consistent distance
+and angle during testing.
 
-Map the device with:
+## Start with an OpMode skeleton
+
+Enter this complete skeleton first. The numbered areas show where you will add
+code during the lesson.
 
 ```java
-ColorSensor colorSensor =
-        hardwareMap.get(ColorSensor.class, "color_sensor");
+package org.firstinspires.ftc.teamcode.level2;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+
+@TeleOp(name = "L2 Color Sensor", group = "Level 2")
+public class ColorSensorOpMode extends LinearOpMode {
+    private ColorSensor colorSensor;
+
+    @Override
+    public void runOpMode() {
+        // Area 1: Map the sensor.
+
+        // Area 2: Wait for PLAY.
+        waitForStart();
+
+        // Area 3: Read, interpret, and report the sensor.
+        while (opModeIsActive()) {
+
+        }
+    }
+}
 ```
 
-The `red()`, `green()`, `blue()`, and `alpha()` values depend on the sensor model,
-surface, distance, angle, illumination, and gain behavior. A threshold copied from
-another robot is not calibration evidence for this bench.
+Build the project before continuing. Fix any package, import, or syntax errors
+first.
 
-## Part 1 — Build a data collector
+## Part 1 — Understand the color channels
 
-### 1. Read one snapshot per loop
+The sensor provides four integer readings:
+
+- `red()` reports the red channel;
+- `green()` reports the green channel;
+- `blue()` reports the blue channel; and
+- `alpha()` reports overall brightness.
+
+The values depend on the sample, distance, angle, and surrounding light. They are
+measurements to compare—not guaranteed color names.
+
+## Part 2 — Map the color sensor
+
+In **Area 1**, add:
+
+```java
+colorSensor = hardwareMap.get(ColorSensor.class, "color_sensor");
+
+telemetry.addData("Status", "Color sensor initialized");
+telemetry.update();
+```
+
+Leave the existing `waitForStart()` directly below this code in **Area 2**.
+
+## Part 3 — Read one sensor snapshot
+
+Inside the active loop in **Area 3**, add:
 
 ```java
 int red = colorSensor.red();
@@ -58,179 +107,89 @@ int blue = colorSensor.blue();
 int alpha = colorSensor.alpha();
 ```
 
-Store each reading in a local variable, then use those same values for telemetry
-and classification. This makes one displayed row correspond to one decision.
+Store the readings once and use these same variables for telemetry and the color
+decision during this loop.
 
-### 2. Display the evidence before adding a classifier
+## Part 4 — Show the raw readings
+
+Immediately after reading the sensor, add:
 
 ```java
 telemetry.addData("Red", red);
 telemetry.addData("Green", green);
 telemetry.addData("Blue", blue);
 telemetry.addData("Alpha", alpha);
-telemetry.update();
 ```
 
-At this stage there is no “correct color” in the code. The result is a live data
-collector that lets you observe how the channels respond to the actual samples.
+Do not call `telemetry.update()` yet. You will add the interpreted result first.
 
-Create an OpMode that displays:
+## Part 5 — Identify the strongest RGB channel
 
-- red;
-- green;
-- blue;
-- alpha; and
-- the sample name you are currently testing.
-
-Before running, predict which channel will be largest for each target and which
-sample will be hardest to distinguish. The measured data, not the prediction,
-will determine the classifier.
-
-Collect at least five readings for each target and for the unknown sample. Keep
-distance and angle as consistent as practical. Then repeat one target at a clearly
-different distance to see how the readings change.
-
-Record the results in a table in your notes or pull-request description:
-
-| Sample | Distance | Red | Green | Blue | Alpha |
-|---|---:|---:|---:|---:|---:|
-| Target A | | | | | |
-| Target B | | | | | |
-| Unknown | | | | | |
-
-## Part 2 — Choose a classification rule
-
-Begin with a simple rule that your data can defend. For example, compare the
-dominant channel or compare each channel's share of total RGB:
+Add this below the raw telemetry:
 
 ```java
-int total = red + green + blue;
-double redRatio = total == 0 ? 0.0 : red / (double) total;
-```
+String detectedColor = "UNKNOWN";
 
-Ratios can reduce sensitivity to overall brightness, but they do not eliminate
-distance, reflection, saturation, or low-signal problems. Include an `UNKNOWN`
-result when the readings do not clearly match a calibrated target.
-
-Keep the sensor read outside the classification method shown below. This lets the
-decision logic be reasoned about with recorded numbers and later moved into
-reusable code.
-
-### 1. Name every possible result
-
-An enum prevents slightly different strings from representing the same result:
-
-```java
-private enum DetectedColor {
-    TARGET_A,
-    TARGET_B,
-    UNKNOWN
+if (red > green && red > blue) {
+    detectedColor = "RED";
+} else if (green > red && green > blue) {
+    detectedColor = "GREEN";
+} else if (blue > red && blue > green) {
+    detectedColor = "BLUE";
 }
 ```
 
-Rename `TARGET_A` and `TARGET_B` for the actual samples when you know what the
-mechanism must recognize.
+This first rule selects a color only when one channel is greater than both
+others. A tie remains `UNKNOWN`.
 
-### 2. Turn measurements into named constants
-
-After collecting the readings, define constants supported by the data:
+Add the result and update telemetry:
 
 ```java
-private static final int MIN_TOTAL_SIGNAL = 1;       // Replace with a calibrated floor.
-private static final double TARGET_A_MIN_RATIO = 0; // Replace from observations.
-private static final double TARGET_B_MIN_RATIO = 0; // Replace from observations.
-```
-
-The ratio thresholds are deliberately incomplete placeholders, not suggested
-calibration values. The initial signal floor only prevents division by zero;
-replace all three constants from recorded observations.
-
-### 3. Define low-signal and ambiguous behavior
-
-This structure shows where the evidence-based comparisons belong:
-
-```java
-private DetectedColor classifyColor(int red, int green, int blue) {
-    int total = red + green + blue;
-    if (total < MIN_TOTAL_SIGNAL) {
-        return DetectedColor.UNKNOWN;
-    }
-
-    double targetARatio = red / (double) total;  // Choose channels from your data.
-    double targetBRatio = blue / (double) total;
-
-    boolean matchesA = targetARatio >= TARGET_A_MIN_RATIO;
-    boolean matchesB = targetBRatio >= TARGET_B_MIN_RATIO;
-
-    if (matchesA == matchesB) {
-        return DetectedColor.UNKNOWN;
-    }
-    return matchesA ? DetectedColor.TARGET_A : DetectedColor.TARGET_B;
-}
-```
-
-The `matchesA == matchesB` condition covers both ambiguous cases: both rules
-match, or neither rule matches. The early signal check also prevents division by
-zero.
-
-### 4. Show the reading and decision together
-
-```java
-DetectedColor detectedColor = classifyColor(red, green, blue);
-
-telemetry.addData("RGB", "%d, %d, %d", red, green, blue);
-telemetry.addData("Alpha", alpha);
-telemetry.addData("Detected", detectedColor);
+telemetry.addData("Detected color", detectedColor);
 telemetry.update();
 ```
 
-If a classification is wrong, the Driver Station now shows both the decision and
-the numbers that produced it.
+This comparison is a starting point, not a fully calibrated competition color
+detector.
 
-## Student task
+## Part 6 — Run and observe
 
-Your completed OpMode must:
-
-1. Map `color_sensor`.
-2. Display all raw channels and the interpreted result.
-3. Classify at least two targets plus `UNKNOWN`.
-4. Store thresholds as named constants.
-5. Avoid division by zero and define boundary behavior.
-6. Demonstrate every classification with repeated readings.
-7. Record at least one ambiguous or failure case.
-
-Do not change a threshold because one convenient reading failed. Look at the full
-data set, adjust one rule, and repeat all target tests.
+- Build and deploy the project.
+- Press INIT and confirm the initialization message appears.
+- Press PLAY.
+- Present each red, green, and blue sample at the same distance and angle.
+- Compare the four numeric readings for each sample.
+- Confirm the detected name matches the strongest RGB channel.
+- Try a neutral or poorly lit sample and observe whether the simple rule is still
+  useful.
 
 ## Git checkpoint
 
-Run `git diff` and verify the calibration constants, method, and telemetry are all
-intentional. Commit, push, and open a pull request into your personal branch.
-Include the reading table, rule, and one known limitation. Obtain review, merge,
-and update `student/<your-name>`.
+In Android Studio:
+
+- confirm the current branch is `feature/<your-name>/color-sensor`;
+- inspect the `ColorSensorOpMode.java` diff;
+- commit with a focused message such as `Add color sensor readings`;
+- push and open a pull request into `student/<your-name>`;
+- describe the strongest channel observed for each sample;
+- obtain a review and merge the pull request; and
+- update your local personal branch before starting Lesson 7.
 
 ## Ask your AI tutor
 
-> Review my color classifier without editing it. Use my recorded readings to find
-> an ambiguous boundary, a low-signal case, and a sample my rules do not cover.
-> Suggest test inputs, not replacement thresholds, until I explain my calibration
-> evidence.
+> Review my color-sensor OpMode without editing it. Check that I read each
+> channel once per loop, display those stored readings, and base the detected
+> color on the same values.
 
 ## Check your work
 
 You are finished when:
 
-- telemetry shows raw readings and the classification together;
-- at least two target colors are distinguished repeatedly;
-- uncertain readings return `UNKNOWN`;
-- named thresholds can be traced to collected evidence;
-- sensor reading and classification are separate responsibilities; and
-- the pull request documents a known limitation.
-
-## Reflect
-
-Why can a classifier that works perfectly on today's five samples still fail when
-mounted on a competition robot?
+- the OpMode finds `color_sensor`;
+- telemetry shows red, green, blue, and alpha readings;
+- each detected name matches the strongest RGB channel;
+- ties remain `UNKNOWN`; and
+- you can explain why this simple rule is not a calibrated classifier.
 
 Continue to
 [Lesson 7: Encoders and Measured Movement](../07-motors-and-encoders/README.md).

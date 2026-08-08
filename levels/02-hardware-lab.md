@@ -18,10 +18,10 @@ each line of code to what you observe.
 3. [Move a positional servo](../level-2/03-positional-servos/README.md) through
    named, mechanically safe positions.
 4. [Control and reliably stop a continuous-rotation servo](../level-2/04-continuous-rotation-servos/README.md).
-5. [Read touch and magnetic limit switches](../level-2/05-digital-sensors-and-limits/README.md)
-   and use them to stop motion safely.
-6. [Calibrate a color sensor](../level-2/06-color-sensing/README.md) and turn raw
-   readings into a useful decision.
+5. [Read a touch sensor](../level-2/05-touch-sensor/README.md) and
+   turn its Boolean value into readable telemetry.
+6. [Read a color sensor](../level-2/06-color-sensing/README.md) and turn RGB
+   values into a simple color decision.
 7. [Convert encoder ticks into measured wheel movement](../level-2/07-motors-and-encoders/README.md)
    and command a calculated wheel-rim distance.
 8. [Move repeated hardware setup into reusable code](../level-2/08-reusable-hardware-code/README.md).

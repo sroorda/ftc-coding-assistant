@@ -31,7 +31,7 @@ feature/<your-name>/reusable-hardware
 ```
 
 Inspect the previous OpModes and list every repeated configuration string, mapping
-statement, direction choice, safe default, sensor-polarity conversion, and stop
+statement, direction choice, safe default, sensor interpretation, and stop
 operation. Refactor because the duplication now exists—not because every robot
 needs a large framework.
 
@@ -50,11 +50,10 @@ org.firstinspires.ftc.teamcode.level2.hardware.TestBenchHardware
 
 - receive a `HardwareMap` during initialization;
 - map the test-bench devices by one set of named constants;
-- configure digital channels as inputs;
 - apply documented motor direction and zero-power behavior;
 - initialize motor and CR-servo power to zero;
 - initialize the positional servo to a tested safe position;
-- translate raw switch polarity behind named methods; and
+- expose sensor meaning through named methods; and
 - provide `stopAll()` for powered outputs.
 
 It should not:
@@ -78,14 +77,12 @@ public final class TestBenchHardware {
     private static final String POSITION_SERVO_NAME = "position_servo";
     private static final String CONTINUOUS_SERVO_NAME = "continuous_servo";
     private static final String TOUCH_SENSOR_NAME = "touch_sensor";
-    private static final String MAGNETIC_LIMIT_NAME = "magnetic_limit";
     private static final String COLOR_SENSOR_NAME = "color_sensor";
 
     private DcMotor benchMotor;
     private Servo positionServo;
     private CRServo continuousServo;
-    private DigitalChannel touchSensor;
-    private DigitalChannel magneticLimit;
+    private TouchSensor touchSensor;
     private ColorSensor colorSensor;
 
     public void initialize(HardwareMap hardwareMap) {
@@ -96,8 +93,8 @@ public final class TestBenchHardware {
         // Clip or otherwise enforce the documented limit.
     }
 
-    public boolean isMagneticLimitReached() {
-        // Return mechanism meaning, not raw electrical state.
+    public boolean isTouchPressed() {
+        // Return the sensor state through a meaningful method.
     }
 
     public void stopAll() {
@@ -119,12 +116,8 @@ public void initialize(HardwareMap hardwareMap) {
     benchMotor = hardwareMap.get(DcMotor.class, MOTOR_NAME);
     positionServo = hardwareMap.get(Servo.class, POSITION_SERVO_NAME);
     continuousServo = hardwareMap.get(CRServo.class, CONTINUOUS_SERVO_NAME);
-    touchSensor = hardwareMap.get(DigitalChannel.class, TOUCH_SENSOR_NAME);
-    magneticLimit = hardwareMap.get(DigitalChannel.class, MAGNETIC_LIMIT_NAME);
+    touchSensor = hardwareMap.get(TouchSensor.class, TOUCH_SENSOR_NAME);
     colorSensor = hardwareMap.get(ColorSensor.class, COLOR_SENSOR_NAME);
-
-    touchSensor.setMode(DigitalChannel.Mode.INPUT);
-    magneticLimit.setMode(DigitalChannel.Mode.INPUT);
 
     benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     benchMotor.setPower(0.0);
@@ -134,7 +127,7 @@ public void initialize(HardwareMap hardwareMap) {
 ```
 
 `HOME_POSITION` must be a named value proven safe in Lesson 3. Apply the tested
-motor direction, run mode, and sensor polarity decisions from earlier lessons as
+motor direction, run mode, and sensor decisions from earlier lessons as
 well. If a configured device is missing, initialization should fail visibly; do
 not silently continue with a partly initialized required bench.
 
@@ -149,7 +142,7 @@ public void setMotorPower(double requestedPower) {
 }
 
 public void setContinuousServoPower(double requestedPower) {
-    double appliedPower = Range.clip(requestedPower, -0.50, 0.50);
+    double appliedPower = Range.clip(requestedPower, -0.25, 0.25);
     continuousServo.setPower(appliedPower);
 }
 
@@ -159,25 +152,17 @@ public int getMotorPosition() {
 ```
 
 Import `Range` from `com.qualcomm.robotcore.util.Range`. The caller requests an
-operation; the hardware class enforces the bench's allowed range. If the motor
-limit behavior from Lesson 5 is part of an OpMode you refactor, preserve that
-behavior here or behind a more specific method such as
-`setLimitProtectedMotorPower(...)`.
+operation; the hardware class enforces the bench's allowed range.
 
 For sensors, return mechanism meaning:
 
 ```java
 public boolean isTouchPressed() {
-    return !touchSensor.getState(); // Use the polarity verified in Lesson 5.
-}
-
-public boolean isMagneticLimitReached() {
-    return !magneticLimit.getState(); // Use the verified polarity.
+    return touchSensor.isPressed();
 }
 ```
 
-The comments are reminders to use measured polarity, not permission to assume both
-devices are active-low.
+The method gives calling code a clear hardware-independent question to ask.
 
 ### 4. Give every powered output one shared stop
 
@@ -226,7 +211,6 @@ Prefer private device fields and small operations such as:
 - `movePositionServoHome()`;
 - `setContinuousServoPower(...)`;
 - `isTouchPressed()`;
-- `isMagneticLimitReached()`; and
 - `classifyColor()`.
 
 Do not add a method merely to wrap every SDK getter. Expose operations or
@@ -293,7 +277,7 @@ You are finished when:
 
 - configuration names have one authoritative location;
 - initialization applies safe defaults;
-- raw digital polarity is hidden behind named meaning;
+- touch-sensor access is hidden behind a named method;
 - `stopAll()` stops every powered output;
 - at least two OpModes use the class with unchanged observed behavior;
 - structural and behavioral changes are distinguishable in Git; and
