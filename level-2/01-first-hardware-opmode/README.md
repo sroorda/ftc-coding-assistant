@@ -38,9 +38,9 @@ Before Java can control a device, the active Driver Station configuration must
 connect a configuration name to the device type and physical Control Hub port.
 Lesson 1 needs the first hardware entry from the lab configuration:
 
-| Test-bench device | FTC SDK type | Configuration name |
-|---|---|---|
-| DC motor with encoder | `DcMotor` | `bench_motor` |
+| Test-bench device | Control Hub port | Driver Station configuration type | FTC SDK type | Configuration name |
+|---|---|---|---|---|
+| goBILDA Yellow Jacket motor | Motor 0 | `GoBILDA 5202/3/4 series` | `DcMotor` | `bench_motor` |
 
 Your Java code retrieves that configured device through `hardwareMap`:
 

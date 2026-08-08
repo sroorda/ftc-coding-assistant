@@ -17,17 +17,25 @@ or Android manifests for a lesson unless the curriculum explicitly says to do so
 
 ## Configuration names
 
-The Level 2 lessons use the following names:
+The Level 2 hardware bench uses the following connections and names:
 
-| Test-bench device | FTC SDK type used by the lessons | Configuration name |
-|---|---|---|
-| DC motor with encoder | `DcMotor` | `bench_motor` |
-| Positional servo | `Servo` | `position_servo` |
-| Continuous-rotation servo | `CRServo` | `continuous_servo` |
-| Color sensor | `ColorSensor` | `color_sensor` |
-| Touch sensor | `DigitalChannel` | `touch_sensor` |
-| Magnetic limit switch | `DigitalChannel` | `magnetic_limit` |
-| Optional simple digital LED | `DigitalChannel` | `status_led` |
+| Test-bench device | Control Hub port or channel | Driver Station configuration type | FTC SDK type used by the lessons | Configuration name |
+|---|---|---|---|---|
+| goBILDA Yellow Jacket motor | Motor 0 | `GoBILDA 5202/3/4 series` | `DcMotor` | `bench_motor` |
+| Positional servo | Servo 1 | `Servo` | `Servo` | `position_servo` |
+| Continuous-rotation servo | Servo 0 | `Continuous Rotation Servo` | `CRServo` | `continuous_servo` |
+| REV Color Sensor V3 | I2C Bus 1 | `REV Color/Range Sensor` | `ColorSensor` | `color_sensor` |
+| REV Touch Sensor | Digital channel 3 (connector 2–3) | `Digital Device` | `DigitalChannel` | `touch_sensor` |
+| Magnetic limit switch | Digital channel TBD | `Digital Device` | `DigitalChannel` | `magnetic_limit` |
+| Optional simple digital LED | Digital channel TBD | `Digital Device` | `DigitalChannel` | `status_led` |
+
+The configured port or channel must match the device's physical Control Hub
+connection. `TBD` means that device is not installed yet; update this contract
+when its connection is chosen.
+
+The touch sensor and magnetic limit switch are intentionally configured as
+`Digital Device`. Lesson 6 uses `DigitalChannel` to inspect their raw electrical
+states before translating those states into useful names.
 
 The string passed to `hardwareMap.get(...)` must match the active Driver Station
 configuration exactly, including capitalization. For example:
@@ -37,8 +45,8 @@ DcMotor benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
 ```
 
 The Java variable name can be different; the quoted configuration name is the
-shared contract. If the physical test bench cannot use one of these names, update
-this page and the curriculum together before students begin.
+shared contract. If the physical test bench uses a different port, device type,
+or name, update this page and the curriculum together before students begin.
 
 ## Branches
 
