@@ -198,6 +198,16 @@ Deploy the updated app to the Control Hub, then use the Driver Station:
    between `-0.25` and `0.25`.
 7. Press Stop and confirm the motor stops.
 
+After INIT, the Driver Station should show the initialized status while the PLAY
+button is still available:
+
+![Driver Station showing L2 First Hardware initialized before PLAY.](../../docs/images/level-2/lesson-2-driver-station-initialized.jpeg)
+
+After PLAY, the running display should show the raw stick input beside the
+requested and applied motor power:
+
+![Driver Station showing running telemetry with raw stick input and limited motor power.](../../docs/images/level-2/lesson-2-driver-station-running.jpeg)
+
 The three numeric values answer different questions. If the motor behaves
 unexpectedly, first identify whether the unexpected value began with the gamepad
 input, the calculation, or the command sent to the motor.
@@ -220,6 +230,11 @@ Keep the Control Hub connected to Android Studio, then:
    ```
 
 6. Confirm the log does not add another message on every active loop.
+
+With `L2Hardware` in the filter, Logcat should look similar to this after one
+complete run:
+
+![Android Studio Logcat filtered to show one initialized, started, and stopped event from L2Hardware.](../../docs/images/level-2/lesson-2-robot-controller-log.png)
 
 Driver Station telemetry is for changing information the operator needs now.
 Logcat preserves occasional diagnostic events that a programmer may inspect
