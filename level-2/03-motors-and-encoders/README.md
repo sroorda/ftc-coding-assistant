@@ -22,7 +22,7 @@ to connect encoder counts, revolutions, angles, and calculated distance.
 By the end of this lesson, you can:
 
 - explain what an encoder tick represents;
-- find the configured ticks-per-revolution value for a motor;
+- find the manufacturer's ticks-per-revolution value for a motor;
 - verify one output-shaft revolution using a marked wheel;
 - convert wheel diameter and gearing into ticks per unit of distance; and
 - command and observe a specific calculated wheel-rim distance.
@@ -140,12 +140,23 @@ meaning.
 Ticks per revolution tells you how many encoder counts represent one complete
 motor-output-shaft revolution.
 
-### Find the manufacturer value
+### Look up the encoder value
 
 Identify the exact motor and gearbox installed on the bench. Use the model label
 or product number to find the manufacturer's ticks-per-output-revolution value.
 Do not use a value from a different Yellow Jacket gear ratio merely because the
-motors look alike.
+motors look alike. The [Hardware Lab Contract](../../docs/hardware-lab-contract.md)
+identifies the installed model; you are responsible for finding and interpreting
+its encoder specification.
+
+Use this process:
+
+- record the complete motor model or product number;
+- find that exact motor on the manufacturer's website;
+- locate the encoder resolution at the output shaft;
+- confirm whether the specification uses ticks, counts, pulses, or cycles per
+  revolution; and
+- keep the product page or specification sheet available as your source.
 
 Add the verified value as a named class constant:
 
@@ -154,58 +165,12 @@ private static final double MOTOR_TICKS_PER_REV = 0.0;
 ```
 
 `0.0` is a safe placeholder that cannot request a revolution. Replace it with the
-manufacturer value only after identifying the installed motor.
+manufacturer value only after identifying the installed motor. Add a nearby
+comment containing the exact motor model and the source of the value.
 
-### Compare it with the configured motor type
-
-Put this telemetry inside `runOpMode()`, during initialization and before
-`waitForStart()`.
-
-In the skeleton, find the section that starts with the motor-mapping line and
-ends with `waitForStart()`. Replace that section with the code below. The
-surrounding lines show exactly where the new telemetry belongs:
-
-```java
-benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
-benchMotor.setPower(0.0);
-
-// Compare the configured motor value with the manufacturer value.
-double configuredTicksPerRevolution =
-        benchMotor.getMotorType().getTicksPerRev();
-
-telemetry.addData(
-        "Configured ticks/revolution",
-        "%.1f",
-        configuredTicksPerRevolution);
-telemetry.addData(
-        "Manufacturer ticks/revolution",
-        "%.1f",
-        MOTOR_TICKS_PER_REV);
-telemetry.update();
-
-// Do not put the comparison below this line.
-waitForStart();
-```
-
-The comparison must run before `waitForStart()` so the values appear on the
-Driver Station after INIT. Read and compare them before pressing PLAY.
-
-This value comes from the motor type selected in the Driver Station configuration.
-The Java method can return a number even when the wrong motor type was selected,
-so configuration is part of the calculation—not merely a name used by
-`hardwareMap`.
-
-Check the value three ways:
-
-- identify the exact motor and gearbox installed on the bench;
-- find its ticks-per-output-revolution value in the manufacturer's specifications;
-  and
-- compare that specification with `getTicksPerRev()` telemetry.
-
-Keep both values as `double`. Gearbox ratios can produce a fractional number of
-ticks per output revolution. If the values do not agree, do not enable movement.
-Recheck the motor model and Driver Station motor type, then update the hardware
-configuration or Hardware Lab Contract before continuing.
+Keep the value as a `double`. Gearbox ratios can produce a fractional number of
+ticks per output revolution. The next part tests whether the value you found
+matches the physical motor.
 
 ## Part 3 — Command exactly one revolution
 
@@ -232,9 +197,8 @@ Add this import with the other imports:
 import com.qualcomm.robotcore.util.ElapsedTime;
 ```
 
-Now expand the same initialization section inside `runOpMode()`. Replace the
-code from the motor-mapping line through `waitForStart()` with this combined
-block:
+Now expand the initialization section inside `runOpMode()`. Replace the code
+from the motor-mapping line through `waitForStart()` with this combined block:
 
 ```java
 benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
@@ -242,18 +206,11 @@ benchMotor.setPower(0.0);
 benchMotor.setDirection(DcMotor.Direction.FORWARD);
 benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-double configuredTicksPerRevolution =
-        benchMotor.getMotorType().getTicksPerRev();
-
 benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 telemetry.addData(
-        "Configured ticks/revolution",
-        "%.1f",
-        configuredTicksPerRevolution);
-telemetry.addData(
-        "Manufacturer ticks/revolution",
+        "Value to test",
         "%.1f",
         MOTOR_TICKS_PER_REV);
 telemetry.update();
@@ -271,13 +228,12 @@ These settings have specific jobs:
 - `RUN_USING_ENCODER` leaves reset mode and prepares the motor for encoder-aware
   operation.
 
-Press INIT and compare both ticks-per-revolution values. Do not press PLAY until
-`MOTOR_TICKS_PER_REV` contains the verified manufacturer value and it agrees with
-the configured value.
+Press INIT and confirm the Driver Station displays the value you found. Do not
+press PLAY while `MOTOR_TICKS_PER_REV` is still `0.0`.
 
 ### 2. Convert one revolution into a target
 
-One output revolution should equal the configured ticks-per-revolution value:
+One output revolution should equal the ticks-per-revolution value you found:
 
 ```java
 int oneRevolutionTicks =
@@ -324,16 +280,17 @@ The order matters:
 ### 4. Run the one-revolution test
 
 - Align the wheel's tape mark with the stationary reference mark.
-- Press INIT and confirm the configured and manufacturer values agree.
+- Press INIT and confirm the displayed value matches your researched value.
 - Press PLAY and watch the wheel move at limited power.
 - Confirm the tape mark returns approximately to the reference after one
   revolution.
 - Compare the final encoder count with `oneRevolutionTicks`.
 - Press Driver Station Stop immediately if the wheel approaches interference.
 
-If the wheel does not complete approximately one revolution, investigate the
-configured motor type, installed gearbox, wheel attachment, encoder cable, and
-target calculation before changing power.
+If the wheel does not complete approximately one revolution, stop and investigate
+the exact motor model, installed gearbox, encoder specification, wheel attachment,
+encoder cable, and target calculation before changing power. Correct the constant
+only when your research and the physical test support the change.
 
 ## Part 4 — Convert ticks into wheel-rim distance
 
@@ -442,8 +399,7 @@ Before each test, complete this prediction table:
 
 | Value | Prediction |
 |---|---:|
-| Configured ticks per motor revolution | |
-| Manufacturer ticks per motor revolution | |
+| Researched ticks per motor revolution | |
 | Measured wheel diameter | |
 | Calculated wheel circumference | |
 | Motor revolutions per wheel revolution | |
@@ -472,7 +428,7 @@ circular path.
 The encoder can report the intended shaft rotation accurately while calculated
 real-world travel is still imperfect. Sources of error include:
 
-- an incorrect Driver Station motor type;
+- a ticks-per-revolution value from the wrong motor or gearbox;
 - using nominal rather than measured wheel diameter;
 - an incorrect external gear ratio;
 - wheel or hub slipping on the shaft;
@@ -502,14 +458,15 @@ In Android Studio:
 
 > Review my encoder-distance calculation without editing it. Track the units from
 > ticks per motor revolution through wheel circumference and target ticks. Ask me
-> for my configured motor type, manufacturer value, measured wheel diameter, and
-> observed wheel movement before deciding whether the calculation is correct.
+> for my exact motor model, specification source, researched encoder value,
+> measured wheel diameter, and observed wheel movement before deciding whether
+> the calculation is correct.
 
 ## Check your work
 
 You are finished when:
 
-- configured and manufacturer ticks-per-revolution values agree;
+- the ticks-per-revolution value is supported by a manufacturer source;
 - the marked wheel completes approximately one revolution for one revolution's
   worth of ticks;
 - the code calculates ticks per inch without premature integer rounding;

@@ -40,7 +40,7 @@ Lesson 1 needs the first hardware entry from the lab configuration:
 
 | Test-bench device | Control Hub port | Driver Station configuration type | FTC SDK type | Configuration name |
 |---|---|---|---|---|
-| goBILDA Yellow Jacket motor | Motor 0 | `GoBILDA 5202/3/4 series` | `DcMotor` | `bench_motor` |
+| [goBILDA 5203 Yellow Jacket, 19.2:1, 312 RPM](https://www.gobilda.com/5203-series-yellow-jacket-planetary-gear-motor-19-2-1-ratio-24mm-length-8mm-rex-shaft-312-rpm-3-3-5v-encoder/) | Motor 0 | `GoBILDA 5202/3/4 series` | `DcMotor` | `bench_motor` |
 
 Your Java code retrieves that configured device through `hardwareMap`:
 

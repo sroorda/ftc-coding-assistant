@@ -21,7 +21,7 @@ The Level 2 hardware bench uses the following connections and names:
 
 | Test-bench device | Control Hub port or channel | Driver Station configuration type | FTC SDK type used by the lessons | Configuration name |
 |---|---|---|---|---|
-| goBILDA Yellow Jacket motor | Motor 0 | `GoBILDA 5202/3/4 series` | `DcMotor` | `bench_motor` |
+| [goBILDA 5203 Yellow Jacket, 19.2:1, 312 RPM](https://www.gobilda.com/5203-series-yellow-jacket-planetary-gear-motor-19-2-1-ratio-24mm-length-8mm-rex-shaft-312-rpm-3-3-5v-encoder/) | Motor 0 | `GoBILDA 5202/3/4 series` | `DcMotor` | `bench_motor` |
 | Positional servo | Servo 1 | `Servo` | `Servo` | `position_servo` |
 | Continuous-rotation servo | Servo 0 | `Continuous Rotation Servo` | `CRServo` | `continuous_servo` |
 | REV Color Sensor V3 | I2C Bus 1 | `REV Color/Range Sensor` | `ColorSensor` | `color_sensor` |
