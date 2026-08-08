@@ -1,4 +1,4 @@
-# Lesson 5: Continuous-Rotation Servos
+# Lesson 4: Continuous-Rotation Servos
 
 A continuous-rotation servo uses a servo port and looks like a positional servo,
 but its command represents direction and speed rather than position. You will make
@@ -173,4 +173,4 @@ What additional sensor would be needed if a mechanism driven by a CR servo had t
 reach and hold a repeatable physical position?
 
 Continue to
-[Lesson 6: Digital Sensors and Limits](../06-digital-sensors-and-limits/README.md).
+[Lesson 5: Digital Sensors and Limits](../05-digital-sensors-and-limits/README.md).

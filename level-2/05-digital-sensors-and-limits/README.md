@@ -1,4 +1,4 @@
-# Lesson 6: Digital Sensors and Limit Switches
+# Lesson 5: Digital Sensors and Limit Switches
 
 The test bench has a touch sensor and a magnetic limit switch. You will first
 observe their raw electrical states, then translate those states into named
@@ -248,4 +248,4 @@ You are finished when:
 Why is a variable named `limitReached` safer to reason about than using
 `!magneticLimit.getState()` throughout the OpMode?
 
-Continue to [Lesson 7: Color Sensing](../07-color-sensing/README.md).
+Continue to [Lesson 6: Color Sensing](../06-color-sensing/README.md).

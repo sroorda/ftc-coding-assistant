@@ -1,4 +1,4 @@
-# Lesson 4: Positional Servos
+# Lesson 3: Positional Servos
 
 A positional servo moves toward a commanded position and attempts to hold it. You
 will explore a safe portion of its range, replace unexplained numbers with named
@@ -235,4 +235,4 @@ You are finished when:
 Why is `0.0–1.0` a valid API range but not automatically a safe mechanism range?
 
 Continue to
-[Lesson 5: Continuous-Rotation Servos](../05-continuous-rotation-servos/README.md).
+[Lesson 4: Continuous-Rotation Servos](../04-continuous-rotation-servos/README.md).

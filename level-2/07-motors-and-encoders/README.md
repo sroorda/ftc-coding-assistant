@@ -1,4 +1,4 @@
-# Lesson 3: Encoders and Measured Movement
+# Lesson 7: Encoders and Measured Movement
 
 Power tells a motor how hard to run. An encoder lets the program measure shaft
 rotation and move toward a repeatable target. In this lesson, you will attach a
@@ -397,7 +397,7 @@ In Android Studio:
 - include the completed prediction table and observed wheel movements in the pull
   request description;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 4.
+- update your local personal branch before starting Lesson 8.
 
 ## Ask your AI tutor
 
@@ -426,4 +426,5 @@ You are finished when:
 If the encoder reaches its calculated target but a future robot travels the wrong
 distance, which mechanical values and physical effects would you check first?
 
-Continue to [Lesson 4: Positional Servos](../04-positional-servos/README.md).
+Continue to
+[Lesson 8: Building Reusable Hardware Code](../08-reusable-hardware-code/README.md).

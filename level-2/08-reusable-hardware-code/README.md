@@ -133,7 +133,7 @@ public void initialize(HardwareMap hardwareMap) {
 }
 ```
 
-`HOME_POSITION` must be a named value proven safe in Lesson 4. Apply the tested
+`HOME_POSITION` must be a named value proven safe in Lesson 3. Apply the tested
 motor direction, run mode, and sensor polarity decisions from earlier lessons as
 well. If a configured device is missing, initialization should fail visibly; do
 not silently continue with a partly initialized required bench.
@@ -160,7 +160,7 @@ public int getMotorPosition() {
 
 Import `Range` from `com.qualcomm.robotcore.util.Range`. The caller requests an
 operation; the hardware class enforces the bench's allowed range. If the motor
-limit behavior from Lesson 6 is part of an OpMode you refactor, preserve that
+limit behavior from Lesson 5 is part of an OpMode you refactor, preserve that
 behavior here or behind a more specific method such as
 `setLimitProtectedMotorPower(...)`.
 
@@ -168,7 +168,7 @@ For sensors, return mechanism meaning:
 
 ```java
 public boolean isTouchPressed() {
-    return !touchSensor.getState(); // Use the polarity verified in Lesson 6.
+    return !touchSensor.getState(); // Use the polarity verified in Lesson 5.
 }
 
 public boolean isMagneticLimitReached() {

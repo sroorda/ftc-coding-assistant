@@ -284,4 +284,4 @@ What information is useful to the driver right now but would become noise in a
 persistent log?
 
 Continue to
-[Lesson 3: Encoders and Measured Movement](../03-motors-and-encoders/README.md).
+[Lesson 3: Positional Servos](../03-positional-servos/README.md).

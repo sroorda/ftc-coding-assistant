@@ -15,15 +15,15 @@ each line of code to what you observe.
    and understand its lifecycle.
 2. [Use telemetry and logging](../level-2/02-telemetry-and-logging/README.md) to
    observe what the robot is doing.
-3. [Convert encoder ticks into measured wheel movement](../level-2/03-motors-and-encoders/README.md)
-   and command a calculated wheel-rim distance.
-4. [Move a positional servo](../level-2/04-positional-servos/README.md) through
+3. [Move a positional servo](../level-2/03-positional-servos/README.md) through
    named, mechanically safe positions.
-5. [Control and reliably stop a continuous-rotation servo](../level-2/05-continuous-rotation-servos/README.md).
-6. [Read touch and magnetic limit switches](../level-2/06-digital-sensors-and-limits/README.md)
+4. [Control and reliably stop a continuous-rotation servo](../level-2/04-continuous-rotation-servos/README.md).
+5. [Read touch and magnetic limit switches](../level-2/05-digital-sensors-and-limits/README.md)
    and use them to stop motion safely.
-7. [Calibrate a color sensor](../level-2/07-color-sensing/README.md) and turn raw
+6. [Calibrate a color sensor](../level-2/06-color-sensing/README.md) and turn raw
    readings into a useful decision.
+7. [Convert encoder ticks into measured wheel movement](../level-2/07-motors-and-encoders/README.md)
+   and command a calculated wheel-rim distance.
 8. [Move repeated hardware setup into reusable code](../level-2/08-reusable-hardware-code/README.md).
 9. [Coordinate several devices with a non-blocking state machine](../level-2/09-integrated-hardware-challenge/README.md).
 

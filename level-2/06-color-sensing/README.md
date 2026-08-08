@@ -1,4 +1,4 @@
-# Lesson 7: Color Sensing and Calibration
+# Lesson 6: Color Sensing and Calibration
 
 A color sensor returns numbers, not the meaning “red game piece” or “blue marker.”
 You will collect evidence under real conditions, create a simple classifier, and
@@ -233,4 +233,4 @@ Why can a classifier that works perfectly on today's five samples still fail whe
 mounted on a competition robot?
 
 Continue to
-[Lesson 8: Building Reusable Hardware Code](../08-reusable-hardware-code/README.md).
+[Lesson 7: Encoders and Measured Movement](../07-motors-and-encoders/README.md).

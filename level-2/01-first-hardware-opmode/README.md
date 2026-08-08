@@ -302,7 +302,7 @@ stick slowly in both directions and press Stop. Record:
 - whether Stop ended motion immediately.
 
 Do not change direction merely because the mechanism uses a different physical
-definition of “forward.” Record what happened; Lesson 3 handles direction
+definition of “forward.” Record what happened; Lesson 7 handles motor direction
 deliberately.
 
 ## Part 6 — Commit, review, and merge
