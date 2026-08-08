@@ -247,12 +247,18 @@ similar to this example, although line numbers and window layout may differ:
 
 ![Android Studio Commit window showing the Lesson 2 telemetry and RobotLog changes in FirstHardwareOpMode.java.](../../docs/images/level-2/lesson-2-commit-window.png)
 
-In the Commit window, confirm the current branch is
-`feature/<your-name>/telemetry-logging`, only the intended lesson file is selected,
-and every highlighted change belongs to this exercise. Commit with a focused
-message, push, and open a pull request into `student/<your-name>`. Include your
-Driver Station and Robot Controller log verification in the description. Obtain
-a review, merge, then update your personal branch.
+In the Commit window:
+
+- confirm the current branch is `feature/<your-name>/telemetry-logging`;
+- confirm only the intended lesson file is selected;
+- inspect every highlighted change and confirm it belongs to this exercise;
+- commit with a focused message;
+- push the feature branch;
+- open a pull request into `student/<your-name>`;
+- include the Driver Station and Robot Controller log verification in the pull
+  request description;
+- obtain a review and merge the pull request; and
+- update your local personal branch.
 
 ## Ask your AI tutor
 
