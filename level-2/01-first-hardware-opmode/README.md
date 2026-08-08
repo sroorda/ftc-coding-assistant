@@ -134,10 +134,6 @@ public class FirstHardwareOpMode extends LinearOpMode {
         // Area 2: Wait for the driver to press START.
         waitForStart();
 
-        if (isStopRequested()) {
-            return;
-        }
-
         // Area 3: Repeat while the OpMode is active.
         while (opModeIsActive()) {
             // Area 4: Read an input and use it to command hardware.
@@ -212,15 +208,12 @@ This code is already present:
 
 ```java
 waitForStart();
-
-if (isStopRequested()) {
-    return;
-}
 ```
 
 `waitForStart()` pauses the sequence after INIT. Pressing PLAY lets execution
-continue. If STOP is requested while waiting, the method returns without entering
-the motor-control loop. The initialization step already requested zero power.
+continue. If STOP is requested while waiting, `opModeIsActive()` is false and the
+motor-control loop does not run. The initialization step already requested zero
+power.
 
 #### 4. Turn joystick input into limited motor power
 
@@ -285,9 +278,11 @@ Answer these questions before continuing:
 
 ## Part 5 — Connect and test
 
-Now follow
+Connect the computer to the Control Hub with a data-capable USB cable, then follow
 [Connect Android Studio to the Control Hub](../../docs/control-hub-connection.md).
-Return here when Android Studio shows the Control Hub as a deployment target.
+USB is the recommended connection for this first deployment. The reference also
+keeps the ADB over Wi-Fi instructions for later use. Return here when Android
+Studio shows the Control Hub as a deployment target.
 
 Before pressing Run:
 

@@ -12,7 +12,27 @@ FIRST's maintained reference is
 [Managing a Control Hub](https://ftc-docs.firstinspires.org/en/latest/programming_resources/shared/managing_control_hub/Managing-a-Control-Hub.html).
 The steps below summarize the repeatable checks used by this course.
 
-## Connect over the Program & Manage network
+## Recommended: connect with a USB cable
+
+Use a data-capable USB cable for the first deployment. This keeps the connection
+simple while you learn the build, deploy, and test cycle.
+
+1. Turn on the Control Hub and wait for it to finish starting.
+2. Connect the programming computer directly to the Control Hub with the USB
+   cable.
+3. In Android Studio, open the deployment-target list and select the Control Hub.
+4. Continue when the Control Hub appears as a connected device.
+
+If the Control Hub does not appear, confirm that the cable supports data—not only
+charging—and reconnect it before changing Android Studio settings.
+
+## Later option: connect with ADB over Wi-Fi
+
+After you are comfortable deploying over USB, you can deploy without a cable by
+using Android Debug Bridge (`adb`) over the Control Hub's Program & Manage
+network.
+
+### Join the Program & Manage network
 
 1. Turn on the Control Hub and wait for it to finish starting.
 2. Connect the programming computer to the Control Hub's **Program & Manage**
@@ -24,7 +44,7 @@ The computer may temporarily lose normal internet access while connected to the
 Control Hub. Do not store the Control Hub Wi-Fi password in Git, documentation,
 source code, screenshots, or AI prompts.
 
-## Connect Android Debug Bridge
+### Connect Android Debug Bridge
 
 Android Studio includes Android SDK Platform Tools, which contains `adb`. In the
 Android Studio terminal, run:
@@ -53,6 +73,7 @@ When those checks are complete, run the code and observe what actually happens.
 
 | Observation | Check next |
 |---|---|
+| The Control Hub does not appear over USB | Confirm the Control Hub is powered and use a data-capable USB cable. Reconnect the cable and check Android Studio's deployment-target list again. |
 | `192.168.43.1:8080` does not open | Verify the Control Hub is powered and the computer is connected to its Program & Manage network. Do not troubleshoot Android Studio yet. |
 | `adb` is not recognized | Confirm Android SDK Platform Tools is installed and locate it through Android Studio's SDK settings. |
 | `adb connect` fails | Recheck the browser connection page, then confirm the IP address and port exactly. |
