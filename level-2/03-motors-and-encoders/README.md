@@ -8,7 +8,7 @@ cannot wait forever.
 
 | | |
 |---|---|
-| **Time** | 75–105 minutes |
+| **Time** | 90–120 minutes |
 | **FTC focus** | direction, zero-power behavior, encoders, run modes, timeout |
 | **Git focus** | inspect history and isolate one behavioral change |
 | **AI tutor** | trace every exit path from the movement loop |
@@ -31,140 +31,246 @@ feature/<your-name>/motor-encoders
 ```
 
 Create `EncoderMoveOpMode.java` in the Level 2 package so the first OpMode remains
-available for comparison.
+available for comparison. Confirm that:
 
-Confirm the encoder cable is connected and the configured motor type is correct.
-With power off, slowly turn the mechanism by hand only if the mechanism permits it
-safely. Observe whether `getCurrentPosition()` changes.
+- the active branch is `feature/<your-name>/motor-encoders`;
+- `bench_motor` still matches the active Driver Station configuration;
+- the motor's encoder cable is connected to the Control Hub; and
+- the mechanism can turn a small amount without interference.
 
-## Separate three motor decisions
+Do not turn the mechanism to “check the encoder” yet. First write code that makes
+the encoder reading visible.
 
-| Setting | Question it answers |
-|---|---|
-| `DcMotor.Direction` | Which physical rotation should Java call positive? |
-| `ZeroPowerBehavior` | Should zero power coast or actively resist motion? |
-| `RunMode` | How should the controller use encoder information? |
+## Part 1 — Observe the encoder without moving the motor
 
-`STOP_AND_RESET_ENCODER` establishes a software zero; it does not physically home
-a mechanism. After resetting, choose another run mode before commanding motion.
+An encoder converts shaft rotation into a changing count. FTC reports that count
+with `getCurrentPosition()`. The value is measured in encoder ticks, not degrees,
+inches, or a known mechanism position.
 
-For `RUN_TO_POSITION`, set the target position before switching to that mode. Use
-a positive power magnitude; the target position determines movement direction.
+### 1. Create a zero-power observation OpMode
 
-## Plan the bounded move
-
-Choose a small relative move that is safe on the bench. Record:
-
-- starting encoder count;
-- requested count change;
-- calculated target;
-- power magnitude, no greater than `0.25` for the first test;
-- timeout; and
-- every condition that can end the move.
-
-Before coding, predict the target sign, observed rotation, expected final encoder
-range, and which loop condition should end a successful move.
-
-An interruptible wait requires every guard:
+Start `EncoderMoveOpMode.java` with this complete observation program:
 
 ```java
-while (opModeIsActive()
-        && benchMotor.isBusy()
-        && runtime.seconds() < timeoutSeconds) {
-    // Report evidence. Do not reset the timer here.
+package org.firstinspires.ftc.teamcode.level2;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+@TeleOp(name = "L2 Encoder Move", group = "Level 2")
+public class EncoderMoveOpMode extends LinearOpMode {
+    private DcMotor benchMotor;
+
+    @Override
+    public void runOpMode() {
+        benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
+        benchMotor.setPower(0.0);
+
+        telemetry.addData("Status", "Encoder observer ready");
+        telemetry.update();
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+            telemetry.addData(
+                    "Current position",
+                    benchMotor.getCurrentPosition());
+            telemetry.update();
+            idle();
+        }
+
+        benchMotor.setPower(0.0);
+    }
 }
 ```
 
-Each condition answers a different safety question:
+The OpMode maps the same motor as Lesson 1 but always commands zero power. The
+active loop repeatedly reads and displays the encoder count.
 
-- `opModeIsActive()` stops waiting when the driver presses Stop.
-- `benchMotor.isBusy()` stops waiting when the controller considers the target
-  reached.
-- `runtime.seconds() < timeoutSeconds` stops waiting when the move takes too long.
+### 2. Build and verify the encoder
 
-## Complete one area at a time
+- Build `TeamCode` before connecting to the test bench.
+- Connect and deploy with the USB cable.
+- Select **L2 Encoder Move**, press INIT, then PLAY.
+- Confirm the motor remains stopped.
+- If the mechanism can be moved safely by hand, turn it slowly while watching
+  `Current position` on the Driver Station.
+- Turn it in the opposite direction and watch the count change the other way.
 
-### 1. Map the motor and establish an encoder zero
+If the value never changes, stop and check the encoder cable and configured motor
+type before writing movement code. A successful build cannot prove that an
+encoder is electrically connected.
 
-Add the timer import and create the devices used by the OpMode:
+## Part 2 — Make three motor decisions
+
+Mapping a `DcMotor` does not explain how this mechanism should behave. Make these
+three decisions explicitly before commanding encoder motion.
+
+### Decision 1: Which physical direction is positive?
+
+Add a direction immediately after the motor is mapped:
 
 ```java
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-private DcMotor benchMotor;
-private final ElapsedTime runtime = new ElapsedTime();
+benchMotor.setDirection(DcMotor.Direction.FORWARD);
 ```
 
-During initialization, apply zero power before changing modes:
+`Direction` defines the motor's logical positive direction. It affects how future
+power commands and encoder direction are interpreted by the SDK.
+
+- Choose `FORWARD` if its positive direction matches the convention you want for
+  the test bench.
+- Choose `REVERSE` if the opposite physical rotation should be positive.
+- Do not change direction merely to make one target number look convenient.
+- Calling `setDirection(...)` does not power or move the motor.
+
+Keep the selected direction unchanged for the rest of the lesson so power signs,
+encoder counts, and targets keep the same meaning.
+
+### Decision 2: What should happen at zero power?
+
+Add the zero-power behavior after direction:
+
+```java
+benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+```
+
+`ZeroPowerBehavior` applies only when the requested motor power is zero:
+
+| Choice | Result at zero power |
+|---|---|
+| `BRAKE` | The controller electrically resists rotation. |
+| `FLOAT` | The motor is allowed to coast more freely. |
+
+- `BRAKE` does not command a precise encoder position.
+- `FLOAT` does not guarantee immediate stopping.
+- Neither choice replaces `benchMotor.setPower(0.0)`.
+
+Use `BRAKE` for this bounded bench move and explain why. With power still at zero,
+you may compare the feel of `BRAKE` and `FLOAT` by turning the shaft by hand only
+when the mechanism permits it safely.
+
+### Decision 3: How should the controller use the encoder?
+
+The run mode determines what the motor controller does with encoder information:
+
+| Run mode | Purpose in this lesson |
+|---|---|
+| `RUN_WITHOUT_ENCODER` | Apply power without encoder-based speed regulation. The count can still be read. |
+| `RUN_USING_ENCODER` | Apply power while using encoder feedback to regulate motor speed. |
+| `STOP_AND_RESET_ENCODER` | Set the current encoder count to software zero. It is a reset step, not a movement mode. |
+| `RUN_TO_POSITION` | Move toward a target encoder count while power is applied. |
+
+Establish the starting software zero during initialization:
+
+```java
+benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+telemetry.addData("Status", "Encoder zeroed");
+telemetry.addData("Current position", benchMotor.getCurrentPosition());
+telemetry.update();
+```
+
+- Stop power before resetting the encoder.
+- `STOP_AND_RESET_ENCODER` does not physically move or home the mechanism.
+- Select another run mode immediately after the reset.
+- The displayed current position after the reset should be at or near zero.
+
+Your three decisions are now visible together:
 
 ```java
 benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
 benchMotor.setPower(0.0);
+benchMotor.setDirection(DcMotor.Direction.FORWARD);
 benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
 benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 ```
 
-`STOP_AND_RESET_ENCODER` changes the controller's current count to zero. It does
-not move the mechanism to a known physical location. `RUN_USING_ENCODER` then
-returns the motor to a mode that can report and regulate motion.
+Replace `FORWARD` only if your chosen physical convention requires `REVERSE`.
 
-Show the result before Start:
+## Part 3 — Plan a bounded move
+
+Choose a small relative move that is safe on the bench. Identify:
+
+- the starting encoder count;
+- a small requested count change;
+- the calculated target;
+- a positive power magnitude no greater than `0.25`;
+- a short timeout; and
+- every condition that can end the move.
+
+Before coding, predict:
+
+- whether the target will be positive or negative;
+- which physical direction the motor will rotate;
+- approximately where the final encoder count should be; and
+- which condition should end a successful move.
+
+## Part 4 — Build the bounded move
+
+### 1. Add named movement values and a timer
+
+Add the timer import and class fields:
 
 ```java
-telemetry.addData("Status", "Initialized");
-telemetry.addData("Encoder", benchMotor.getCurrentPosition());
-telemetry.update();
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+private static final int MOVE_TICKS = 200;
+private static final double MOVE_POWER = 0.25;
+private static final double TIMEOUT_SECONDS = 3.0;
+
+private final ElapsedTime runtime = new ElapsedTime();
 ```
 
-The motor should remain stationary and the displayed count should be at or very
-near zero.
+`MOVE_TICKS` is a relative count change, not a universal distance. Replace `200`
+with a smaller value if that is safer for the bench.
 
-### 2. Calculate a relative target
+### 2. Calculate the target only after Start
 
-After `waitForStart()`, guard the one-time movement commands so they cannot run if
-STOP was pressed while waiting:
+Replace the observation loop with this active check and target calculation:
 
 ```java
 waitForStart();
 
+String exitReason = "Stopped before move";
+int targetPosition = benchMotor.getCurrentPosition();
+
 if (opModeIsActive()) {
     int startingPosition = benchMotor.getCurrentPosition();
-    int requestedChange = 200; // Replace with a small value safe for the bench.
-    int targetPosition = startingPosition + requestedChange;
+    targetPosition = startingPosition + MOVE_TICKS;
 
-    // The remaining movement code belongs inside this active check.
+    // Target, mode, power, and wait code goes here.
 }
 ```
 
-The target is relative to the measured starting count. A negative
-`requestedChange` requests the opposite encoder direction.
+The active check prevents one-time motor commands from running if Stop was pressed
+while `waitForStart()` was waiting. A negative `MOVE_TICKS` value requests the
+opposite encoder direction.
 
-### 3. Put the controller into position mode in the correct order
+### 3. Set target, mode, timer, and power in order
 
-Inside the active check, set the target before selecting `RUN_TO_POSITION`:
+Inside the active check:
 
 ```java
 benchMotor.setTargetPosition(targetPosition);
 benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
 runtime.reset();
-benchMotor.setPower(0.25);
+benchMotor.setPower(MOVE_POWER);
 ```
 
-In `RUN_TO_POSITION`, use a positive power magnitude. The target relative to the
-current count determines the movement direction. `runtime.reset()` starts this
-move's timeout clock; resetting it inside the loop would prevent the timeout.
+- Set the target before selecting `RUN_TO_POSITION`.
+- Use a positive power magnitude in `RUN_TO_POSITION`.
+- The target count determines the movement direction.
+- Reset the timer once when the move begins, not inside the wait loop.
 
-### 4. Wait only while all three conditions allow it
+### 4. Wait only while every condition allows motion
 
 ```java
-double timeoutSeconds = 3.0;
-
 while (opModeIsActive()
         && benchMotor.isBusy()
-        && runtime.seconds() < timeoutSeconds) {
+        && runtime.seconds() < TIMEOUT_SECONDS) {
     telemetry.addData("Target", targetPosition);
     telemetry.addData("Current", benchMotor.getCurrentPosition());
     telemetry.addData("Busy", benchMotor.isBusy());
@@ -174,18 +280,17 @@ while (opModeIsActive()
 }
 ```
 
-`idle()` gives the runtime an opportunity to perform other work while this OpMode
-has nothing else to do on that pass. It does not replace any loop guard.
+- `opModeIsActive()` ends the wait when the driver presses Stop.
+- `isBusy()` becomes false when the controller considers the target reached.
+- the timer ends the wait if the movement takes too long.
+- `idle()` gives the runtime an opportunity to perform other work; it does not
+  replace any loop condition.
 
-### 5. Stop first, then determine why the loop ended
+### 5. Identify the exit reason inside the active check
 
-Every exit must reach the same cleanup:
+Immediately after the wait loop:
 
 ```java
-benchMotor.setPower(0.0);
-benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-String exitReason;
 if (!opModeIsActive()) {
     exitReason = "Driver Station Stop";
 } else if (!benchMotor.isBusy()) {
@@ -193,58 +298,57 @@ if (!opModeIsActive()) {
 } else {
     exitReason = "Timed out";
 }
+```
+
+The three branches correspond to the three wait conditions. Do not assume that
+leaving the loop automatically means the target was reached.
+
+### 6. Put cleanup outside the active check
+
+```java
+benchMotor.setPower(0.0);
+benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 telemetry.addData("Exit", exitReason);
+telemetry.addData("Target", targetPosition);
 telemetry.addData("Final position", benchMotor.getCurrentPosition());
 telemetry.update();
 ```
 
-Place the zero-power and `RUN_USING_ENCODER` commands so they also execute when
-the OpMode never became active. Cleanup should not depend on a successful move.
+Cleanup remains reachable when the target is reached, the timer expires, Stop is
+pressed, or the OpMode never becomes active. The final power command must be zero.
 
-## Student task
+## Test one exit path at a time
 
-Implement `EncoderMoveOpMode` so it:
+- Run a small positive move and compare the target with the final count.
+- Change only `MOVE_TICKS` and run a small negative move.
+- Test the timeout by temporarily using a very short time—not by holding or
+  jamming the mechanism.
+- Press Driver Station Stop during a move.
+- Restore the normal timeout before committing.
 
-1. Maps `bench_motor` and initializes it at zero power.
-2. Selects and documents direction and zero-power behavior.
-3. Resets the encoder during initialization.
-4. Changes to `RUN_USING_ENCODER` after resetting.
-5. Reports the zeroed encoder position before Start.
-6. Waits for Start and guards one-time movement commands with
-   `opModeIsActive()`.
-7. Calculates a target relative to the current position.
-8. Sets the target before selecting `RUN_TO_POSITION`.
-9. Starts an `ElapsedTime` timeout and applies limited positive power magnitude.
-10. Waits only while active, busy, and before the timeout.
-11. Reports target, current position, busy state, and elapsed time.
-12. Sets power to zero and returns to `RUN_USING_ENCODER` after the wait.
-13. Reports whether the move ended by reaching the target, timing out, or Stop.
-
-The snippets show the required operations but not the complete method structure.
-Trace the braces and confirm that the movement commands are inside the active
-check while cleanup is reachable from every path.
-
-Run a small positive move, then a small negative move. Compare the requested target
-with the final encoder value; exact equality is not required to reason about
-whether the move succeeded.
-
-Test the timeout with an intentionally short time—not by holding or jamming the
-mechanism. Restore the normal timeout before committing.
+Exact target equality is not required to determine whether the bounded move
+behaved correctly. The important result is that every exit path reaches zero
+power and reports why it ended.
 
 ## Git checkpoint
 
-Run:
+In Android Studio:
 
-```text
-git status
-git diff
-git log --oneline -5
-```
-
-Explain how the feature branch relates to the latest commit on your personal
-branch. Commit the bounded movement, push it, and merge it into
-`student/<your-name>` through a reviewed pull request.
+- open the Commit window and confirm the current branch is
+  `feature/<your-name>/motor-encoders`;
+- confirm only `EncoderMoveOpMode.java` and other intentional lesson changes are
+  selected;
+- inspect every highlighted change before committing;
+- open **View → Tool Windows → Git**, select the **Log** tab, and find where the
+  feature branch starts from the latest commit on `student/<your-name>`;
+- commit with a focused message such as `Add bounded encoder move`;
+- push the feature branch and open a pull request into
+  `student/<your-name>`;
+- include the positive, negative, timeout, and Stop test results in the pull
+  request description;
+- obtain a review and merge the pull request; and
+- update your local personal branch before starting Lesson 4.
 
 ## Ask your AI tutor
 
