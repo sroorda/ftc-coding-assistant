@@ -162,7 +162,8 @@ to follow. You will encounter iterative OpModes when reading other FTC code.
 
 The following examples introduce the FTC APIs used by the TODOs. Add each small
 piece to the matching labeled area in your starter OpMode. After each step, pause
-and explain what the code will cause the robot to do.
+and explain what the code will cause the robot to do. Work through the six steps
+in order because each one builds on the hardware setup before it.
 
 #### 1. Get the configured motor
 
