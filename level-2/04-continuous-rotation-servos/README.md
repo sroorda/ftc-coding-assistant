@@ -1,26 +1,27 @@
 # Lesson 4: Continuous-Rotation Servos
 
-A continuous-rotation servo uses power instead of position. In this lesson, you
-will initialize the servo at zero power and use one gamepad button to alternate
-between running and stopped.
+A continuous-rotation servo uses a power command instead of a position command.
+In this lesson, you will initialize the servo with a `0.0` power command and use
+one gamepad button to alternate between running and stopped.
 
 ## Your mission
 
 | | |
 |---|---|
 | **Time** | 45–60 minutes |
-| **FTC focus** | `CRServo`, power, gamepad press detection, telemetry |
+| **FTC focus** | `CRServo`, power commands, gamepad press detection, telemetry |
 | **Git focus** | commit, push, review, and merge one focused hardware change |
-| **AI tutor** | check the start/stop logic and every path that commands power |
+| **AI tutor** | check the start/stop logic and every power-command path |
 
 ## Your goal
 
 By the end of this lesson, you can:
 
-- explain how CR-servo power differs from positional-servo position;
-- initialize a CR servo at zero power;
+- explain how a CR-servo power command differs from a positional-servo position
+  command;
+- initialize a CR servo with a `0.0` power command;
 - use one button to start and stop the servo; and
-- use telemetry to observe the requested and commanded power.
+- use telemetry to observe the requested and stored power commands.
 
 ## Get ready
 
@@ -73,19 +74,21 @@ public class ContinuousServoOpMode extends LinearOpMode {
 Build the project before continuing. Fix any package, import, or syntax errors
 first.
 
-## Part 1 — Understand CR-servo power
+## Part 1 — Understand CR-servo power commands
 
 A positional servo uses `setPosition()`. A continuous-rotation servo uses
 `setPower()`:
 
 - `0.0` commands the servo to stop;
-- positive power rotates in one direction; and
-- negative power rotates in the opposite direction.
+- a positive command rotates in one direction; and
+- a negative command rotates in the opposite direction.
 
-Power controls direction and effort, not a physical position. `getPower()`
-reports the last power command; it does not measure the servo's rotation speed.
+The value passed to `setPower()` is a normalized SDK control command, not a
+measurement or direct setting of electrical watts or current. Its sign requests
+direction, and its magnitude requests rotation speed. `getPower()` reports the
+last power command; it does not measure the servo's rotation speed.
 
-## Part 2 — Map the servo and command zero power
+## Part 2 — Map the servo and command stop
 
 Add these constants near the top of the class, above the `continuousServo`
 field:
@@ -95,7 +98,7 @@ private static final double RUN_POWER = 0.25;
 private static final double STOP_POWER = 0.0;
 ```
 
-In **Area 1**, map the servo, create its running state, and command zero power:
+In **Area 1**, map the servo, create its running state, and command `0.0`:
 
 ```java
 continuousServo = hardwareMap.get(CRServo.class, "continuous_servo");
@@ -108,7 +111,7 @@ Still in **Area 1**, add initialization telemetry:
 
 ```java
 telemetry.addData("Status", "Servo stopped");
-telemetry.addData("Power", "%.2f", continuousServo.getPower());
+telemetry.addData("Power command", "%.2f", continuousServo.getPower());
 telemetry.update();
 ```
 
@@ -132,7 +135,7 @@ Each new A-button press reverses the Boolean value:
 Because `aWasPressed()` is true once for each new press, holding A does not
 repeatedly switch between running and stopped.
 
-## Part 4 — Convert the state into servo power
+## Part 4 — Convert the state into a power command
 
 Immediately after the button code in **Area 3**, add:
 
@@ -150,9 +153,9 @@ Add this next, still inside the loop in **Area 3**:
 
 ```java
 telemetry.addData("Running", servoRunning);
-telemetry.addData("Requested power", "%.2f", requestedPower);
+telemetry.addData("Requested power command", "%.2f", requestedPower);
 telemetry.addData(
-        "Commanded power",
+        "Stored power command",
         "%.2f",
         continuousServo.getPower());
 telemetry.update();
@@ -170,21 +173,21 @@ In **Area 4**, after the active loop, add:
 continuousServo.setPower(STOP_POWER);
 ```
 
-When Driver Station Stop ends the loop, this line commands zero power.
+When Driver Station Stop ends the loop, this line sends the `0.0` stop command.
 
 ## Part 7 — Run and observe
 
 - Build and deploy the project.
-- Press INIT and confirm the servo remains stopped at `0.0` power.
+- Press INIT and confirm the servo remains stopped with a `0.0` command.
 - Press PLAY.
-- Press A once and confirm the servo runs at `0.25` power.
+- Press A once and confirm the servo runs with a `0.25` command.
 - Press A again and confirm the servo stops.
 - Hold A and confirm the state changes only once.
 - Start and stop the servo several times while watching telemetry.
 - Press A to start the servo, then press Driver Station Stop and confirm the
   servo stops.
 
-If the servo creeps while commanded power is `0.0`, stop the test and check its
+If the servo creeps while its power command is `0.0`, stop the test and check its
 neutral calibration.
 
 ## Git checkpoint
@@ -203,19 +206,19 @@ In Android Studio:
 ## Ask your AI tutor
 
 > Review my continuous-servo OpMode without editing it. Check that each new
-> A-button press toggles the state once, false always commands zero power, and
-> leaving the active loop stops the servo.
+> A-button press toggles the state once, false always sends a 0.0 power command,
+> and leaving the active loop stops the servo.
 
 ## Check your work
 
 You are finished when:
 
-- INIT commands `0.0` power;
-- the first A-button press starts the servo at `0.25` power;
+- INIT sends a `0.0` power command;
+- the first A-button press starts the servo with a `0.25` power command;
 - the next A-button press stops the servo;
 - holding A does not repeatedly toggle the state;
 - telemetry shows the running state and power commands; and
-- Driver Station Stop leaves the servo at zero power.
+- Driver Station Stop leaves the servo with a `0.0` power command.
 
 Continue to
 [Lesson 5: Digital Sensors and Limits](../05-digital-sensors-and-limits/README.md).
