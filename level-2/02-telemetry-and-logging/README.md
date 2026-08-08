@@ -10,7 +10,7 @@ for the operator and event logging for later diagnosis.
 |---|---|
 | **Time** | 60–90 minutes |
 | **FTC focus** | telemetry, `RobotLog`, observable behavior |
-| **Git focus** | `git status`, `git diff`, focused commit messages |
+| **Git focus** | inspect a visual diff and write a focused commit message |
 | **AI tutor** | judge whether each message provides useful evidence |
 
 ## Your goal
@@ -247,17 +247,12 @@ similar to this example, although line numbers and window layout may differ:
 
 ![Android Studio Commit window showing the Lesson 2 telemetry and RobotLog changes in FirstHardwareOpMode.java.](../../docs/images/level-2/lesson-2-commit-window.png)
 
-Before committing, run:
-
-```text
-git status
-git diff
-```
-
-Confirm the branch and changed files match this lesson. Commit with a focused
+In the Commit window, confirm the current branch is
+`feature/<your-name>/telemetry-logging`, only the intended lesson file is selected,
+and every highlighted change belongs to this exercise. Commit with a focused
 message, push, and open a pull request into `student/<your-name>`. Include your
-Driver Station and Robot Controller log verification in the description. Obtain a
-review, merge, then update your personal branch.
+Driver Station and Robot Controller log verification in the description. Obtain
+a review, merge, then update your personal branch.
 
 ## Ask your AI tutor
 
