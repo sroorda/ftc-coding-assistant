@@ -158,16 +158,112 @@ separate lifecycle methods such as `init()`, `start()`, `loop()`, and `stop()`.
 This course begins with `LinearOpMode` because its top-to-bottom flow is easier
 to follow. You will encounter iterative OpModes when reading other FTC code.
 
-Complete the TODOs using these requirements:
+### Complete one area at a time
 
-1. Retrieve a `DcMotor` with `hardwareMap.get(...)` and the exact name
-   `bench_motor`.
-2. Set motor power to `0.0` during initialization.
-3. Choose `BRAKE` or `FLOAT` zero-power behavior and record why.
-4. Use `-gamepad1.left_stick_y` so pushing the stick forward requests positive
-   power.
-5. Multiply the request by `0.25`, limiting the first test to 25% power.
-6. Set power to zero after the active loop.
+The following examples introduce the FTC APIs used by the TODOs. Add each small
+piece to the matching labeled area in your starter OpMode. After each step, pause
+and explain what the code will cause the robot to do.
+
+#### 1. Get the configured motor
+
+Use `hardwareMap` to retrieve the motor configured as `bench_motor` and store it
+in the `benchMotor` field declared near the top of the class:
+
+```java
+benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
+```
+
+- `hardwareMap` contains the devices in the active Driver Station configuration.
+- `DcMotor.class` says which FTC hardware type the code expects.
+- `"bench_motor"` selects the entry with that exact configuration name.
+- `benchMotor` stores the resulting Java object for the rest of the OpMode.
+
+This line runs after INIT. It gives Java a connection to the configured motor; it
+does not move the motor. A missing name or incompatible device type is a runtime
+configuration error, even though the Java project can still compile.
+
+#### 2. Define what zero power means
+
+A motor receiving zero power can either resist rotation or coast:
+
+- `BRAKE` electrically resists rotation when commanded power is zero.
+- `FLOAT` lets the motor coast more freely when commanded power is zero.
+
+Choose one behavior and set an explicit initial power:
+
+```java
+benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+benchMotor.setPower(0.0);
+```
+
+You may replace `BRAKE` with `FLOAT`, but record why your choice makes sense for
+the test bench. Zero-power behavior does **not** command zero power by itself; it
+only controls how the motor behaves after `setPower(0.0)` is requested. Neither
+choice is a precise position-holding system.
+
+The observable result after INIT should be a stationary motor. If someone turns
+the shaft by hand while the robot is enabled, `BRAKE` and `FLOAT` should feel
+different.
+
+#### 3. Wait without moving
+
+This code is already present:
+
+```java
+waitForStart();
+
+if (isStopRequested()) {
+    return;
+}
+```
+
+`waitForStart()` pauses the sequence after INIT. Pressing PLAY lets execution
+continue. If STOP is requested while waiting, the method returns without entering
+the motor-control loop. The initialization step already requested zero power.
+
+#### 4. Turn joystick input into limited motor power
+
+Inside the active loop, read the vertical position of the first gamepad's left
+stick and limit it to 25% motor power:
+
+```java
+double requestedPower = -gamepad1.left_stick_y;
+double limitedPower = requestedPower * 0.25;
+```
+
+The stick value ranges from `-1.0` to `1.0`. FTC gamepads report a negative value
+when the stick is pushed forward, so the leading minus sign makes forward input
+positive. Multiplying by `0.25` changes the possible motor command from
+`-1.0`–`1.0` to `-0.25`–`0.25` for a safer first test.
+
+These lines only calculate numbers. They do not move hardware yet.
+
+#### 5. Command the motor
+
+Still inside the active loop, send the limited value to the motor:
+
+```java
+benchMotor.setPower(limitedPower);
+```
+
+The loop repeats quickly, so the command follows changes to the stick until the
+OpMode stops. Centered input requests approximately zero power; full stick travel
+requests no more than 25% power in either direction.
+
+#### 6. Leave the motor in a safe state
+
+After the active loop, explicitly request zero power again:
+
+```java
+benchMotor.setPower(0.0);
+```
+
+Pressing STOP makes `opModeIsActive()` become false, the loop ends, and execution
+reaches this line. The result on the normal stop path is a zero-power command using
+the `BRAKE` or `FLOAT` behavior selected during initialization.
+
+Before building, trace the completed method from INIT through STOP and identify
+the requested motor power at every stage.
 
 The FTC SDK contains official examples under
 `FtcRobotController/.../external/samples`. Use `BasicOpMode_Linear` as a reference,
