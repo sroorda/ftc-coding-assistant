@@ -38,6 +38,60 @@ feature/<your-name>/encoder-distance
 Create `EncoderDistanceOpMode.java` in the Level 2 package. Leave the earlier
 OpModes available for comparison.
 
+### Build the basic OpMode skeleton
+
+Before adding any encoder calculations, make the new file a complete FTC
+`LinearOpMode`. Enter this skeleton, changing the package declaration only if
+your Level 2 package has a different name:
+
+```java
+package org.firstinspires.ftc.teamcode.level2;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+@TeleOp(name = "L2 Encoder Distance", group = "Level 2")
+public class EncoderDistanceOpMode extends LinearOpMode {
+    private DcMotor benchMotor;
+
+    @Override
+    public void runOpMode() {
+        // Initialization: this runs after INIT and before PLAY.
+        benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
+        benchMotor.setPower(0.0);
+
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+
+        // Pause here until the driver presses PLAY.
+        waitForStart();
+
+        if (opModeIsActive()) {
+            // The encoder movement code will go here later in this lesson.
+        }
+
+        // Leave the motor stopped when the OpMode finishes.
+        benchMotor.setPower(0.0);
+    }
+}
+```
+
+This gives the lesson code its required structure:
+
+- `@TeleOp` makes the OpMode appear in the Driver Station's TeleOp list.
+- `extends LinearOpMode` provides `hardwareMap`, `telemetry`,
+  `waitForStart()`, and `opModeIsActive()`.
+- `runOpMode()` is the method the FTC SDK runs.
+- initialization maps the configured motor and commands zero power before PLAY.
+- `waitForStart()` separates initialization from movement.
+- `if (opModeIsActive())` is where the one-time encoder movement will go.
+- the final `setPower(0.0)` is cleanup reached after the movement finishes or
+  Stop is pressed.
+
+Build the project now. Fix any package, import, or syntax errors before adding
+the encoder code.
+
 Prepare the fixed test bench:
 
 - confirm `bench_motor` matches the active Driver Station configuration;
@@ -146,14 +200,13 @@ verify ticks per revolution.
 
 ### 1. Map and prepare the motor
 
-Start the OpMode with these fields:
+Add these constants and timer alongside the existing `benchMotor` field:
 
 ```java
 private static final double TEST_POWER = 0.20;
 private static final double TIMEOUT_SECONDS = 5.0;
 private static final double MOTOR_TICKS_PER_REV = 0.0;
 
-private DcMotor benchMotor;
 private final ElapsedTime runtime = new ElapsedTime();
 ```
 
