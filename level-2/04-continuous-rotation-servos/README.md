@@ -1,176 +1,221 @@
 # Lesson 4: Continuous-Rotation Servos
 
-A continuous-rotation servo uses a servo port and looks like a positional servo,
-but its command represents direction and speed rather than position. You will make
-that difference visible and establish a reliable software stop.
+A continuous-rotation servo uses power instead of position. In this lesson, you
+will initialize the servo at zero power and use one gamepad button to alternate
+between running and stopped.
 
 ## Your mission
 
 | | |
 |---|---|
-| **Time** | 60–75 minutes |
-| **FTC focus** | `CRServo`, power, direction, neutral behavior |
-| **Git focus** | update from the personal branch before starting work |
-| **AI tutor** | catch positional-servo assumptions applied to a CR servo |
+| **Time** | 45–60 minutes |
+| **FTC focus** | `CRServo`, power, gamepad press detection, telemetry |
+| **Git focus** | commit, push, review, and merge one focused hardware change |
+| **AI tutor** | check the start/stop logic and every path that commands power |
 
 ## Your goal
 
 By the end of this lesson, you can:
 
-- explain why `CRServo` uses power instead of position;
-- command both directions at a conservative speed;
-- stop the device during initialization, neutral input, and OpMode Stop; and
-- identify mechanical neutral calibration separately from Java logic.
+- explain how CR-servo power differs from positional-servo position;
+- initialize a CR servo at zero power;
+- use one button to start and stop the servo; and
+- use telemetry to observe the requested and commanded power.
 
 ## Get ready
 
-Switch to `student/<your-name>`, pull the latest merge, and confirm the working
-tree is clean before creating:
+Update `student/<your-name>` and create:
 
 ```text
 feature/<your-name>/continuous-servo
 ```
 
-Create `ContinuousServoOpMode.java`. Confirm the device is configured as
-`continuous_servo` and has room to rotate without winding a cable or striking the
-bench.
+Create `ContinuousServoOpMode.java` in the Level 2 package. Confirm the active
+Driver Station configuration contains a `Continuous Rotation Servo` named
+exactly `continuous_servo`.
 
-## Position versus power
+Clear the servo horn and anything connected to it before pressing INIT. Confirm
+that continuous rotation cannot wind a cable or strike the bench.
 
-Compare the two interfaces:
+## Start with an OpMode skeleton
 
-| Device | Java type | Command | Meaning |
-|---|---|---|---|
-| Positional servo | `Servo` | `setPosition(0.0–1.0)` | move toward a logical position |
-| Continuous servo | `CRServo` | `setPower(-1.0–1.0)` | rotate with direction and speed |
-
-A CR servo normally has no position feedback through this interface. Time and
-power do not create a reliable position because load, voltage, friction, and
-neutral calibration affect motion.
-
-## Complete one area at a time
-
-### 1. Map the correct device type and start at zero
-
-Map the device with:
+Enter this complete skeleton first. The numbered areas show where you will add
+code during the lesson.
 
 ```java
-CRServo continuousServo =
-        hardwareMap.get(CRServo.class, "continuous_servo");
-continuousServo.setPower(0.0);
+package org.firstinspires.ftc.teamcode.level2;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
+
+@TeleOp(name = "L2 Continuous Servo", group = "Level 2")
+public class ContinuousServoOpMode extends LinearOpMode {
+    private CRServo continuousServo;
+
+    @Override
+    public void runOpMode() {
+        // Area 1: Map and initialize the servo.
+
+        // Area 2: Wait for PLAY.
+        waitForStart();
+
+        // Area 3: Read the gamepad and command the servo.
+        while (opModeIsActive()) {
+
+        }
+
+        // Area 4: Stop the servo when the OpMode ends.
+    }
+}
 ```
 
-`CRServo.class` must agree with the Driver Station configuration type. Mapping the
-same port as a positional `Servo` would give the code the wrong command model.
-The zero-power command makes INIT request no rotation.
+Build the project before continuing. Fix any package, import, or syntax errors
+first.
 
-### 2. Name the input limits
+## Part 1 — Understand CR-servo power
+
+A positional servo uses `setPosition()`. A continuous-rotation servo uses
+`setPower()`:
+
+- `0.0` commands the servo to stop;
+- positive power rotates in one direction; and
+- negative power rotates in the opposite direction.
+
+Power controls direction and effort, not a physical position. `getPower()`
+reports the last power command; it does not measure the servo's rotation speed.
+
+## Part 2 — Map the servo and command zero power
+
+Add these constants near the top of the class, above the `continuousServo`
+field:
 
 ```java
-private static final double MAX_TEST_POWER = 0.50;
-private static final double STICK_DEADBAND = 0.05;
+private static final double RUN_POWER = 0.25;
+private static final double STOP_POWER = 0.0;
 ```
 
-The maximum limits the first test speed. The deadband defines a small region near
-the stick center that the program deliberately treats as zero.
-
-### 3. Convert stick input into applied power
-
-Inside the active loop:
+In **Area 1**, map the servo, create its running state, and command zero power:
 
 ```java
-double rawStickY = -gamepad1.right_stick_y;
-double requestedPower = Math.abs(rawStickY) < STICK_DEADBAND
-        ? 0.0
-        : rawStickY;
-double appliedPower = requestedPower * MAX_TEST_POWER;
+continuousServo = hardwareMap.get(CRServo.class, "continuous_servo");
 
-continuousServo.setPower(appliedPower);
+boolean servoRunning = false;
+continuousServo.setPower(STOP_POWER);
 ```
 
-The leading minus makes pushing the stick forward produce a positive request.
-The conditional operator chooses zero inside the deadband. Multiplying by `0.50`
-keeps full stick travel at half power. The expected results are:
-
-| Stick condition | Requested result |
-|---|---|
-| Centered or slight noise | `0.0` power; servo stopped |
-| Forward | Positive power, no greater than `0.50` |
-| Backward | Negative power, no less than `-0.50` |
-
-### 4. Display what was requested and applied
+Still in **Area 1**, add initialization telemetry:
 
 ```java
-telemetry.addData("Raw stick Y", "%.2f", rawStickY);
-telemetry.addData("Requested power", "%.2f", requestedPower);
-telemetry.addData("Applied power", "%.2f", continuousServo.getPower());
+telemetry.addData("Status", "Servo stopped");
+telemetry.addData("Power", "%.2f", continuousServo.getPower());
 telemetry.update();
 ```
 
-`getPower()` reports the logical command, not measured rotation speed. A servo
-that physically creeps while this value is zero needs neutral calibration, not a
-telemetry-label change.
+Leave the existing `waitForStart()` directly below this code in **Area 2**.
 
-### 5. Stop after the active loop
+## Part 3 — Toggle the running state with one button
+
+Inside the active loop in **Area 3**, add:
 
 ```java
-continuousServo.setPower(0.0);
+if (gamepad1.aWasPressed()) {
+    servoRunning = !servoRunning;
+}
 ```
 
-No separate early-Stop check is needed here. If STOP is pressed while waiting,
-the active loop is skipped and this zero-power cleanup still runs.
+Each new A-button press reverses the Boolean value:
 
-## Student task
+- `false` becomes `true`, starting the servo; and
+- `true` becomes `false`, stopping the servo.
 
-Implement an OpMode that:
+Because `aWasPressed()` is true once for each new press, holding A does not
+repeatedly switch between running and stopped.
 
-1. Sets power to `0.0` during initialization.
-2. Waits for Start and loops only while `opModeIsActive()`.
-3. Uses `-gamepad1.right_stick_y` as requested power.
-4. Applies a maximum magnitude of `0.50` for testing.
-5. Uses a small deadband so stick noise commands zero power.
-6. Reports raw input, requested power, and applied power.
-7. Sets power to `0.0` after the active loop.
+## Part 4 — Convert the state into servo power
 
-Predict direction before running. Test zero, slow positive, zero again, and slow
-negative. Do not begin at full power.
+Immediately after the button code in **Area 3**, add:
 
-If a `0.0` command still produces motion, stop the OpMode and use the servo's
-supported mechanical or programmer-based neutral calibration procedure. Do not
-hide a badly calibrated neutral by scattering a mystery software offset through
-lesson code.
+```java
+double requestedPower = servoRunning ? RUN_POWER : STOP_POWER;
+continuousServo.setPower(requestedPower);
+```
 
-As an extension, choose two buttons for fixed, named actions such as
-`INTAKE_POWER` and `EJECT_POWER`, with neutral as the default when neither is
-pressed. Define what happens if both buttons are pressed.
+The conditional expression selects `RUN_POWER` when `servoRunning` is true and
+`STOP_POWER` when it is false.
+
+## Part 5 — Show telemetry
+
+Add this next, still inside the loop in **Area 3**:
+
+```java
+telemetry.addData("Running", servoRunning);
+telemetry.addData("Requested power", "%.2f", requestedPower);
+telemetry.addData(
+        "Commanded power",
+        "%.2f",
+        continuousServo.getPower());
+telemetry.update();
+```
+
+- `requestedPower` is selected by your start/stop logic.
+- `getPower()` is the command stored by the CR-servo object. It is not measured
+  speed.
+
+## Part 6 — Stop when the OpMode ends
+
+In **Area 4**, after the active loop, add:
+
+```java
+continuousServo.setPower(STOP_POWER);
+```
+
+When Driver Station Stop ends the loop, this line commands zero power.
+
+## Part 7 — Run and observe
+
+- Build and deploy the project.
+- Press INIT and confirm the servo remains stopped at `0.0` power.
+- Press PLAY.
+- Press A once and confirm the servo runs at `0.25` power.
+- Press A again and confirm the servo stops.
+- Hold A and confirm the state changes only once.
+- Start and stop the servo several times while watching telemetry.
+- Press A to start the servo, then press Driver Station Stop and confirm the
+  servo stops.
+
+If the servo creeps while commanded power is `0.0`, stop the test and check its
+neutral calibration.
 
 ## Git checkpoint
 
-Run `git status` and `git diff`. The diff should contain only the new CR-servo
-exercise and intentional supporting changes. Commit, push, obtain review through a
-pull request into `student/<your-name>`, merge, and update the personal branch.
+In Android Studio:
+
+- confirm the current branch is `feature/<your-name>/continuous-servo`;
+- inspect the `ContinuousServoOpMode.java` diff;
+- commit with a focused message such as `Add continuous servo toggle`;
+- push and open a pull request into `student/<your-name>`;
+- describe what happened during INIT, each A-button press, and Driver Station
+  Stop;
+- obtain a review and merge the pull request; and
+- update your local personal branch before starting Lesson 5.
 
 ## Ask your AI tutor
 
-> Review my CR-servo OpMode without editing it. Find any place where I treat power
-> as position, any input combination without a defined result, and any exit path
-> that can leave nonzero power. Ask me what I observed at a zero command.
+> Review my continuous-servo OpMode without editing it. Check that each new
+> A-button press toggles the state once, false always commands zero power, and
+> leaving the active loop stops the servo.
 
 ## Check your work
 
 You are finished when:
 
-- initialization commands zero power;
-- both directions work at limited speed;
-- neutral input reliably stops rotation;
-- Stop results in zero commanded power;
-- telemetry distinguishes input from applied power; and
-- you can explain why timing a CR servo is not position control.
-
-## Reflect
-
-What additional sensor would be needed if a mechanism driven by a CR servo had to
-reach and hold a repeatable physical position?
+- INIT commands `0.0` power;
+- the first A-button press starts the servo at `0.25` power;
+- the next A-button press stops the servo;
+- holding A does not repeatedly toggle the state;
+- telemetry shows the running state and power commands; and
+- Driver Station Stop leaves the servo at zero power.
 
 Continue to
 [Lesson 5: Digital Sensors and Limits](../05-digital-sensors-and-limits/README.md).
