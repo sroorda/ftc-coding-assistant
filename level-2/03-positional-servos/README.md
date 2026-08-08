@@ -1,238 +1,209 @@
 # Lesson 3: Positional Servos
 
-A positional servo moves toward a commanded position and attempts to hold it. You
-will explore a safe portion of its range, replace unexplained numbers with named
-positions, and trigger each movement once per button press.
+A positional servo moves toward a commanded position and attempts to hold it.
+In this lesson, you will command the servo's zero position, then use the D-pad to
+increase and decrease its position one step at a time.
 
 ## Your mission
 
 | | |
 |---|---|
-| **Time** | 60–90 minutes |
-| **FTC focus** | `Servo`, mechanical limits, named positions, button edges |
-| **Git focus** | review another student's intent and test evidence |
-| **AI tutor** | look for unsafe ranges and unexplained constants |
+| **Time** | 45–60 minutes |
+| **FTC focus** | `Servo`, normalized position, gamepad press detection, telemetry |
+| **Git focus** | commit, push, review, and merge one focused hardware change |
+| **AI tutor** | check position limits and explain code without inventing hardware behavior |
 
 ## Your goal
 
 By the end of this lesson, you can:
 
-- explain how the normalized servo range relates to physical motion;
-- distinguish a software limit from a mechanical stop;
-- use named constants for meaningful positions; and
-- command a servo without repeatedly retriggering one button press.
+- explain what servo positions `0.0` through `1.0` mean;
+- command a servo's zero position;
+- increment and decrement its position with the D-pad; and
+- use telemetry to observe the requested and commanded positions.
 
 ## Get ready
 
-Update your personal branch and create:
+Update `student/<your-name>` and create:
 
 ```text
 feature/<your-name>/positional-servo
 ```
 
-Create `PositionalServoOpMode.java`. Confirm the configured device name is
-`position_servo` and that the servo horn has clearance through a small movement
-around its current position.
+Create `PositionalServoOpMode.java` in the Level 2 package. Confirm the active
+Driver Station configuration contains a `Servo` named exactly
+`position_servo`.
 
-## Position is not angle
+Clear the servo horn and linkage before pressing INIT. The servo can move during
+initialization.
 
-FTC's `Servo` interface accepts a normalized command from `0.0` through `1.0`.
-Those endpoints represent the configured PWM range, not a guaranteed number of
-degrees. The physical result depends on the servo, its programming, linkage, horn,
-and installation.
+## Start with an OpMode skeleton
 
-A software command inside `0.0–1.0` can still drive a linkage into a mechanical
-stop. Begin near the middle and change only a small amount at a time.
-
-## Explore a conservative range
-
-Map the device:
+Enter this complete skeleton first. The numbered areas show where you will add
+code during the lesson.
 
 ```java
-Servo positionServo = hardwareMap.get(Servo.class, "position_servo");
-```
+package org.firstinspires.ftc.teamcode.level2;
 
-Start with a position of `0.50`. Use two buttons to request changes of `0.02`, and
-clip the experimental value to a deliberately narrow initial range such as
-`0.40–0.60`.
-
-Before the first command, predict which physical direction an increase will move
-the horn and write down what would tell you to stop the test.
-
-A normal active loop runs many times while a button is held. Use rising-edge
-detection so one press produces one step. You may track the previous button state
-yourself or use the button edge helpers supported by FTC SDK `11.2.1`.
-
-Report the requested position before calling `setPosition(...)` and after the
-command. `getPosition()` reports the last commanded logical position; it does not
-measure the horn's physical angle.
-
-## Complete one area at a time
-
-### 1. Define the experimental limits
-
-Place named values near the top of the class:
-
-```java
-private static final double START_POSITION = 0.50;
-private static final double STEP_SIZE = 0.02;
-private static final double MIN_TEST_POSITION = 0.40;
-private static final double MAX_TEST_POSITION = 0.60;
-```
-
-These are software limits for the first exploration, not proof of the mechanism's
-physical limits. The names make the safety assumptions visible in code.
-
-### 2. Map and initialize the servo
-
-Add the `Range` import, then map the configured servo:
-
-```java
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-Servo positionServo = hardwareMap.get(Servo.class, "position_servo");
-double requestedPosition = START_POSITION;
-positionServo.setPosition(requestedPosition);
+@TeleOp(name = "L2 Positional Servo", group = "Level 2")
+public class PositionalServoOpMode extends LinearOpMode {
+    private Servo positionServo;
+
+    @Override
+    public void runOpMode() {
+        // Area 1: Map and initialize the servo.
+
+        // Area 2: Wait for PLAY.
+        waitForStart();
+
+        // Area 3: Read the gamepad and command the servo.
+        while (opModeIsActive()) {
+
+        }
+    }
+}
 ```
 
-Calling `setPosition()` during initialization can move the horn as soon as INIT is
-pressed. Clear the mechanism before INIT, not only before PLAY. The expected
-result is one movement toward the conservative start position.
+Build the project before continuing. Fix any package, import, or syntax errors
+first.
 
-### 3. Detect a new press instead of a held button
+## Part 1 — Understand servo position
 
-Before the active loop, remember the previous state of each button:
+The FTC `Servo` class uses normalized position values:
+
+- `0.0` is one end of the configured range;
+- `0.5` is the midpoint; and
+- `1.0` is the other end.
+
+These values are not degrees. The physical angle depends on the servo and how it
+is installed. `getPosition()` reports the last commanded position; it does not
+measure the horn's physical position.
+
+## Part 2 — Map the servo and command zero
+
+Add these constants near the top of the class, above the `positionServo` field:
 
 ```java
-boolean previousIncreaseButton = false;
-boolean previousDecreaseButton = false;
+private static final double ZERO_POSITION = 0.0;
+private static final double POSITION_STEP = 0.05;
 ```
 
-Inside the loop, compare the current and previous states:
+In **Area 1**, map the servo, create the position variable, and command zero:
 
 ```java
-boolean increaseButton = gamepad1.dpad_up;
-boolean decreaseButton = gamepad1.dpad_down;
+positionServo = hardwareMap.get(Servo.class, "position_servo");
 
-boolean increasePressed = increaseButton && !previousIncreaseButton;
-boolean decreasePressed = decreaseButton && !previousDecreaseButton;
+double targetPosition = ZERO_POSITION;
+positionServo.setPosition(targetPosition);
 ```
 
-`increasePressed` is true for only the first loop after the button changes from
-not pressed to pressed. Holding the button does not create another edge.
+This commands position `0.0`; it does not mechanically home or measure the
+servo. The servo may move as soon as INIT is pressed.
 
-### 4. Change and clip the requested position
+Still in **Area 1**, add initialization telemetry:
 
 ```java
-if (increasePressed && !decreasePressed) {
-    requestedPosition += STEP_SIZE;
-} else if (decreasePressed && !increasePressed) {
-    requestedPosition -= STEP_SIZE;
+telemetry.addData("Status", "Servo initialized");
+telemetry.addData("Position", "%.2f", targetPosition);
+telemetry.update();
+```
+
+Leave the existing `waitForStart()` directly below this code in **Area 2**.
+
+## Part 3 — Change the target with the D-pad
+
+Inside the active loop in **Area 3**, add:
+
+```java
+if (gamepad1.dpadUpWasPressed()) {
+    targetPosition += POSITION_STEP;
 }
 
-requestedPosition = Range.clip(
-        requestedPosition,
-        MIN_TEST_POSITION,
-        MAX_TEST_POSITION);
-positionServo.setPosition(requestedPosition);
+if (gamepad1.dpadDownWasPressed()) {
+    targetPosition -= POSITION_STEP;
+}
 ```
 
-If both buttons are newly pressed together, this rule makes no change. `Range.clip`
-prevents the variable from crossing the chosen test limits. At a limit, another
-press requests the same boundary value rather than moving farther.
+`dpadUpWasPressed()` and `dpadDownWasPressed()` are true once for each new
+press. Holding a direction does not repeatedly change the target.
 
-### 5. Report the command and save button history
+## Part 4 — Keep the target in range
 
-At the end of each loop:
+Immediately after the D-pad code in **Area 3**, add:
 
 ```java
-telemetry.addData("Requested position", "%.2f", requestedPosition);
-telemetry.addData("Servo command", "%.2f", positionServo.getPosition());
+targetPosition = Range.clip(targetPosition, 0.0, 1.0);
+```
+
+This keeps the command inside the FTC servo range even if the student continues
+pressing the D-pad at an endpoint.
+
+## Part 5 — Command the servo and show telemetry
+
+Add this next, still inside the loop in **Area 3**:
+
+```java
+positionServo.setPosition(targetPosition);
+
+telemetry.addData("Target position", "%.2f", targetPosition);
+telemetry.addData(
+        "Commanded position",
+        "%.2f",
+        positionServo.getPosition());
 telemetry.update();
-
-previousIncreaseButton = increaseButton;
-previousDecreaseButton = decreaseButton;
 ```
 
-Saving the current states prepares the next loop to detect a new edge. The two
-telemetry values normally match because neither one measures the horn's physical
-position.
+- `targetPosition` is the value calculated by your program.
+- `getPosition()` is the position command stored by the servo object. It is not
+  physical feedback from the servo.
 
-## Student task
+## Part 6 — Run and observe
 
-Implement an OpMode that:
+- Build and deploy the project.
+- Press INIT and confirm the servo moves to position `0.0`.
+- Press PLAY.
+- Press D-pad Up several times and confirm each press adds `0.05`.
+- Press D-pad Down and confirm each press subtracts `0.05`.
+- Hold a D-pad direction and confirm the position changes only once.
+- Confirm telemetry never shows a target below `0.0` or above `1.0`.
+- Compare the servo's movement with the telemetry values.
 
-1. Maps `position_servo` and initializes it to a conservative center position.
-2. Waits for Start and honors Stop.
-3. Moves one small increment for each selected increase-button press.
-4. Moves one small increment for each selected decrease-button press.
-5. Clips the requested value to the experimental range.
-6. Displays requested position and reported servo position in telemetry.
-7. Never scans automatically from `0.0` to `1.0`.
-
-Build after mapping and initialization, then test one button and one direction at
-a time. Do not wait until the whole checklist is finished to discover a wrong
-configuration name or unsafe starting position.
-
-Test one increment at a time. Observe the mechanism after every change. If the
-motion approaches interference or strain, stop, return to the last safe value, and
-record the limit.
-
-After finding three conservative useful positions, replace the exploratory
-numbers with named constants such as:
-
-```java
-private static final double HOME_POSITION = 0.48;
-private static final double MID_POSITION = 0.52;
-private static final double ACTIVE_POSITION = 0.58;
-```
-
-The example values are placeholders. Use the safe values supported by your test
-evidence. Map three separate buttons to the named positions and keep telemetry.
-You can reuse the same rising-edge pattern, replacing the `STEP_SIZE` calculation
-with assignment to the selected named position.
-
-## Review another student's pull request
-
-When reviewing this lesson, look for:
-
-- a narrow, evidence-based range;
-- constants named for mechanism intent;
-- one action per button press;
-- telemetry that distinguishes requested from measured behavior; and
-- no unrelated changes to SDK or sample files.
-
-Do not approve solely because the project builds. Ask what physical movement was
-observed at each named position.
+Press Driver Station Stop immediately if the servo approaches interference or
+places strain on the mechanism.
 
 ## Git checkpoint
 
-Commit, push, and open a pull request into your personal branch. Include the three
-tested positions and observed movement in the description. Review another
-student's servo pull request while yours is awaiting review, then merge the
-approved work and update `student/<your-name>`.
+In Android Studio:
+
+- confirm the current branch is `feature/<your-name>/positional-servo`;
+- inspect the `PositionalServoOpMode.java` diff;
+- commit with a focused message such as `Add positional servo control`;
+- push and open a pull request into `student/<your-name>`;
+- describe how INIT, D-pad Up, and D-pad Down moved the servo;
+- obtain a review and merge the pull request; and
+- update your local personal branch before starting Lesson 4.
 
 ## Ask your AI tutor
 
-> Review my positional-servo OpMode without editing. Find commands outside my
-> documented safe range, unexplained numeric positions, and buttons that could
-> trigger repeatedly while held. Ask me for physical test evidence for each named
-> position.
+> Review my positional-servo OpMode without editing it. Check that each D-pad
+> press changes the target once, the position stays between 0.0 and 1.0, and my
+> telemetry distinguishes the calculated target from the stored command.
 
 ## Check your work
 
 You are finished when:
 
-- one button press produces one intended movement;
-- all commands stay within the tested safe range;
-- three meaningful positions have descriptive names;
-- telemetry reports the commanded value accurately;
-- you can explain why `getPosition()` is not physical feedback; and
-- the reviewed change is merged into your personal branch.
-
-## Reflect
-
-Why is `0.0–1.0` a valid API range but not automatically a safe mechanism range?
+- INIT commands position `0.0`;
+- each D-pad press changes the target by `0.05`;
+- holding the D-pad does not repeatedly change the target;
+- all commands stay between `0.0` and `1.0`;
+- telemetry shows the target and commanded positions; and
+- you can explain why `getPosition()` is not physical feedback.
 
 Continue to
 [Lesson 4: Continuous-Rotation Servos](../04-continuous-rotation-servos/README.md).
