@@ -28,17 +28,34 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-![The Android Studio branch selector showing a personal student branch.](../../docs/images/level-2/android-studio-personal-branch.png)
-
 Complete [Level 2 Setup](../../docs/level-2-setup.md). Android Studio should show
 `student/<your-name>` as the current branch, and the unchanged `TeamCode` module
 should build successfully.
 
-Read the hardware repository's
-[Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md).
-Confirm that the motor is configured as `bench_motor`. The quoted configuration
-name in Java must match the Driver Station configuration exactly, including
-capitalization.
+![The Android Studio branch selector showing a personal student branch.](../../docs/images/level-2/android-studio-personal-branch.png)
+
+Before Java can control a device, the active Driver Station configuration must
+connect a configuration name to the device type and physical Control Hub port.
+Lesson 1 needs the first hardware entry from the lab configuration:
+
+| Test-bench device | FTC SDK type | Configuration name |
+|---|---|---|
+| DC motor with encoder | `DcMotor` | `bench_motor` |
+
+Your Java code retrieves that configured device through `hardwareMap`:
+
+```java
+DcMotor benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
+```
+
+`DcMotor.class` is the device type Java expects. `"bench_motor"` must match the
+name in the active Driver Station configuration exactly, including capitalization.
+`benchMotor` is only the Java variable name, so it does not need to match.
+
+You only need to configure `bench_motor` for this lesson. If you prefer, you can
+set up every test-bench device now by following the
+[Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md)
+in Student Reference.
 
 ## Part 1 — Create the feature branch
 

@@ -48,6 +48,7 @@
 
 * [Set Up GitHub and Git](docs/github-and-git-setup.md)
 * [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
+* [Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md)
 * [Robot Code Architecture](docs/robot-code-architecture.md)
 * [Install Visual Studio Code](docs/vscode-setup.md)
 * [Install Java on Windows](docs/windows-setup.md)
