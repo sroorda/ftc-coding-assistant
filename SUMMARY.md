@@ -24,7 +24,7 @@
 * [Level 2 Setup](docs/level-2-setup.md)
 * [Lesson 1: Your First Hardware OpMode](level-2/01-first-hardware-opmode/README.md)
 * [Lesson 2: Telemetry and Logging](level-2/02-telemetry-and-logging/README.md)
-* [Lesson 3: Motors and Encoders](level-2/03-motors-and-encoders/README.md)
+* [Lesson 3: Encoders and Measured Movement](level-2/03-motors-and-encoders/README.md)
 * [Lesson 4: Positional Servos](level-2/04-positional-servos/README.md)
 * [Lesson 5: Continuous-Rotation Servos](level-2/05-continuous-rotation-servos/README.md)
 * [Lesson 6: Digital Sensors and Limits](level-2/06-digital-sensors-and-limits/README.md)

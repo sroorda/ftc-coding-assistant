@@ -1,376 +1,444 @@
-# Lesson 3: Motors, Encoders, and Controlled Motion
+# Lesson 3: Encoders and Measured Movement
 
-Open-loop power tells a motor how hard to run, not how far to move. You will read
-the encoder, choose motor settings deliberately, and make a bounded movement that
-cannot wait forever.
+Power tells a motor how hard to run. An encoder lets the program measure shaft
+rotation and move toward a repeatable target. In this lesson, you will attach a
+marked wheel to the fixed test bench, calculate how encoder ticks relate to the
+wheel, and command a specific distance around the wheel's rim.
+
+The test bench will not travel across the floor. The wheel provides a visible way
+to connect encoder counts, revolutions, angles, and calculated distance.
 
 ## Your mission
 
 | | |
 |---|---|
 | **Time** | 90–120 minutes |
-| **FTC focus** | direction, zero-power behavior, encoders, run modes, timeout |
-| **Git focus** | inspect history and isolate one behavioral change |
-| **AI tutor** | trace every exit path from the movement loop |
+| **FTC focus** | encoder ticks, ticks per revolution, `RUN_TO_POSITION`, distance conversion |
+| **Git focus** | inspect a visual diff and review the calculation separately from the motor code |
+| **AI tutor** | verify units, formulas, and target calculations without inventing hardware values |
 
 ## Your goal
 
 By the end of this lesson, you can:
 
-- explain power direction separately from encoder position;
-- choose a zero-power behavior and run mode for a stated reason;
-- command a relative encoder move; and
-- guarantee that target completion, timeout, or Stop ends motor power.
+- explain what an encoder tick represents;
+- find the configured ticks-per-revolution value for a motor;
+- verify one output-shaft revolution using a marked wheel;
+- convert wheel diameter and gearing into ticks per unit of distance; and
+- command and observe a specific calculated wheel-rim distance.
 
 ## Get ready
 
 Update `student/<your-name>` and create:
 
 ```text
-feature/<your-name>/motor-encoders
+feature/<your-name>/encoder-distance
 ```
 
-Create `EncoderMoveOpMode.java` in the Level 2 package so the first OpMode remains
-available for comparison. Confirm that:
+Create `EncoderDistanceOpMode.java` in the Level 2 package. Leave the earlier
+OpModes available for comparison.
 
-- the active branch is `feature/<your-name>/motor-encoders`;
-- `bench_motor` still matches the active Driver Station configuration;
-- the motor's encoder cable is connected to the Control Hub; and
-- the mechanism can turn a small amount without interference.
+Prepare the fixed test bench:
 
-Do not turn the mechanism to “check the encoder” yet. First write code that makes
-the encoder reading visible.
+- confirm `bench_motor` matches the active Driver Station configuration;
+- confirm the motor's encoder cable is connected;
+- attach a wheel securely to the motor output shaft;
+- confirm the wheel can rotate without striking the bench or nearby objects;
+- measure the wheel diameter in inches; and
+- place a visible tape mark on the wheel and a stationary reference mark on the
+  bench.
 
-## Part 1 — Observe the encoder without moving the motor
+The wheel will move under motor power. Do not try to turn the motor shaft by hand.
 
-An encoder converts shaft rotation into a changing count. FTC reports that count
-with `getCurrentPosition()`. The value is measured in encoder ticks, not degrees,
-inches, or a known mechanism position.
+## Part 1 — Why use an encoder?
 
-### 1. Create a zero-power observation OpMode
+Running a motor at a particular power for a particular time does not guarantee a
+repeatable movement. Battery voltage, friction, and load can change the result.
 
-Start `EncoderMoveOpMode.java` with this complete observation program:
+An encoder allows the program to:
+
+- count shaft rotation;
+- move toward a repeatable rotational target;
+- compare requested and reported movement; and
+- stop based on position rather than time alone.
+
+An encoder does not automatically know:
+
+- the wheel diameter;
+- any external gear ratio;
+- how many inches a point on the wheel rim traveled;
+- whether a wheel slipped; or
+- the mechanism's absolute physical position.
+
+`getCurrentPosition()` returns a signed encoder count relative to the most recent
+software reset. The count is measured in ticks—not degrees, revolutions, or
+inches.
 
 ```java
-package org.firstinspires.ftc.teamcode.level2;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-@TeleOp(name = "L2 Encoder Move", group = "Level 2")
-public class EncoderMoveOpMode extends LinearOpMode {
-    private DcMotor benchMotor;
-
-    @Override
-    public void runOpMode() {
-        benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
-        benchMotor.setPower(0.0);
-
-        telemetry.addData("Status", "Encoder observer ready");
-        telemetry.update();
-
-        waitForStart();
-
-        while (opModeIsActive()) {
-            telemetry.addData(
-                    "Current position",
-                    benchMotor.getCurrentPosition());
-            telemetry.update();
-            idle();
-        }
-
-        benchMotor.setPower(0.0);
-    }
-}
+int currentTicks = benchMotor.getCurrentPosition();
 ```
 
-The OpMode maps the same motor as Lesson 1 but always commands zero power. The
-active loop repeatedly reads and displays the encoder count.
+Your code must supply the mechanical information that gives those ticks physical
+meaning.
 
-### 2. Build and verify the encoder
+## Part 2 — Find ticks per revolution
 
-- Build `TeamCode` before connecting to the test bench.
-- Connect and deploy with the USB cable.
-- Select **L2 Encoder Move**, press INIT, then PLAY.
-- Confirm the motor remains stopped.
-- If the mechanism can be moved safely by hand, turn it slowly while watching
-  `Current position` on the Driver Station.
-- Turn it in the opposite direction and watch the count change the other way.
+Ticks per revolution tells you how many encoder counts represent one complete
+motor-output-shaft revolution.
 
-If the value never changes, stop and check the encoder cable and configured motor
-type before writing movement code. A successful build cannot prove that an
-encoder is electrically connected.
+### Find the manufacturer value
 
-## Part 2 — Make three motor decisions
+Identify the exact motor and gearbox installed on the bench. Use the model label
+or product number to find the manufacturer's ticks-per-output-revolution value.
+Do not use a value from a different Yellow Jacket gear ratio merely because the
+motors look alike.
 
-Mapping a `DcMotor` does not explain how this mechanism should behave. Make these
-three decisions explicitly before commanding encoder motion.
-
-### Decision 1: Which physical direction is positive?
-
-Add a direction immediately after the motor is mapped:
+Add the verified value as a named class constant:
 
 ```java
-benchMotor.setDirection(DcMotor.Direction.FORWARD);
+private static final double MOTOR_TICKS_PER_REV = 0.0;
 ```
 
-`Direction` defines the motor's logical positive direction. It affects how future
-power commands and encoder direction are interpreted by the SDK.
+`0.0` is a safe placeholder that cannot request a revolution. Replace it with the
+manufacturer value only after identifying the installed motor.
 
-- Choose `FORWARD` if its positive direction matches the convention you want for
-  the test bench.
-- Choose `REVERSE` if the opposite physical rotation should be positive.
-- Do not change direction merely to make one target number look convenient.
-- Calling `setDirection(...)` does not power or move the motor.
+### Compare it with the configured motor type
 
-Keep the selected direction unchanged for the rest of the lesson so power signs,
-encoder counts, and targets keep the same meaning.
-
-### Decision 2: What should happen at zero power?
-
-Add the zero-power behavior after direction:
+After mapping the motor, ask the FTC SDK for the value stored by the active motor
+configuration:
 
 ```java
-benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-```
+double configuredTicksPerRevolution =
+        benchMotor.getMotorType().getTicksPerRev();
 
-`ZeroPowerBehavior` applies only when the requested motor power is zero:
-
-| Choice | Result at zero power |
-|---|---|
-| `BRAKE` | The controller electrically resists rotation. |
-| `FLOAT` | The motor is allowed to coast more freely. |
-
-- `BRAKE` does not command a precise encoder position.
-- `FLOAT` does not guarantee immediate stopping.
-- Neither choice replaces `benchMotor.setPower(0.0)`.
-
-Use `BRAKE` for this bounded bench move and explain why. With power still at zero,
-you may compare the feel of `BRAKE` and `FLOAT` by turning the shaft by hand only
-when the mechanism permits it safely.
-
-### Decision 3: How should the controller use the encoder?
-
-The run mode determines what the motor controller does with encoder information:
-
-| Run mode | Purpose in this lesson |
-|---|---|
-| `RUN_WITHOUT_ENCODER` | Apply power without encoder-based speed regulation. The count can still be read. |
-| `RUN_USING_ENCODER` | Apply power while using encoder feedback to regulate motor speed. |
-| `STOP_AND_RESET_ENCODER` | Set the current encoder count to software zero. It is a reset step, not a movement mode. |
-| `RUN_TO_POSITION` | Move toward a target encoder count while power is applied. |
-
-Establish the starting software zero during initialization:
-
-```java
-benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-telemetry.addData("Status", "Encoder zeroed");
-telemetry.addData("Current position", benchMotor.getCurrentPosition());
+telemetry.addData(
+        "Configured ticks/revolution",
+        "%.1f",
+        configuredTicksPerRevolution);
+telemetry.addData(
+        "Manufacturer ticks/revolution",
+        "%.1f",
+        MOTOR_TICKS_PER_REV);
 telemetry.update();
 ```
 
-- Stop power before resetting the encoder.
-- `STOP_AND_RESET_ENCODER` does not physically move or home the mechanism.
-- Select another run mode immediately after the reset.
-- The displayed current position after the reset should be at or near zero.
+This value comes from the motor type selected in the Driver Station configuration.
+The Java method can return a number even when the wrong motor type was selected,
+so configuration is part of the calculation—not merely a name used by
+`hardwareMap`.
 
-Your three decisions are now visible together:
+Check the value three ways:
+
+- identify the exact motor and gearbox installed on the bench;
+- find its ticks-per-output-revolution value in the manufacturer's specifications;
+  and
+- compare that specification with `getTicksPerRev()` telemetry.
+
+Keep both values as `double`. Gearbox ratios can produce a fractional number of
+ticks per output revolution. If the values do not agree, do not enable movement.
+Recheck the motor model and Driver Station motor type, then update the hardware
+configuration or Hardware Lab Contract before continuing.
+
+## Part 3 — Command exactly one revolution
+
+The motor cannot be turned by hand, so use a conservative powered movement to
+verify ticks per revolution.
+
+### 1. Map and prepare the motor
+
+Start the OpMode with these fields:
+
+```java
+private static final double TEST_POWER = 0.20;
+private static final double TIMEOUT_SECONDS = 5.0;
+private static final double MOTOR_TICKS_PER_REV = 0.0;
+
+private DcMotor benchMotor;
+private final ElapsedTime runtime = new ElapsedTime();
+```
+
+Add this import with the other imports:
+
+```java
+import com.qualcomm.robotcore.util.ElapsedTime;
+```
+
+During initialization:
 
 ```java
 benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
 benchMotor.setPower(0.0);
 benchMotor.setDirection(DcMotor.Direction.FORWARD);
 benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+double configuredTicksPerRevolution =
+        benchMotor.getMotorType().getTicksPerRev();
+
 benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 ```
 
-Replace `FORWARD` only if your chosen physical convention requires `REVERSE`.
+These settings have specific jobs:
 
-## Part 3 — Plan a bounded move
+- `Direction.FORWARD` defines the sign used for this test. Use `REVERSE` only if
+  the opposite physical rotation should be positive.
+- `BRAKE` makes zero power resist rotation; it does not hold an exact position.
+- `STOP_AND_RESET_ENCODER` establishes software zero; it does not physically home
+  the wheel.
+- `RUN_USING_ENCODER` leaves reset mode and prepares the motor for encoder-aware
+  operation.
 
-Choose a small relative move that is safe on the bench. Identify:
+Before `waitForStart()`, display both ticks-per-revolution values. Do not continue
+until `MOTOR_TICKS_PER_REV` contains the verified manufacturer value and it agrees
+with the configured value.
 
-- the starting encoder count;
-- a small requested count change;
-- the calculated target;
-- a positive power magnitude no greater than `0.25`;
-- a short timeout; and
-- every condition that can end the move.
+### 2. Convert one revolution into a target
 
-Before coding, predict:
-
-- whether the target will be positive or negative;
-- which physical direction the motor will rotate;
-- approximately where the final encoder count should be; and
-- which condition should end a successful move.
-
-## Part 4 — Build the bounded move
-
-### 1. Add named movement values and a timer
-
-Add the timer import and class fields:
+One output revolution should equal the configured ticks-per-revolution value:
 
 ```java
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-private static final int MOVE_TICKS = 200;
-private static final double MOVE_POWER = 0.25;
-private static final double TIMEOUT_SECONDS = 3.0;
-
-private final ElapsedTime runtime = new ElapsedTime();
+int oneRevolutionTicks =
+        (int) Math.round(MOTOR_TICKS_PER_REV);
 ```
 
-`MOVE_TICKS` is a relative count change, not a universal distance. Replace `200`
-with a smaller value if that is safer for the bench.
+Use `Math.round()` only when producing the final integer target. Do not discard the
+fraction earlier in the calculation.
 
-### 2. Calculate the target only after Start
+### 3. Command and observe the revolution
 
-Replace the observation loop with this active check and target calculation:
+After `waitForStart()`, guard the one-time movement commands:
 
 ```java
-waitForStart();
-
-String exitReason = "Stopped before move";
-int targetPosition = benchMotor.getCurrentPosition();
-
 if (opModeIsActive()) {
-    int startingPosition = benchMotor.getCurrentPosition();
-    targetPosition = startingPosition + MOVE_TICKS;
+    benchMotor.setTargetPosition(oneRevolutionTicks);
+    benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    runtime.reset();
+    benchMotor.setPower(TEST_POWER);
 
-    // Target, mode, power, and wait code goes here.
+    while (opModeIsActive()
+            && benchMotor.isBusy()
+            && runtime.seconds() < TIMEOUT_SECONDS) {
+        telemetry.addData("Target ticks", oneRevolutionTicks);
+        telemetry.addData(
+                "Current ticks",
+                benchMotor.getCurrentPosition());
+        telemetry.update();
+        idle();
+    }
 }
-```
 
-The active check prevents one-time motor commands from running if Stop was pressed
-while `waitForStart()` was waiting. A negative `MOVE_TICKS` value requests the
-opposite encoder direction.
-
-### 3. Set target, mode, timer, and power in order
-
-Inside the active check:
-
-```java
-benchMotor.setTargetPosition(targetPosition);
-benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-runtime.reset();
-benchMotor.setPower(MOVE_POWER);
-```
-
-- Set the target before selecting `RUN_TO_POSITION`.
-- Use a positive power magnitude in `RUN_TO_POSITION`.
-- The target count determines the movement direction.
-- Reset the timer once when the move begins, not inside the wait loop.
-
-### 4. Wait only while every condition allows motion
-
-```java
-while (opModeIsActive()
-        && benchMotor.isBusy()
-        && runtime.seconds() < TIMEOUT_SECONDS) {
-    telemetry.addData("Target", targetPosition);
-    telemetry.addData("Current", benchMotor.getCurrentPosition());
-    telemetry.addData("Busy", benchMotor.isBusy());
-    telemetry.addData("Elapsed", "%.1f s", runtime.seconds());
-    telemetry.update();
-    idle();
-}
-```
-
-- `opModeIsActive()` ends the wait when the driver presses Stop.
-- `isBusy()` becomes false when the controller considers the target reached.
-- the timer ends the wait if the movement takes too long.
-- `idle()` gives the runtime an opportunity to perform other work; it does not
-  replace any loop condition.
-
-### 5. Identify the exit reason inside the active check
-
-Immediately after the wait loop:
-
-```java
-if (!opModeIsActive()) {
-    exitReason = "Driver Station Stop";
-} else if (!benchMotor.isBusy()) {
-    exitReason = "Target reached";
-} else {
-    exitReason = "Timed out";
-}
-```
-
-The three branches correspond to the three wait conditions. Do not assume that
-leaving the loop automatically means the target was reached.
-
-### 6. Put cleanup outside the active check
-
-```java
 benchMotor.setPower(0.0);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+```
 
-telemetry.addData("Exit", exitReason);
-telemetry.addData("Target", targetPosition);
-telemetry.addData("Final position", benchMotor.getCurrentPosition());
+The order matters:
+
+- set the target before selecting `RUN_TO_POSITION`;
+- use a positive power magnitude—the target determines direction;
+- reset the timeout once before movement; and
+- place zero-power cleanup outside the active check so every exit reaches it.
+
+### 4. Run the one-revolution test
+
+- Align the wheel's tape mark with the stationary reference mark.
+- Press INIT and confirm the configured and manufacturer values agree.
+- Press PLAY and watch the wheel move at limited power.
+- Confirm the tape mark returns approximately to the reference after one
+  revolution.
+- Compare the final encoder count with `oneRevolutionTicks`.
+- Press Driver Station Stop immediately if the wheel approaches interference.
+
+If the wheel does not complete approximately one revolution, investigate the
+configured motor type, installed gearbox, wheel attachment, encoder cable, and
+target calculation before changing power.
+
+## Part 4 — Convert ticks into wheel-rim distance
+
+A point on the edge of a wheel travels one circumference during one wheel
+revolution:
+
+```text
+wheel circumference = π × wheel diameter
+```
+
+If the wheel is attached directly to the motor output shaft, one motor-output
+revolution equals one wheel revolution:
+
+```text
+motor revolutions per wheel revolution = 1.0
+```
+
+If external gears or chain are added later:
+
+```text
+motor revolutions per wheel revolution
+    = driven wheel gear teeth ÷ motor gear teeth
+```
+
+For example, a 12-tooth motor gear driving a 24-tooth wheel gear requires two
+motor revolutions for one wheel revolution.
+
+### Calculate ticks per inch
+
+Add measured mechanism values:
+
+```java
+private static final double WHEEL_DIAMETER_INCHES = 4.0;
+private static final double MOTOR_REVS_PER_WHEEL_REV = 1.0;
+private static final double MOVE_DISTANCE_INCHES = 6.0;
+```
+
+The example diameter is a placeholder. Replace it with the wheel measurement from
+your bench.
+
+Using the verified manufacturer value, calculate:
+
+```java
+double wheelCircumferenceInches =
+        Math.PI * WHEEL_DIAMETER_INCHES;
+
+double ticksPerInch =
+        MOTOR_TICKS_PER_REV
+        * MOTOR_REVS_PER_WHEEL_REV
+        / wheelCircumferenceInches;
+
+int moveTicks =
+        (int) Math.round(MOVE_DISTANCE_INCHES * ticksPerInch);
+```
+
+Track the units through the calculation:
+
+```text
+ticks              motor revolutions          1 wheel revolution
+---------------- × ------------------------ × --------------------
+motor revolution   wheel revolution            circumference
+
+= ticks per inch
+```
+
+### Predict the visible wheel movement
+
+Calculate how much of a wheel revolution the requested rim distance represents:
+
+```java
+double expectedWheelRevolutions =
+        MOVE_DISTANCE_INCHES / wheelCircumferenceInches;
+
+double expectedWheelDegrees =
+        expectedWheelRevolutions * 360.0;
+```
+
+Display the calculation before movement:
+
+```java
+telemetry.addData("Wheel diameter", "%.2f in", WHEEL_DIAMETER_INCHES);
+telemetry.addData("Wheel circumference", "%.2f in", wheelCircumferenceInches);
+telemetry.addData("Ticks/revolution", "%.1f", MOTOR_TICKS_PER_REV);
+telemetry.addData("Ticks/inch", "%.2f", ticksPerInch);
+telemetry.addData("Requested distance", "%.2f in", MOVE_DISTANCE_INCHES);
+telemetry.addData("Target ticks", moveTicks);
+telemetry.addData("Expected wheel turn", "%.1f degrees", expectedWheelDegrees);
 telemetry.update();
 ```
 
-Cleanup remains reachable when the target is reached, the timer expires, Stop is
-pressed, or the OpMode never becomes active. The final power command must be zero.
+Students should be able to explain every displayed value before pressing PLAY.
 
-## Test one exit path at a time
+## Part 5 — Move a calculated distance
 
-- Run a small positive move and compare the target with the final count.
-- Change only `MOVE_TICKS` and run a small negative move.
-- Test the timeout by temporarily using a very short time—not by holding or
-  jamming the mechanism.
-- Press Driver Station Stop during a move.
-- Restore the normal timeout before committing.
+Replace the one-revolution target with the calculated distance target:
 
-Exact target equality is not required to determine whether the bounded move
-behaved correctly. The important result is that every exit path reaches zero
-power and reports why it ended.
+```java
+int startingPosition = benchMotor.getCurrentPosition();
+int targetPosition = startingPosition + moveTicks;
+```
+
+Use `targetPosition` with the same limited-power `RUN_TO_POSITION` sequence and
+timeout from Part 3.
+
+Before each test, complete this prediction table:
+
+| Value | Prediction |
+|---|---:|
+| Configured ticks per motor revolution | |
+| Manufacturer ticks per motor revolution | |
+| Measured wheel diameter | |
+| Calculated wheel circumference | |
+| Motor revolutions per wheel revolution | |
+| Calculated ticks per inch | |
+| Requested rim distance | |
+| Calculated move ticks | |
+| Expected wheel revolutions | |
+| Expected wheel degrees | |
+
+Test the calculation in this order:
+
+- request one wheel circumference and verify approximately one full revolution;
+- request half the circumference and verify approximately half a revolution;
+- request one quarter of the circumference and verify approximately a quarter
+  revolution;
+- request a different safe rim distance and compare the observed wheel angle with
+  the predicted degrees; and
+- use a negative distance and verify the wheel moves the opposite direction.
+
+The fixed bench does not travel the requested number of inches. The calculated
+distance describes how far a point on the wheel rim would travel along the wheel's
+circular path.
+
+## Understand the limits of the calculation
+
+The encoder can report the intended shaft rotation accurately while calculated
+real-world travel is still imperfect. Sources of error include:
+
+- an incorrect Driver Station motor type;
+- using nominal rather than measured wheel diameter;
+- an incorrect external gear ratio;
+- wheel or hub slipping on the shaft;
+- gear backlash; and
+- rounding the tick calculation too early.
+
+On a future driving robot, wheel compression and floor slip add more error. An
+encoder measures rotation; it does not directly measure the robot's position on
+the field.
 
 ## Git checkpoint
 
 In Android Studio:
 
-- open the Commit window and confirm the current branch is
-  `feature/<your-name>/motor-encoders`;
-- confirm only `EncoderMoveOpMode.java` and other intentional lesson changes are
-  selected;
-- inspect every highlighted change before committing;
-- open **View → Tool Windows → Git**, select the **Log** tab, and find where the
-  feature branch starts from the latest commit on `student/<your-name>`;
-- commit with a focused message such as `Add bounded encoder move`;
+- confirm the current branch is `feature/<your-name>/encoder-distance`;
+- inspect the `EncoderDistanceOpMode.java` diff in the Commit window;
+- check that wheel measurements and conversion constants are named and explained;
+- commit with a focused message such as `Add encoder distance calculation`;
 - push the feature branch and open a pull request into
   `student/<your-name>`;
-- include the positive, negative, timeout, and Stop test results in the pull
+- include the completed prediction table and observed wheel movements in the pull
   request description;
 - obtain a review and merge the pull request; and
 - update your local personal branch before starting Lesson 4.
 
 ## Ask your AI tutor
 
-> Review my encoder OpMode without editing it. Trace the exact order of target,
-> run mode, power, timer, and loop operations. List every way the loop can end and
-> show whether each path reaches zero motor power. Do not suggest larger test
-> values.
+> Review my encoder-distance calculation without editing it. Track the units from
+> ticks per motor revolution through wheel circumference and target ticks. Ask me
+> for my configured motor type, manufacturer value, measured wheel diameter, and
+> observed wheel movement before deciding whether the calculation is correct.
 
 ## Check your work
 
 You are finished when:
 
-- encoder counts change consistently with shaft movement;
-- both requested directions complete a small move;
-- the wait exits on target, timeout, or Stop;
-- telemetry identifies the exit reason;
-- the motor is at zero power after every exit; and
-- you can explain why encoder reset is not physical homing.
+- configured and manufacturer ticks-per-revolution values agree;
+- the marked wheel completes approximately one revolution for one revolution's
+  worth of ticks;
+- the code calculates ticks per inch without premature integer rounding;
+- full-, half-, and quarter-revolution tests match the predictions;
+- a requested rim distance produces the predicted approximate wheel angle;
+- negative distance reverses the movement direction;
+- timeout, Stop, and normal completion all reach zero motor power; and
+- you can explain why encoder rotation is not the same as robot field position.
 
 ## Reflect
 
-What unsafe behavior could occur if `isBusy()` were the only condition in the
-movement loop?
+If the encoder reaches its calculated target but a future robot travels the wrong
+distance, which mechanical values and physical effects would you check first?
 
 Continue to [Lesson 4: Positional Servos](../04-positional-servos/README.md).

@@ -15,8 +15,8 @@ each line of code to what you observe.
    and understand its lifecycle.
 2. [Use telemetry and logging](../level-2/02-telemetry-and-logging/README.md) to
    observe what the robot is doing.
-3. [Control a DC motor with encoders](../level-2/03-motors-and-encoders/README.md),
-   stop checks, and timeouts.
+3. [Convert encoder ticks into measured wheel movement](../level-2/03-motors-and-encoders/README.md)
+   and command a calculated wheel-rim distance.
 4. [Move a positional servo](../level-2/04-positional-servos/README.md) through
    named, mechanically safe positions.
 5. [Control and reliably stop a continuous-rotation servo](../level-2/05-continuous-rotation-servos/README.md).

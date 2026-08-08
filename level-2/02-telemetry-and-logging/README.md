@@ -283,4 +283,5 @@ You are finished when:
 What information is useful to the driver right now but would become noise in a
 persistent log?
 
-Continue to [Lesson 3: Motors and Encoders](../03-motors-and-encoders/README.md).
+Continue to
+[Lesson 3: Encoders and Measured Movement](../03-motors-and-encoders/README.md).
