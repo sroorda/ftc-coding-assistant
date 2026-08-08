@@ -131,7 +131,7 @@ Student Level 2 code belongs under the `TeamCode` module in the
 page explains this module boundary and where the official samples live.
 
 The hardware repository's
-[Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md)
+[Hardware Lab Contract](hardware-lab-contract.md)
 records the package boundary, device configuration names, and branch conventions
 used by the lessons.
 

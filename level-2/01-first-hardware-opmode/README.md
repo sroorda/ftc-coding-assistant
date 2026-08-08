@@ -55,7 +55,7 @@ DcMotor benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
 
 You only need to configure `bench_motor` for this lesson. If you prefer, you can
 set up every test-bench device now by following the
-[Hardware Lab Contract](https://github.com/sroorda/ftc-hardware-lab/blob/main/docs/HARDWARE_LAB.md)
+[Hardware Lab Contract](../../docs/hardware-lab-contract.md)
 in Student Reference.
 
 ## Part 1 — Create the feature branch
