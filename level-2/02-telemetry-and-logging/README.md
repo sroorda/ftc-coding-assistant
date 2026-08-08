@@ -33,6 +33,9 @@ feature/<your-name>/telemetry-logging
 Open `FirstHardwareOpMode.java`. Before editing, run it once and list three
 questions the Driver Station cannot currently answer.
 
+This lesson changes only what the program reports. The joystick-to-motor behavior
+from Lesson 1 should remain the same.
+
 ## Telemetry versus logging
 
 Telemetry is live information sent to the Driver Station. Values added with
@@ -66,9 +69,95 @@ View live entries in Android Studio's Logcat window while connected to the Contr
 Hub and filter on `L2Hardware`. The exact Logcat interface may differ by Android
 Studio version; preserve the tag so the filter remains useful.
 
-## Student task
+## Complete one area at a time
 
-Improve the Lesson 1 OpMode so it provides:
+Add and test each area below before moving to the next. Keep the motor limited to
+the same power used in Lesson 1.
+
+### 1. Add the logging import and tag
+
+Place the import with the other imports and the constant inside the class:
+
+```java
+import com.qualcomm.robotcore.util.RobotLog;
+
+private static final String LOG_TAG = "L2Hardware";
+```
+
+The tag gives related log messages one searchable name. It does not appear on the
+Driver Station unless you also add it to telemetry.
+
+### 2. Report that initialization finished
+
+After the motor is mapped and its safe defaults are applied, add:
+
+```java
+telemetry.addData("Status", "Initialized");
+telemetry.update();
+RobotLog.ii(LOG_TAG, "OpMode initialized");
+```
+
+`addData(...)` prepares one Driver Station line. `update()` sends the prepared
+telemetry. The log call records a separate event for Logcat. The expected result
+after INIT is a stationary motor, `Status: Initialized` on the Driver Station,
+and one initialization event in Logcat.
+
+### 3. Record Start without mislabeling an early Stop
+
+Use the lifecycle condition to record Start only if the OpMode is actually active:
+
+```java
+waitForStart();
+
+if (opModeIsActive()) {
+    RobotLog.ii(LOG_TAG, "OpMode started");
+}
+```
+
+This guard matters because `waitForStart()` can also return after STOP. Unlike the
+Lesson 1 loop, this is a one-time action after the wait, so its condition must be
+checked explicitly.
+
+### 4. Make each motor command observable
+
+Keep the three values separate inside the active loop:
+
+```java
+double rawStickY = gamepad1.left_stick_y;
+double requestedPower = -rawStickY * 0.25;
+benchMotor.setPower(requestedPower);
+
+telemetry.addData("Status", "Running");
+telemetry.addData("Raw stick Y", "%.2f", rawStickY);
+telemetry.addData("Requested power", "%.2f", requestedPower);
+telemetry.addData("Applied power", "%.2f", benchMotor.getPower());
+telemetry.update();
+```
+
+- `rawStickY` is what the gamepad supplied.
+- `requestedPower` is what your calculation asked the motor to use.
+- `getPower()` reports the power command currently stored by the motor object; it
+  does not measure physical speed or torque.
+
+With the stick centered, all three numeric values should be close to zero. Moving
+the stick should show the sign change and the `0.25` limit.
+
+### 5. Record the normal end of the loop
+
+Keep the safe stop from Lesson 1, then log the lifecycle event:
+
+```java
+benchMotor.setPower(0.0);
+RobotLog.ii(LOG_TAG, "OpMode stopped");
+```
+
+These lines run after `opModeIsActive()` becomes false. The expected result is a
+zero motor-power command and one stopped event—not a repeated message from every
+loop.
+
+## Put the pieces together
+
+Your revised Lesson 1 OpMode should now provide:
 
 - `Initialized` telemetry before `waitForStart()`;
 - `Running` telemetry inside the active loop;
@@ -76,7 +165,7 @@ Improve the Lesson 1 OpMode so it provides:
 - calculated requested power;
 - power returned by `benchMotor.getPower()`;
 - an initialization log event;
-- a Start log event immediately after `waitForStart()`; and
+- a Start log event only when the OpMode becomes active; and
 - a stopped log event after the loop.
 
 Do not log on every loop. Do not include names, credentials, Wi-Fi information, or

@@ -68,6 +68,125 @@ private enum State {
 
 Reset a state timer only when entering a new state, not on every loop.
 
+## Build the state-machine frame first
+
+The final challenge is not a blank page. Build and test the control structure
+before enabling hardware motion.
+
+### 1. Store the current state, timer, and fault evidence
+
+```java
+private State currentState = State.IDLE;
+private final ElapsedTime stateTimer = new ElapsedTime();
+private String faultReason = "None";
+```
+
+`currentState` tells the loop which small piece of behavior to run. `stateTimer`
+measures only time spent in that state. `faultReason` preserves why the automation
+stopped instead of showing only the generic word `FAULT`.
+
+### 2. Change states through one method
+
+```java
+private void transitionTo(State nextState) {
+    currentState = nextState;
+    stateTimer.reset();
+}
+
+private void enterFault(String reason) {
+    bench.stopAll();
+    faultReason = reason;
+    transitionTo(State.FAULT);
+}
+```
+
+Calling one transition method prevents a forgotten timer reset. Do not call
+`transitionTo(currentState)` on every loop; that would keep elapsed time near zero
+and defeat every timeout. `enterFault(...)` stops powered outputs before recording
+the reason and changing state.
+
+### 3. Create one outer lifecycle loop
+
+```java
+bench.initialize(hardwareMap);
+telemetry.addData("Status", "Initialized");
+telemetry.update();
+
+waitForStart();
+transitionTo(State.IDLE);
+
+while (opModeIsActive()) {
+    // Check the interlock, run one state, and report telemetry.
+}
+
+bench.stopAll();
+```
+
+If STOP is pressed before Start, the loop is skipped and `stopAll()` still runs.
+If STOP is pressed during any state, the loop condition becomes false without
+waiting for the current automation sequence to finish.
+
+### 4. Add the switch with outputs disabled
+
+Start with a switch that changes states but requests zero powered output:
+
+```java
+switch (currentState) {
+    case IDLE:
+        bench.stopAll();
+        // A rising-edge button press may transition to HOMING.
+        break;
+
+    case HOMING:
+        bench.stopAll(); // Keep this disabled during the transition-only test.
+        if (bench.isMagneticLimitReached()) {
+            transitionTo(State.MOVING_TO_WORK);
+        } else if (stateTimer.seconds() >= HOMING_TIMEOUT_SECONDS) {
+            enterFault("Homing timeout");
+        }
+        break;
+
+    // Add one explicit case for every remaining state.
+}
+```
+
+There is no inner `while`. One case performs a small decision and returns control
+to the outer loop, which keeps Stop, telemetry, and interlocks responsive.
+
+### 5. Apply the interlock before powered-state logic
+
+Define which states can command motion, then check the touch sensor before their
+normal switch behavior:
+
+```java
+boolean poweredState = currentState == State.HOMING
+        || currentState == State.MOVING_TO_WORK
+        || currentState == State.POSITIONING
+        || currentState == State.FEEDING;
+
+if (poweredState && bench.isTouchPressed()) {
+    enterFault("Touch interlock");
+} else {
+    // Run the switch for the current state.
+}
+```
+
+`enterFault(...)` stops outputs before changing state. The `FAULT` case must also
+call `stopAll()` on every later loop rather than relying on the previous command.
+
+### 6. Report the decision on every outer loop
+
+```java
+telemetry.addData("State", currentState);
+telemetry.addData("State time", "%.1f s", stateTimer.seconds());
+telemetry.addData("Fault", faultReason);
+// Add the sensor values, targets, positions, and commands relevant to the state.
+telemetry.update();
+```
+
+During the first test, state and timer telemetry should change even though all
+outputs remain zero. Only then enable one hardware state at a time.
+
 ## Required behavior
 
 Implement this sequence:
@@ -93,6 +212,10 @@ At any active state, an activated touch sensor acts as an interlock and sends th
 automation to `FAULT`. Driver Station Stop must still end the outer loop
 immediately.
 
+The positional servo does not report physical arrival. In `POSITIONING`, the
+elapsed time is a documented allowance based on prior testing—not sensor proof
+that the mechanism reached the commanded position.
+
 If a simple digital LED is installed and configured as `status_led`, use it as an
 optional extension. Define and document what off/on means; do not assume the
 electrical polarity. Telemetry remains required even when the LED is present.
@@ -117,6 +240,12 @@ hardware test provides evidence that the model is incomplete or incorrect.
 For each transition, name the sensor reading, encoder condition, button edge, or
 elapsed-time condition that causes it. Avoid transitions based on comments such as
 “when ready” without a value the program can observe.
+
+Before writing a case, read one row aloud as:
+
+> While in this state, command these outputs. If this observable success condition
+> occurs, enter this next state. If this fault or timeout occurs, stop outputs and
+> enter `FAULT`.
 
 ## Implementation constraints
 

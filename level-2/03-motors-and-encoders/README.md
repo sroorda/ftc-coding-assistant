@@ -75,6 +75,133 @@ while (opModeIsActive()
 }
 ```
 
+Each condition answers a different safety question:
+
+- `opModeIsActive()` stops waiting when the driver presses Stop.
+- `benchMotor.isBusy()` stops waiting when the controller considers the target
+  reached.
+- `runtime.seconds() < timeoutSeconds` stops waiting when the move takes too long.
+
+## Complete one area at a time
+
+### 1. Map the motor and establish an encoder zero
+
+Add the timer import and create the devices used by the OpMode:
+
+```java
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+private DcMotor benchMotor;
+private final ElapsedTime runtime = new ElapsedTime();
+```
+
+During initialization, apply zero power before changing modes:
+
+```java
+benchMotor = hardwareMap.get(DcMotor.class, "bench_motor");
+benchMotor.setPower(0.0);
+benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+```
+
+`STOP_AND_RESET_ENCODER` changes the controller's current count to zero. It does
+not move the mechanism to a known physical location. `RUN_USING_ENCODER` then
+returns the motor to a mode that can report and regulate motion.
+
+Show the result before Start:
+
+```java
+telemetry.addData("Status", "Initialized");
+telemetry.addData("Encoder", benchMotor.getCurrentPosition());
+telemetry.update();
+```
+
+The motor should remain stationary and the displayed count should be at or very
+near zero.
+
+### 2. Calculate a relative target
+
+After `waitForStart()`, guard the one-time movement commands so they cannot run if
+STOP was pressed while waiting:
+
+```java
+waitForStart();
+
+if (opModeIsActive()) {
+    int startingPosition = benchMotor.getCurrentPosition();
+    int requestedChange = 200; // Replace with a small value safe for the bench.
+    int targetPosition = startingPosition + requestedChange;
+
+    // The remaining movement code belongs inside this active check.
+}
+```
+
+The target is relative to the measured starting count. A negative
+`requestedChange` requests the opposite encoder direction.
+
+### 3. Put the controller into position mode in the correct order
+
+Inside the active check, set the target before selecting `RUN_TO_POSITION`:
+
+```java
+benchMotor.setTargetPosition(targetPosition);
+benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+runtime.reset();
+benchMotor.setPower(0.25);
+```
+
+In `RUN_TO_POSITION`, use a positive power magnitude. The target relative to the
+current count determines the movement direction. `runtime.reset()` starts this
+move's timeout clock; resetting it inside the loop would prevent the timeout.
+
+### 4. Wait only while all three conditions allow it
+
+```java
+double timeoutSeconds = 3.0;
+
+while (opModeIsActive()
+        && benchMotor.isBusy()
+        && runtime.seconds() < timeoutSeconds) {
+    telemetry.addData("Target", targetPosition);
+    telemetry.addData("Current", benchMotor.getCurrentPosition());
+    telemetry.addData("Busy", benchMotor.isBusy());
+    telemetry.addData("Elapsed", "%.1f s", runtime.seconds());
+    telemetry.update();
+    idle();
+}
+```
+
+`idle()` gives the runtime an opportunity to perform other work while this OpMode
+has nothing else to do on that pass. It does not replace any loop guard.
+
+### 5. Stop first, then determine why the loop ended
+
+Every exit must reach the same cleanup:
+
+```java
+benchMotor.setPower(0.0);
+benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+String exitReason;
+if (!opModeIsActive()) {
+    exitReason = "Driver Station Stop";
+} else if (!benchMotor.isBusy()) {
+    exitReason = "Target reached";
+} else {
+    exitReason = "Timed out";
+}
+
+telemetry.addData("Exit", exitReason);
+telemetry.addData("Final position", benchMotor.getCurrentPosition());
+telemetry.update();
+```
+
+Place the zero-power and `RUN_USING_ENCODER` commands so they also execute when
+the OpMode never became active. Cleanup should not depend on a successful move.
+
 ## Student task
 
 Implement `EncoderMoveOpMode` so it:
@@ -84,7 +211,8 @@ Implement `EncoderMoveOpMode` so it:
 3. Resets the encoder during initialization.
 4. Changes to `RUN_USING_ENCODER` after resetting.
 5. Reports the zeroed encoder position before Start.
-6. Waits for Start and honors an early Stop request.
+6. Waits for Start and guards one-time movement commands with
+   `opModeIsActive()`.
 7. Calculates a target relative to the current position.
 8. Sets the target before selecting `RUN_TO_POSITION`.
 9. Starts an `ElapsedTime` timeout and applies limited positive power magnitude.
@@ -92,6 +220,10 @@ Implement `EncoderMoveOpMode` so it:
 11. Reports target, current position, busy state, and elapsed time.
 12. Sets power to zero and returns to `RUN_USING_ENCODER` after the wait.
 13. Reports whether the move ended by reaching the target, timing out, or Stop.
+
+The snippets show the required operations but not the complete method structure.
+Trace the braces and confirm that the movement commands are inside the active
+check while cleanup is reachable from every path.
 
 Run a small positive move, then a small negative move. Compare the requested target
 with the final encoder value; exact equality is not required to reason about

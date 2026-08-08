@@ -68,13 +68,25 @@ It should not:
 
 ## Start with a small class boundary
 
+### 1. Centralize configuration names and SDK devices
+
 Use this as structural guidance, not a completed solution:
 
 ```java
 public final class TestBenchHardware {
     private static final String MOTOR_NAME = "bench_motor";
+    private static final String POSITION_SERVO_NAME = "position_servo";
+    private static final String CONTINUOUS_SERVO_NAME = "continuous_servo";
+    private static final String TOUCH_SENSOR_NAME = "touch_sensor";
+    private static final String MAGNETIC_LIMIT_NAME = "magnetic_limit";
+    private static final String COLOR_SENSOR_NAME = "color_sensor";
 
     private DcMotor benchMotor;
+    private Servo positionServo;
+    private CRServo continuousServo;
+    private DigitalChannel touchSensor;
+    private DigitalChannel magneticLimit;
+    private ColorSensor colorSensor;
 
     public void initialize(HardwareMap hardwareMap) {
         // Map devices, configure modes, and apply safe defaults.
@@ -93,6 +105,119 @@ public final class TestBenchHardware {
     }
 }
 ```
+
+The constants are the Java side of the
+[Hardware Lab Contract](../../docs/hardware-lab-contract.md). The private fields
+prevent an OpMode from bypassing the operations this class will provide.
+
+### 2. Move mapping and safe defaults into initialization
+
+Start by moving tested code—not rewriting it from memory:
+
+```java
+public void initialize(HardwareMap hardwareMap) {
+    benchMotor = hardwareMap.get(DcMotor.class, MOTOR_NAME);
+    positionServo = hardwareMap.get(Servo.class, POSITION_SERVO_NAME);
+    continuousServo = hardwareMap.get(CRServo.class, CONTINUOUS_SERVO_NAME);
+    touchSensor = hardwareMap.get(DigitalChannel.class, TOUCH_SENSOR_NAME);
+    magneticLimit = hardwareMap.get(DigitalChannel.class, MAGNETIC_LIMIT_NAME);
+    colorSensor = hardwareMap.get(ColorSensor.class, COLOR_SENSOR_NAME);
+
+    touchSensor.setMode(DigitalChannel.Mode.INPUT);
+    magneticLimit.setMode(DigitalChannel.Mode.INPUT);
+
+    benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    benchMotor.setPower(0.0);
+    continuousServo.setPower(0.0);
+    positionServo.setPosition(HOME_POSITION);
+}
+```
+
+`HOME_POSITION` must be a named value proven safe in Lesson 4. Apply the tested
+motor direction, run mode, and sensor polarity decisions from earlier lessons as
+well. If a configured device is missing, initialization should fail visibly; do
+not silently continue with a partly initialized required bench.
+
+### 3. Expose operations that protect intent
+
+For a powered output, keep the safety limit in one place:
+
+```java
+public void setMotorPower(double requestedPower) {
+    double appliedPower = Range.clip(requestedPower, -0.25, 0.25);
+    benchMotor.setPower(appliedPower);
+}
+
+public void setContinuousServoPower(double requestedPower) {
+    double appliedPower = Range.clip(requestedPower, -0.50, 0.50);
+    continuousServo.setPower(appliedPower);
+}
+
+public int getMotorPosition() {
+    return benchMotor.getCurrentPosition();
+}
+```
+
+Import `Range` from `com.qualcomm.robotcore.util.Range`. The caller requests an
+operation; the hardware class enforces the bench's allowed range. If the motor
+limit behavior from Lesson 6 is part of an OpMode you refactor, preserve that
+behavior here or behind a more specific method such as
+`setLimitProtectedMotorPower(...)`.
+
+For sensors, return mechanism meaning:
+
+```java
+public boolean isTouchPressed() {
+    return !touchSensor.getState(); // Use the polarity verified in Lesson 6.
+}
+
+public boolean isMagneticLimitReached() {
+    return !magneticLimit.getState(); // Use the verified polarity.
+}
+```
+
+The comments are reminders to use measured polarity, not permission to assume both
+devices are active-low.
+
+### 4. Give every powered output one shared stop
+
+```java
+public void stopAll() {
+    benchMotor.setPower(0.0);
+    continuousServo.setPower(0.0);
+}
+```
+
+A positional servo holds its last commanded position, so it is not assigned a
+made-up “zero.” A separate named operation can return it to a tested home position
+when the mechanism requires that behavior.
+
+### 5. Replace hardware details in an OpMode
+
+An OpMode should now read like control flow:
+
+```java
+private final TestBenchHardware bench = new TestBenchHardware();
+
+@Override
+public void runOpMode() {
+    bench.initialize(hardwareMap);
+    waitForStart();
+
+    while (opModeIsActive()) {
+        double requestedPower = -gamepad1.left_stick_y * 0.25;
+        bench.setMotorPower(requestedPower);
+        telemetry.addData("Motor position", bench.getMotorPosition());
+        telemetry.update();
+    }
+
+    bench.stopAll();
+}
+```
+
+The OpMode still owns the gamepad, lifecycle, and telemetry. The hardware class
+owns how the bench is mapped and commanded. `final` means the `bench` reference is
+not replaced; the object is still initialized and used normally.
 
 Prefer private device fields and small operations such as:
 
@@ -132,6 +257,15 @@ Complete the refactor in two stages.
 If you discover a behavior change, do not call it “just refactoring.” Either
 restore the original behavior or document and review the behavioral change in a
 separate commit.
+
+Use a small comparison table while testing:
+
+| Behavior | Before refactor | After refactor | Preserved? |
+|---|---|---|---|
+| INIT output state | | | |
+| Gamepad command | | | |
+| Sensor interpretation | | | |
+| Driver Station Stop | | | |
 
 ## Git checkpoint
 

@@ -34,6 +34,10 @@ Create `DigitalLimitOpMode.java`. Confirm the configured names are `touch_sensor
 and `magnetic_limit`. The hardware contract uses `DigitalChannel` intentionally so
 you can see the underlying state.
 
+Check the [Hardware Lab Contract](../../docs/hardware-lab-contract.md) before this
+lesson. If the magnetic-limit port is still marked `TBD`, its physical connection
+and Driver Station configuration must be completed before testing Part 2.
+
 ## Raw state versus meaning
 
 Configure each channel as an input:
@@ -57,6 +61,62 @@ If your device behaves differently, use the behavior you measured and document
 it. Do not randomly add or remove `!` until the display looks convenient.
 
 ## Part 1 — Sensor observation
+
+### 1. Map both channels and set them as inputs
+
+```java
+DigitalChannel touchSensor =
+        hardwareMap.get(DigitalChannel.class, "touch_sensor");
+DigitalChannel magneticLimit =
+        hardwareMap.get(DigitalChannel.class, "magnetic_limit");
+
+touchSensor.setMode(DigitalChannel.Mode.INPUT);
+magneticLimit.setMode(DigitalChannel.Mode.INPUT);
+```
+
+`INPUT` tells the hub that Java will read the channel rather than drive an output.
+The quoted names must match the active Driver Station configuration.
+
+### 2. Read raw values before interpreting them
+
+Inside the active loop, take one snapshot of each state:
+
+```java
+boolean touchRaw = touchSensor.getState();
+boolean magneticRaw = magneticLimit.getState();
+
+telemetry.addData("Touch raw", touchRaw);
+telemetry.addData("Magnetic raw", magneticRaw);
+```
+
+Record the displayed value with each device clear and activated. Reading the raw
+state first prevents an incorrect polarity assumption from hiding the evidence.
+During the raw-only test, call `telemetry.update()` after these lines. When you add
+interpreted values in the next step, keep one `update()` at the end.
+
+### 3. Convert electrical state into mechanism meaning
+
+After the truth table shows the polarity, add named conversions. If both devices
+are confirmed active-low, they would look like:
+
+```java
+boolean touchPressed = !touchRaw;
+boolean limitReached = !magneticRaw;
+```
+
+Do not copy the negation merely because it appears here. If one truth table shows
+active-high behavior, its meaningful value should use the raw state directly.
+
+Now report both layers:
+
+```java
+telemetry.addData("Touch", touchPressed ? "PRESSED" : "CLEAR");
+telemetry.addData("Magnetic limit", limitReached ? "MAGNET PRESENT" : "CLEAR");
+telemetry.update();
+```
+
+The raw line helps diagnose wiring; the interpreted line lets later motor logic
+use names that describe the mechanism.
 
 Implement an OpMode that maps both digital devices and reports for each:
 
@@ -91,6 +151,49 @@ else
 
 The mechanism must still be able to move away from an active limit. Otherwise it
 can become trapped at the switch.
+
+### 1. Turn the physical direction into a named fact
+
+After a low-power test with the limit clear, record which sign moves toward it:
+
+```java
+private static final boolean POSITIVE_POWER_MOVES_TOWARD_LIMIT = true;
+```
+
+Change this value only if your observed mechanism direction is negative. The name
+is more useful than scattering comparisons with unexplained signs.
+
+### 2. Separate requested, limited, and applied power
+
+```java
+double requestedPower = -gamepad1.left_stick_y;
+double limitedPower = requestedPower * 0.25;
+
+boolean movingTowardLimit = POSITIVE_POWER_MOVES_TOWARD_LIMIT
+        ? limitedPower > 0.0
+        : limitedPower < 0.0;
+boolean commandBlocked = limitReached && movingTowardLimit;
+double appliedPower = commandBlocked ? 0.0 : limitedPower;
+
+benchMotor.setPower(appliedPower);
+```
+
+When the limit is clear, the requested direction is allowed. When the limit is
+active, only the direction farther into the limit becomes zero; the opposite sign
+still moves the mechanism away.
+
+### 3. Explain every decision in telemetry
+
+```java
+telemetry.addData("Requested power", "%.2f", requestedPower);
+telemetry.addData("Applied power", "%.2f", benchMotor.getPower());
+telemetry.addData("Limit reached", limitReached);
+telemetry.addData("Command", commandBlocked ? "BLOCKED BY LIMIT" : "ALLOWED");
+telemetry.update();
+```
+
+This evidence distinguishes a centered stick, a blocked command, and a motor that
+was allowed to run but did not physically move.
 
 Display requested power, applied power, limit state, and the reason for any
 blocked command. Stop motor power after the active loop.

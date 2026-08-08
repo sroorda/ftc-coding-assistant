@@ -49,6 +49,31 @@ another robot is not calibration evidence for this bench.
 
 ## Part 1 — Build a data collector
 
+### 1. Read one snapshot per loop
+
+```java
+int red = colorSensor.red();
+int green = colorSensor.green();
+int blue = colorSensor.blue();
+int alpha = colorSensor.alpha();
+```
+
+Store each reading in a local variable, then use those same values for telemetry
+and classification. This makes one displayed row correspond to one decision.
+
+### 2. Display the evidence before adding a classifier
+
+```java
+telemetry.addData("Red", red);
+telemetry.addData("Green", green);
+telemetry.addData("Blue", blue);
+telemetry.addData("Alpha", alpha);
+telemetry.update();
+```
+
+At this stage there is no “correct color” in the code. The result is a live data
+collector that lets you observe how the channels respond to the actual samples.
+
 Create an OpMode that displays:
 
 - red;
@@ -87,16 +112,80 @@ Ratios can reduce sensitivity to overall brightness, but they do not eliminate
 distance, reflection, saturation, or low-signal problems. Include an `UNKNOWN`
 result when the readings do not clearly match a calibrated target.
 
-Create a method such as:
+Keep the sensor read outside the classification method shown below. This lets the
+decision logic be reasoned about with recorded numbers and later moved into
+reusable code.
+
+### 1. Name every possible result
+
+An enum prevents slightly different strings from representing the same result:
 
 ```java
-private String classifyColor(int red, int green, int blue) {
-    // TODO: implement an evidence-based rule
+private enum DetectedColor {
+    TARGET_A,
+    TARGET_B,
+    UNKNOWN
 }
 ```
 
-Keep the sensor read outside the method. This lets the decision logic be reasoned
-about with recorded numbers and later moved into reusable code.
+Rename `TARGET_A` and `TARGET_B` for the actual samples when you know what the
+mechanism must recognize.
+
+### 2. Turn measurements into named constants
+
+After collecting the readings, define constants supported by the data:
+
+```java
+private static final int MIN_TOTAL_SIGNAL = 1;       // Replace with a calibrated floor.
+private static final double TARGET_A_MIN_RATIO = 0; // Replace from observations.
+private static final double TARGET_B_MIN_RATIO = 0; // Replace from observations.
+```
+
+The ratio thresholds are deliberately incomplete placeholders, not suggested
+calibration values. The initial signal floor only prevents division by zero;
+replace all three constants from recorded observations.
+
+### 3. Define low-signal and ambiguous behavior
+
+This structure shows where the evidence-based comparisons belong:
+
+```java
+private DetectedColor classifyColor(int red, int green, int blue) {
+    int total = red + green + blue;
+    if (total < MIN_TOTAL_SIGNAL) {
+        return DetectedColor.UNKNOWN;
+    }
+
+    double targetARatio = red / (double) total;  // Choose channels from your data.
+    double targetBRatio = blue / (double) total;
+
+    boolean matchesA = targetARatio >= TARGET_A_MIN_RATIO;
+    boolean matchesB = targetBRatio >= TARGET_B_MIN_RATIO;
+
+    if (matchesA == matchesB) {
+        return DetectedColor.UNKNOWN;
+    }
+    return matchesA ? DetectedColor.TARGET_A : DetectedColor.TARGET_B;
+}
+```
+
+The `matchesA == matchesB` condition covers both ambiguous cases: both rules
+match, or neither rule matches. The early signal check also prevents division by
+zero.
+
+### 4. Show the reading and decision together
+
+```java
+DetectedColor detectedColor = classifyColor(red, green, blue);
+
+telemetry.addData("RGB", "%d, %d, %d", red, green, blue);
+telemetry.addData("Alpha", alpha);
+telemetry.addData("Detected", detectedColor);
+telemetry.update();
+```
+
+If a classification is wrong, the Driver Station now shows both the decision and
+the numbers that produced it.
 
 ## Student task
 

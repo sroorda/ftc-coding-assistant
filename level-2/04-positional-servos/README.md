@@ -67,6 +67,97 @@ Report the requested position before calling `setPosition(...)` and after the
 command. `getPosition()` reports the last commanded logical position; it does not
 measure the horn's physical angle.
 
+## Complete one area at a time
+
+### 1. Define the experimental limits
+
+Place named values near the top of the class:
+
+```java
+private static final double START_POSITION = 0.50;
+private static final double STEP_SIZE = 0.02;
+private static final double MIN_TEST_POSITION = 0.40;
+private static final double MAX_TEST_POSITION = 0.60;
+```
+
+These are software limits for the first exploration, not proof of the mechanism's
+physical limits. The names make the safety assumptions visible in code.
+
+### 2. Map and initialize the servo
+
+Add the `Range` import, then map the configured servo:
+
+```java
+import com.qualcomm.robotcore.util.Range;
+
+Servo positionServo = hardwareMap.get(Servo.class, "position_servo");
+double requestedPosition = START_POSITION;
+positionServo.setPosition(requestedPosition);
+```
+
+Calling `setPosition()` during initialization can move the horn as soon as INIT is
+pressed. Clear the mechanism before INIT, not only before PLAY. The expected
+result is one movement toward the conservative start position.
+
+### 3. Detect a new press instead of a held button
+
+Before the active loop, remember the previous state of each button:
+
+```java
+boolean previousIncreaseButton = false;
+boolean previousDecreaseButton = false;
+```
+
+Inside the loop, compare the current and previous states:
+
+```java
+boolean increaseButton = gamepad1.dpad_up;
+boolean decreaseButton = gamepad1.dpad_down;
+
+boolean increasePressed = increaseButton && !previousIncreaseButton;
+boolean decreasePressed = decreaseButton && !previousDecreaseButton;
+```
+
+`increasePressed` is true for only the first loop after the button changes from
+not pressed to pressed. Holding the button does not create another edge.
+
+### 4. Change and clip the requested position
+
+```java
+if (increasePressed && !decreasePressed) {
+    requestedPosition += STEP_SIZE;
+} else if (decreasePressed && !increasePressed) {
+    requestedPosition -= STEP_SIZE;
+}
+
+requestedPosition = Range.clip(
+        requestedPosition,
+        MIN_TEST_POSITION,
+        MAX_TEST_POSITION);
+positionServo.setPosition(requestedPosition);
+```
+
+If both buttons are newly pressed together, this rule makes no change. `Range.clip`
+prevents the variable from crossing the chosen test limits. At a limit, another
+press requests the same boundary value rather than moving farther.
+
+### 5. Report the command and save button history
+
+At the end of each loop:
+
+```java
+telemetry.addData("Requested position", "%.2f", requestedPosition);
+telemetry.addData("Servo command", "%.2f", positionServo.getPosition());
+telemetry.update();
+
+previousIncreaseButton = increaseButton;
+previousDecreaseButton = decreaseButton;
+```
+
+Saving the current states prepares the next loop to detect a new edge. The two
+telemetry values normally match because neither one measures the horn's physical
+position.
+
 ## Student task
 
 Implement an OpMode that:
@@ -78,6 +169,10 @@ Implement an OpMode that:
 5. Clips the requested value to the experimental range.
 6. Displays requested position and reported servo position in telemetry.
 7. Never scans automatically from `0.0` to `1.0`.
+
+Build after mapping and initialization, then test one button and one direction at
+a time. Do not wait until the whole checklist is finished to discover a wrong
+configuration name or unsafe starting position.
 
 Test one increment at a time. Observe the mechanism after every change. If the
 motion approaches interference or strain, stop, return to the last safe value, and
@@ -94,6 +189,8 @@ private static final double ACTIVE_POSITION = 0.58;
 
 The example values are placeholders. Use the safe values supported by your test
 evidence. Map three separate buttons to the named positions and keep telemetry.
+You can reuse the same rising-edge pattern, replacing the `STEP_SIZE` calculation
+with assignment to the selected named position.
 
 ## Review another student's pull request
 

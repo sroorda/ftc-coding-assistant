@@ -48,19 +48,84 @@ A CR servo normally has no position feedback through this interface. Time and
 power do not create a reliable position because load, voltage, friction, and
 neutral calibration affect motion.
 
-## Student task
+## Complete one area at a time
+
+### 1. Map the correct device type and start at zero
 
 Map the device with:
 
 ```java
 CRServo continuousServo =
         hardwareMap.get(CRServo.class, "continuous_servo");
+continuousServo.setPower(0.0);
 ```
+
+`CRServo.class` must agree with the Driver Station configuration type. Mapping the
+same port as a positional `Servo` would give the code the wrong command model.
+The zero-power command makes INIT request no rotation.
+
+### 2. Name the input limits
+
+```java
+private static final double MAX_TEST_POWER = 0.50;
+private static final double STICK_DEADBAND = 0.05;
+```
+
+The maximum limits the first test speed. The deadband defines a small region near
+the stick center that the program deliberately treats as zero.
+
+### 3. Convert stick input into applied power
+
+Inside the active loop:
+
+```java
+double rawStickY = -gamepad1.right_stick_y;
+double requestedPower = Math.abs(rawStickY) < STICK_DEADBAND
+        ? 0.0
+        : rawStickY;
+double appliedPower = requestedPower * MAX_TEST_POWER;
+
+continuousServo.setPower(appliedPower);
+```
+
+The leading minus makes pushing the stick forward produce a positive request.
+The conditional operator chooses zero inside the deadband. Multiplying by `0.50`
+keeps full stick travel at half power. The expected results are:
+
+| Stick condition | Requested result |
+|---|---|
+| Centered or slight noise | `0.0` power; servo stopped |
+| Forward | Positive power, no greater than `0.50` |
+| Backward | Negative power, no less than `-0.50` |
+
+### 4. Display what was requested and applied
+
+```java
+telemetry.addData("Raw stick Y", "%.2f", rawStickY);
+telemetry.addData("Requested power", "%.2f", requestedPower);
+telemetry.addData("Applied power", "%.2f", continuousServo.getPower());
+telemetry.update();
+```
+
+`getPower()` reports the logical command, not measured rotation speed. A servo
+that physically creeps while this value is zero needs neutral calibration, not a
+telemetry-label change.
+
+### 5. Stop after the active loop
+
+```java
+continuousServo.setPower(0.0);
+```
+
+No separate early-Stop check is needed here. If STOP is pressed while waiting,
+the active loop is skipped and this zero-power cleanup still runs.
+
+## Student task
 
 Implement an OpMode that:
 
 1. Sets power to `0.0` during initialization.
-2. Waits for Start and honors an early Stop request.
+2. Waits for Start and loops only while `opModeIsActive()`.
 3. Uses `-gamepad1.right_stick_y` as requested power.
 4. Applies a maximum magnitude of `0.50` for testing.
 5. Uses a small deadband so stick noise commands zero power.
