@@ -123,7 +123,19 @@ status that is easier to read quickly.
 Suppose one press should turn something on and the next press should turn it
 off. Checking only `isPressed()` would toggle the state repeatedly while the
 sensor is held. The program must detect the moment the sensor changes from
-released to pressed.
+released to pressed. This change is called a **rising edge**.
+
+The current reading only tells the program what the sensor is doing now. Keeping
+the previous reading lets it recognize how the sensor changed:
+
+| Previous reading | Current reading | Meaning |
+|---|---|---|
+| `false` | `false` | Still released |
+| `false` | `true` | New press: rising edge |
+| `true` | `true` | Still being held |
+| `true` | `false` | Released: falling edge |
+
+The toggle should change only in the rising-edge row.
 
 In **Area 3**, add these variables immediately before the active loop:
 
@@ -149,6 +161,22 @@ previousPressed = pressed;
 - `toggledOn = !toggledOn` changes `false` to `true` or `true` to `false`.
 - Updating `previousPressed` prepares the comparison for the next loop pass.
 
+### Why a very quick press may not appear
+
+The OpMode reads the sensor once during each loop pass, while Driver Station
+telemetry updates the screen at a slower rate. Because of this:
+
+- a short press may be read by the program but change back before `PRESSED`
+  appears on the Driver Station;
+- the persistent toggled state makes a detected press visible even after the
+  sensor is released; and
+- a press that begins and ends entirely between two sensor readings cannot be
+  detected by this polling code.
+
+During the basic telemetry test, hold the sensor until the Driver Station shows
+`PRESSED`. Later, use the toggled state to confirm whether a shorter press was
+detected.
+
 Immediately before the existing `telemetry.update()`, add:
 
 ```java
@@ -163,7 +191,7 @@ Build and deploy the project, then complete each test:
 |---|---|
 | Press **INIT**. | Telemetry shows `Touch sensor initialized`. |
 | Release the sensor, then press **PLAY**. | Telemetry shows `Pressed: false`, `Touch sensor: RELEASED`, and `Toggled state: OFF`. |
-| Press and hold the sensor. | The sensor shows `true` and `PRESSED`, and the toggled state changes to `ON` only once. |
+| Press and hold the sensor until telemetry updates. | The sensor shows `true` and `PRESSED`, and the toggled state changes to `ON` only once. |
 | Continue holding the sensor. | The toggled state remains `ON`; it does not repeatedly change while held. |
 | Release the sensor. | The sensor shows `false` and `RELEASED`, while the toggled state remains `ON`. |
 | Press the sensor again. | The toggled state changes to `OFF`. |
