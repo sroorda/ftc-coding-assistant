@@ -9,7 +9,7 @@ telemetry.
 | | |
 |---|---|
 | **Time** | 30–45 minutes |
-| **FTC focus** | `TouchSensor`, Boolean input, telemetry |
+| **FTC focus** | `TouchSensor`, Boolean input, press detection, telemetry |
 | **Git focus** | commit, push, review, and merge one focused hardware change |
 | **AI tutor** | check sensor mapping and state interpretation |
 
@@ -19,7 +19,8 @@ By the end of this lesson, you can:
 
 - map a configured touch sensor;
 - read whether it is pressed;
-- turn a Boolean reading into a readable status; and
+- turn a Boolean reading into a readable status;
+- detect a new press and toggle a state once; and
 - use telemetry to observe changes in real time.
 
 ## Get ready
@@ -117,17 +118,56 @@ telemetry.update();
 The first line shows the Boolean value. The second turns the same value into a
 status that is easier to read quickly.
 
-## Part 5 — Run and test
+## Part 5 — Advanced example: toggle on each press
+
+Suppose one press should turn something on and the next press should turn it
+off. Checking only `isPressed()` would toggle the state repeatedly while the
+sensor is held. The program must detect the moment the sensor changes from
+released to pressed.
+
+In **Area 3**, add these variables immediately before the active loop:
+
+```java
+boolean previousPressed = false;
+boolean toggledOn = false;
+```
+
+These variables must be outside the loop so their values are remembered between
+loop passes.
+
+Immediately after reading `pressed` inside the loop, add:
+
+```java
+if (pressed && !previousPressed) {
+    toggledOn = !toggledOn;
+}
+
+previousPressed = pressed;
+```
+
+- `pressed && !previousPressed` is true only on a new press.
+- `toggledOn = !toggledOn` changes `false` to `true` or `true` to `false`.
+- Updating `previousPressed` prepares the comparison for the next loop pass.
+
+Immediately before the existing `telemetry.update()`, add:
+
+```java
+telemetry.addData("Toggled state", toggledOn ? "ON" : "OFF");
+```
+
+## Part 6 — Run and test
 
 Build and deploy the project, then complete each test:
 
 | Test | Verify |
 |---|---|
 | Press **INIT**. | Telemetry shows `Touch sensor initialized`. |
-| Release the sensor, then press **PLAY**. | Telemetry shows `Pressed: false` and `Touch sensor: RELEASED`. |
-| Press and hold the sensor. | Telemetry changes to `Pressed: true` and `Touch sensor: PRESSED`. |
-| Release the sensor. | Telemetry changes back to `Pressed: false` and `Touch sensor: RELEASED`. |
-| Press and release the sensor several times. | Telemetry follows every change and always shows matching Boolean and text values. |
+| Release the sensor, then press **PLAY**. | Telemetry shows `Pressed: false`, `Touch sensor: RELEASED`, and `Toggled state: OFF`. |
+| Press and hold the sensor. | The sensor shows `true` and `PRESSED`, and the toggled state changes to `ON` only once. |
+| Continue holding the sensor. | The toggled state remains `ON`; it does not repeatedly change while held. |
+| Release the sensor. | The sensor shows `false` and `RELEASED`, while the toggled state remains `ON`. |
+| Press the sensor again. | The toggled state changes to `OFF`. |
+| Press and release the sensor several times. | Each new press changes the toggled state exactly once. |
 
 ## Git checkpoint
 
@@ -135,17 +175,17 @@ In Android Studio:
 
 - confirm the current branch is `feature/<your-name>/touch-sensor`;
 - inspect the `TouchSensorOpMode.java` diff;
-- commit with a focused message such as `Add touch sensor telemetry`;
+- commit with a focused message such as `Add touch sensor toggle`;
 - push and open a pull request into `student/<your-name>`;
-- describe the released and pressed telemetry results;
+- describe the released, pressed, and toggled-state test results;
 - obtain a review and merge the pull request; and
 - update your local personal branch before starting Lesson 6.
 
 ## Ask your AI tutor
 
 > Review my touch-sensor OpMode without editing it. Check that I map the correct
-> SDK type and configuration name, read the sensor once per loop, and use that
-> reading consistently in telemetry.
+> SDK type and configuration name, read the sensor once per loop, detect only
+> new presses, and toggle the state exactly once per press.
 
 ## Check your work
 
@@ -154,7 +194,8 @@ You are finished when:
 - the OpMode finds `touch_sensor`;
 - released reports `false` and `RELEASED`;
 - pressed reports `true` and `PRESSED`;
-- telemetry follows repeated presses and releases; and
+- holding the sensor does not repeatedly change the toggled state;
+- each new press changes the toggled state exactly once; and
 - you can explain what the Boolean value means.
 
 Continue to [Lesson 6: Color Sensor Readings](../06-color-sensing/README.md).
