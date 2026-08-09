@@ -115,6 +115,26 @@ telemetry.update();
 
 Leave the existing `waitForStart()` directly below this code in **Area 2**.
 
+### Run the initialization checkpoint
+
+Test the code before adding the D-pad controls:
+
+- clear the servo horn and linkage;
+- build and deploy the project;
+- select **L2 Positional Servo** on the Driver Station; and
+- press INIT.
+
+You should see:
+
+- the servo move once toward position `0.0`, unless it is already there;
+- `Status: Servo initialized` on the Driver Station; and
+- `Position: 0.00` on the Driver Station.
+
+Do not press PLAY yet; the active loop does not contain control code. Press Stop
+after checking initialization. If the OpMode cannot find `position_servo`, the
+servo approaches interference, or telemetry does not show `0.00`, correct that
+problem before continuing.
+
 ## Part 3 — Change the target with the D-pad
 
 Inside the active loop in **Area 3**, add:
