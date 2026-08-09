@@ -142,15 +142,14 @@ Inside the active loop in **Area 3**, add:
 ```java
 if (gamepad1.dpadUpWasPressed()) {
     targetPosition += POSITION_STEP;
-}
-
-if (gamepad1.dpadDownWasPressed()) {
+} else if (gamepad1.dpadDownWasPressed()) {
     targetPosition -= POSITION_STEP;
 }
 ```
 
 `dpadUpWasPressed()` and `dpadDownWasPressed()` are true once for each new
-press. Holding a direction does not repeatedly change the target.
+press. Holding a direction does not repeatedly change the target. The `else if`
+ensures that at most one change is applied during each loop.
 
 ## Part 4 — Keep the target in range
 
