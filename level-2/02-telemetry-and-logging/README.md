@@ -84,6 +84,23 @@ import com.qualcomm.robotcore.util.RobotLog;
 private static final String LOG_TAG = "L2Hardware";
 ```
 
+Together, `private static final` defines a constant used only by this class. The
+value is created once, cannot be reassigned, and is written in uppercase to make
+it recognizable as a constant.
+
+- `private` — only this class can use the value.
+- `static` — the value belongs to the class rather than an individual OpMode
+  object.
+- `final` — the variable cannot be assigned a different value after
+  initialization.
+- `LOG_TAG` — uppercase with underscores is Java's convention for constants.
+- `String` — the type of value being stored.
+
+A constant can be `public` when other classes intentionally need to use it. A
+`public static final` constant can be accessed through its class name, such as
+`RobotConstants.LOG_TAG`. Keep a constant `private` when it is only an
+implementation detail of one class.
+
 The tag gives related log messages one searchable name. It does not appear on the
 Driver Station unless you also add it to telemetry.
 
