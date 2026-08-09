@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Drive gear reduction examples</title>
+  <desc id="desc">Direct drive has a one-to-one ratio. A twelve-tooth motor gear driving a twenty-four-tooth wheel gear has a two-to-one reduction.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .title { font: 700 32px Arial, sans-serif; fill: #0f172a; }
+      .heading { font: 700 25px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 20px Arial, sans-serif; fill: #0f172a; }
+      .note { font: 18px Arial, sans-serif; fill: #334155; }
+      .ratio { font: 700 24px Arial, sans-serif; fill: #166534; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="520" rx="24" fill="#f8fafc"/>
+  <text x="600" y="50" text-anchor="middle" class="title">Drive Gear Reduction</text>
+
+  <rect x="40" y="80" width="535" height="400" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="307" y="122" text-anchor="middle" class="heading">Direct drive</text>
+  <rect x="95" y="185" width="150" height="105" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/>
+  <text x="170" y="230" text-anchor="middle" class="label">Motor</text>
+  <text x="170" y="258" text-anchor="middle" class="note">output shaft</text>
+  <line x1="245" y1="237" x2="360" y2="237" stroke="#475569" stroke-width="14"/>
+  <circle cx="430" cy="237" r="72" fill="#dcfce7" stroke="#16a34a" stroke-width="8"/>
+  <circle cx="430" cy="237" r="10" fill="#475569"/>
+  <path d="M395 163 A82 82 0 0 1 500 205" fill="none" stroke="#2563eb" stroke-width="6" marker-end="url(#arrow)"/>
+  <text x="430" y="337" text-anchor="middle" class="label">Wheel</text>
+  <text x="307" y="390" text-anchor="middle" class="ratio">DRIVE_GEAR_REDUCTION = 1.0</text>
+  <text x="307" y="430" text-anchor="middle" class="note">1 motor revolution = 1 wheel revolution</text>
+
+  <rect x="625" y="80" width="535" height="400" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="892" y="122" text-anchor="middle" class="heading">External 2:1 reduction</text>
+  <circle cx="765" cy="245" r="48" fill="#dbeafe" stroke="#2563eb" stroke-width="8"/>
+  <circle cx="900" cy="245" r="92" fill="#fef3c7" stroke="#f59e0b" stroke-width="8"/>
+  <circle cx="765" cy="245" r="9" fill="#475569"/>
+  <circle cx="900" cy="245" r="11" fill="#475569"/>
+  <path d="M735 195 A58 58 0 0 1 813 230" fill="none" stroke="#2563eb" stroke-width="6" marker-end="url(#arrow)"/>
+  <path d="M985 260 A102 102 0 0 0 945 165" fill="none" stroke="#2563eb" stroke-width="6" marker-end="url(#arrow)"/>
+  <text x="765" y="320" text-anchor="middle" class="label">12-tooth</text>
+  <text x="765" y="346" text-anchor="middle" class="note">motor gear</text>
+  <text x="900" y="370" text-anchor="middle" class="label">24-tooth wheel gear</text>
+  <text x="892" y="410" text-anchor="middle" class="ratio">DRIVE_GEAR_REDUCTION = 2.0</text>
+  <text x="892" y="448" text-anchor="middle" class="note">2 motor revolutions = 1 wheel revolution</text>
+</svg>

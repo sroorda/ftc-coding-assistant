@@ -13,7 +13,7 @@ encoder ticks with physical movement.
 | | |
 |---|---|
 | **Time** | 60–90 minutes |
-| **FTC focus** | encoder ticks, ticks per revolution, `RUN_TO_POSITION`, counts per inch |
+| **FTC focus** | encoder ticks, ticks per revolution, `RUN_TO_POSITION`, ticks per inch |
 | **Git focus** | inspect and review the motor code separately from its conversion formula |
 | **AI tutor** | verify units and calculations without inventing hardware values |
 
@@ -24,7 +24,7 @@ By the end of this lesson, you can:
 - explain what an encoder tick represents;
 - find the manufacturer's ticks-per-revolution value for a motor;
 - use `RUN_TO_POSITION` to move one output-shaft revolution;
-- convert wheel diameter and external gearing into counts per inch; and
+- convert wheel diameter and external gearing into ticks per inch; and
 - command a measured distance around the wheel's rim.
 
 ## Get ready
@@ -36,20 +36,6 @@ feature/<your-name>/encoder-distance
 ```
 
 Create `EncoderDistanceOpMode.java` in the Level 2 package.
-
-Prepare the fixed test bench:
-
-- confirm `bench_motor` matches the active Driver Station configuration;
-- confirm the motor's encoder cable is connected;
-- attach a wheel securely to the motor output shaft;
-- make sure the wheel cannot strike the bench or nearby objects;
-- place a visible tape mark on the wheel and a stationary reference mark on the
-  bench; and
-- have a flexible measuring tape or piece of string available for measuring
-  distance around the wheel.
-
-The wheel will move under motor power. Do not try to turn the motor shaft by
-hand.
 
 ## Start with an OpMode skeleton
 
@@ -118,7 +104,7 @@ encoder resolution at the output shaft.
 Add these constants below the `benchMotor` field:
 
 ```java
-private static final double COUNTS_PER_MOTOR_REV = 0.0;
+private static final double TICKS_PER_MOTOR_REV = 0.0;
 private static final double TEST_POWER = 0.25;
 ```
 
@@ -138,6 +124,10 @@ benchMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+telemetry.addData("Status", "Encoder reset");
+telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
+telemetry.update();
 ```
 
 - `FORWARD` makes the first target use positive encoder counts.
@@ -152,11 +142,13 @@ The order matters: reset the encoder before selecting the next run mode.
 
 ### Calculate the target
 
-Still in **Area 1**, calculate a one-revolution target:
+Still in **Area 1**, calculate a one-revolution target and replace the Part 3
+initialization telemetry with:
 
 ```java
-int targetTicks = (int) Math.round(COUNTS_PER_MOTOR_REV);
+int targetTicks = (int) Math.round(TICKS_PER_MOTOR_REV);
 
+telemetry.addData("Status", "Encoder reset");
 telemetry.addData("Movement", "One revolution");
 telemetry.addData("Target ticks", targetTicks);
 telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
@@ -167,6 +159,15 @@ The motor controller requires an integer target, so `Math.round()` converts the
 manufacturer's decimal value to the nearest whole tick.
 
 Keep `waitForStart()` immediately after this initialization code.
+
+### Test — Target calculation
+
+Build and deploy the project before adding the movement code:
+
+| Test | Verify |
+|---|---|
+| Press **INIT**. | Telemetry shows `Encoder reset`, current ticks are near `0`, and target ticks match the rounded manufacturer value. |
+| Press **PLAY**. | The motor does not move because the OpMode has not yet commanded `RUN_TO_POSITION` or nonzero power. |
 
 ### Command the movement
 
@@ -210,7 +211,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class EncoderDistanceOpMode extends LinearOpMode {
     private DcMotor benchMotor;
 
-    private static final double COUNTS_PER_MOTOR_REV = 0.0;
+    private static final double TICKS_PER_MOTOR_REV = 0.0;
     private static final double TEST_POWER = 0.25;
 
     @Override
@@ -223,8 +224,9 @@ public class EncoderDistanceOpMode extends LinearOpMode {
         benchMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        int targetTicks = (int) Math.round(COUNTS_PER_MOTOR_REV);
+        int targetTicks = (int) Math.round(TICKS_PER_MOTOR_REV);
 
+        telemetry.addData("Status", "Encoder reset");
         telemetry.addData("Movement", "One revolution");
         telemetry.addData("Target ticks", targetTicks);
         telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
@@ -255,10 +257,17 @@ public class EncoderDistanceOpMode extends LinearOpMode {
 
 Replace `0.0` in the complete example with the value you researched.
 
-### Test Part 4 — One revolution
+### Test — One revolution
 
-Align the wheel's tape mark with the stationary reference mark. Build and deploy
-the project, then complete each test:
+Before running this test:
+
+- confirm the encoder cable is connected;
+- attach the wheel securely to the motor output shaft;
+- make sure the wheel cannot strike the bench or nearby objects; and
+- align a tape mark on the wheel with a stationary reference mark on the bench.
+
+Do not try to turn the motor shaft by hand. Build and deploy the project, then
+complete each test:
 
 | Test | Verify |
 |---|---|
@@ -279,6 +288,12 @@ One wheel revolution moves a point on the rim through one wheel circumference:
 wheel circumference = wheel diameter × π
 ```
 
+That circumference is also the **inches in one wheel revolution**. For example,
+a 4-inch wheel moves a point on its rim approximately `12.57` inches during one
+revolution.
+
+![Wheel circumference converts one wheel revolution into inches around the rim.](../../docs/images/level-2/ticks-per-inch-formula.svg)
+
 Measure the wheel diameter in inches. Add these constants with the other class
 constants:
 
@@ -287,9 +302,12 @@ private static final double DRIVE_GEAR_REDUCTION = 1.0;
 private static final double WHEEL_DIAMETER_INCHES = 4.0;
 private static final double MOVE_DISTANCE_INCHES = 6.0;
 
-private static final double COUNTS_PER_INCH =
-        (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION)
-        / (WHEEL_DIAMETER_INCHES * Math.PI);
+private static final double TICKS_PER_WHEEL_REV =
+        TICKS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION;
+private static final double INCHES_PER_WHEEL_REV =
+        WHEEL_DIAMETER_INCHES * Math.PI;
+private static final double TICKS_PER_INCH =
+        TICKS_PER_WHEEL_REV / INCHES_PER_WHEEL_REV;
 ```
 
 Replace `4.0` with your measured wheel diameter.
@@ -297,14 +315,20 @@ Replace `4.0` with your measured wheel diameter.
 `DRIVE_GEAR_REDUCTION` is the ratio between motor output-shaft revolutions and
 wheel revolutions:
 
+![Direct drive and a 2-to-1 external gear reduction.](../../docs/images/level-2/drive-gear-reduction.svg)
+
 - The bench wheel is attached directly to the output shaft, so use `1.0`.
 - External gears would change this value. For example, a 12-tooth motor gear
   driving a 24-tooth wheel gear uses `2.0`.
 - Do not include the motor's internal gearbox again; its effect is already in
-  `COUNTS_PER_MOTOR_REV`.
+  `TICKS_PER_MOTOR_REV`.
 
-`COUNTS_PER_INCH` divides the encoder counts in one wheel revolution by the
-inches in one wheel circumference.
+The three calculated constants make the units visible:
+
+- `TICKS_PER_WHEEL_REV` is the number of encoder ticks in one wheel revolution.
+- `INCHES_PER_WHEEL_REV` is the wheel circumference.
+- `TICKS_PER_INCH` divides the ticks in one wheel revolution by the inches in
+  that revolution.
 
 ### Change the target calculation
 
@@ -312,7 +336,7 @@ Replace the one-revolution target calculation with:
 
 ```java
 int targetTicks =
-        (int) Math.round(MOVE_DISTANCE_INCHES * COUNTS_PER_INCH);
+        (int) Math.round(MOVE_DISTANCE_INCHES * TICKS_PER_INCH);
 ```
 
 The encoder was reset during INIT, so this single movement still uses a target
@@ -323,7 +347,8 @@ Replace the initialization telemetry with:
 
 ```java
 telemetry.addData("Requested distance", "%.2f in", MOVE_DISTANCE_INCHES);
-telemetry.addData("Counts per inch", "%.2f", COUNTS_PER_INCH);
+telemetry.addData("Inches in 1 revolution", "%.2f", INCHES_PER_WHEEL_REV);
+telemetry.addData("Ticks per inch", "%.2f", TICKS_PER_INCH);
 telemetry.addData("Target ticks", targetTicks);
 telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
 telemetry.update();
@@ -351,7 +376,9 @@ how far a point on the wheel rim moves around its circular path.
 ## How this relates to the FTC SDK example
 
 The SDK's `RobotAutoDriveByEncoder_Linear` example uses the same
-`COUNTS_PER_INCH` formula and `RUN_TO_POSITION` sequence. It also introduces:
+conversion formula and `RUN_TO_POSITION` sequence. The SDK calls these values
+`COUNTS_PER_MOTOR_REV` and `COUNTS_PER_INCH`; in this lesson, we call them ticks
+to match the units shown in telemetry. The SDK example also introduces:
 
 - two drive motors;
 - relative targets based on each motor's current position;
@@ -385,7 +412,7 @@ In Android Studio:
 ## Ask your AI tutor
 
 > Review my encoder-distance OpMode without editing it. Check the order of the
-> motor modes, follow the units from counts per revolution to counts per inch and
+> motor modes, follow the units from ticks per revolution to ticks per inch and
 > target ticks, and ask for my real motor and wheel values instead of inventing
 > them.
 
@@ -395,7 +422,7 @@ You are finished when:
 
 - the ticks-per-revolution value comes from the correct motor manufacturer;
 - the marked wheel moves approximately one revolution for that many ticks;
-- the code calculates counts per inch without early integer rounding;
+- the code calculates ticks per inch without early integer rounding;
 - a requested rim distance produces the expected wheel movement;
 - a negative distance reverses the movement direction;
 - normal completion and Driver Station Stop both reach zero motor power; and
