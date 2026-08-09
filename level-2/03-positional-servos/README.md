@@ -181,16 +181,22 @@ telemetry.update();
 - `getPosition()` is the position command stored by the servo object. It is not
   physical feedback from the servo.
 
-## Part 6 — Run and observe
+## Part 6 — Run and test
 
-- Build and deploy the project.
-- Press INIT and confirm the servo moves to position `0.0`.
-- Press PLAY.
-- Press D-pad Up several times and confirm each press adds `0.05`.
-- Press D-pad Down and confirm each press subtracts `0.05`.
-- Hold a D-pad direction and confirm the position changes only once.
-- Confirm telemetry never shows a target below `0.0` or above `1.0`.
-- Compare the servo's movement with the telemetry values.
+Build and deploy the project, then complete each test:
+
+- **Test:** Press INIT.
+  **Verify:** The servo moves to position `0.0`, and telemetry shows a target and commanded position of `0.00`.
+- **Test:** Press PLAY, then press D-pad Up once.
+  **Verify:** The servo moves, and the target and commanded position shown in telemetry increase by `0.05`.
+- **Test:** Press D-pad Down once.
+  **Verify:** The servo moves in the opposite direction, and the telemetry values decrease by `0.05`.
+- **Test:** Hold D-pad Up or D-pad Down.
+  **Verify:** The position changes only once. The `WasPressed()` method detects a new press instead of repeatedly changing the position while the button is held.
+- **Test:** Press D-pad Up until the target reaches `1.0`, then press it again.
+  **Verify:** The target and commanded position remain at `1.00`.
+- **Test:** Press D-pad Down until the target reaches `0.0`, then press it again.
+  **Verify:** The target and commanded position remain at `0.00`.
 
 Press Driver Station Stop immediately if the servo approaches interference or
 places strain on the mechanism.
