@@ -185,18 +185,14 @@ telemetry.update();
 
 Build and deploy the project, then complete each test:
 
-- **Test:** Press INIT.
-  **Verify:** The servo moves to position `0.0`, and telemetry shows a target and commanded position of `0.00`.
-- **Test:** Press PLAY, then press D-pad Up once.
-  **Verify:** The servo moves, and the target and commanded position shown in telemetry increase by `0.05`.
-- **Test:** Press D-pad Down once.
-  **Verify:** The servo moves in the opposite direction, and the telemetry values decrease by `0.05`.
-- **Test:** Hold D-pad Up or D-pad Down.
-  **Verify:** The position changes only once. The `WasPressed()` method detects a new press instead of repeatedly changing the position while the button is held.
-- **Test:** Press D-pad Up until the target reaches `1.0`, then press it again.
-  **Verify:** The target and commanded position remain at `1.00`.
-- **Test:** Press D-pad Down until the target reaches `0.0`, then press it again.
-  **Verify:** The target and commanded position remain at `0.00`.
+| Test | Verify |
+|---|---|
+| Press **INIT**. | The servo moves to position `0.0`, and telemetry shows a target and commanded position of `0.00`. |
+| Press **PLAY**, then press **D-pad Up** once. | The servo moves, and the target and commanded position shown in telemetry increase by `0.05`. |
+| Press **D-pad Down** once. | The servo moves in the opposite direction, and the telemetry values decrease by `0.05`. |
+| Hold **D-pad Up** or **D-pad Down**. | The position changes only once because `WasPressed()` detects a new press rather than a held button. |
+| Press **D-pad Up** until the target reaches `1.0`, then press it again. | The target and commanded position remain at `1.00`. |
+| Press **D-pad Down** until the target reaches `0.0`, then press it again. | The target and commanded position remain at `0.00`. |
 
 Press Driver Station Stop immediately if the servo approaches interference or
 places strain on the mechanism.

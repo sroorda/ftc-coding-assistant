@@ -179,18 +179,14 @@ When Driver Station Stop ends the loop, this line sends the `0.0` stop command.
 
 Build and deploy the project, then complete each test:
 
-- **Test:** Press INIT.
-  **Verify:** The servo remains stopped, the status says `Servo stopped`, and the power command is `0.00`.
-- **Test:** Press PLAY, then press A once.
-  **Verify:** The servo rotates, `Running` is `true`, and both power commands shown in telemetry are `0.25`.
-- **Test:** Press A again.
-  **Verify:** The servo stops, `Running` is `false`, and both power commands are `0.00`.
-- **Test:** Hold A.
-  **Verify:** The running state changes only once. The `aWasPressed()` method detects a new press instead of repeatedly toggling the state while the button is held.
-- **Test:** Press A several times.
-  **Verify:** Each new press alternates between running at `0.25` and stopped at `0.00`.
-- **Test:** Start the servo, then press Driver Station Stop.
-  **Verify:** The servo stops because the code after the active loop sends the `0.0` power command.
+| Test | Verify |
+|---|---|
+| Press **INIT**. | The servo remains stopped, the status says `Servo stopped`, and the power command is `0.00`. |
+| Press **PLAY**, then press **A** once. | The servo rotates, `Running` is `true`, and both power commands shown in telemetry are `0.25`. |
+| Press **A** again. | The servo stops, `Running` is `false`, and both power commands are `0.00`. |
+| Hold **A**. | The running state changes only once because `aWasPressed()` detects a new press rather than a held button. |
+| Press **A** several times. | Each new press alternates between running at `0.25` and stopped at `0.00`. |
+| Start the servo, then press Driver Station **Stop**. | The servo stops because the code after the active loop sends the `0.0` power command. |
 
 If the servo creeps while its power command is `0.0`, stop the test and check its
 neutral calibration.
