@@ -156,7 +156,9 @@ telemetry.update();
 ```
 
 The motor controller requires an integer target, so `Math.round()` converts the
-manufacturer's decimal value to the nearest whole tick.
+manufacturer's decimal value to the nearest whole tick. `Math.round()` returns a
+`long`, so `(int)` converts that result to the type required by
+`setTargetPosition()`.
 
 Keep `waitForStart()` immediately after this initialization code.
 
@@ -292,8 +294,6 @@ That circumference is also the **inches in one wheel revolution**. For example,
 a 4-inch wheel moves a point on its rim approximately `12.57` inches during one
 revolution.
 
-![Wheel circumference converts one wheel revolution into inches around the rim.](../../docs/images/level-2/ticks-per-inch-formula.svg)
-
 Measure the wheel diameter in inches. Add these constants with the other class
 constants:
 
@@ -302,15 +302,15 @@ private static final double DRIVE_GEAR_REDUCTION = 1.0;
 private static final double WHEEL_DIAMETER_INCHES = 4.0;
 private static final double MOVE_DISTANCE_INCHES = 6.0;
 
-private static final double TICKS_PER_WHEEL_REV =
-        TICKS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION;
-private static final double INCHES_PER_WHEEL_REV =
-        WHEEL_DIAMETER_INCHES * Math.PI;
-private static final double TICKS_PER_INCH =
-        TICKS_PER_WHEEL_REV / INCHES_PER_WHEEL_REV;
+private static final double TICKS_PER_WHEEL_REV = TICKS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION;
+private static final double INCHES_PER_WHEEL_REV = WHEEL_DIAMETER_INCHES * Math.PI;
+private static final double TICKS_PER_INCH = TICKS_PER_WHEEL_REV / INCHES_PER_WHEEL_REV;
 ```
 
-Replace `4.0` with your measured wheel diameter.
+Replace `4.0` with your measured wheel diameter. `MOVE_DISTANCE_INCHES` keeps the
+requested movement separate from the conversion formula. It is set to `6.0` to
+show that the program can request any safe distance, not only one inch. Change
+this value when you want to test a different distance.
 
 `DRIVE_GEAR_REDUCTION` is the ratio between motor output-shaft revolutions and
 wheel revolutions:
@@ -335,9 +335,13 @@ The three calculated constants make the units visible:
 Replace the one-revolution target calculation with:
 
 ```java
-int targetTicks =
-        (int) Math.round(MOVE_DISTANCE_INCHES * TICKS_PER_INCH);
+int targetTicks = (int) Math.round(MOVE_DISTANCE_INCHES * TICKS_PER_INCH);
 ```
+
+Multiplying the requested distance by `TICKS_PER_INCH` can produce a decimal.
+`Math.round()` selects the nearest whole encoder tick and returns a `long`.
+The `(int)` cast converts it to the integer type required by
+`setTargetPosition()`.
 
 The encoder was reset during INIT, so this single movement still uses a target
 measured from zero. Relative targets based on `getCurrentPosition()` will be
