@@ -175,17 +175,22 @@ continuousServo.setPower(STOP_POWER);
 
 When Driver Station Stop ends the loop, this line sends the `0.0` stop command.
 
-## Part 7 — Run and observe
+## Part 7 — Run and test
 
-- Build and deploy the project.
-- Press INIT and confirm the servo remains stopped with a `0.0` command.
-- Press PLAY.
-- Press A once and confirm the servo runs with a `0.25` command.
-- Press A again and confirm the servo stops.
-- Hold A and confirm the state changes only once.
-- Start and stop the servo several times while watching telemetry.
-- Press A to start the servo, then press Driver Station Stop and confirm the
-  servo stops.
+Build and deploy the project, then complete each test:
+
+- **Test:** Press INIT.
+  **Verify:** The servo remains stopped, the status says `Servo stopped`, and the power command is `0.00`.
+- **Test:** Press PLAY, then press A once.
+  **Verify:** The servo rotates, `Running` is `true`, and both power commands shown in telemetry are `0.25`.
+- **Test:** Press A again.
+  **Verify:** The servo stops, `Running` is `false`, and both power commands are `0.00`.
+- **Test:** Hold A.
+  **Verify:** The running state changes only once. The `aWasPressed()` method detects a new press instead of repeatedly toggling the state while the button is held.
+- **Test:** Press A several times.
+  **Verify:** Each new press alternates between running at `0.25` and stopped at `0.00`.
+- **Test:** Start the servo, then press Driver Station Stop.
+  **Verify:** The servo stops because the code after the active loop sends the `0.0` power command.
 
 If the servo creeps while its power command is `0.0`, stop the test and check its
 neutral calibration.
