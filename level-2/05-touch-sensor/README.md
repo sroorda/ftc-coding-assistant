@@ -117,16 +117,17 @@ telemetry.update();
 The first line shows the Boolean value. The second turns the same value into a
 status that is easier to read quickly.
 
-## Part 5 — Run and observe
+## Part 5 — Run and test
 
-- Build and deploy the project.
-- Press INIT and confirm the initialization message appears.
-- Press PLAY with the sensor released.
-- Confirm telemetry shows `false` and `RELEASED`.
-- Press and hold the sensor.
-- Confirm telemetry shows `true` and `PRESSED`.
-- Release it and confirm the display changes back.
-- Repeat the test several times.
+Build and deploy the project, then complete each test:
+
+| Test | Verify |
+|---|---|
+| Press **INIT**. | Telemetry shows `Touch sensor initialized`. |
+| Release the sensor, then press **PLAY**. | Telemetry shows `Pressed: false` and `Touch sensor: RELEASED`. |
+| Press and hold the sensor. | Telemetry changes to `Pressed: true` and `Touch sensor: PRESSED`. |
+| Release the sensor. | Telemetry changes back to `Pressed: false` and `Touch sensor: RELEASED`. |
+| Press and release the sensor several times. | Telemetry follows every change and always shows matching Boolean and text values. |
 
 ## Git checkpoint
 

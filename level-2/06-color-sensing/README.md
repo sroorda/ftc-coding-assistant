@@ -152,16 +152,19 @@ telemetry.update();
 This comparison is a starting point, not a fully calibrated competition color
 detector.
 
-## Part 6 — Run and observe
+## Part 6 — Run and test
 
-- Build and deploy the project.
-- Press INIT and confirm the initialization message appears.
-- Press PLAY.
-- Present each red, green, and blue sample at the same distance and angle.
-- Compare the four numeric readings for each sample.
-- Confirm the detected name matches the strongest RGB channel.
-- Try a neutral or poorly lit sample and observe whether the simple rule is still
-  useful.
+Build and deploy the project, then complete each test. Keep every sample at the
+same distance and angle so the comparisons are meaningful.
+
+| Test | Verify |
+|---|---|
+| Press **INIT**. | Telemetry shows `Color sensor initialized`. |
+| Press **PLAY** and present the red sample. | The red reading is greater than the green and blue readings, and `Detected color` shows `RED`. |
+| Present the green sample. | The green reading is greater than the red and blue readings, and `Detected color` shows `GREEN`. |
+| Present the blue sample. | The blue reading is greater than the red and green readings, and `Detected color` shows `BLUE`. |
+| Present a neutral or poorly lit sample. | Telemetry continues to show all four numeric readings. If two RGB channels tie for the highest value, `Detected color` shows `UNKNOWN`. |
+| Move one sample closer to and farther from the sensor. | The channel values change, demonstrating that distance and lighting affect the readings. |
 
 ## Git checkpoint
 
