@@ -1,38 +1,28 @@
-# Level 3 Preview — Robot Systems and TeleOp
+# Level 3 Learning Path — Robot Systems and TeleOp
 
-> **Coming later:** You will begin this level after you can safely control and
-> explain the individual devices used on the robot.
+> **WORK IN PROGRESS — DO NOT ATTEMPT THESE LESSONS YET.** They have not been
+> validated on the team robot. Mentors must first verify the current configuration,
+> safe training limits, test procedure, and integration branch.
 
-In Level 3, you will combine separate hardware skills into a working robot. You
-will learn how gamepad input becomes drivetrain and mechanism behavior while the
-control loop keeps everything responsive.
+In Level 3, you will combine individually tested devices into a responsive robot.
+You will preserve a traceable path from driver input through subsystem behavior to
+the final hardware command.
 
 ## What you will learn
 
-1. Read gamepad inputs and apply deadbands and scaling.
-2. Test drivetrain directions one motor at a time.
-3. Drive robot-centric at reduced power.
-4. Organize one mechanism as a reusable subsystem.
-5. Drive and operate a mechanism without blocking the control loop.
-6. Handle limits, conflicting controls, and safe stop behavior.
-7. Complete an integration challenge: drive while operating an intake, arm, or servo.
+1. [Map the robot and verify drive directions](../level-3/01-robot-contract-and-direction/README.md).
+2. [Build reduced-power robot-centric mecanum drive](../level-3/02-robot-centric-mecanum-drive/README.md).
+3. [Turn gamepad readings into documented driver intent](../level-3/03-driver-intent/README.md).
+4. [Refactor one tested mechanism into a reusable subsystem](../level-3/04-first-subsystem/README.md).
+5. [Apply operator controls, limits, and conflict priority](../level-3/05-mechanism-controls-and-limits/README.md).
+6. [Complete the TeleOp integration challenge](../level-3/06-teleop-integration-challenge/README.md).
 
-You will start with robot-centric driving. Field-centric driving can follow after
-you understand the drivetrain and the robot's heading sensor.
-
-## Follow one command
-
-By the end, you should be able to trace:
-
-```text
-gamepad input → OpMode decision → subsystem method → hardware command
-```
-
-See [Robot Code Architecture](../docs/robot-code-architecture.md) for the structure
-you will build toward.
+Begin with robot-centric driving. Field-centric driving is an extension after the
+team can verify heading and explain the underlying drivetrain behavior.
 
 ## Your next checkpoint
 
-You will be ready for Level 4 when you can safely drive, operate a mechanism,
-explain why the control loop must keep running, integrate a partner's subsystem,
-and diagnose unexpected movement without guessing.
+You are ready for Level 4 when you can safely drive and operate a mechanism at the
+same time, trace commands through the architecture, explain why the outer loop must
+remain responsive, integrate through a partner's subsystem interface, and diagnose
+unexpected movement with isolated tests and telemetry.

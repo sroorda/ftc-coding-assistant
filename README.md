@@ -15,11 +15,14 @@ try your own changes, read the results, and explain what you learned.
 |---|---|---|
 | [1 — Java Foundations](levels/01-java-foundations.md) | write and test robot-like Java without hardware | **Ready now** |
 | [2 — Hardware Lab](levels/02-hardware-lab.md) | safely control motors, servos, and sensors | Coming later |
-| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating robot mechanisms | Coming later |
-| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | use localization and Pedro Pathing | Coming later |
-| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | run mechanism actions while following paths | Coming later |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating robot mechanisms | Draft for validation |
+| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | use localization and Pedro Pathing | Draft for validation |
+| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | run mechanism actions while following paths | Draft for validation |
 
 The [Program Roadmap](PROGRAM_ROADMAP.md) shows how the levels fit together.
+
+> **Levels 3–5 are work in progress. Do not attempt them yet.** They require
+> mentor review and validation on the team's current robot before student use.
 
 ## How you will use AI
 

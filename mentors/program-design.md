@@ -17,17 +17,22 @@ Students advance by demonstrated understanding, not title or prior experience.
 Adults may adjust pace and accommodations, but should not waive hardware safety or
 understanding checks.
 
-## Later-level status
+## Hardware-level validation status
 
-Levels 2–5 currently define outcomes and constraints; they are not student-ready
-curricula. Do not remove a **Coming later** label until the lessons
-have been tested with:
+Levels 2–5 contain student lesson drafts, but they are not independently
+student-ready until the relevant level has been tested with:
 
 - the team's current FTC SDK and Android Studio environment;
 - the team's actual hardware and configuration;
 - the tested safety and emergency-stop procedure;
 - both Windows and macOS development paths used by the team; and
 - a beginner who was not involved in writing the lesson.
+
+For Level 3, also validate the team's robot hardware contract, training power, and
+integration workflow. For Levels 4–5, pin the Pedro Pathing version and verify every
+API example against that version. Level 5 additionally requires safe injected
+failure tests; never create failures by jamming a mechanism or obstructing a
+moving robot.
 
 ## Hardware lab recommendation
 

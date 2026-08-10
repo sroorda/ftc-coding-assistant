@@ -10,11 +10,12 @@ finished solution.
 |---|---|---|
 | [1 — Java Foundations](levels/01-java-foundations.md) | write, test, debug, and explain robot-like Java | **Ready now** |
 | [2 — Hardware Lab](levels/02-hardware-lab.md) | safely command and observe one device at a time | Coming later |
-| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating a robot mechanism | Coming later |
-| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | create and tune reliable autonomous paths | Coming later |
-| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | coordinate mechanisms with path following | Coming later |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating a robot mechanism | Draft for robot validation |
+| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | create and tune reliable autonomous paths | Draft for robot/version validation |
+| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | coordinate mechanisms with path following | Draft for integrated validation |
 
-The later-level pages are previews, not complete lessons yet.
+Levels 2–5 contain complete lesson drafts. Their hardware-dependent claims and
+procedures still require the validation named on each level page.
 
 ## How the levels build on one another
 

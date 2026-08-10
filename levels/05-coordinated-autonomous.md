@@ -1,41 +1,32 @@
-# Level 5 Preview — Coordinated Autonomous Actions
+# Level 5 Learning Path — Coordinated Autonomous Actions
 
-> **Coming later:** You will begin this level after paths and mechanisms work
-> reliably on their own.
+> **WORK IN PROGRESS — DO NOT ATTEMPT THESE LESSONS YET.** These integrated
+> procedures have not been validated on the team robot. Drivetrain paths and
+> mechanism operations must also pass their independent tests first.
 
-In Level 5, you will make the drivetrain and mechanisms work together. The robot
-must continue updating its path, localization, mechanisms, safety conditions, and
-telemetry instead of freezing inside a long sequence of waits.
+In Level 5, you will coordinate path following with mechanism work without
+freezing localization, safety checks, telemetry, or Stop handling.
 
 ## What you will learn
 
-1. Explain why long sleeps break responsive robot control.
-2. Define mechanism states, commands, completion conditions, and timeouts.
-3. Update the follower and mechanisms in the same loop.
-4. Use Pedro Pathing progress- and pose-based callbacks.
-5. Pause and resume movement when an action requires it.
-6. Handle conflicting actions, safety priority, and cancellation.
-7. Report the current path, state, target, and failure reason through telemetry.
-8. Build a final routine that drives, acquires or scores, recovers, and parks.
+1. [Define observable action contracts](../level-5/01-action-contracts/README.md).
+2. [Implement one nonblocking mechanism action](../level-5/02-nonblocking-mechanism-actions/README.md).
+3. [Coordinate paths and actions with explicit states](../level-5/03-coordinate-with-states/README.md).
+4. [Request actions from path callbacks](../level-5/04-path-callbacks/README.md).
+5. [Pause, recover, time out, and cancel safely](../level-5/05-recovery-and-cancellation/README.md).
+6. [Complete the coordinated autonomous challenge](../level-5/06-final-autonomous-challenge/README.md).
 
 ## Ask these questions about every action
 
 - When may it start?
-- What does it command while it runs?
-- How do you know it completed?
+- What does it command while running?
+- What observable evidence means it completed?
 - What stops or cancels it?
 - What happens if it never completes?
 
-You will use the same subsystem operations in TeleOp and autonomous. Autonomous
-code should coordinate existing capabilities instead of bypassing them to command
-devices directly.
-
 ## Your final checkpoint
 
-You will demonstrate normal, delayed, failed, and stopped behavior; show that
-localization and mechanisms keep updating together; and explain every timeout and
-priority decision.
-
-## Learn more
-
-- [Pedro Pathing path callbacks](https://pedropathing.com/docs/pathing/reference/callbacks)
+You have completed the pathway when you can demonstrate normal, delayed, failed,
+timed-out, and stopped behavior; show follower and mechanism updates occurring
+together; trace decisions to hardware; and defend every timeout and safety-priority
+choice with evidence.
