@@ -35,10 +35,10 @@
 ## Level 3 — Robot Systems and TeleOp
 
 * [Level 3 Learning Path](levels/03-robot-systems-and-teleop.md)
-* [Lesson 1: Robot Contract and Drive Direction](level-3/01-robot-contract-and-direction/README.md)
+* [Lesson 1: Map the Robot Before Moving It](level-3/01-robot-contract-and-direction/README.md)
 * [Lesson 2: Robot-Centric Mecanum Drive](level-3/02-robot-centric-mecanum-drive/README.md)
 * [Lesson 3: Driver Intent](level-3/03-driver-intent/README.md)
-* [Lesson 4: First Reusable Subsystem](level-3/04-first-subsystem/README.md)
+* [Lesson 4: Build One Reusable Mechanism Subsystem](level-3/04-first-subsystem/README.md)
 * [Lesson 5: Mechanism Controls and Limits](level-3/05-mechanism-controls-and-limits/README.md)
 * [Lesson 6: TeleOp Integration Challenge](level-3/06-teleop-integration-challenge/README.md)
 
