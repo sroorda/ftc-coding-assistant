@@ -30,7 +30,6 @@
 * [2.6: Color Sensor Readings](level-2/06-color-sensing/README.md)
 * [2.7: Encoders and Measured Movement](level-2/07-motors-and-encoders/README.md)
 * [2.8: Reusable Hardware Code](level-2/08-reusable-hardware-code/README.md)
-* [2.9: Integrated Hardware Challenge](level-2/09-integrated-hardware-challenge/README.md)
 
 ## Level 3 Lessons
 

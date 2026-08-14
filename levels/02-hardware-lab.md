@@ -1,8 +1,8 @@
 # Level 2 Learning Path — Hardware Lab
 
-> **Draft for hardware validation:** The nine lessons are available for review,
+> **Draft for hardware validation:** The eight lessons are available for review,
 > but their device types, configuration names, safe ranges, sensor polarity, and
-> integrated sequence must be verified on the physical test bench before students
+> expected behavior must be verified on the physical test bench before students
 > use them independently.
 
 In Level 2, your Java code will leave the laptop and control real FTC hardware for
@@ -24,8 +24,8 @@ each line of code to what you observe.
    values into a simple color decision.
 - [2.7: Convert encoder ticks into measured wheel movement](../level-2/07-motors-and-encoders/README.md)
    and command a calculated wheel-rim distance.
-- [2.8: Move repeated hardware setup into reusable code](../level-2/08-reusable-hardware-code/README.md).
-- [2.9: Coordinate several devices with a non-blocking state machine](../level-2/09-integrated-hardware-challenge/README.md).
+- [2.8: Control several devices, then move their repeated setup into reusable
+  code](../level-2/08-reusable-hardware-code/README.md).
 
 Your first hardware environment will be a small benchtop rig. Before running code,
 verify the wiring, test area, expected motion, power limits, and stop procedure.
@@ -47,7 +47,7 @@ You will be ready for Level 3 when you can:
 - command and stop a motor or servo within an approved range;
 - use telemetry as evidence;
 - organize repeated hardware setup behind clear reusable methods;
-- coordinate multiple devices without blocking Stop handling;
+- control multiple devices in one active OpMode loop;
 - describe the expected physical movement before pressing Run; and
 - recover your work through the team's Git workflow.
 
