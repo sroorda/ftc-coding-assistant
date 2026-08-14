@@ -60,20 +60,15 @@ public class EncoderDistanceOpMode extends LinearOpMode {
         waitForStart();
 
         // Area 2: Command one encoder movement.
-        if (opModeIsActive()) {
+
+        // Area 3: Monitor movement and keep final telemetry visible.
+        while( opModeIsActive() ) {
 
         }
 
-        // Area 3: Leave the motor stopped.
+        // Area 4: Leave the motor stopped after Driver Station Stop.
         benchMotor.setPower(0.0);
         benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        // Area 4: Keep final telemetry visible until STOP.
-        while (opModeIsActive()) {
-            idle();
-        }
-
-        benchMotor.setPower(0.0);
     }
 }
 ```
@@ -180,19 +175,24 @@ Build and deploy the project before adding the movement code:
 
 ### Command the movement
 
-Inside the `if (opModeIsActive())` block in **Area 2**, add:
+Immediately after `waitForStart()`, add this guard before commanding the motor:
+
+```java
+if (!opModeIsActive()) {
+    benchMotor.setPower(0.0);
+    return;
+}
+```
+
+If Driver Station Stop is pressed before PLAY, `waitForStart()` returns but the
+OpMode is not active. This guard exits without starting the motor.
+
+In **Area 2**, add:
 
 ```java
 benchMotor.setTargetPosition(targetTicks);
 benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 benchMotor.setPower(TEST_POWER);
-
-while (opModeIsActive() && benchMotor.isBusy()) {
-    telemetry.addData("Target ticks", targetTicks);
-    telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
-    telemetry.update();
-    idle();
-}
 ```
 
 Read the sequence from top to bottom:
@@ -200,35 +200,51 @@ Read the sequence from top to bottom:
 - `setTargetPosition()` supplies the encoder count to reach.
 - `RUN_TO_POSITION` tells the motor controller to move toward that target.
 - `setPower()` starts the movement at limited power.
-- `isBusy()` remains true while the motor is moving toward the target.
-- the loop displays the target and current counts while the movement runs.
-- **Area 3** stops the motor and leaves `RUN_TO_POSITION` after the movement
-  ends or Driver Station Stop is pressed.
 
-### Stop the motor but keep the OpMode active
+### Monitor movement and keep the OpMode active
 
-After the movement loop, replace **Area 3** and **Area 4** with:
+In **Area 3**, add one active loop:
+
+```java
+while( opModeIsActive() ) {
+    if(benchMotor.isBusy() || benchMotor.getCurrentPosition() != targetTicks ) {
+        telemetry.addData("Status", "Motor moving");
+        telemetry.addData("Target ticks", targetTicks);
+        telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
+    }
+    else {
+        benchMotor.setPower(0.0);
+
+        telemetry.addData("Status", "Movement complete");
+        telemetry.addData("Target ticks", targetTicks);
+        telemetry.addData("Final ticks", benchMotor.getCurrentPosition());
+    }
+
+    telemetry.update();
+}
+```
+
+The loop handles both states:
+
+- While `isBusy()` is true or the current position differs from `targetTicks`,
+  telemetry reports that the motor is moving.
+- When the motor is no longer busy and its current position equals
+  `targetTicks`, the `else` block commands zero power and reports completion.
+- The loop continues after completion, so final telemetry remains visible until
+  Driver Station Stop is pressed.
+
+The equality check is exact. A motor controller can sometimes consider a move
+complete while its reported position is still a few ticks from the target. If
+that happens, this example will continue to show `Motor moving` because the
+current position is not equal to `targetTicks`. Record the final values and use
+Driver Station Stop; the cleanup code in **Area 4** commands zero power.
+
+After the loop, keep the **Area 4** cleanup:
 
 ```java
 benchMotor.setPower(0.0);
 benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-while (opModeIsActive()) {
-    telemetry.addData("Status", "Movement complete");
-    telemetry.addData("Target ticks", targetTicks);
-    telemetry.addData("Final ticks", benchMotor.getCurrentPosition());
-    telemetry.update();
-    idle();
-}
-
-benchMotor.setPower(0.0);
 ```
-
-The first zero-power command stops the motor as soon as the movement finishes.
-The final loop keeps `runOpMode()` active so the completed status and final
-encoder count remain visible. It does not command more movement. Pressing Driver
-Station Stop ends the loop, and the last zero-power command leaves the motor
-stopped as the method exits.
 
 ### Check the complete one-revolution OpMode
 
@@ -268,35 +284,34 @@ public class EncoderDistanceOpMode extends LinearOpMode {
 
         waitForStart();
 
-        if (opModeIsActive()) {
-            benchMotor.setTargetPosition(targetTicks);
-            benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            benchMotor.setPower(TEST_POWER);
+        if (!opModeIsActive()) {
+            benchMotor.setPower(0.0);
+            return;
+        }
 
-            while (opModeIsActive() && benchMotor.isBusy()) {
+        benchMotor.setTargetPosition(targetTicks);
+        benchMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        benchMotor.setPower(TEST_POWER);
+
+        while( opModeIsActive() ) {
+            if(benchMotor.isBusy() || benchMotor.getCurrentPosition() != targetTicks ) {
+                telemetry.addData("Status", "Motor moving");
                 telemetry.addData("Target ticks", targetTicks);
-                telemetry.addData(
-                        "Current ticks",
-                        benchMotor.getCurrentPosition());
-                telemetry.update();
-                idle();
+                telemetry.addData("Current ticks", benchMotor.getCurrentPosition());
             }
+            else {
+                benchMotor.setPower(0.0);
+
+                telemetry.addData("Status", "Movement complete");
+                telemetry.addData("Target ticks", targetTicks);
+                telemetry.addData("Final ticks", benchMotor.getCurrentPosition());
+            }
+
+            telemetry.update();
         }
 
         benchMotor.setPower(0.0);
         benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        while (opModeIsActive()) {
-            telemetry.addData("Status", "Movement complete");
-            telemetry.addData("Target ticks", targetTicks);
-            telemetry.addData(
-                    "Final ticks",
-                    benchMotor.getCurrentPosition());
-            telemetry.update();
-            idle();
-        }
-
-        benchMotor.setPower(0.0);
     }
 }
 ```
@@ -319,8 +334,9 @@ complete each test:
 |---|---|
 | Press **INIT**. | Current ticks are near `0`, and target ticks match the rounded manufacturer value. |
 | Press **PLAY**. | The wheel moves at limited power while current ticks approach target ticks. |
-| Allow the movement to finish. | The wheel stops near the target count, its tape mark returns approximately to the reference mark, and telemetry shows `Movement complete`. |
+| Allow the movement to reach the exact target tick. | The wheel stops, its tape mark returns approximately to the reference mark, and telemetry shows `Movement complete`. |
 | Wait without pressing Driver Station **Stop**. | The motor remains stopped, final telemetry remains visible, and the OpMode stays active. |
+| Observe a move that stops a few ticks from the target. | Telemetry may continue to show `Motor moving` because the example requires exact equality. Record both tick values and press Stop. |
 | Run the test again and press Driver Station **Stop** during movement. | The movement ends and the final cleanup commands zero motor power. |
 
 If the wheel does not complete approximately one revolution, stop and check the
@@ -416,7 +432,7 @@ the stationary reference, build, and deploy the updated project.
 |---|---|
 | Press **INIT**. | Requested distance is `6.00 in`, current ticks are near `0`, and target ticks equal the rounded distance calculation. |
 | Press **PLAY**. | The current count approaches the calculated target while the wheel rotates. |
-| Allow the movement to finish. | The wheel stops near the target count, rotates through approximately the marked 6-inch rim distance, and the OpMode remains active with final telemetry visible. |
+| Allow the movement to reach the exact target tick. | The wheel stops, rotates through approximately the marked 6-inch rim distance, and the OpMode remains active with final telemetry visible. |
 | Change `MOVE_DISTANCE_INCHES` to `-6.0`, rebuild, and run again. | The target is negative, and the wheel moves approximately 6 inches in the opposite direction. |
 
 The fixed bench does not travel six inches. The calculated distance describes
