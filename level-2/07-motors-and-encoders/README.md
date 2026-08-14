@@ -67,6 +67,13 @@ public class EncoderDistanceOpMode extends LinearOpMode {
         // Area 3: Leave the motor stopped.
         benchMotor.setPower(0.0);
         benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        // Area 4: Keep final telemetry visible until STOP.
+        while (opModeIsActive()) {
+            idle();
+        }
+
+        benchMotor.setPower(0.0);
     }
 }
 ```
@@ -195,8 +202,33 @@ Read the sequence from top to bottom:
 - `setPower()` starts the movement at limited power.
 - `isBusy()` remains true while the motor is moving toward the target.
 - the loop displays the target and current counts while the movement runs.
-- **Area 3** stops the motor and leaves reset mode after the movement ends or
-  Driver Station Stop is pressed.
+- **Area 3** stops the motor and leaves `RUN_TO_POSITION` after the movement
+  ends or Driver Station Stop is pressed.
+
+### Stop the motor but keep the OpMode active
+
+After the movement loop, replace **Area 3** and **Area 4** with:
+
+```java
+benchMotor.setPower(0.0);
+benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+while (opModeIsActive()) {
+    telemetry.addData("Status", "Movement complete");
+    telemetry.addData("Target ticks", targetTicks);
+    telemetry.addData("Final ticks", benchMotor.getCurrentPosition());
+    telemetry.update();
+    idle();
+}
+
+benchMotor.setPower(0.0);
+```
+
+The first zero-power command stops the motor as soon as the movement finishes.
+The final loop keeps `runOpMode()` active so the completed status and final
+encoder count remain visible. It does not command more movement. Pressing Driver
+Station Stop ends the loop, and the last zero-power command leaves the motor
+stopped as the method exits.
 
 ### Check the complete one-revolution OpMode
 
@@ -253,6 +285,18 @@ public class EncoderDistanceOpMode extends LinearOpMode {
 
         benchMotor.setPower(0.0);
         benchMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        while (opModeIsActive()) {
+            telemetry.addData("Status", "Movement complete");
+            telemetry.addData("Target ticks", targetTicks);
+            telemetry.addData(
+                    "Final ticks",
+                    benchMotor.getCurrentPosition());
+            telemetry.update();
+            idle();
+        }
+
+        benchMotor.setPower(0.0);
     }
 }
 ```
@@ -275,7 +319,8 @@ complete each test:
 |---|---|
 | Press **INIT**. | Current ticks are near `0`, and target ticks match the rounded manufacturer value. |
 | Press **PLAY**. | The wheel moves at limited power while current ticks approach target ticks. |
-| Allow the movement to finish. | The wheel stops near the target count, and its tape mark returns approximately to the reference mark. |
+| Allow the movement to finish. | The wheel stops near the target count, its tape mark returns approximately to the reference mark, and telemetry shows `Movement complete`. |
+| Wait without pressing Driver Station **Stop**. | The motor remains stopped, final telemetry remains visible, and the OpMode stays active. |
 | Run the test again and press Driver Station **Stop** during movement. | The movement ends and the final cleanup commands zero motor power. |
 
 If the wheel does not complete approximately one revolution, stop and check the
@@ -371,7 +416,7 @@ the stationary reference, build, and deploy the updated project.
 |---|---|
 | Press **INIT**. | Requested distance is `6.00 in`, current ticks are near `0`, and target ticks equal the rounded distance calculation. |
 | Press **PLAY**. | The current count approaches the calculated target while the wheel rotates. |
-| Allow the movement to finish. | The wheel stops near the target count and rotates through approximately the marked 6-inch rim distance. |
+| Allow the movement to finish. | The wheel stops near the target count, rotates through approximately the marked 6-inch rim distance, and the OpMode remains active with final telemetry visible. |
 | Change `MOVE_DISTANCE_INCHES` to `-6.0`, rebuild, and run again. | The target is negative, and the wheel moves approximately 6 inches in the opposite direction. |
 
 The fixed bench does not travel six inches. The calculated distance describes
