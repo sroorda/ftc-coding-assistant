@@ -133,7 +133,7 @@ Start with a switch that changes states but requests zero powered output:
 switch (currentState) {
     case IDLE:
         bench.stopAll();
-        // A rising-edge button press may transition to MOVING_TO_WORK.
+        // gamepad1.crossWasPressed() may transition to MOVING_TO_WORK.
         break;
 
     case MOVING_TO_WORK:
@@ -188,8 +188,8 @@ outputs remain zero. Only then enable one hardware state at a time.
 
 Implement this sequence:
 
-1. **IDLE** — all powered outputs are stopped. A deliberate gamepad button starts
-   the automation.
+1. **IDLE** — all powered outputs are stopped. A press of the PlayStation Cross
+   (✕) button starts the automation.
 2. **MOVING_TO_WORK** — use the encoder to move from its initialized zero to a
    small tested work position.
    Continue when the target is reached. Fault on timeout.
@@ -231,9 +231,9 @@ Complete this transition table first:
 Treat the completed table as your prediction of the automation. Revise it when a
 hardware test provides evidence that the model is incomplete or incorrect.
 
-For each transition, name the sensor reading, encoder condition, button edge, or
-elapsed-time condition that causes it. Avoid transitions based on comments such as
-“when ready” without a value the program can observe.
+For each transition, name the sensor reading, encoder condition, Cross-button
+edge, or elapsed-time condition that causes it. Avoid transitions based on
+comments such as “when ready” without a value the program can observe.
 
 Before writing a case, read one row aloud as:
 
@@ -257,8 +257,8 @@ Before writing a case, read one row aloud as:
 
 Do not test the entire automation first.
 
-1. Run with motor and servo powers forced to zero; verify button, sensor, state,
-   and timeout transitions through telemetry.
+1. Run with motor and servo powers forced to zero; verify the Cross button,
+   sensor, state, and timeout transitions through telemetry.
 2. Enable the small encoder movement and verify target and timeout.
 3. Enable positional-servo movement using previously tested constants.
 4. Enable CR-servo feeding and color completion.

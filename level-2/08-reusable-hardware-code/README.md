@@ -364,7 +364,7 @@ Keep this state and gamepad logic in the OpMode:
 ```java
 boolean servoRunning = false;
 
-if (gamepad1.aWasPressed()) {
+if (gamepad1.crossWasPressed()) {
     servoRunning = !servoRunning;
 }
 
@@ -381,9 +381,9 @@ Build and deploy the refactored OpMode, then repeat the 2.4 tests:
 | Test | Verify |
 |---|---|
 | Press **INIT**. | The CR servo remains stopped at `0.00`. |
-| Press **PLAY**, then press **A**. | The servo runs and telemetry shows `0.25`. |
-| Press **A** again. | The servo stops and telemetry shows `0.00`. |
-| Hold **A**. | The state changes only once. |
+| Press **PLAY**, then press **Cross (✕)**. | The servo runs and telemetry shows `0.25`. |
+| Press **Cross (✕)** again. | The servo stops and telemetry shows `0.00`. |
+| Hold **Cross (✕)**. | The state changes only once. |
 | Start the servo, then press Driver Station **Stop**. | `stopAll()` stops both powered outputs. |
 
 Do not continue until these results match 2.4.

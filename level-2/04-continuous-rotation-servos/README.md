@@ -2,7 +2,7 @@
 
 A continuous-rotation servo uses a power command instead of a position command.
 In this lesson, you will initialize the servo with a `0.0` power command and use
-one gamepad button to alternate between running and stopped.
+the PlayStation Cross (✕) button to alternate between running and stopped.
 
 ## Your mission
 
@@ -20,7 +20,7 @@ By the end of this lesson, you can:
 - explain how a CR-servo power command differs from a positional-servo position
   command;
 - initialize a CR servo with a `0.0` power command;
-- use one button to start and stop the servo; and
+- use the Cross button to start and stop the servo; and
 - use telemetry to observe the requested and stored power commands.
 
 ## Get ready
@@ -117,22 +117,25 @@ telemetry.update();
 
 Leave the existing `waitForStart()` directly below this code in **Area 2**.
 
-## Part 3 — Toggle the running state with one button
+## Part 3 — Toggle the running state with the Cross button
+
+The FTC SDK provides PlayStation-specific gamepad names. Use
+`crossWasPressed()` for the Cross (✕) button:
 
 Inside the active loop in **Area 3**, add:
 
 ```java
-if (gamepad1.aWasPressed()) {
+if (gamepad1.crossWasPressed()) {
     servoRunning = !servoRunning;
 }
 ```
 
-Each new A-button press reverses the Boolean value:
+Each new Cross-button press reverses the Boolean value:
 
 - `false` becomes `true`, starting the servo; and
 - `true` becomes `false`, stopping the servo.
 
-Because `aWasPressed()` is true once for each new press, holding A does not
+Because `crossWasPressed()` is true once for each new press, holding Cross does not
 repeatedly switch between running and stopped.
 
 ## Part 4 — Convert the state into a power command
@@ -182,10 +185,10 @@ Build and deploy the project, then complete each test:
 | Test | Verify |
 |---|---|
 | Press **INIT**. | The servo remains stopped, the status says `Servo stopped`, and the power command is `0.00`. |
-| Press **PLAY**, then press **A** once. | The servo rotates, `Running` is `true`, and both power commands shown in telemetry are `0.25`. |
-| Press **A** again. | The servo stops, `Running` is `false`, and both power commands are `0.00`. |
-| Hold **A**. | The running state changes only once because `aWasPressed()` detects a new press rather than a held button. |
-| Press **A** several times. | Each new press alternates between running at `0.25` and stopped at `0.00`. |
+| Press **PLAY**, then press **Cross (✕)** once. | The servo rotates, `Running` is `true`, and both power commands shown in telemetry are `0.25`. |
+| Press **Cross (✕)** again. | The servo stops, `Running` is `false`, and both power commands are `0.00`. |
+| Hold **Cross (✕)**. | The running state changes only once because `crossWasPressed()` detects a new press rather than a held button. |
+| Press **Cross (✕)** several times. | Each new press alternates between running at `0.25` and stopped at `0.00`. |
 | Start the servo, then press Driver Station **Stop**. | The servo stops because the code after the active loop sends the `0.0` power command. |
 
 If the servo creeps while its power command is `0.0`, stop the test and check its
@@ -199,7 +202,7 @@ In Android Studio:
 - inspect the `ContinuousServoOpMode.java` diff;
 - commit with a focused message such as `Add continuous servo toggle`;
 - push and open a pull request into `student/<your-name>`;
-- describe what happened during INIT, each A-button press, and Driver Station
+- describe what happened during INIT, each Cross-button press, and Driver Station
   Stop;
 - obtain a review and merge the pull request; and
 - update your local personal branch before starting 2.5.
@@ -207,17 +210,17 @@ In Android Studio:
 ## Ask your AI tutor
 
 > Review my continuous-servo OpMode without editing it. Check that each new
-> A-button press toggles the state once, false always sends a 0.0 power command,
-> and leaving the active loop stops the servo.
+> Cross-button press toggles the state once, false always sends a 0.0 power
+> command, and leaving the active loop stops the servo.
 
 ## Check your work
 
 You are finished when:
 
 - INIT sends a `0.0` power command;
-- the first A-button press starts the servo with a `0.25` power command;
-- the next A-button press stops the servo;
-- holding A does not repeatedly toggle the state;
+- the first Cross-button press starts the servo with a `0.25` power command;
+- the next Cross-button press stops the servo;
+- holding Cross does not repeatedly toggle the state;
 - telemetry shows the running state and power commands; and
 - Driver Station Stop leaves the servo with a `0.0` power command.
 
