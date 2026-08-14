@@ -51,7 +51,7 @@ with working code.
 | 1 | Find repeated hardware code. | Refactor duplication that actually exists. |
 | 2 | Create a small hardware class. | Give hardware setup one clear home. |
 | 3 | Move the motor code first. | Learn the pattern with one familiar device. |
-| 4 | Refactor and test the motor OpMode. | Prove its behavior did not change. |
+| 4 | Refactor and test a copy of the motor OpMode. | Keep the original available for comparison. |
 | 5 | Repeat with the CR servo and touch sensor. | Apply the pattern to an output and an input. |
 | 6 | Finish and review the class boundary. | Decide what belongs in the class and what stays in an OpMode. |
 
@@ -101,7 +101,7 @@ Before editing, record the behavior that must remain unchanged:
 |---|---|---|---|
 | Motor is stopped after INIT | | | |
 | Joystick limits motor power to `0.25` | | | |
-| A button starts and stops the CR servo | | | |
+| Cross button starts and stops the CR servo | | | |
 | Driver Station Stop stops powered outputs | | | |
 | Touch sensor reports pressed and released | | | |
 | Each touch-sensor press toggles once | | | |
@@ -196,12 +196,38 @@ In Android Studio:
 - confirm it contains no gamepad, telemetry, or lifecycle code; and
 - commit with `Add reusable test bench motor`.
 
-Do not push yet. The next commit will show how an existing OpMode begins using
-the class.
+Do not push yet. The next commit will add a refactored OpMode that uses the
+class while preserving the original OpMode as a comparison.
 
-## Part 3 — Refactor the motor OpMode
+## Part 3 — Copy and refactor the motor OpMode
 
-Open `FirstHardwareOpMode.java`.
+Do not change `FirstHardwareOpMode.java`. It is your known-working version and
+will remain available for side-by-side comparison.
+
+### Make the comparison copy
+
+In Android Studio:
+
+1. In the Project window, right-click `FirstHardwareOpMode.java` and select
+   **Copy**.
+2. Right-click the same Level 2 package and select **Paste**.
+3. Name the copy `RefactoredFirstOpMode`.
+4. Confirm the class declaration matches the new filename:
+
+   ```java
+   public class RefactoredFirstOpMode extends LinearOpMode {
+   ```
+
+5. Give the copied OpMode a different Driver Station name:
+
+   ```java
+   @TeleOp(name = "L2 Refactored First", group = "Level 2")
+   ```
+
+Build the project before refactoring the copy. Both OpModes should compile, and
+both should appear separately in the Driver Station's TeleOp list.
+
+Make every remaining change in this part to `RefactoredFirstOpMode.java` only.
 
 ### Replace the motor field
 
@@ -271,26 +297,38 @@ Keep the lifecycle logging from 2.2 in its existing locations.
 
 ### Test — Refactored motor OpMode
 
-Build and deploy the project, then repeat the original motor tests:
+Build and deploy the project. Run `L2 First Hardware` first, then run
+`L2 Refactored First` and repeat the same tests:
 
-| Test | Verify |
+| Test | Verify in both OpModes |
 |---|---|
-| Press **INIT**. | The motor remains stopped, and initialization telemetry and logging still appear. |
+| Press **INIT**. | The motor remains stopped, and initialization telemetry and logging appear. |
 | Press **PLAY** and move the left stick. | The motor follows the stick and applied power remains between `-0.25` and `0.25`. |
 | Center the stick. | Requested and applied power return to approximately `0.00`. |
 | Press Driver Station **Stop**. | The motor stops and the stopped log entry appears. |
 
-Complete the motor rows in the before-and-after table. If telemetry, logging, or
-hardware behavior changed, fix it before committing.
+Complete the motor rows in the before-and-after table. Use
+`FirstHardwareOpMode.java` to investigate any difference in telemetry, logging,
+or hardware behavior before committing.
+
+### Compare the code
+
+Open `FirstHardwareOpMode.java` and `RefactoredFirstOpMode.java` side-by-side.
+Verify that:
+
+- lifecycle, gamepad, telemetry, and logging code stayed in the OpMode;
+- direct `DcMotor` mapping and commands moved behind `TestBenchHardware`; and
+- the original file did not change.
 
 ### Git checkpoint — First consumer
 
 In Android Studio:
 
-- inspect the `FirstHardwareOpMode.java` diff;
-- verify that the commit removes direct motor access without changing gamepad,
-  telemetry, or lifecycle logic; and
-- commit with `Use hardware class in motor OpMode`.
+- confirm `FirstHardwareOpMode.java` has no changes;
+- inspect the new `RefactoredFirstOpMode.java` file;
+- compare the two files and verify that the refactored copy changes hardware
+  access without changing gamepad, telemetry, logging, or lifecycle logic; and
+- commit with `Add refactored motor OpMode`.
 
 ## Part 4 — Add the continuous-rotation servo
 
@@ -654,6 +692,8 @@ You are finished when:
 - motor and CR-servo power limits are enforced by the hardware class;
 - touch-sensor rising-edge state remains in the OpMode;
 - `stopAll()` stops every powered output;
+- `FirstHardwareOpMode.java` remains unchanged as the comparison baseline;
+- `RefactoredFirstOpMode.java` uses `TestBenchHardware`;
 - the original motor, CR-servo, and touch-sensor tests still pass;
 - the refactor and consumer changes are understandable as separate commits; and
 - you can explain why each responsibility belongs in its current class.
