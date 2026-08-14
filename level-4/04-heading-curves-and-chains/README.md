@@ -1,4 +1,4 @@
-# Lesson 4: Heading, Curves, and Path Chains
+# 4.4: Heading, Curves, and Path Chains
 
 You will separate where the robot travels from which direction it faces.
 
@@ -28,7 +28,7 @@ chain and verify that their shared pose agrees.
 
 The PR contains drawings, definitions, and repeated end-pose evidence. Explain why
 a correct curve can still have a wrong heading. Continue to
-[Lesson 5](../05-tuning-with-evidence/README.md).
+[4.5](../05-tuning-with-evidence/README.md).
 
 ## Reflect
 

@@ -1,4 +1,4 @@
-# Lesson 2: Make Localization Trustworthy
+# 4.2: Make Localization Trustworthy
 
 You will configure the team's actual localizer using the matching current Pedro
 tuning guide, then measure error instead of declaring that the pose “looks right.”
@@ -39,7 +39,7 @@ different problem than random variation; preserve the raw evidence either way.
 
 The PR records version, configuration, measurements, changes, and repeated results.
 You are not finished merely because the field display moves. Continue to
-[Lesson 3](../03-first-pedro-path/README.md).
+[4.3](../03-first-pedro-path/README.md).
 
 ## Reflect
 

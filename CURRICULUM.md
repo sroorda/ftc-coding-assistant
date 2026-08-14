@@ -19,14 +19,14 @@ thinking that helps you become a programmer.
 
 ## Your six challenges
 
-| Lesson | Java idea | Robot connection | What you will demonstrate |
+| Number | Java idea | Robot connection | What you will demonstrate |
 |---|---|---|---|
-| 1. First program | class, `main`, output | initialization messages | change output and explain where execution begins |
-| 2. Variables and math | types, variables, arithmetic | wheel travel | name values, track units, and predict a calculation |
-| 3. Decisions and deadbands | booleans and `if`/`else` | joystick drift | repair and test a boundary condition |
-| 4. Loops and autonomous | `for`, `while`, and termination | repeated autonomous steps | write both loops and explain blocking behavior |
-| 5. Methods, classes, tests | parameters, returns, test checks | bounded motor power | isolate hardware-independent logic and verify it with tests |
-| 6. Virtual intake | requirements and priority | intake decision logic | implement and demonstrate conflicting rules |
+| 1.1 First program | class, `main`, output | initialization messages | change output and explain where execution begins |
+| 1.2 Variables and math | types, variables, arithmetic | wheel travel | name values, track units, and predict a calculation |
+| 1.3 Decisions and deadbands | booleans and `if`/`else` | joystick drift | repair and test a boundary condition |
+| 1.4 Loops and autonomous | `for`, `while`, and termination | repeated autonomous steps | write both loops and explain blocking behavior |
+| 1.5 Methods, classes, tests | parameters, returns, test checks | bounded motor power | isolate hardware-independent logic and verify it with tests |
+| 1.6 Virtual intake | requirements and priority | intake decision logic | implement and demonstrate conflicting rules |
 
 ## What “ready” means
 
@@ -38,6 +38,6 @@ You are ready to continue when you can:
 - describe at least one case that could expose a mistake; and
 - explain the difference between “it compiled” and “it meets the requirement.”
 
-When you finish Lesson 6, complete the
+When you finish 1.6, complete the
 [Level 1 readiness check](levels/01-java-foundations.md#level-1-readiness-check).
 Then continue to [Level 2 Setup](docs/level-2-setup.md).

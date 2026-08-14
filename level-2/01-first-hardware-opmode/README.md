@@ -1,4 +1,4 @@
-# Lesson 1: Your First Hardware OpMode
+# 2.1: Your First Hardware OpMode
 
 Your Java code is about to control physical hardware. You will create an FTC
 OpMode, build it before connecting to the robot, deploy it to the Control Hub, and
@@ -36,7 +36,7 @@ should build successfully.
 
 Before Java can control a device, the active Driver Station configuration must
 connect a configuration name to the device type and physical Control Hub port.
-Lesson 1 needs the first hardware entry from the lab configuration:
+2.1 needs the first hardware entry from the lab configuration:
 
 | Test-bench device | Control Hub port | Driver Station configuration type | FTC SDK type | Configuration name |
 |---|---|---|---|---|
@@ -302,7 +302,7 @@ stick slowly in both directions and press Stop. Record:
 - whether Stop ended motion immediately.
 
 Do not change direction merely because the mechanism uses a different physical
-definition of “forward.” Record what happened; Lesson 7 handles motor direction
+definition of “forward.” Record what happened; 2.7 handles motor direction
 deliberately.
 
 ## Part 6 — Commit, review, and merge
@@ -481,4 +481,4 @@ You are finished when:
 Why is the hardware configuration name a runtime contract rather than something
 the Java compiler can verify?
 
-Continue to [Lesson 2: Telemetry and Logging](../02-telemetry-and-logging/README.md).
+Continue to [2.2: Telemetry and Logging](../02-telemetry-and-logging/README.md).

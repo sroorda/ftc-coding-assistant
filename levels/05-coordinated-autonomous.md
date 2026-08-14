@@ -7,14 +7,14 @@
 In Level 5, you will coordinate path following with mechanism work without
 freezing localization, safety checks, telemetry, or Stop handling.
 
-## What you will learn
+## Level 5 Lessons
 
-1. [Define observable action contracts](../level-5/01-action-contracts/README.md).
-2. [Implement one nonblocking mechanism action](../level-5/02-nonblocking-mechanism-actions/README.md).
-3. [Coordinate paths and actions with explicit states](../level-5/03-coordinate-with-states/README.md).
-4. [Request actions from path callbacks](../level-5/04-path-callbacks/README.md).
-5. [Pause, recover, time out, and cancel safely](../level-5/05-recovery-and-cancellation/README.md).
-6. [Complete the coordinated autonomous challenge](../level-5/06-final-autonomous-challenge/README.md).
+- [5.1: Define observable action contracts](../level-5/01-action-contracts/README.md).
+- [5.2: Implement one nonblocking mechanism action](../level-5/02-nonblocking-mechanism-actions/README.md).
+- [5.3: Coordinate paths and actions with explicit states](../level-5/03-coordinate-with-states/README.md).
+- [5.4: Request actions from path callbacks](../level-5/04-path-callbacks/README.md).
+- [5.5: Pause, recover, time out, and cancel safely](../level-5/05-recovery-and-cancellation/README.md).
+- [5.6: Complete the coordinated autonomous challenge](../level-5/06-final-autonomous-challenge/README.md).
 
 ## Ask these questions about every action
 

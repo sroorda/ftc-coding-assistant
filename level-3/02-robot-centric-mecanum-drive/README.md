@@ -1,4 +1,4 @@
-# Lesson 2: Robot-Centric Mecanum Drive
+# 3.2: Robot-Centric Mecanum Drive
 
 You will translate forward, strafe, and turn intent into four wheel commands,
 normalize the result, and drive at reduced power.
@@ -67,7 +67,7 @@ change.
 
 Your PR includes the prediction table, automated test output, and five hardware
 results. Explain why clipping each wheel independently is not equivalent to
-normalization. Continue to [Lesson 3](../03-driver-intent/README.md).
+normalization. Continue to [3.3](../03-driver-intent/README.md).
 
 ## Reflect
 

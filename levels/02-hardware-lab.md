@@ -9,32 +9,32 @@ In Level 2, your Java code will leave the laptop and control real FTC hardware f
 the first time. You will work with one device at a time so you can clearly connect
 each line of code to what you observe.
 
-## What you will learn
+## Level 2 Lessons
 
-1. [Write and run a hardware OpMode](../level-2/01-first-hardware-opmode/README.md)
+- [2.1: Write and run a hardware OpMode](../level-2/01-first-hardware-opmode/README.md)
    and understand its lifecycle.
-2. [Use telemetry and logging](../level-2/02-telemetry-and-logging/README.md) to
+- [2.2: Use telemetry and logging](../level-2/02-telemetry-and-logging/README.md) to
    observe what the robot is doing.
-3. [Move a positional servo](../level-2/03-positional-servos/README.md) through
+- [2.3: Move a positional servo](../level-2/03-positional-servos/README.md) through
    named, mechanically safe positions.
-4. [Control and reliably stop a continuous-rotation servo](../level-2/04-continuous-rotation-servos/README.md).
-5. [Read a touch sensor](../level-2/05-touch-sensor/README.md) and
+- [2.4: Control and reliably stop a continuous-rotation servo](../level-2/04-continuous-rotation-servos/README.md).
+- [2.5: Read a touch sensor](../level-2/05-touch-sensor/README.md) and
    turn its Boolean value into readable telemetry.
-6. [Read a color sensor](../level-2/06-color-sensing/README.md) and turn RGB
+- [2.6: Read a color sensor](../level-2/06-color-sensing/README.md) and turn RGB
    values into a simple color decision.
-7. [Convert encoder ticks into measured wheel movement](../level-2/07-motors-and-encoders/README.md)
+- [2.7: Convert encoder ticks into measured wheel movement](../level-2/07-motors-and-encoders/README.md)
    and command a calculated wheel-rim distance.
-8. [Move repeated hardware setup into reusable code](../level-2/08-reusable-hardware-code/README.md).
-9. [Coordinate several devices with a non-blocking state machine](../level-2/09-integrated-hardware-challenge/README.md).
+- [2.8: Move repeated hardware setup into reusable code](../level-2/08-reusable-hardware-code/README.md).
+- [2.9: Coordinate several devices with a non-blocking state machine](../level-2/09-integrated-hardware-challenge/README.md).
 
 Your first hardware environment will be a small benchtop rig. Before running code,
 verify the wiring, test area, expected motion, power limits, and stop procedure.
 
 ## Start Level 2
 
-Complete [Level 2 Setup](../docs/level-2-setup.md) before beginning Lesson 1. You
+Complete [Level 2 Setup](../docs/level-2-setup.md) before beginning 2.1. You
 will prepare Android Studio, clone and build the hardware-lab project, and create
-your personal branch. [Lesson 1](../level-2/01-first-hardware-opmode/README.md)
+your personal branch. [2.1](../level-2/01-first-hardware-opmode/README.md)
 introduces feature branches and connects to the Control Hub after your first
 OpMode builds successfully.
 

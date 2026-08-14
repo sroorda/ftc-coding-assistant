@@ -48,9 +48,9 @@ Check the environment and run the affected lesson:
 On Windows use `scripts\check-environment.cmd` and
 `scripts\run-lesson.cmd 01`.
 
-Lessons 1–4 should compile and run from their starter state. Lesson 3 also requires
+1.1–1.4 should compile and run from their starter state. 1.3 also requires
 a joystick test value, such as `./scripts/run-lesson.sh 03 0.05` or
-`scripts\run-lesson.cmd 03 0.05`. Lessons 5 and 6 deliberately run every starter
+`scripts\run-lesson.cmd 03 0.05`. 1.5 and 1.6 deliberately run every starter
 check and then exit with a failure until the student implements the exercise.
 
 ## Add or revise a Level 1 lesson

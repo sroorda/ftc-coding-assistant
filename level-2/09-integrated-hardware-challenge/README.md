@@ -1,11 +1,11 @@
-# Lesson 9: Integrated Hardware Challenge
+# 2.9: Integrated Hardware Challenge
 
 You will combine the motor, encoder, positional servo, continuous-rotation servo,
 color sensor, and touch sensor into one interruptible automation. The optional
 LED can display the automation state.
 
 This is a requirements challenge. You will design the state transitions and write
-the implementation using the reusable hardware class from Lesson 8.
+the implementation using the reusable hardware class from 2.8.
 
 ## Your mission
 

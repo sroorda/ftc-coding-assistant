@@ -60,7 +60,7 @@ In the maintainer clone:
 - Do not merge all student implementations into `main`.
 
 The personal-branch setup is documented in
-[Level 2 Setup](../docs/level-2-setup.md). Lesson 1 will provide the complete
+[Level 2 Setup](../docs/level-2-setup.md). 2.1 will provide the complete
 feature-branch and pull-request procedure.
 
 ## Keep code portable to competition

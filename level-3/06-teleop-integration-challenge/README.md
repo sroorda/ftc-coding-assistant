@@ -1,4 +1,4 @@
-# Lesson 6: TeleOp Integration Challenge
+# 3.6: TeleOp Integration Challenge
 
 Build a TeleOp in which one driver can move while one operator uses the mechanism,
 without either capability starving the control loop.

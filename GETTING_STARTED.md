@@ -65,7 +65,7 @@ You are ready when the output shows both `java` and `javac` at version 17 or new
 ## 5. Start learning
 
 Read [How the Lessons Work](docs/student-workflow.md), then open
-[Level 1 — Java Foundations](levels/01-java-foundations.md). Lesson 1 will ask you
+[Level 1 — Java Foundations](levels/01-java-foundations.md). 1.1 will ask you
 to predict your first program's output before you run it.
 
 ## Stop and ask an adult when

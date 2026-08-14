@@ -1,4 +1,4 @@
-# Lesson 7: Encoders and Measured Movement
+# 2.7: Encoders and Measured Movement
 
 Power tells a motor how hard to run. An encoder measures shaft rotation so the
 motor can move toward a repeatable target. In this lesson, you will first move a
@@ -452,7 +452,7 @@ to match the units shown in telemetry. The SDK example also introduces:
 
 Those features are useful for a driving robot, but they are not required to
 understand the first encoder movement. You will work with reusable hardware code
-in Lesson 8.
+in 2.8.
 
 ## Understand the limits
 
@@ -472,7 +472,7 @@ In Android Studio:
 - include the one-revolution and measured-distance test results in the pull
   request description;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 8.
+- update your local personal branch before starting 2.8.
 
 ## Ask your AI tutor
 
@@ -494,4 +494,4 @@ You are finished when:
 - you can explain why encoder rotation is not the same as robot field position.
 
 Continue to
-[Lesson 8: Building Reusable Hardware Code](../08-reusable-hardware-code/README.md).
+[2.8: Building Reusable Hardware Code](../08-reusable-hardware-code/README.md).

@@ -1,4 +1,4 @@
-# Lesson 3: Turn Gamepad Input into Driver Intent
+# 3.3: Turn Gamepad Input into Driver Intent
 
 You will make the drivetrain easier to control with named input processing rather
 than scattering signs, deadbands, and scale factors through the OpMode.
@@ -48,7 +48,7 @@ acceptable when documented and tested. Keep FTC `gamepad` access in the OpMode.
 
 The PR includes the input contract and boundary evidence. Explain where gamepad
 input becomes robot intent and why that decision does not belong in the hardware
-mapping class. Continue to [Lesson 4](../04-first-subsystem/README.md).
+mapping class. Continue to [3.4](../04-first-subsystem/README.md).
 
 ## Reflect
 

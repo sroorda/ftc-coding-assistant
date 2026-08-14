@@ -85,7 +85,7 @@ rules established by the tool provider, school, and team.
 - Run a Level 1 lesson with `./scripts/run-lesson.sh NN` on macOS/Linux or
   `scripts\run-lesson.cmd NN` on Windows. Level 2 work builds and runs from the
   separate FTC Android Studio project.
-- Level 1 Lesson 3 requires a joystick test value after the lesson number, for example
+- 1.3 requires a joystick test value after the lesson number, for example
   `./scripts/run-lesson.sh 03 0.05` or `scripts\run-lesson.cmd 03 0.05`.
 - Place instructor-only guidance under `instructor/` and student guidance in the
   lesson README.

@@ -1,4 +1,4 @@
-# Lesson 5: Hardware-Independent Methods and Tests
+# 1.5: Hardware-Independent Methods and Tests
 
 Robot code often mixes three kinds of work: reading hardware, making a decision,
 and commanding hardware. The decision is usually the easiest part to test, but
@@ -31,7 +31,7 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-Complete [Lesson 4](../04-loops-and-autonomous/README.md). Open both files in your
+Complete [1.4](../04-loops-and-autonomous/README.md). Open both files in your
 local clone:
 
 ```text
@@ -184,4 +184,4 @@ motor.
 
 ## Continue
 
-Continue to [Lesson 6: Virtual Intake Controller](../06-virtual-intake-project/README.md).
+Continue to [1.6: Virtual Intake Controller](../06-virtual-intake-project/README.md).

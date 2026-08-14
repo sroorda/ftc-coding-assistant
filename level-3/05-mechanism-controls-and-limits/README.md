@@ -1,4 +1,4 @@
-# Lesson 5: Mechanism Controls, Limits, and Priority
+# 3.5: Mechanism Controls, Limits, and Priority
 
 You will connect the second gamepad to the subsystem while making conflicts and
 safety limits explicit.
@@ -41,7 +41,7 @@ Test with powered outputs disabled first, then with conservative values:
 
 The PR includes normal, conflict, limit, recovery, and Stop evidence. Explain why
 the safety rule is visible in both code order and tests. Continue to
-[Lesson 6](../06-teleop-integration-challenge/README.md).
+[3.6](../06-teleop-integration-challenge/README.md).
 
 ## Reflect
 

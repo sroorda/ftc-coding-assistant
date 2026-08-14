@@ -1,7 +1,7 @@
 # Level 2 Setup
 
 Level 2 moves from small desktop Java programs to an Android Studio project that
-can deploy code to FTC hardware. Complete this setup before Lesson 1. You will
+can deploy code to FTC hardware. Complete this setup before 2.1. You will
 write your first OpMode before connecting Android Studio to the Control Hub.
 
 ## What you need
@@ -10,7 +10,7 @@ write your first OpMode before connecting Android Studio to the Control Hub.
   [FTC hardware-lab repository](https://github.com/sroorda/ftc-hardware-lab)
 - A GitHub account with permission to push branches to that repository
 - Git and a supported version of Android Studio
-- The configured hardware test bench when you begin Lesson 1
+- The configured hardware test bench when you begin 2.1
 
 Do not clone the official FIRST repository for this course. The team hardware-lab
 repository is the FTC project where your Level 2 work belongs.
@@ -79,7 +79,7 @@ Check these parts of the window:
 - `TeamCode` is selected as the run configuration;
 - the current branch is still `main` before you complete the next section; and
 - **No Devices** is expected because you do not connect to the Control Hub until
-  Lesson 1.
+  2.1.
 
 Your operating system, theme, and Android Studio layout may look different. The
 screenshot confirms the expected project structure; it does not replace a
@@ -115,7 +115,7 @@ JetBrains' official
 reference contains screenshots and more detail. Android Studio uses the same Git
 interface.
 
-Do not create a feature branch yet. Lesson 1 introduces that workflow when you
+Do not create a feature branch yet. 2.1 introduces that workflow when you
 have an OpMode worth committing, reviewing, and merging.
 
 ## Understand the project boundary
@@ -154,7 +154,7 @@ used by the lessons.
 - the `TeamCode` module builds successfully.
 
 When these checks succeed, continue to
-[Lesson 1: Your First Hardware OpMode](../level-2/01-first-hardware-opmode/README.md).
+[2.1: Your First Hardware OpMode](../level-2/01-first-hardware-opmode/README.md).
 It will create the first feature branch, introduce the OpMode lifecycle, have you
 write and build your first OpMode, and then direct you to the Control Hub
 connection guide.

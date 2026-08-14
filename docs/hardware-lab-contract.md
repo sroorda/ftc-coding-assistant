@@ -32,7 +32,7 @@ The configured port or channel must match the device's physical Control Hub
 connection. `TBD` means that device is not installed yet; update this contract
 when its connection is chosen.
 
-Lesson 5 maps the REV Touch Sensor through the SDK's `TouchSensor` interface so
+2.5 maps the REV Touch Sensor through the SDK's `TouchSensor` interface so
 student code can read its pressed-or-released state directly.
 
 The string passed to `hardwareMap.get(...)` must match the active Driver Station

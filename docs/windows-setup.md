@@ -35,7 +35,7 @@ From the repository root in VS Code's terminal:
 scripts\run-lesson.cmd 01
 ```
 
-Replace `01` with `02` through `06` as the course progresses. Lesson 5 is expected
+Replace `01` with `02` through `06` as the course progresses. 1.5 is expected
 to report a failed assertion on its first run; repairing that behavior is the
 exercise.
 

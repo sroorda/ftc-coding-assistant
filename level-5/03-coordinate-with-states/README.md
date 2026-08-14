@@ -1,4 +1,4 @@
-# Lesson 3: Coordinate Paths and Actions with States
+# 5.3: Coordinate Paths and Actions with States
 
 You will run Pedro Pathing and the mechanism action from the same outer loop.
 
@@ -37,7 +37,7 @@ enter `FAULT`. `COMPLETE` and `FAULT` must remain safe on every later loop.
 
 Demonstrate success, mechanism timeout, routine timeout, and Stop. Telemetry must
 continue changing while either component runs. Continue to
-[Lesson 4](../04-path-callbacks/README.md).
+[5.4](../04-path-callbacks/README.md).
 
 ## Reflect
 

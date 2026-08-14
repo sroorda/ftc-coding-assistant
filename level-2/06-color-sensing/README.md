@@ -1,4 +1,4 @@
-# Lesson 6: Color Sensor Readings
+# 2.6: Color Sensor Readings
 
 A color sensor reports numeric color channels rather than a color name. In this
 lesson, you will read those channels with telemetry and use a simple comparison
@@ -176,7 +176,7 @@ In Android Studio:
 - push and open a pull request into `student/<your-name>`;
 - describe the strongest channel observed for each sample;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 7.
+- update your local personal branch before starting 2.7.
 
 ## Ask your AI tutor
 
@@ -195,4 +195,4 @@ You are finished when:
 - you can explain why this simple rule is not a calibrated classifier.
 
 Continue to
-[Lesson 7: Encoders and Measured Movement](../07-motors-and-encoders/README.md).
+[2.7: Encoders and Measured Movement](../07-motors-and-encoders/README.md).

@@ -1,4 +1,4 @@
-# Lesson 6: Coordinated Autonomous Challenge
+# 5.6: Coordinated Autonomous Challenge
 
 Build a routine that drives, performs one acquire-or-score action, responds to a
 failure, and parks. Use the same subsystem operations proven in TeleOp.

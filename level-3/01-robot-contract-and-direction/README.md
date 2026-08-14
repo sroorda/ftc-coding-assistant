@@ -1,4 +1,4 @@
-# Lesson 1: Map the Robot Before Moving It
+# 3.1: Map the Robot Before Moving It
 
 You will turn the team's wiring and Driver Station configuration into a reviewed
 software contract, then verify one drivetrain motor at a time at low power.
@@ -68,7 +68,7 @@ Commit the contract separately from code. Your pull request must include the
 four one-motor results and the Stop result. You are finished when another person
 can trace every row from wheel to code without guessing.
 
-Continue to [Lesson 2](../02-robot-centric-mecanum-drive/README.md).
+Continue to [3.2](../02-robot-centric-mecanum-drive/README.md).
 
 ## Reflect
 

@@ -1,4 +1,4 @@
-# Lesson 6: Autonomous Motion Challenge
+# 4.6: Autonomous Motion Challenge
 
 Create a repeatable `START → TARGET → PARK` routine using drivetrain motion only.
 Mechanism actions belong in Level 5.

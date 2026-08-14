@@ -1,4 +1,4 @@
-# Lesson 5: Pause, Recover, and Cancel Safely
+# 5.5: Pause, Recover, and Cancel Safely
 
 You will define what happens when an action cannot safely overlap motion or when a
 component fails.
@@ -31,7 +31,7 @@ Inject a safe short timeout or simulated decision input approved by a mentor.
 
 Demonstrate pause/resume success, timeout without resume, cancellation, and a
 reviewed retry if the team permits one. Continue to
-[Lesson 6](../06-final-autonomous-challenge/README.md).
+[5.6](../06-final-autonomous-challenge/README.md).
 
 ## Reflect
 

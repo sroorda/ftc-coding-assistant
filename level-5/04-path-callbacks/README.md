@@ -1,4 +1,4 @@
-# Lesson 4: Trigger Actions Along a Path
+# 5.4: Trigger Actions Along a Path
 
 Pedro callbacks can request work while a path is active. Read the pinned version's
 [callback reference](https://pedropathing.com/docs/pathing/reference/callbacks)
@@ -32,7 +32,7 @@ sensor evidence; speed changes can make the same time occur at a different pose.
 ## Check your work
 
 The PR includes two-speed evidence and callback-count evidence. Continue to
-[Lesson 5](../05-recovery-and-cancellation/README.md).
+[5.5](../05-recovery-and-cancellation/README.md).
 
 ## Reflect
 

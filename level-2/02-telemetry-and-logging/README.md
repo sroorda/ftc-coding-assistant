@@ -1,6 +1,6 @@
-# Lesson 2: Seeing What the Robot Is Doing
+# 2.2: Seeing What the Robot Is Doing
 
-The motor moved in Lesson 1, but the Driver Station did not explain what the
+The motor moved in 2.1, but the Driver Station did not explain what the
 program requested or which lifecycle state it reached. You will add live telemetry
 for the operator and event logging for later diagnosis.
 
@@ -24,7 +24,7 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-Switch to `student/<your-name>` and pull the Lesson 1 merge. Create and check out:
+Switch to `student/<your-name>` and pull the 2.1 merge. Create and check out:
 
 ```text
 feature/<your-name>/telemetry-logging
@@ -34,7 +34,7 @@ Open `FirstHardwareOpMode.java`. Before editing, run it once and list three
 questions the Driver Station cannot currently answer.
 
 This lesson changes only what the program reports. The joystick-to-motor behavior
-from Lesson 1 should remain the same.
+from 2.1 should remain the same.
 
 ## Telemetry versus logging
 
@@ -72,7 +72,7 @@ Studio version; preserve the tag so the filter remains useful.
 ## Complete one area at a time
 
 Add and test each area below before moving to the next. Keep the motor limited to
-the same power used in Lesson 1.
+the same power used in 2.1.
 
 ### 1. Add the logging import and tag
 
@@ -132,7 +132,7 @@ if (opModeIsActive()) {
 ```
 
 This guard matters because `waitForStart()` can also return after STOP. Unlike the
-Lesson 1 loop, this is a one-time action after the wait, so its condition must be
+2.1 loop, this is a one-time action after the wait, so its condition must be
 checked explicitly.
 
 ### 4. Make each motor command observable
@@ -161,7 +161,7 @@ the stick should show the sign change and the `0.25` limit.
 
 ### 5. Record the normal end of the loop
 
-Keep the safe stop from Lesson 1, then log the lifecycle event:
+Keep the safe stop from 2.1, then log the lifecycle event:
 
 ```java
 benchMotor.setPower(0.0);
@@ -174,7 +174,7 @@ loop.
 
 ## Put the pieces together
 
-Your revised Lesson 1 OpMode should now provide:
+Your revised 2.1 OpMode should now provide:
 
 - `Initialized` telemetry before `waitForStart()`;
 - `Running` telemetry inside the active loop;
@@ -259,10 +259,10 @@ later. Both describe the same run, but they serve different audiences.
 
 ## Git checkpoint
 
-Open Android Studio's Commit window and inspect the Lesson 2 diff. It should look
+Open Android Studio's Commit window and inspect the 2.2 diff. It should look
 similar to this example, although line numbers and window layout may differ:
 
-![Android Studio Commit window showing the Lesson 2 telemetry and RobotLog changes in FirstHardwareOpMode.java.](../../docs/images/level-2/lesson-2-commit-window.png)
+![Android Studio Commit window showing the 2.2 telemetry and RobotLog changes in FirstHardwareOpMode.java.](../../docs/images/level-2/lesson-2-commit-window.png)
 
 In the Commit window:
 
@@ -301,4 +301,4 @@ What information is useful to the driver right now but would become noise in a
 persistent log?
 
 Continue to
-[Lesson 3: Positional Servos](../03-positional-servos/README.md).
+[2.3: Positional Servos](../03-positional-servos/README.md).

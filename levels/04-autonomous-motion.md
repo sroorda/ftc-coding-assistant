@@ -7,14 +7,14 @@
 In Level 4, you will measure where the robot is, define where it should go, and use
 repeatable evidence to improve autonomous drivetrain motion.
 
-## What you will learn
+## Level 4 Lessons
 
-1. [Draw field coordinates and define measured poses](../level-4/01-field-coordinates-and-poses/README.md).
-2. [Configure and measure localization](../level-4/02-localization-evidence/README.md).
-3. [Follow one straight path with the correct lifecycle](../level-4/03-first-pedro-path/README.md).
-4. [Separate path geometry from heading and build chains](../level-4/04-heading-curves-and-chains/README.md).
-5. [Tune through controlled experiments](../level-4/05-tuning-with-evidence/README.md).
-6. [Complete a start-to-target-to-park challenge](../level-4/06-autonomous-motion-challenge/README.md).
+- [4.1: Draw field coordinates and define measured poses](../level-4/01-field-coordinates-and-poses/README.md).
+- [4.2: Configure and measure localization](../level-4/02-localization-evidence/README.md).
+- [4.3: Follow one straight path with the correct lifecycle](../level-4/03-first-pedro-path/README.md).
+- [4.4: Separate path geometry from heading and build chains](../level-4/04-heading-curves-and-chains/README.md).
+- [4.5: Tune through controlled experiments](../level-4/05-tuning-with-evidence/README.md).
+- [4.6: Complete a start-to-target-to-park challenge](../level-4/06-autonomous-motion-challenge/README.md).
 
 Mechanism coordination remains disabled in this level so path, localization, and
 tuning problems can be isolated.

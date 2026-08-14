@@ -81,9 +81,9 @@ The lesson scripts:
 - compile the same way on every student's computer;
 - enforce the FTC-compatible Java language boundary;
 - run the correct source files for each lesson; and
-- preserve intentional behavior such as Lesson 5's starting test failure.
+- preserve intentional behavior such as 1.5's starting test failure.
 
-When Lesson 1 tells you to run its program, use:
+When 1.1 tells you to run its program, use:
 
 ```text
 ./scripts/run-lesson.sh 01
@@ -97,4 +97,4 @@ scripts\run-lesson.cmd 01
 
 For now, you are ready when the environment check succeeds and VS Code's Explorer
 shows the course files. Return to [Set Up Your Computer](../GETTING_STARTED.md) and
-let Lesson 1 ask for your prediction before you run its program.
+let 1.1 ask for your prediction before you run its program.

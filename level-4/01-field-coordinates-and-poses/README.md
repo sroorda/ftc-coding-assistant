@@ -1,4 +1,4 @@
-# Lesson 1: Field Coordinates and Poses
+# 4.1: Field Coordinates and Poses
 
 Before the robot follows a path, you must be able to describe where it is. Pedro
 Pathing represents a pose as `x`, `y`, and heading; distance is normally inches
@@ -45,7 +45,7 @@ visible. Do not copy season coordinates from an example autonomous.
 
 Your PR includes the diagram and signed-motion evidence. Explain why the same
 physical spot can be described differently in two coordinate systems. Continue
-to [Lesson 2](../02-localization-evidence/README.md).
+to [4.2](../02-localization-evidence/README.md).
 
 ## Reflect
 

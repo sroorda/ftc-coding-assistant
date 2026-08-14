@@ -1,4 +1,4 @@
-# Lesson 4: Writing `for` and `while` Loops
+# 1.4: Writing `for` and `while` Loops
 
 Robot programs repeat work: read controls, update telemetry, follow a path, or
 continue an action until a condition changes. Today you will learn two Java loop
@@ -24,7 +24,7 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-Complete [Lesson 3](../03-decisions-and-deadbands/README.md), then open this file in
+Complete [1.3](../03-decisions-and-deadbands/README.md), then open this file in
 your local clone:
 
 ```text
@@ -133,7 +133,7 @@ mechanism may not get updated.
 
 ## Ask your AI tutor
 
-> I wrote the `for` and `while` loops in Lesson 4. Ask me to explain when each
+> I wrote the `for` and `while` loops in 1.4. Ask me to explain when each
 > loop stops and which value changes. If I am wrong, give one hint. Do not write a
 > replacement loop for me. Then ask me why the `while` activity is blocking.
 
@@ -161,4 +161,4 @@ levels.
 
 ## Continue
 
-Continue to [Lesson 5: Methods, Classes, and Tests](../05-methods-classes-and-tests/README.md).
+Continue to [1.5: Methods, Classes, and Tests](../05-methods-classes-and-tests/README.md).

@@ -1,4 +1,4 @@
-# Lesson 3: Decisions and Joystick Deadbands
+# 1.3: Decisions and Joystick Deadbands
 
 Today you will debug a small input-filtering program. The important skill is not
 the filter itself—it is predicting behavior, comparing code with a written
@@ -24,7 +24,7 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-Complete [Lesson 2](../02-variables-and-math/README.md), then open this file in your
+Complete [1.2](../02-variables-and-math/README.md), then open this file in your
 local clone:
 
 ```text
@@ -37,7 +37,7 @@ The program reads its test value from the first command-line argument:
 double joystick = Double.parseDouble(args[0]);
 ```
 
-You used `args[0]` in Lesson 1. `Double.parseDouble` converts that text argument
+You used `args[0]` in 1.1. `Double.parseDouble` converts that text argument
 into a `double` that the program can compare and use as motor power.
 
 ## Why someone might write this filter
@@ -150,4 +150,4 @@ and add filtering only when it addresses observed behavior.
 
 ## Continue
 
-Continue to [Lesson 4: Loops and Autonomous](../04-loops-and-autonomous/README.md).
+Continue to [1.4: Loops and Autonomous](../04-loops-and-autonomous/README.md).

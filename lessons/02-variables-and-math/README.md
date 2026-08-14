@@ -1,4 +1,4 @@
-# Lesson 2: Variables and Robot Math
+# 1.2: Variables and Robot Math
 
 Today you will use Java to calculate how far a wheel travels. Your main challenge
 is not typing the formula—it is making every value and unit clear enough that
@@ -24,7 +24,7 @@ By the end of this lesson, you can:
 
 ## Get ready
 
-Complete [Lesson 1](../01-first-program/README.md), then open this file in your
+Complete [1.1](../01-first-program/README.md), then open this file in your
 local clone:
 
 ```text
@@ -96,4 +96,4 @@ numbers but incorrect movement.
 
 ## Continue
 
-Continue to [Lesson 3: Decisions and Deadbands](../03-decisions-and-deadbands/README.md).
+Continue to [1.3: Decisions and Deadbands](../03-decisions-and-deadbands/README.md).

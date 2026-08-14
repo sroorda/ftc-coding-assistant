@@ -1,4 +1,4 @@
-# Lesson 1: Define Actions Before Coordinating Them
+# 5.1: Define Actions Before Coordinating Them
 
 An autonomous action needs more than a method that starts a motor. You must define
 when it may start, what it commands, how completion is observed, how it times out,
@@ -37,7 +37,7 @@ terminal result.
 
 The PR contains the table and decision tests. Explain the difference between
 starting, updating, completing, timing out, and cancelling. Continue to
-[Lesson 2](../02-nonblocking-mechanism-actions/README.md).
+[5.2](../02-nonblocking-mechanism-actions/README.md).
 
 ## Reflect
 

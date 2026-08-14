@@ -1,4 +1,4 @@
-# Lesson 8: Building Reusable Hardware Code
+# 2.8: Building Reusable Hardware Code
 
 The earlier OpModes each map and configure their own hardware. That was useful
 while learning one device at a time, but it also repeated configuration names,
@@ -37,9 +37,9 @@ feature/<your-name>/reusable-hardware
 
 You will refactor code from these earlier lessons:
 
-- `FirstHardwareOpMode.java` from Lessons 1 and 2;
-- `ContinuousServoOpMode.java` from Lesson 4; and
-- `TouchSensorOpMode.java` from Lesson 5.
+- `FirstHardwareOpMode.java` from 2.1 and 2.2;
+- `ContinuousServoOpMode.java` from 2.4; and
+- `TouchSensorOpMode.java` from 2.5.
 
 Make sure all three OpModes build before changing them. A refactor should begin
 with working code.
@@ -267,7 +267,7 @@ with:
 bench.stopAll();
 ```
 
-Keep the lifecycle logging from Lesson 2 in its existing locations.
+Keep the lifecycle logging from 2.2 in its existing locations.
 
 ### Test — Refactored motor OpMode
 
@@ -294,7 +294,7 @@ In Android Studio:
 
 ## Part 4 — Add the continuous-rotation servo
 
-Now repeat the extraction pattern with Lesson 4.
+Now repeat the extraction pattern with 2.4.
 
 ### Add the device to `TestBenchHardware`
 
@@ -376,7 +376,7 @@ mapping or safety responsibility.
 
 ### Test — Refactored continuous servo
 
-Build and deploy the refactored OpMode, then repeat the Lesson 4 tests:
+Build and deploy the refactored OpMode, then repeat the 2.4 tests:
 
 | Test | Verify |
 |---|---|
@@ -386,7 +386,7 @@ Build and deploy the refactored OpMode, then repeat the Lesson 4 tests:
 | Hold **A**. | The state changes only once. |
 | Start the servo, then press Driver Station **Stop**. | `stopAll()` stops both powered outputs. |
 
-Do not continue until these results match Lesson 4.
+Do not continue until these results match 2.4.
 
 Inspect and commit the consumer change separately with
 `Use hardware class in continuous servo OpMode`.
@@ -457,7 +457,7 @@ new press should toggle program state.
 
 ### Test — Refactored touch sensor
 
-Build and deploy the refactored OpMode, then repeat the Lesson 5 tests:
+Build and deploy the refactored OpMode, then repeat the 2.5 tests:
 
 | Test | Verify |
 |---|---|
@@ -477,7 +477,7 @@ The positional servo and color sensor follow the same extraction pattern. Add
 their configuration names, private fields, mapping calls, and small operations.
 
 Use this complete class to check the result of all the steps. `HOME_POSITION`
-is the position tested in Lesson 3. The generic `initialize()` method maps every
+is the position tested in 2.3. The generic `initialize()` method maps every
 required bench device and applies zero power to powered outputs. The positional
 servo moves only when an OpMode requests a named position operation.
 
@@ -635,7 +635,7 @@ In Android Studio:
 - push and open a pull request into `student/<your-name>`;
 - include the completed before-and-after behavior table in the description;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 9.
+- update your local personal branch before starting 2.9.
 
 ## Ask your AI tutor
 
@@ -659,4 +659,4 @@ You are finished when:
 - you can explain why each responsibility belongs in its current class.
 
 Continue to the
-[Lesson 9 Integrated Hardware Challenge](../09-integrated-hardware-challenge/README.md).
+[2.9 Integrated Hardware Challenge](../09-integrated-hardware-challenge/README.md).

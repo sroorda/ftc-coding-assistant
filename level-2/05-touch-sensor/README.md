@@ -1,4 +1,4 @@
-# Lesson 5: Touch Sensor Input
+# 2.5: Touch Sensor Input
 
 A touch sensor gives the program a simple pressed-or-not-pressed value. In this
 lesson, you will read the REV Touch Sensor and make its state visible with
@@ -222,7 +222,7 @@ In Android Studio:
 - push and open a pull request into `student/<your-name>`;
 - describe the released, pressed, and toggled-state test results;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 6.
+- update your local personal branch before starting 2.6.
 
 ## Ask your AI tutor
 
@@ -241,4 +241,4 @@ You are finished when:
 - each new press changes the toggled state exactly once; and
 - you can explain what the Boolean value means.
 
-Continue to [Lesson 6: Color Sensor Readings](../06-color-sensing/README.md).
+Continue to [2.6: Color Sensor Readings](../06-color-sensing/README.md).

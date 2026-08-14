@@ -11,19 +11,19 @@ will also practice using an AI tutor without asking it to do your thinking for y
 Complete [Set Up Your Computer](../GETTING_STARTED.md). Continue when the environment
 check succeeds and VS Code has the complete course folder open.
 
-## Your lessons
+## Level 1 Lessons
 
 Complete these in order. Each lesson builds on something you practiced in the one
 before it.
 
-| Session | Lesson | You are ready to continue when |
+| Number | Topic | You are ready to continue when |
 |---:|---|---|
-| 1 | [First Java Program](../lessons/01-first-program/README.md) | you can change output and identify where execution begins |
-| 2 | [Variables and Robot Math](../lessons/02-variables-and-math/README.md) | you can name values and track their units |
-| 3 | [Decisions and Deadbands](../lessons/03-decisions-and-deadbands/README.md) | you can repair and test a boundary condition |
-| 4 | [Loops and Autonomous](../lessons/04-loops-and-autonomous/README.md) | you can write `for` and `while` loops and explain blocking behavior |
-| 5 | [Methods, Classes, and Tests](../lessons/05-methods-classes-and-tests/README.md) | you can isolate a calculation and verify it with multiple checks |
-| 6 | [Virtual Intake Controller](../lessons/06-virtual-intake-project/README.md) | you can implement and demonstrate conflicting rules |
+| 1.1 | [First Java Program](../lessons/01-first-program/README.md) | you can change output and identify where execution begins |
+| 1.2 | [Variables and Robot Math](../lessons/02-variables-and-math/README.md) | you can name values and track their units |
+| 1.3 | [Decisions and Deadbands](../lessons/03-decisions-and-deadbands/README.md) | you can repair and test a boundary condition |
+| 1.4 | [Loops and Autonomous](../lessons/04-loops-and-autonomous/README.md) | you can write `for` and `while` loops and explain blocking behavior |
+| 1.5 | [Methods, Classes, and Tests](../lessons/05-methods-classes-and-tests/README.md) | you can isolate a calculation and verify it with multiple checks |
+| 1.6 | [Virtual Intake Controller](../lessons/06-virtual-intake-project/README.md) | you can implement and demonstrate conflicting rules |
 
 ## The learning loop
 
@@ -55,7 +55,7 @@ message. Record your decisions and your evidence.
 
 ## Level 1 readiness check
 
-After Lesson 6, show that you can:
+After 1.6, show that you can:
 
 - explain the intake priority rules before opening the implementation;
 - make one requirement change in a small method;

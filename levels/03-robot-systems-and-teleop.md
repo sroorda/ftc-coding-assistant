@@ -8,14 +8,14 @@ In Level 3, you will combine individually tested devices into a responsive robot
 You will preserve a traceable path from driver input through subsystem behavior to
 the final hardware command.
 
-## What you will learn
+## Level 3 Lessons
 
-1. [Map the robot and verify drive directions](../level-3/01-robot-contract-and-direction/README.md).
-2. [Build reduced-power robot-centric mecanum drive](../level-3/02-robot-centric-mecanum-drive/README.md).
-3. [Turn gamepad readings into documented driver intent](../level-3/03-driver-intent/README.md).
-4. [Refactor one tested mechanism into a reusable subsystem](../level-3/04-first-subsystem/README.md).
-5. [Apply operator controls, limits, and conflict priority](../level-3/05-mechanism-controls-and-limits/README.md).
-6. [Complete the TeleOp integration challenge](../level-3/06-teleop-integration-challenge/README.md).
+- [3.1: Map the robot and verify drive directions](../level-3/01-robot-contract-and-direction/README.md).
+- [3.2: Build reduced-power robot-centric mecanum drive](../level-3/02-robot-centric-mecanum-drive/README.md).
+- [3.3: Turn gamepad readings into documented driver intent](../level-3/03-driver-intent/README.md).
+- [3.4: Refactor one tested mechanism into a reusable subsystem](../level-3/04-first-subsystem/README.md).
+- [3.5: Apply operator controls, limits, and conflict priority](../level-3/05-mechanism-controls-and-limits/README.md).
+- [3.6: Complete the TeleOp integration challenge](../level-3/06-teleop-integration-challenge/README.md).
 
 Begin with robot-centric driving. Field-centric driving is an extension after the
 team can verify heading and explain the underlying drivetrain behavior.

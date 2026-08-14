@@ -1,4 +1,4 @@
-# Lesson 5: Tune with Evidence
+# 4.5: Tune with Evidence
 
 Tuning is a controlled experiment. Follow the current official
 [Pedro tuning sequence](https://pedropathing.com/docs/pathing/tuning) for the
@@ -34,7 +34,7 @@ before changing follower gains.
 
 Your PR contains a readable experiment history and the retained constants. Explain
 why faster is not the same as more reliable. Continue to
-[Lesson 6](../06-autonomous-motion-challenge/README.md).
+[4.6](../06-autonomous-motion-challenge/README.md).
 
 ## Reflect
 

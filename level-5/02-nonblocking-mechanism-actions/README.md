@@ -1,4 +1,4 @@
-# Lesson 2: Make a Mechanism Action Nonblocking
+# 5.2: Make a Mechanism Action Nonblocking
 
 You will implement the action contract so one quick `update()` advances it during
 each outer-loop pass.
@@ -33,7 +33,7 @@ reason.
 ## Check your work
 
 The PR includes transition tests and all six hardware results. Continue to
-[Lesson 3](../03-coordinate-with-states/README.md).
+[5.3](../03-coordinate-with-states/README.md).
 
 ## Reflect
 

@@ -1,4 +1,4 @@
-# Lesson 3: Follow One Straight Path
+# 4.3: Follow One Straight Path
 
 You will build a short `PathChain`, start it once, and keep the follower updating
 until it reports completion.
@@ -42,7 +42,7 @@ start pose or localization error.
 
 Record expected and observed final poses for at least three identical runs and
 explain what `isBusy()` does and does not prove. Continue to
-[Lesson 4](../04-heading-curves-and-chains/README.md).
+[4.4](../04-heading-curves-and-chains/README.md).
 
 ## Reflect
 

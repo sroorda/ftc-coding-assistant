@@ -14,7 +14,7 @@ make the next comparable change with less help.
 
 ## Before the course
 
-1. Run every lesson, including the intentionally failing starting state in Lesson 5.
+1. Run every lesson, including the intentionally failing starting state in 1.5.
 2. Identify the Java concept and evidence of learning for each exercise.
 3. Agree on account, privacy, repository, deployment, and hardware boundaries.
 4. Configure Claude Code using the repository's [CLAUDE.md](../CLAUDE.md), or apply

@@ -1,4 +1,4 @@
-# Lesson 4: Build One Reusable Mechanism Subsystem
+# 3.4: Build One Reusable Mechanism Subsystem
 
 You will move one already-tested mechanism behind operations named in team
 language so TeleOp and autonomous can use the same safe behavior.
@@ -42,7 +42,7 @@ give it a quick `update()` method that is called once per outer loop.
 
 The PR shows a clear extraction commit followed by a consumer change and includes
 before/after evidence. Explain one command from OpMode decision to final hardware
-call. Continue to [Lesson 5](../05-mechanism-controls-and-limits/README.md).
+call. Continue to [3.5](../05-mechanism-controls-and-limits/README.md).
 
 ## Reflect
 

@@ -1,4 +1,4 @@
-# Lesson 4: Continuous-Rotation Servos
+# 2.4: Continuous-Rotation Servos
 
 A continuous-rotation servo uses a power command instead of a position command.
 In this lesson, you will initialize the servo with a `0.0` power command and use
@@ -202,7 +202,7 @@ In Android Studio:
 - describe what happened during INIT, each A-button press, and Driver Station
   Stop;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 5.
+- update your local personal branch before starting 2.5.
 
 ## Ask your AI tutor
 
@@ -222,4 +222,4 @@ You are finished when:
 - Driver Station Stop leaves the servo with a `0.0` power command.
 
 Continue to
-[Lesson 5: Touch Sensor Input](../05-touch-sensor/README.md).
+[2.5: Touch Sensor Input](../05-touch-sensor/README.md).

@@ -1,4 +1,4 @@
-# Lesson 3: Positional Servos
+# 2.3: Positional Servos
 
 A positional servo moves toward a commanded position and attempts to hold it.
 In this lesson, you will command the servo's zero position, then use the D-pad to
@@ -207,7 +207,7 @@ In Android Studio:
 - push and open a pull request into `student/<your-name>`;
 - describe how INIT, D-pad Up, and D-pad Down moved the servo;
 - obtain a review and merge the pull request; and
-- update your local personal branch before starting Lesson 4.
+- update your local personal branch before starting 2.4.
 
 ## Ask your AI tutor
 
@@ -227,4 +227,4 @@ You are finished when:
 - you can explain why `getPosition()` is not physical feedback.
 
 Continue to
-[Lesson 4: Continuous-Rotation Servos](../04-continuous-rotation-servos/README.md).
+[2.4: Continuous-Rotation Servos](../04-continuous-rotation-servos/README.md).

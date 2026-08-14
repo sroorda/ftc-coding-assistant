@@ -1,4 +1,4 @@
-# Lesson 1: First Java Program
+# 1.1: First Java Program
 
 Today you will take control of your first Java program. You will predict its output,
 change what it says, run it again, and identify where Java begins executing your
@@ -95,7 +95,7 @@ File:    org/ftc/training/lesson01/RobotStatus.java
 Reading the package from left to right:
 
 - `org.ftc.training` identifies this training code;
-- `lesson01` groups the code for Lesson 1; and
+- `lesson01` groups the code for 1.1; and
 - `RobotStatus` is the class inside that package.
 
 Together, the package and class form the class's full name:
@@ -250,4 +250,4 @@ operator what the software actually knows.
 
 ## Continue
 
-Continue to [Lesson 2: Variables and Robot Math](../02-variables-and-math/README.md).
+Continue to [1.2: Variables and Robot Math](../02-variables-and-math/README.md).

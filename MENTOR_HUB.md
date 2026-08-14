@@ -13,7 +13,7 @@ can speak directly to learners.
   responsible AI use, and supervision boundaries.
 - Use the [Level 1 Instructor Guide](instructor/instructor-guide.md) for preparation,
   lesson notes, expected results, and assessment.
-- Run every lesson before the students arrive. Remember that Lesson 5 begins with
+- Run every lesson before the students arrive. Remember that 1.5 begins with
   an intentional failing test.
 
 ## Prepare later levels

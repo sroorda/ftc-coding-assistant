@@ -45,7 +45,7 @@ must be used, isolate mechanisms and raise drive wheels when appropriate.
 Test on the same managed Windows and macOS environments students will use. Personal
 machines often have permissions and developer tools that school machines do not.
 Confirm that students can extract or clone the repository, open a terminal, run the
-environment check, edit a Java file, and rerun Lesson 1 without administrator
+environment check, edit a Java file, and rerun 1.1 without administrator
 access.
 
 ## Git and collaboration

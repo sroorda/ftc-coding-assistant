@@ -46,9 +46,9 @@ Use the help ladder from the
 concept hint, pseudocode, small example, then implementation only when appropriate.
 Adult reviewers should check requirements and evidence before discussing style.
 
-## Lesson notes
+## Level 1 Lessons
 
-### 1 — First program
+### 1.1 — First program
 
 Watch for confusion between a source file, a class, and a running program. Students
 should change the status message and add a second line. The key assistant behavior
@@ -56,7 +56,7 @@ is explanation without editing.
 
 Exit ticket: “What does `main` tell Java, and what did you verify by running it?”
 
-### 2 — Variables and math
+### 1.2 — Variables and math
 
 The starter deliberately uses weak names (`d`, `r`, `x`). Expected improvements are
 names such as `wheelDiameterInches`, `wheelRotations`, and `distanceInches`.
@@ -64,7 +64,7 @@ Circumference times rotations is `Math.PI * diameter * rotations`. Ask about uni
 
 Exit ticket: “Why is `double` appropriate here, and where are the units visible?”
 
-### 3 — Decisions and deadbands
+### 1.3 — Decisions and deadbands
 
 The starter bug uses a deadband of `0.01` while the requirement says `0.10`.
 Boundary behavior should be discussed explicitly: with `< 0.10`, exactly `0.10`
@@ -73,7 +73,7 @@ requirement consistently.
 
 Exit ticket: “Which three values best test a boundary at 0.10?”
 
-### 4 — Loops and autonomous
+### 1.4 — Loops and autonomous
 
 Students write both loops rather than repair starter code. The intended `for` loop
 uses `segment = 1`, continues through `segment <= totalSegments`, and increments
@@ -90,7 +90,7 @@ shared machines.
 Exit ticket: “When would you choose `for` instead of `while`, and why can a long
 `while` loop be dangerous in robot code?”
 
-### 5 — Methods, classes, and tests
+### 1.5 — Methods, classes, and tests
 
 Frame the lesson as extracting a numerical rule from hardware-facing code so it can
 be tested without a robot or FTC SDK. Students implement clamping to the inclusive
@@ -104,7 +104,7 @@ Students then add the two exact-boundary checks for a total of seven.
 
 Exit ticket: “Why is this logic easier to trust as a method than when duplicated?”
 
-### 6 — Virtual intake
+### 1.6 — Virtual intake
 
 Walk through all four starter files before presenting the requirements. Students
 should be able to trace one demo call into `update`, identify all four boolean

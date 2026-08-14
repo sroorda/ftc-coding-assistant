@@ -1,4 +1,4 @@
-# Lesson 6: Virtual Intake Controller
+# 1.6: Virtual Intake Controller
 
 This is your Level 1 project. You will combine inputs, decisions, methods, objects,
 and tests in one small program that models an FTC intake without using robot
@@ -28,7 +28,7 @@ By the end of this project, you can:
 
 ## Get ready
 
-Complete [Lesson 5](../05-methods-classes-and-tests/README.md). Open these four
+Complete [1.5](../05-methods-classes-and-tests/README.md). Open these four
 files in your local clone:
 
 ```text
@@ -99,7 +99,7 @@ You do not need to modify `IntakeOutput` for this project.
 
 ### `VirtualIntakeControllerTest.java` — checks scenarios
 
-This supplied test harness is based on Lesson 5. Each call to `check` sends one
+This supplied test harness is based on 1.5. Each call to `check` sends one
 combination of inputs to the controller and compares the returned power and status
 with the expected result.
 
@@ -123,7 +123,7 @@ Trace it from the inside out:
 4. That `IntakeOutput` object returns to the demo.
 5. `show` prints the scenario name and the object's `toString` representation.
 
-In Lesson 5, `DriveMath.limitPower` was `static`, so you called it through the class
+In 1.5, `DriveMath.limitPower` was `static`, so you called it through the class
 name. Here the demo first creates an object:
 
 ```java
