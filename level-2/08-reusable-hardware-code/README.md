@@ -629,6 +629,80 @@ You are finished when:
 - both OpModes pass the same tests; and
 - you can explain why each responsibility belongs in its current class.
 
+## Where this goes next — Robot subsystems
+
+`TestBenchHardware` is a useful first abstraction because this bench is small.
+A competition robot usually divides its hardware into **subsystems**. A
+subsystem groups hardware and behavior that serve one purpose, such as driving,
+moving an arm, or collecting a game piece.
+
+```mermaid
+flowchart TD
+    O["TeleOp or Autonomous OpMode"] --> R["Robot"]
+    R --> D["Drive subsystem"]
+    R --> A["Arm subsystem"]
+    R --> I["Intake subsystem"]
+
+    D --> DM["Drive motors and sensors"]
+    A --> AM["Arm motor, servo, and limit sensor"]
+    I --> IM["Intake motor and color sensor"]
+```
+
+The layers have different responsibilities:
+
+| Layer | Responsibilities |
+|---|---|
+| OpMode | FTC lifecycle, gamepad interpretation, and autonomous decisions |
+| Robot | Creates subsystems, initializes the complete robot, and coordinates shutdown |
+| Subsystem | Owns related hardware, safety limits, commands, sensor interpretation, and logging |
+| Hardware device | FTC SDK motor, servo, or sensor object |
+
+An `Arm` subsystem might own an arm motor, wrist servo, limit sensor, encoder
+conversions, and safe movement limits. A `Drive` subsystem might own the drive
+motors, motor directions, localization sensors, and wheel-power limits. The
+OpMode decides **when** to request an action; the subsystem knows **how** to
+perform it safely with its hardware.
+
+### Telemetry and logging
+
+A subsystem knows which values explain its behavior, so it can add its arm
+position, drive pose, sensor state, or current command to telemetry. The OpMode
+should still call `telemetry.update()` once per loop after every subsystem has
+contributed its values. This prevents several subsystems from refreshing the
+Driver Station display independently.
+
+A subsystem can log meaningful events directly, such as an arm beginning a
+movement, reaching a limit, completing a movement, or timing out. Avoid writing
+the same log message during every loop.
+
+### More than one robot configuration
+
+A team can assemble the same subsystem classes into different robot
+configurations:
+
+```mermaid
+flowchart TD
+    T["TestBenchRobot"] --> M["Motor subsystem"]
+    E["EarlySeasonRobot"] --> D1["Drive"]
+    E --> A1["Basic arm"]
+    C["CompetitionRobot"] --> D2["Drive"]
+    C --> A2["Competition arm"]
+    C --> I["Intake"]
+```
+
+Separate robot classes are most useful when the team must support different
+physical robots at the same time, such as a test bench, practice robot, and
+competition robot. Do not create a new robot class merely to preserve every
+week of the season; Git already records the history of a robot that evolves.
+
+### Discuss before moving on
+
+- If another OpMode needs the arm, what code should it reuse?
+- Which class should know the arm's safe limits?
+- Which class decides that a gamepad button means “move to score”?
+- Which class should stop every powered mechanism?
+- What would change between a test-bench robot and the competition robot?
+
 You have completed Level 2. Review the
 [Level 2 learning goals](../../levels/02-hardware-lab.md) before continuing to
 Level 3.
