@@ -34,12 +34,14 @@
 ## Level 3 Lessons
 
 * [Level 3 Learning Path](levels/03-robot-systems-and-teleop.md)
-* [3.1: Robot Contract and Drive Direction](level-3/01-robot-contract-and-direction/README.md)
-* [3.2: Robot-Centric Mecanum Drive](level-3/02-robot-centric-mecanum-drive/README.md)
-* [3.3: Driver Intent](level-3/03-driver-intent/README.md)
-* [3.4: First Reusable Subsystem](level-3/04-first-subsystem/README.md)
-* [3.5: Mechanism Controls and Limits](level-3/05-mechanism-controls-and-limits/README.md)
-* [3.6: TeleOp Integration Challenge](level-3/06-teleop-integration-challenge/README.md)
+* [3.1: Robot-Relative and Field-Relative Driving](level-3/01-robot-and-field-relative/README.md)
+* [3.2: Build a Reusable Mecanum Drive](level-3/02-reusable-mecanum-drive/README.md)
+* [3.3: Initialize and Verify the IMU](level-3/03-imu-orientation-and-heading/README.md)
+* [3.4: Robot-Relative Mecanum Drive](level-3/04-robot-relative-mecanum-drive/README.md)
+* [3.5: Field-Relative Mecanum Drive](level-3/05-field-relative-mecanum-drive/README.md)
+* [3.6: Driver Controls and the TeleOp](level-3/06-driver-controls-and-teleop/README.md)
+* [3.7: Add a Safe Mechanism Subsystem](level-3/07-mechanism-subsystem/README.md)
+* [3.8: Integrate and Test the Complete TeleOp](level-3/08-integrated-teleop/README.md)
 
 ## Level 4 Lessons
 

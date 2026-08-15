@@ -10,7 +10,7 @@ finished solution.
 |---|---|---|
 | [1 — Java Foundations](levels/01-java-foundations.md) | write, test, debug, and explain robot-like Java | **Ready now** |
 | [2 — Hardware Lab](levels/02-hardware-lab.md) | safely command and observe one device at a time | Coming later |
-| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating a robot mechanism | Draft for robot validation |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | build robot- and field-relative drive, then operate a mechanism while driving | Published draft for robot validation |
 | [4 — Autonomous Motion](levels/04-autonomous-motion.md) | create and tune reliable autonomous paths | Draft for robot/version validation |
 | [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | coordinate mechanisms with path following | Draft for integrated validation |
 
@@ -21,7 +21,8 @@ procedures still require the validation named on each level page.
 
 1. You begin with ordinary Java logic.
 2. You connect Java logic to individual hardware devices.
-3. You combine devices into subsystems controlled during TeleOp.
+3. You build and explain robot- and field-relative drive, then combine devices
+   into subsystems controlled during TeleOp.
 4. You use localization and Pedro Pathing to move autonomously.
 5. You coordinate drivetrain movement with mechanism actions.
 

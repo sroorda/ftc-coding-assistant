@@ -1,28 +1,73 @@
 # Level 3 Learning Path — Robot Systems and TeleOp
 
-> **WORK IN PROGRESS — DO NOT ATTEMPT THESE LESSONS YET.** They have not been
-> validated on the team robot. Mentors must first verify the current configuration,
-> safe training limits, test procedure, and integration branch.
+> **Published draft for robot validation:** Mentors must verify the team's current
+> FTC SDK, robot configuration, Control Hub orientation, training-power limits,
+> mechanism directions, safety procedure, and integration branch before students
+> operate the robot independently.
 
-In Level 3, you will combine individually tested devices into a responsive robot.
-You will preserve a traceable path from driver input through subsystem behavior to
-the final hardware command.
+In Level 3, you will combine the devices tested in Level 2 into a responsive
+TeleOp robot. The first six lessons use short sections of a mecanum-drive video:
+watch one idea, pause, enter and explain the code, and test it before continuing.
+You will not watch the entire video and then try to recreate it from memory.
 
-## Level 3 Lessons
+The last two lessons add one safe mechanism and integrate it with the drivetrain.
+Complete examples are provided throughout; small prediction and extension prompts
+support learning without turning the core build into a guessing exercise.
 
-- [3.1: Map the robot and verify drive directions](../level-3/01-robot-contract-and-direction/README.md).
-- [3.2: Build reduced-power robot-centric mecanum drive](../level-3/02-robot-centric-mecanum-drive/README.md).
-- [3.3: Turn gamepad readings into documented driver intent](../level-3/03-driver-intent/README.md).
-- [3.4: Refactor one tested mechanism into a reusable subsystem](../level-3/04-first-subsystem/README.md).
-- [3.5: Apply operator controls, limits, and conflict priority](../level-3/05-mechanism-controls-and-limits/README.md).
-- [3.6: Complete the TeleOp integration challenge](../level-3/06-teleop-integration-challenge/README.md).
+## Video-guided learning rhythm
 
-Begin with robot-centric driving. Field-centric driving is an extension after the
-team can verify heading and explain the underlying drivetrain behavior.
+The drivetrain lessons use
+[How To Program Drivetrains: Mecanum Drive](https://www.youtube.com/watch?v=sFCO4du5IZk&list=PLRHdgFNRLyaPiZ5rvINwMmGMHEIL9usla&index=18)
+by Brogan Pratt:
+
+| Video section | Student work before continuing |
+|---|---|
+| 0:00–5:10 | Compare robot-relative and field-relative coordinates and record the robot contract. |
+| 5:10–10:45 | Build, configure, and direction-test a reusable four-motor class. |
+| 10:45–13:03 | Initialize the IMU and verify heading without driving. |
+| 13:03–19:31 | Add wheel mixing, pause for normalization, then test robot-relative drive. |
+| 19:31–23:03 | Transform the driver's field request and reuse robot-relative drive. |
+| 23:03–end | Build the thin driver-facing TeleOp and verify its controls. |
+
+The Java follows FIRST's `RobotTeleopMecanumFieldRelativeDrive` SDK sample, then
+separates hardware behavior into reusable classes so students can trace every
+input through the system.
+
+## Level 3 lessons
+
+- [3.1: Compare robot-relative and field-relative driving](../level-3/01-robot-and-field-relative/README.md)
+  and verify the robot contract before applying power.
+- [3.2: Build a reusable mecanum-drive class](../level-3/02-reusable-mecanum-drive/README.md)
+  and confirm all four wheel directions at reduced power.
+- [3.3: Initialize and verify the IMU](../level-3/03-imu-orientation-and-heading/README.md)
+  using the Control Hub's actual physical orientation.
+- [3.4: Build robot-relative mecanum drive](../level-3/04-robot-relative-mecanum-drive/README.md)
+  through wheel mixing, normalization, and staged hardware tests.
+- [3.5: Add field-relative drive](../level-3/05-field-relative-mecanum-drive/README.md)
+  as a coordinate transformation that reuses the tested drivetrain method.
+- [3.6: Assemble driver controls and TeleOp](../level-3/06-driver-controls-and-teleop/README.md)
+  with deadband, precision mode, yaw reset, and diagnostic mode.
+- [3.7: Add a safe mechanism subsystem](../level-3/07-mechanism-subsystem/README.md)
+  with an explicit state, power limit, and touch-sensor rule.
+- [3.8: Integrate and test the complete TeleOp](../level-3/08-integrated-teleop/README.md)
+  without blocking either subsystem.
+
+## Source examples
+
+- [FIRST FTC SDK: field-relative mecanum sample](https://github.com/FIRST-Tech-Challenge/FtcRobotController/blob/master/FtcRobotController/src/main/java/org/firstinspires/ftc/robotcontroller/external/samples/RobotTeleopMecanumFieldRelativeDrive.java)
+- [FIRST documentation: Universal IMU interface](https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html)
 
 ## Your next checkpoint
 
-You are ready for Level 4 when you can safely drive and operate a mechanism at the
-same time, trace commands through the architecture, explain why the outer loop must
-remain responsive, integrate through a partner's subsystem interface, and diagnose
-unexpected movement with isolated tests and telemetry.
+You are ready for Level 4 when you can:
+
+- explain robot-relative and field-relative commands;
+- verify motor direction and IMU orientation independently;
+- trace a drive request through coordinate transformation, wheel mixing,
+  normalization, and motor output;
+- safely drive while operating a mechanism;
+- explain why the outer OpMode loop must remain responsive;
+- integrate through public subsystem operations rather than private hardware;
+- use telemetry to isolate gamepad, drivetrain, heading, and mechanism problems;
+  and
+- stop every powered subsystem through the Driver Station and code lifecycle.

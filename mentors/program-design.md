@@ -28,11 +28,30 @@ student-ready until the relevant level has been tested with:
 - both Windows and macOS development paths used by the team; and
 - a beginner who was not involved in writing the lesson.
 
-For Level 3, also validate the team's robot hardware contract, training power, and
-integration workflow. For Levels 4–5, pin the Pedro Pathing version and verify every
+For Level 3, also validate the team's robot hardware contract, drivetrain encoder
+wiring and run mode, Control Hub logo/USB orientation, heading-reset procedure,
+training power, mechanism direction and limit behavior, and integration workflow.
+Compare the code with the FTC SDK version installed in the team's Robot
+Controller project. For Levels 4–5, pin the Pedro Pathing version and verify every
 API example against that version. Level 5 additionally requires safe injected
 failure tests; never create failures by jamming a mechanism or obstructing a
 moving robot.
+
+## Level 3 video facilitation
+
+Do not assign the 25-minute mecanum video as one uninterrupted prerequisite.
+Use the timestamped segments in the Level 3 path:
+
+1. play one conceptual or code section;
+2. pause at the named code boundary;
+3. have students predict or enter the next small block;
+4. build or test immediately; and
+5. resume only after students can explain the current behavior.
+
+The robot-relative chapter has additional pauses after wheel mixing and
+normalization. The field-relative chapter begins only after both robot-relative
+drive and IMU heading pass independently. Students may replay a segment while
+coding; memorizing the video is not an objective.
 
 ## Hardware lab recommendation
 
