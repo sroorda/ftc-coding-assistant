@@ -3,6 +3,19 @@
 Use this guide whenever you are unsure what to try next. A good programmer does
 not need to know every answer; a good programmer knows how to gather evidence.
 
+## Know which repository you are changing
+
+- Levels 1–3.6 use the course and hardware-lab repositories named in their setup
+  instructions.
+- Beginning with Lesson 3.7, read lessons here but make every robot-code change in
+  the team's Season Repository.
+- Before editing, say the repository name, current branch, pull-request target, and
+  expected milestone aloud or show them to a teammate.
+
+Follow the [Season Repository Workflow](season-repository-workflow.md). If you
+cannot access the repository or cannot build its target branch unchanged, stop and
+record the baseline problem before creating a feature branch.
+
 ## Before asking your AI tutor
 
 Write down three things:

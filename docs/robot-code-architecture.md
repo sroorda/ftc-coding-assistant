@@ -4,6 +4,11 @@ Use this architecture to keep the robot code easy to read, test, and reuse. The
 framework should describe what the robot can do without hiding how the FTC
 lifecycle works.
 
+This page describes the course's general design rules. Beginning with Lesson 3.7,
+the Season Repository's `docs/architecture.md` records the team's concrete package
+names, hardware ownership, integration branch, decisions, and current limitations.
+Read both; do not copy generic examples over verified season code.
+
 ![OpMode flows through Robot and its subsystems to FTC SDK hardware](images/thin-robot-architecture.png)
 
 A useful subsystem operation uses team vocabulary:
@@ -42,6 +47,20 @@ TeamCode/src/main/java/org/firstinspires/ftc/teamcode/
 
 Create a package when the team has code that belongs there. Do not create empty
 packages for possible future mechanisms.
+
+## First Season Repository slice
+
+The first reviewed framework contains only the existing drivetrain behavior:
+
+```text
+TeleOp -> Robot -> DrivetrainSubsystem -> drive motors
+```
+
+The drivetrain subsystem owns motor initialization, directions, limits, coordinate
+conversion, drive commands, and stopping. The TeleOp owns gamepad interpretation
+and the FTC lifecycle. `Robot` assembles the current subsystems and provides one
+complete shutdown path. Add intake, vision, or autonomous coordination only when a
+later lesson introduces the requirement.
 
 ## Design rules
 
@@ -163,7 +182,7 @@ public final class Robot {
 Add another subsystem only after it works independently. Keep construction and
 shutdown explicit so another programmer can trace them easily.
 
-###3. Behavior and Limits belong in the Subsystem
+### 3. Behavior and Limits belong in the Subsystem
 
 The intake owns its motor. Its public methods describe mechanism behavior rather
 than exposing lower level functions like motor power to the OpMode.

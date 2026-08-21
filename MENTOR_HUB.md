@@ -22,10 +22,15 @@ can speak directly to learners.
   planned level into student lessons.
 - Use [Prepare the Level 2 Hardware-Lab Repository](mentors/level-2-repository-setup.md)
   before giving students access to the Android Studio project.
+- Configure access, branch protection, review, and tags using the
+  [Season Repository Workflow](docs/season-repository-workflow.md) before Lesson 3.7.
 - Evolve the team's base framework using
   [Robot Code Architecture](docs/robot-code-architecture.md).
-- Verify the current FTC SDK, hardware, Pedro Pathing version, safety procedure,
-  and Windows development process with the team's actual equipment.
+- Keep the Season Repository's `docs/architecture.md` aligned with the actual
+  hardware and reviewed code.
+- Verify the current FTC SDK, hardware, Pedro Pathing and dashboard versions,
+  intake behavior, nonblocking autonomous failures, vision choice, safety
+  procedure, and student development process with the team's actual equipment.
 
 ## Maintain and publish
 

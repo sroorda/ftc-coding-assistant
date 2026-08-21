@@ -292,8 +292,8 @@ Add field-relative mecanum TeleOp controls
 - [ ] Cross (✕) resets yaw only on a new press.
 - [ ] `stop()` commands the entire drivetrain to zero.
 
-Continue to [3.7](../07-mechanism-subsystem/README.md) to add one mechanism
-without making the drive loop harder to understand.
+Continue to [3.7](../07-architecture-and-season-repository/README.md) to plan the
+architecture and move into the team's Season Repository.
 
 ## Reflect
 

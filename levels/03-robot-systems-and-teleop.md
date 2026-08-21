@@ -2,17 +2,18 @@
 
 > **Published draft for robot validation:** Mentors must verify the team's current
 > FTC SDK, robot configuration, Control Hub orientation, training-power limits,
-> mechanism directions, safety procedure, and integration branch before students
-> operate the robot independently.
+> safety procedure, Season Repository access, and integration branch before
+> students operate the robot independently.
 
 In Level 3, you will combine the devices tested in Level 2 into a responsive
 TeleOp robot. The first six lessons use short sections of a mecanum-drive video:
 watch one idea, pause, enter and explain the code, and test it before continuing.
 You will not watch the entire video and then try to recreate it from memory.
 
-The last two lessons add one safe mechanism and integrate it with the drivetrain.
-Complete examples are provided throughout; small prediction and extension prompts
-support learning without turning the core build into a guessing exercise.
+The last two lessons move the verified drivetrain into the team's Season Repository.
+Students review the architecture, plan the smallest useful framework with a coach,
+implement a drivetrain subsystem, and deliver it through a reviewed pull request.
+The merged result becomes the `v0.1` season-code milestone.
 
 ## Video-guided learning rhythm
 
@@ -47,10 +48,10 @@ input through the system.
   as a coordinate transformation that reuses the tested drivetrain method.
 - [3.6: Assemble driver controls and TeleOp](../level-3/06-driver-controls-and-teleop/README.md)
   with deadband, precision mode, yaw reset, and diagnostic mode.
-- [3.7: Add a safe mechanism subsystem](../level-3/07-mechanism-subsystem/README.md)
-  with an explicit state, power limit, and touch-sensor rule.
-- [3.8: Integrate and test the complete TeleOp](../level-3/08-integrated-teleop/README.md)
-  without blocking either subsystem.
+- [3.7: Plan the architecture and enter the Season Repository](../level-3/07-architecture-and-season-repository/README.md)
+  after verifying access, build, and the unchanged TeleOp baseline.
+- [3.8: Deliver the drivetrain framework](../level-3/08-drive-subsystem-delivery/README.md)
+  through a coach-reviewed pull request and the `v0.1` milestone.
 
 ## Source examples
 
@@ -65,9 +66,11 @@ You are ready for Level 4 when you can:
 - verify motor direction and IMU orientation independently;
 - trace a drive request through coordinate transformation, wheel mixing,
   normalization, and motor output;
-- safely drive while operating a mechanism;
 - explain why the outer OpMode loop must remain responsive;
-- integrate through public subsystem operations rather than private hardware;
-- use telemetry to isolate gamepad, drivetrain, heading, and mechanism problems;
-  and
+- trace the thin TeleOp through public drivetrain operations rather than private
+  hardware;
+- use telemetry to isolate gamepad, drivetrain, and heading problems;
+- pass the Season Repository's unchanged build and TeleOp baseline;
+- explain the approved drivetrain architecture and its ownership boundaries;
+- deliver reviewed changes through the team's feature-branch workflow; and
 - stop every powered subsystem through the Driver Station and code lifecycle.

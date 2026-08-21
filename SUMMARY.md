@@ -40,32 +40,33 @@
 * [3.4: Robot-Relative Mecanum Drive](level-3/04-robot-relative-mecanum-drive/README.md)
 * [3.5: Field-Relative Mecanum Drive](level-3/05-field-relative-mecanum-drive/README.md)
 * [3.6: Driver Controls and the TeleOp](level-3/06-driver-controls-and-teleop/README.md)
-* [3.7: Add a Safe Mechanism Subsystem](level-3/07-mechanism-subsystem/README.md)
-* [3.8: Integrate and Test the Complete TeleOp](level-3/08-integrated-teleop/README.md)
+* [3.7: Plan the Architecture and Enter the Season Repository](level-3/07-architecture-and-season-repository/README.md)
+* [3.8: Deliver the Drivetrain Framework](level-3/08-drive-subsystem-delivery/README.md)
 
 ## Level 4 Lessons
 
 * [Level 4 Learning Path](levels/04-autonomous-motion.md)
-* [4.1: Field Coordinates and Poses](level-4/01-field-coordinates-and-poses/README.md)
-* [4.2: Localization Evidence](level-4/02-localization-evidence/README.md)
-* [4.3: First Pedro Path](level-4/03-first-pedro-path/README.md)
-* [4.4: Heading, Curves, and Chains](level-4/04-heading-curves-and-chains/README.md)
-* [4.5: Tuning with Evidence](level-4/05-tuning-with-evidence/README.md)
-* [4.6: Autonomous Motion Challenge](level-4/06-autonomous-motion-challenge/README.md)
+* [4.1: Install Pedro Pathing](level-4/01-pedro-installation/README.md)
+* [4.2: Constants and Localization](level-4/02-constants-and-localization/README.md)
+* [4.3: Pedro Tuning Tests](level-4/03-tuning-tests/README.md)
+* [4.4: Hand-Built Four-Segment Path](level-4/04-hand-built-path/README.md)
+* [4.5: Visualizer-Authored Path](level-4/05-visualizer-path/README.md)
+* [4.6: Review and Release Pedro Pathing](level-4/06-review-and-release/README.md)
 
 ## Level 5 Lessons
 
-* [Level 5 Learning Path](levels/05-coordinated-autonomous.md)
-* [5.1: Action Contracts](level-5/01-action-contracts/README.md)
-* [5.2: Nonblocking Mechanism Actions](level-5/02-nonblocking-mechanism-actions/README.md)
-* [5.3: Coordinate with States](level-5/03-coordinate-with-states/README.md)
-* [5.4: Path Callbacks](level-5/04-path-callbacks/README.md)
-* [5.5: Recovery and Cancellation](level-5/05-recovery-and-cancellation/README.md)
-* [5.6: Coordinated Autonomous Challenge](level-5/06-final-autonomous-challenge/README.md)
+* [Level 5 Learning Path](levels/05-nonblocking-robot-operations.md)
+* [5.1: Plan the Intake Contract](level-5/01-intake-contract/README.md)
+* [5.2: Implement the Intake Subsystem](level-5/02-intake-subsystem/README.md)
+* [5.3: Standalone Intake Test OpMode](level-5/03-intake-test-opmode/README.md)
+* [5.4: Drive and Operate the Intake](level-5/04-drive-and-intake/README.md)
+* [5.5: Responsiveness and Safe Shutdown](level-5/05-responsiveness-and-safety/README.md)
+* [5.6: Review and Release the Intake TeleOp](level-5/06-review-and-release/README.md)
 
 ## Student Reference
 
 * [Set Up GitHub and Git](docs/github-and-git-setup.md)
+* [Season Repository Workflow](docs/season-repository-workflow.md)
 * [Connect Android Studio to the Control Hub](docs/control-hub-connection.md)
 * [Hardware Lab Contract](docs/hardware-lab-contract.md)
 * [Robot Code Architecture](docs/robot-code-architecture.md)

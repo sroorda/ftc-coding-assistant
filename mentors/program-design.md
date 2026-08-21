@@ -10,8 +10,14 @@
 - Teach the feature-branch and pull-request workflow inside the first hardware
   exercise, when students have a real change to review.
 - Introduce hardware one device at a time in a controlled Level 2 environment.
-- Require reliable TeleOp subsystems before autonomous pathing.
-- Require reliable pathing and mechanisms independently before coordinating them.
+- Move students into the protected Season Repository only after the Level 3 drive
+  baseline, access gate, and coach-reviewed architecture plan pass.
+- Require a reliable drivetrain and unchanged TeleOp regression before Pedro
+  Pathing installation and tuning.
+- Require reliable pathing and intake behavior independently before coordinating
+  them in autonomous.
+- Add vision only after the autonomous coordinator has explicit success, timeout,
+  cancellation, and fallback behavior.
 
 Students advance by demonstrated understanding, not title or prior experience.
 Adults may adjust pace and accommodations, but should not waive hardware safety or
@@ -19,8 +25,8 @@ understanding checks.
 
 ## Hardware-level validation status
 
-Levels 2–5 contain student lesson drafts, but they are not independently
-student-ready until the relevant level has been tested with:
+Levels 2–6 contain lesson drafts, but they are not independently student-ready
+until the relevant level has been tested with:
 
 - the team's current FTC SDK and Android Studio environment;
 - the team's actual hardware and configuration;
@@ -30,12 +36,18 @@ student-ready until the relevant level has been tested with:
 
 For Level 3, also validate the team's robot hardware contract, drivetrain encoder
 wiring and run mode, Control Hub logo/USB orientation, heading-reset procedure,
-training power, mechanism direction and limit behavior, and integration workflow.
-Compare the code with the FTC SDK version installed in the team's Robot
-Controller project. For Levels 4–5, pin the Pedro Pathing version and verify every
-API example against that version. Level 5 additionally requires safe injected
-failure tests; never create failures by jamming a mechanism or obstructing a
-moving robot.
+training power, Season Repository access, protected integration branch,
+architecture page, and `v0.1` release procedure. Compare the code with the FTC SDK
+version installed in the team's Robot Controller project.
+
+For Level 4, pin Pedro Pathing, the dashboard, copied Quickstart files, and relevant
+firmware. Verify every API example against that version and repeat the unchanged
+TeleOp regression after installation. For Level 5, validate intake power,
+direction, hazards, every button combination, standalone tests, simultaneous drive
+behavior, and complete Stop. Level 6 additionally requires safe injected failure
+tests; never create failures by jamming a mechanism or obstructing a moving robot.
+Level 7 must remain planning-only until the season objective, camera, processor,
+decision interface, and conservative fallback are selected and validated.
 
 ## Level 3 video facilitation
 
@@ -77,9 +89,15 @@ branch. Increase the collaboration challenge gradually:
 | Level | Team practice |
 |---|---|
 | 2 | personal cumulative branches with selected feature branches and pull requests |
-| 3 | pairs own different subsystems and review integration points |
-| 4 | review paths, poses, constants, and tuning evidence separately |
-| 5 | coordinate changes across autonomous and mechanism code |
+| 3 | enter the Season Repository and deliver `feature/drive-subsystem` through coach review |
+| 4 | keep installation, constants, tuning, and paths reviewable on `feature/pedro-pathing` |
+| 5 | deliver standalone and integrated intake evidence on `feature/intake-subsystem` |
+| 6 | coordinate reviewed drivetrain and intake interfaces on `feature/nonblocking-auto` |
+| 7 | review vision observations separately from the robot decisions that consume them |
+
+The coach merges each Season Repository milestone and creates the annotated tag
+only after the merged integration commit passes its regression checks. Students do
+not tag an unmerged feature commit or merge their own pull request.
 
 Do not assign permanent student leads before the team has evidence that someone can
 review, recover, communicate, and protect other students' learning.
