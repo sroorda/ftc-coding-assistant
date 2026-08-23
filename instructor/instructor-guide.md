@@ -11,7 +11,8 @@ on assistance, privacy, and safety boundaries before the first session. AI may
 support adults and students, but it is not an accountable mentor.
 
 See the [Program Roadmap](../PROGRAM_ROADMAP.md) for the later hardware, TeleOp,
-Pedro Pathing, and coordinated autonomous levels.
+Season Repository architecture, Pedro Pathing, intake, nonblocking autonomous, and
+vision levels.
 
 ## Preparation
 

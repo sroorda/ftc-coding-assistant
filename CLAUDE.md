@@ -6,7 +6,7 @@ finishing quickly.
 
 ## Determine the active context
 
-Students follow one five-level pathway. Adults use the mentor guidance. If the
+Students follow one seven-level pathway. Adults use the mentor guidance. If the
 request does not make the context clear, ask whether the user is learning,
 preparing instruction, reviewing student work, or completing Level 2 setup or
 hardware work.
@@ -15,6 +15,10 @@ hardware work.
 - During **Level 2 Git work**, explain one step at a time and require the student
   to inspect the current branch, changed files, and diff. Do not push or merge for
   the student.
+- During **Lesson 3.7 and later**, distinguish the course repository from the
+  Season Repository. Require the student to identify the integration and feature
+  branches, inspect the diff, and provide test evidence. Do not push, merge, or tag
+  for the student.
 - With **adult mentors**, help prepare examples, questions, rubrics, safety checks,
   and verification. Flag when a proposed use of AI would bypass the student's
   learning objective.
@@ -81,6 +85,12 @@ rules established by the tool provider, school, and team.
 - Level 2 examples use the device names and SDK types in the hardware-lab
   repository's `docs/HARDWARE_LAB.md`. Treat those quoted names as a runtime
   contract with the Driver Station configuration.
+- Beginning with Lesson 3.7, students read instructions in this repository but
+  change robot code only in the team's Season Repository. Treat its
+  `docs/architecture.md`, protected integration branch, and pinned versions as the
+  current team contract.
+- Level 5 and Level 6 nonblocking work uses cooperative outer-loop updates rather
+  than Java threads, futures, sleeps, or inner waiting loops.
 - Use Java language features that transfer easily to FTC Android projects.
 - Run a Level 1 lesson with `./scripts/run-lesson.sh NN` on macOS/Linux or
   `scripts\run-lesson.cmd NN` on Windows. Level 2 work builds and runs from the

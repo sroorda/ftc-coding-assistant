@@ -15,14 +15,21 @@ try your own changes, read the results, and explain what you learned.
 |---|---|---|
 | [1 — Java Foundations](levels/01-java-foundations.md) | write and test robot-like Java without hardware | **Ready now** |
 | [2 — Hardware Lab](levels/02-hardware-lab.md) | safely control motors, servos, and sensors | Coming later |
-| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | drive while operating robot mechanisms | Draft for validation |
-| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | use localization and Pedro Pathing | Draft for validation |
-| [5 — Coordinated Autonomous](levels/05-coordinated-autonomous.md) | run mechanism actions while following paths | Draft for validation |
+| [3 — Robot Systems and TeleOp](levels/03-robot-systems-and-teleop.md) | build the drivetrain framework in the Season Repository | Draft for validation |
+| [4 — Autonomous Motion](levels/04-autonomous-motion.md) | install, tune, and use Pedro Pathing | Draft for validation |
+| [5 — Nonblocking Robot Operations](levels/05-nonblocking-robot-operations.md) | operate a verified intake while driving | Draft for validation |
+| 6 — Nonblocking Autonomous | coordinate Pedro paths and intake actions | Planning draft |
+| 7 — Vision | turn camera observations into safe robot decisions | Mentor planning only |
 
 The [Program Roadmap](PROGRAM_ROADMAP.md) shows how the levels fit together.
 
-> **Levels 3–5 are work in progress. Do not attempt them yet.** They require
-> mentor review and validation on the team's current robot before student use.
+> **Levels 3–5 are work in progress. Do not attempt them yet.** Levels 6–7 remain
+> outside the student navigation. All require mentor review and validation on the
+> team's current robot before student use.
+
+Beginning with Lesson 3.7, students need access to the team's Season Repository.
+The course repository continues to provide instructions; all later robot-code work
+and milestone tags belong in the Season Repository.
 
 ## How you will use AI
 

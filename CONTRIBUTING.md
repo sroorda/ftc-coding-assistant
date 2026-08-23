@@ -17,6 +17,8 @@ GitBook editor.
 `SUMMARY.md` controls the GitBook navigation. `.gitbook.yaml` identifies the
 homepage and summary file. Files omitted from `SUMMARY.md`, including `CLAUDE.md`,
 remain in the repository but are not part of the published course navigation.
+Keep planning drafts such as Levels 6–7 out of `SUMMARY.md` until their hardware,
+APIs, safety procedure, and student instructions have passed mentor validation.
 
 ## Repository map
 
@@ -26,10 +28,11 @@ remain in the repository but are not part of the published course navigation.
 ├── GETTING_STARTED.md        First-time student setup
 ├── SUMMARY.md                Published navigation
 ├── CURRICULUM.md             Course sequence and outcomes
-├── PROGRAM_ROADMAP.md        Five-level student progression and readiness gates
+├── PROGRAM_ROADMAP.md        Seven-level progression and readiness gates
 ├── CLAUDE.md                 AI tutoring and safety behavior
-├── docs/                     Setup, workflow, and FTC transition references
-├── levels/                   Level 1 path and planned Level 2–5 outcomes
+├── docs/                     Setup, workflow, architecture, and repository references
+├── levels/                   Level paths, checkpoints, and planning status
+├── level-2/ ... level-6/     Hardware-dependent student lesson drafts
 ├── mentors/                  Adult preparation and coaching guidance
 ├── instructor/               Facilitation notes and answer guidance
 ├── lessons/                  Six Java exercises and their source code
@@ -74,7 +77,8 @@ Add new lesson mappings to both `scripts/run-lesson.sh` and
 `scripts/run-lesson.ps1`. Add the lesson to `SUMMARY.md`, then test its instructions
 on Windows and a Unix-like system.
 
-For Levels 2–5, do not remove the **Coming later** label until the material has been
-tested with the team's actual FTC SDK version, hardware, safety procedure, and
-Windows development environment. Update the checkpoint in `PROGRAM_ROADMAP.md`
-when a level becomes available.
+For Levels 2–7, do not remove a draft warning or add a planning-only level to
+`SUMMARY.md` until the material has been tested with the team's actual FTC SDK and
+dependency versions, hardware, safety procedure, Season Repository workflow, and
+student development environments. Update `README.md`, `PROGRAM_ROADMAP.md`, and
+`SUMMARY.md` together when a level becomes available.

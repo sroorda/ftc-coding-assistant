@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">Robot-relative and field-relative coordinate frames</title>
+  <desc id="desc">Two robots turned ninety degrees. Robot-relative forward follows the robot while field-relative forward remains toward the top of the field.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1769aa"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#d96c16"/>
+    </marker>
+  </defs>
+  <rect width="960" height="430" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#1f2933">
+    <text x="240" y="35" text-anchor="middle" font-size="24" font-weight="700">Robot-relative</text>
+    <text x="720" y="35" text-anchor="middle" font-size="24" font-weight="700">Field-relative</text>
+    <rect x="55" y="65" width="370" height="310" rx="12" fill="#f4f7fa" stroke="#a9b4c0" stroke-width="2"/>
+    <rect x="535" y="65" width="370" height="310" rx="12" fill="#f4f7fa" stroke="#a9b4c0" stroke-width="2"/>
+    <path d="M70 220 H410 M240 80 V360" stroke="#d6dde4" stroke-width="2" stroke-dasharray="8 8"/>
+    <path d="M550 220 H890 M720 80 V360" stroke="#d6dde4" stroke-width="2" stroke-dasharray="8 8"/>
+    <g transform="translate(240 220) rotate(90)">
+      <rect x="-65" y="-42" width="130" height="84" rx="10" fill="#dceeff" stroke="#1769aa" stroke-width="3"/>
+      <path d="M0 -15 V-85" stroke="#1769aa" stroke-width="7" marker-end="url(#arrowBlue)"/>
+      <text x="0" y="8" text-anchor="middle" font-size="17" font-weight="700">ROBOT</text>
+    </g>
+    <g transform="translate(720 220) rotate(90)">
+      <rect x="-65" y="-42" width="130" height="84" rx="10" fill="#fff0df" stroke="#d96c16" stroke-width="3"/>
+      <path d="M0 -15 V-85" stroke="#d96c16" stroke-width="7" marker-end="url(#arrowOrange)"/>
+      <text x="0" y="8" text-anchor="middle" font-size="17" font-weight="700">ROBOT</text>
+    </g>
+    <path d="M240 220 H360" stroke="#1769aa" stroke-width="7" marker-end="url(#arrowBlue)"/>
+    <path d="M720 220 V100" stroke="#d96c16" stroke-width="7" marker-end="url(#arrowOrange)"/>
+    <text x="240" y="405" text-anchor="middle" font-size="18">Stick forward follows the robot's front</text>
+    <text x="720" y="405" text-anchor="middle" font-size="18">Stick forward stays fixed on the field</text>
+  </g>
+</svg>
