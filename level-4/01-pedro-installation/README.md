@@ -16,57 +16,43 @@ beginning tuning.
 ## 1. Verify the hardware choice
 
 Read the current [Pedro Pathing introduction](https://pedropathing.com/docs/pathing).
-With a coach, record:
 
-- which physical robot and omnidirectional drivetrain this lesson uses;
-- the four drive-motor configuration names and directions;
-- which localization hardware is installed;
-- odometry-pod type, placement, and encoder connections when applicable;
-- goBILDA Pinpoint, OTOS, or other localizer firmware and configuration; and
-- the approved training-power limit and test area.
+Verify the Hardware before starting
 
-Do not proceed because the robot “should” have odometry. Inspect the hardware and
-active Driver Station configuration.
+- which physical robot and omnidirectional drivetrain you will use
+- the four drive-motor configuration names and directions
+- which localization hardware is installed (pinpoint, OTOS, etc)
+- odometry-pod type, placement, and encoder connections
+
+Do not proceed because the robot “should” have odometry. Inspect the hardware and active Driver Station configuration.
 
 ## 2. Create the feature branch
 
-Start from the latest reviewed Season Repository integration branch and create:
+Start from your season's main branch, create a feature branch
 
 ```text
 feature/pedro-pathing
 ```
 
-Record the current FTC SDK version and build the unchanged branch once more.
-
 ## 3. Install the pinned version
 
-Follow the coach-pinned [official installation guide](https://pedropathing.com/docs/pathing/installation).
-Because this course adds Pedro to an existing Season Repository, follow the
-approved manual-integration path; do not replace the repository by cloning the
-Quickstart over it.
-
-Record the exact Pedro dependency version and the Quickstart commit or release used
-for any copied support files. Never leave `x.y.z`, a floating version, or an
-unrecorded copied file in season code.
+Follow the [official installation guide](https://pedropathing.com/docs/pathing/installation) to install Pedro Pathing.  Follow the
+approved manual-integration path.  Do not replace the repository by cloning the Quickstart over it.
 
 ## 4. Choose one dashboard
 
-Review the official [dashboard comparison](https://pedropathing.com/docs/pathing/dashboard).
-The coach chooses Panels or FTC Dashboard for the team. Record the choice and
-version in `docs/architecture.md`; students should not maintain two tuning stacks.
+Review the official [dashboard comparison](https://pedropathing.com/docs/pathing/dashboard). Decide on which you want to use and follow the appropriate instructions to install it.
 
 ## 5. Build and rerun TeleOp
 
 Before tuning:
 
-1. synchronize Gradle and build the complete project;
-2. confirm the existing TeleOp still appears on the Driver Station;
-3. repeat forward, strafe, rotate, precision-mode, and Stop checks;
-4. open the selected dashboard and verify telemetry reaches it; and
-5. record every warning or change required by the integration.
+1. synchronize Gradle and build the complete project
+2. confirm the existing TeleOp still appears on the Driver Station
+3. repeat forward, strafe, rotate, precision-mode, and Stop checks
+4. open the selected dashboard and verify telemetry reaches it
 
-Commit and push the installation result only after this regression passes. Use a
-focused checkpoint such as:
+Commit and push the installation result only after this regression passes. Use a focused commit message such as:
 
 ```text
 Install pinned Pedro Pathing dependencies
@@ -83,7 +69,3 @@ Install pinned Pedro Pathing dependencies
 The Season Repository builds, TeleOp behavior is unchanged, the dashboard works,
 and the feature branch contains a clean installation checkpoint. Continue to
 [4.2](../02-constants-and-localization/README.md).
-
-## Reflect
-
-Why is “Gradle sync succeeded” weaker evidence than rerunning the existing TeleOp?
