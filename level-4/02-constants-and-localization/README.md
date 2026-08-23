@@ -1,61 +1,23 @@
-# 4.2: Establish Constants and Trustworthy Localization
+# 4.2: Constants and Localization
 
-Configure the actual drivetrain and localizer, then measure pose behavior before
-tuning path following.
+In this lesson you will define the Constants, configure the Localizer, Test the Pose.  This step is important, if Localization is incorrect or has errors it will affect the accuracy of your movements and your autonomous.
 
-## Get ready
+## Tasks
 
-Use the pinned version's official [Constants](https://pedropathing.com/docs/pathing/constants)
-and [Tuning](https://pedropathing.com/docs/pathing/tuning) pages. Do not combine
-constants from another robot, Pedro version, dashboard, or localizer.
+Using the official documentation, follow these steps
+- Read and understand the different Constants: [Constants](https://pedropathing.com/docs/pathing/constants)
+- Read the Tuning Overview: [Tuning Overview](https://pedropathing.com/docs/pathing/tuning)
+- Follow Setup Instructions: [Tuning Setup](https://pedropathing.com/docs/pathing/tuning/setup)
+- Follow Localization Instructions for Pinpoint: [Localization](https://pedropathing.com/docs/pathing/tuning/localization)
+- Run the Localization Test at the end of the instructions
 
-Record the source of every initial value:
 
-| Category | Record |
-|---|---|
-| Drivetrain | motor names, directions, wheel dimensions, gearing |
-| Localizer | device type, hardware name, encoder directions, offsets, units |
-| Follower | initial values and the tuner that will determine each value |
-| Constraints | conservative starting limits and completion conditions |
-
-## Draw the coordinate contract
-
-Create a team field diagram showing the origin, positive axes, zero heading,
-positive rotation, and robot reference point. Use named measured poses rather than
-copying coordinates from an example autonomous.
-
-## Verify localization without following a path
-
-Place the robot repeatably, then push it by hand through known translations and
-rotations while viewing the reported pose:
-
-| Motion | Expected change | Observed change | Pass? |
-|---|---|---|---|
-| Forward at zero heading | | | |
-| Left strafe | | | |
-| Counterclockwise turn | | | |
-| Forward and return | | | |
-| Rotate and return | | | |
-
-Correct sign, unit, offset, or configuration errors before follower tuning. Change
-one reviewed value at a time and preserve the evidence.
+## Completion
+This lesson is complete when
+- you have completed all of the Setup and Localization Instructions
+- you can run the robot on the field and it drives correctly
+- the x and y values in panels move in the proper directions, as documented
+- you can see the robot moving in Panels on the Field diagram
 
 ## Git checkpoint
-
-Commit and push when the constants are traceable and the localization contract
-passes. Include the diagram and measurement table in the Season Repository.
-
-## Ask your AI tutor
-
-> Analyze my constants and localization evidence without changing values. Separate
-> sign, unit, geometry, scale, and repeatability risks, then recommend the single
-> next measurement that best distinguishes them.
-
-## Check your work
-
-You can explain every constant's source and predict the sign of each pose change.
-Continue to [4.3](../03-tuning-tests/README.md).
-
-## Reflect
-
-Which placement error could be mistaken for a localizer error?
+Commit and push your changes when you have achieved all of the above
