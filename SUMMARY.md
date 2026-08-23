@@ -48,10 +48,10 @@
 * [Level 4 Learning Path](levels/04-autonomous-motion.md)
 * [4.1: Install Pedro Pathing](level-4/01-pedro-installation/README.md)
 * [4.2: Constants and Localization](level-4/02-constants-and-localization/README.md)
-* [4.3: Pedro Tuning Tests](level-4/03-tuning-tests/README.md)
-* [4.4: Hand-Built Four-Segment Path](level-4/04-hand-built-path/README.md)
-* [4.5: Visualizer-Authored Path](level-4/05-visualizer-path/README.md)
-* [4.6: Review and Release Pedro Pathing](level-4/06-review-and-release/README.md)
+* [4.3: Tune Pedro Pathing](level-4/03-tuning-tests/README.md)
+* [4.4: Build Your First Pedro Paths](level-4/04-hand-built-path/README.md)
+* [4.5: Build a Path with the Pedro Visualizer](level-4/05-visualizer-path/README.md)
+* [4.6: Merge Pedro Pathing into Main](level-4/06-review-and-release/README.md)
 
 ## Level 5 Lessons
 

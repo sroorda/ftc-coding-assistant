@@ -1,54 +1,63 @@
-# 4.6: Review and Release Pedro Pathing
+# 4.6: Merge Pedro Pathing into Main
 
-Prepare the complete `feature/pedro-pathing` change for coach review, merge it into
-the Season Repository's protected integration branch, and mark the `v0.2`
-milestone.
+Finish Level 4 by submitting `feature/pedro-pathing` for coach review. The coach
+will merge the code into `main` and create the `v0.2` milestone tag.
 
-## Pull-request checklist
+## Before you open the pull request
 
-The pull request includes:
+- [ ] All Level 4 changes are committed and pushed.
+- [ ] There are no uncommitted changes.
+- [ ] The project builds.
+- [ ] TeleOp still works.
+- [ ] `First Pedro Auto` works.
+- [ ] `Visualizer Auto` works.
 
-- pinned Pedro, FTC SDK, dashboard, and relevant firmware versions;
-- drivetrain and localization hardware contract;
-- installation and unchanged-TeleOp evidence;
-- constants and the source of their initial and tuned values;
-- completed tuning-test evidence;
-- the hand-built four-segment path and its repeated results;
-- the Visualizer-authored path and its repeated results;
-- timeout and Driver Station Stop evidence; and
-- known limitations or conditions that require retuning.
+## Open the pull request
 
-Keep dependency installation, constants, paths, and evidence understandable in the
-commit history. Do not combine unrelated mechanism or vision work into this pull
-request.
+Create the pull request in GitHub:
 
-## Coach review and merge
+- **Base:** `main`
+- **Compare:** `feature/pedro-pathing`
+- **Title:** `Add Pedro Pathing autonomous motion`
 
-Open the pull request from `feature/pedro-pathing` into the integration branch
-named in the [Season Repository Workflow](../../docs/season-repository-workflow.md).
-Address review comments on the same branch. The coach confirms the target, reviews
-the hardware evidence, merges, and reruns the critical regression checks.
+In the description, state that:
 
-After the merged commit passes, the coach creates the annotated milestone tag:
+- Pedro Pathing was installed and tuned;
+- localization works;
+- the hand-built Auto works;
+- the Visualizer Auto works;
+- TeleOp still works; and
+- any known limitations are listed.
 
-```text
-v0.2
-```
+Request review from the coach. If changes are requested, commit and push them to
+the same feature branch so the pull request updates automatically.
 
-Use the season-qualified form when the repository contains multiple seasons.
+## After coach review
 
-## Ask your AI tutor
+The coach will merge the pull request in GitHub, delete the remote feature branch,
+and create the `v0.2` tag.
 
-> Review this Pedro Pathing pull request without editing. Trace installation,
-> constants, localization, tuning, both paths, completion, timeout, and Stop
-> evidence. Identify claims that are not supported by a repeatable observation.
+After the merge, use Android Studio to update your local `main` branch. Build and
+deploy from `main`, then run a quick final check of TeleOp and both Autonomous
+OpModes.
 
-## Finish Level 4
+## Troubleshooting
 
-Level 4 is complete when the reviewed code is merged, both paths repeat from their
-documented starts, TeleOp still works, and the coach has created the `v0.2` tag.
+| Problem | What to check |
+|---|---|
+| Pull request contains unrelated files | Confirm the base is `main` and compare branch is `feature/pedro-pathing` |
+| Pull request has merge conflicts | Update the feature branch from `main`, resolve the conflicts with the coach, and retest |
+| Code worked before merging but not afterward | Confirm local `main` contains the merged changes, then rebuild and deploy |
+| Autonomous OpMode is missing | Confirm its Java file was merged, then rebuild and deploy |
+| Feature branch was deleted before the work was merged | Stop and ask the coach to help recover the branch or commits |
+
+## You are done with Level 4 when
+
+- [ ] The pull request is approved and merged.
+- [ ] Local `main` is updated.
+- [ ] The project builds from `main`.
+- [ ] TeleOp and both Autos work from `main`.
+- [ ] The coach created the `v0.2` tag.
+- [ ] The feature branch is deleted.
+
 Return to the [Level 4 checkpoint](../../levels/04-autonomous-motion.md#your-next-checkpoint).
-
-## Reflect
-
-Which pull-request artifact will be most useful when the robot changes later?

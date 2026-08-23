@@ -11,12 +11,12 @@ the `v0.2` season-code milestone.
 
 ## Level 4 Lessons
 
-- [4.1: Install Pedro Pathing without breaking TeleOp](../level-4/01-pedro-installation/README.md).
-- [4.2: Establish constants and trustworthy localization](../level-4/02-constants-and-localization/README.md).
-- [4.3: Complete the pinned Pedro tuning tests](../level-4/03-tuning-tests/README.md).
-- [4.4: Design and build a hand-authored four-segment path](../level-4/04-hand-built-path/README.md).
-- [4.5: Build a second path with the Pedro Visualizer](../level-4/05-visualizer-path/README.md).
-- [4.6: Submit, review, merge, and mark the `v0.2` milestone](../level-4/06-review-and-release/README.md).
+- [4.1: Install Pedro Pathing Without Breaking TeleOp](../level-4/01-pedro-installation/README.md).
+- [4.2: Constants and Localization](../level-4/02-constants-and-localization/README.md).
+- [4.3: Tune Pedro Pathing](../level-4/03-tuning-tests/README.md).
+- [4.4: Build Your First Pedro Paths](../level-4/04-hand-built-path/README.md).
+- [4.5: Build a Path with the Pedro Visualizer](../level-4/05-visualizer-path/README.md).
+- [4.6: Merge Pedro Pathing into Main](../level-4/06-review-and-release/README.md).
 
 Mechanism coordination remains disabled in this level so path, localization, and
 tuning problems can be isolated.
@@ -25,7 +25,7 @@ tuning problems can be isolated.
 
 You are ready for Level 5 when you can reproduce the installation from its pinned
 sources, draw the coordinate frame, place the robot repeatably, complete the
-selected tuning tests, explain the follower lifecycle, repeat both paths, preserve
+required tuning tests, explain the follower lifecycle, repeat both paths, preserve
 TeleOp behavior, and distinguish geometry, localization, tuning, and sequencing
 problems.
 
